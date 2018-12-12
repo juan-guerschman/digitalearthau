@@ -1,0 +1,1032 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>United Nations Sustainable Development Goal Indicator 6.6.1 : Water-related ecoystems &mdash; Digital Earth Australia 1.0.0 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/dea-favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="https://unpkg.com/font-awesome@4.5.0/css/font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html">
+          
+
+          
+            
+            <img src="../../../_static/dea-logo-inline.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about/intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about/changelog.html">DEA NCI Environment Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../connect/account.html">NCI Account Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../connect/install.html">Installation and Software Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../connect/get_help.html">Getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../connect/nci_basics.html">Command Line Usage (Advanced)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../connect/jupyter.html">Jupyter Notebooks Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../internal/other_modules.html">Other Modules</a></li>
+</ul>
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../01_Getting_started/README.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_DEA_datasets/README.html">DEA Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_Integrating_external_data/README.html">Integrating External Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_Index_calculation/README.html">Index Calculation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_Temporal_analysis/README.html">Temporal Analyses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_Composite_generation/README.html">Composite Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_Image_classification/README.html">Image Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../08_Outputting_data/README.html">Outputting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../09_Workflows/README.html">Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../10_Scripts/README.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Supplementary_data/README.html">Supplementary Data</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Data Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../data/data.html">Surface Reflectance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data/s3.html">Products Available on Amazon S3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data/s3-sftp.html">Bulk download products from Amazon S3</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developer Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../internal/new_product.html">Creating a New Product</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../internal/git_best_practice.html">Git Best Practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../internal/release.html">DEA Release Process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../internal/modules.html">DEA Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../internal/collection_management.html">Collection Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../internal/requirements_met.html">DEA Code Functionality Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Indexes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">Tags Index</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Digital Earth Australia</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>United Nations Sustainable Development Goal Indicator 6.6.1 : Water-related ecoystems</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/notebooks/11_UN_Sustainable_Development_Goal_indicators/11_6.6.1_Change_in_extent_of_water-related_ecosystems/11_6.6.1_Water_Wet_Veg_Workflow.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="United-Nations-Sustainable-Development-Goal-Indicator-6.6.1-:-Water-related-ecoystems">
+<h1>United Nations Sustainable Development Goal Indicator 6.6.1 : Water-related ecoystems<a class="headerlink" href="#United-Nations-Sustainable-Development-Goal-Indicator-6.6.1-:-Water-related-ecoystems" title="Permalink to this headline">¶</a></h1>
+<p><strong>Background:</strong> The United Nations Sustainable Development Goals include
+Target 6.6.1 : By 2020 protect and restore water-related ecosystems,
+including mountains, forests, wetlands, rivers, acquifers and lakes
+(<a class="reference external" href="http://www.unwater.org/app/uploads/2018/05/Step-by-step-methodology-6-6-1_Revision-2018-03-02_Final.pdf">Indicator 6.6.1 : Change in the extent of water-related ecosystems
+over
+time</a>).
+This notebook demonstrates a workflow for calculating the change in
+vegetated wetlands and open waterbodies, a component of 6.6.1.</p>
+<p><strong>Requirements:</strong> You need to run the following commands from the
+command line prior to launching jupyter notebooks from the same terminal
+so that the required libraries and paths are set:</p>
+<p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">use</span> <span class="pre">/g/data/v10/public/modules/modulefiles</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">dea</span></code></p>
+<p>If you find an error or bug in this notebook, please either create an
+<code class="docutils literal notranslate"><span class="pre">issue</span></code> in the Github repository, or fix it yourself and create a
+<code class="docutils literal notranslate"><span class="pre">pull</span> <span class="pre">request</span></code> to contribute the updated notebook back into the
+repository (See the repository
+<a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/blob/master/README.rst">README</a>
+for instructions on creating a pull request).</p>
+<p><strong>Date:</strong> November 2018</p>
+<p><strong>Authors:</strong> Bex Dunn, Robbi Bishop-Taylor, Sebastian Wong, Andrew Lem,
+Duncan Gray</p>
+<div class="section" id="Import-modules">
+<h2>Import modules<a class="headerlink" href="#Import-modules" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">datacube</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">rasterio.mask</span>
+<span class="kn">import</span> <span class="nn">rasterio.features</span>
+<span class="kn">from</span> <span class="nn">shapely</span> <span class="k">import</span> <span class="n">geometry</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1">#These are dea-notebooks scripts https://github.com/GeoscienceAustralia/dea-notebooks</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../10_Scripts&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">DEADataHandling</span><span class="o">,</span> <span class="nn">DEAPlotting</span><span class="o">,</span> <span class="nn">TasseledCapTools</span><span class="o">,</span> <span class="nn">SpatialTools</span>
+
+<span class="n">dc</span> <span class="o">=</span> <span class="n">datacube</span><span class="o">.</span><span class="n">Datacube</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="s1">&#39;tci and wofs&#39;</span><span class="p">)</span>
+
+<span class="o">%</span><span class="k">load_ext</span> autoreload
+
+<span class="o">%</span><span class="k">autoreload</span> 2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Import-the-coastline-mask-for-removing-open-ocean-from-our-dataset">
+<h2>Import the coastline mask for removing open ocean from our dataset<a class="headerlink" href="#Import-the-coastline-mask-for-removing-open-ocean-from-our-dataset" title="Permalink to this headline">¶</a></h2>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">GEODATA</span> <span class="pre">COAST</span> <span class="pre">100K</span> <span class="pre">2004</span></code> dataset
+(<a class="reference external" href="https://data.gov.au/dataset/geodata-coast-100k-2004">https://data.gov.au/dataset/geodata-coast-100k-2004</a>) as a coarse
+approximation of the mean high water coastline to remove ocean from
+water layers This is the mean high water mark (?)</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">coastline_gpd</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s1">&#39;/g/data/r78/rt1527/datasets/Coastlines/australia/cstauscd_r.shp&#39;</span><span class="p">)</span>
+<span class="n">coastline_gpd</span> <span class="o">=</span> <span class="n">coastline_gpd</span><span class="o">.</span><span class="n">to_crs</span><span class="p">({</span><span class="s1">&#39;init&#39;</span><span class="p">:</span> <span class="s1">&#39;epsg:3577&#39;</span><span class="p">})</span>
+<span class="n">coastline_gpd</span> <span class="o">=</span> <span class="n">coastline_gpd</span><span class="p">[(</span><span class="n">coastline_gpd</span><span class="o">.</span><span class="n">FEAT_CODE</span> <span class="o">==</span> <span class="s1">&#39;island&#39;</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">coastline_gpd</span><span class="o">.</span><span class="n">FEAT_CODE</span> <span class="o">==</span> <span class="s1">&#39;mainland&#39;</span><span class="p">)]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+<span class="n">coastline_gpd</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[2]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1549691cc0&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>&lt;Figure size 432x288 with 0 Axes&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_11_UN_Sustainable_Development_Goal_indicators_11_6.6.1_Change_in_extent_of_water-related_ecosystems_11_6.6.1_Water_Wet_Veg_Workflow_4_2.png" src="../../../_images/notebooks_11_UN_Sustainable_Development_Goal_indicators_11_6.6.1_Change_in_extent_of_water-related_ecosystems_11_6.6.1_Water_Wet_Veg_Workflow_4_2.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Load-WOfS-to-get-extent-of-open-water">
+<h2>Load WOfS to get extent of open water<a class="headerlink" href="#Load-WOfS-to-get-extent-of-open-water" title="Permalink to this headline">¶</a></h2>
+<p>We have four test areas available in this notebook. The areas are the
+Coorong/Murray Mouth, Mangroves in North-East QLD, Arafura swamp, and
+Menindee Lakes</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">resolution</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="c1">## Mangrove site</span>
+<span class="n">query</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">(</span><span class="mf">149.84</span><span class="p">,</span> <span class="mf">150.05</span><span class="p">),</span>
+         <span class="n">y</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">22.14</span><span class="p">,</span> <span class="o">-</span><span class="mf">22.38</span><span class="p">),</span>
+         <span class="n">resolution</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="n">resolution</span><span class="p">,</span> <span class="n">resolution</span><span class="p">),</span>
+         <span class="n">output_crs</span><span class="o">=</span><span class="s1">&#39;EPSG:3577&#39;</span><span class="p">,</span>
+         <span class="n">time</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;2013-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-12-31&#39;</span><span class="p">))</span>
+
+<span class="c1"># # ## Coorong</span>
+<span class="c1"># query = dict(x=(138.75, 139.03),</span>
+<span class="c1">#              y=(-35.41, -35.59),</span>
+<span class="c1">#              resolution=(-resolution, resolution),</span>
+<span class="c1">#              output_crs=&#39;EPSG:3577&#39;,</span>
+<span class="c1">#              time=(&#39;2001-01-01&#39;, &#39;2019-01-01&#39;))</span>
+
+<span class="c1"># # Menindee</span>
+<span class="c1"># query = dict(x=(143.92, 144.14),</span>
+<span class="c1">#              y=(-31.35, -31.53),</span>
+<span class="c1">#              resolution=(-resolution, resolution),</span>
+<span class="c1">#              output_crs=&#39;EPSG:3577&#39;,</span>
+<span class="c1"># #              time=(&#39;2001-01-01&#39;, &#39;2017-12-31&#39;))</span>
+
+<span class="c1"># # Arafura swamp</span>
+<span class="c1"># query = dict(x=(134.867839, 135.251071),</span>
+<span class="c1">#              y=(-12.430335, -12.729316),</span>
+<span class="c1">#              resolution=(-resolution, resolution),</span>
+<span class="c1">#              output_crs=&#39;EPSG:3577&#39;,</span>
+<span class="c1">#              time=(&#39;2001-01-01&#39;, &#39;2017-12-31&#39;))</span>
+
+<span class="c1"># # Mangroves</span>
+<span class="n">wofs_ds</span> <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">product</span><span class="o">=</span><span class="s1">&#39;wofs_annual_summary&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">query</span><span class="p">)</span>
+
+<span class="c1"># Set nodata</span>
+<span class="n">wofs_ds</span> <span class="o">=</span> <span class="n">wofs_ds</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">wofs_ds</span><span class="o">.</span><span class="n">frequency</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Use-the-coastline-to-mask-out-the-open-ocean">
+<h2>Use the coastline to mask out the open ocean<a class="headerlink" href="#Use-the-coastline-to-mask-out-the-open-ocean" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Create shoreline mask</span>
+<span class="n">coastline_mask</span> <span class="o">=</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">geometry_mask</span><span class="p">(</span><span class="n">coastline_gpd</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span>
+                                                 <span class="n">out_shape</span><span class="o">=</span><span class="n">wofs_ds</span><span class="o">.</span><span class="n">geobox</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+                                                 <span class="n">transform</span><span class="o">=</span><span class="n">wofs_ds</span><span class="o">.</span><span class="n">geobox</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span>
+                                                 <span class="n">all_touched</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">invert</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Plot-permanent-water">
+<h2>Plot permanent water<a class="headerlink" href="#Plot-permanent-water" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">perm_water</span> <span class="o">=</span> <span class="p">(</span><span class="n">wofs_ds</span><span class="o">.</span><span class="n">frequency</span> <span class="o">&gt;</span> <span class="mf">0.9</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">coastline_mask</span><span class="p">)</span>
+<span class="n">perm_water</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[22]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>&lt;matplotlib.collections.QuadMesh at 0x7f1548dbe630&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_11_UN_Sustainable_Development_Goal_indicators_11_6.6.1_Change_in_extent_of_water-related_ecosystems_11_6.6.1_Water_Wet_Veg_Workflow_10_1.png" src="../../../_images/notebooks_11_UN_Sustainable_Development_Goal_indicators_11_6.6.1_Change_in_extent_of_water-related_ecosystems_11_6.6.1_Water_Wet_Veg_Workflow_10_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="calculate-area-of-permanent-open-water-per-year">
+<h2>calculate area of permanent open water per year<a class="headerlink" href="#calculate-area-of-permanent-open-water-per-year" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pixel_km2</span> <span class="o">=</span> <span class="p">(</span><span class="n">resolution</span> <span class="o">*</span> <span class="n">resolution</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1000</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">perm_water_sum</span> <span class="o">=</span><span class="p">(</span><span class="n">perm_water</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">])</span> <span class="o">*</span> <span class="n">pixel_km2</span><span class="p">)</span>
+<span class="n">perm_water_sum</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;area km^2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;time (years)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[23]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Text(0.5, 0, &#39;time (years)&#39;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_11_UN_Sustainable_Development_Goal_indicators_11_6.6.1_Change_in_extent_of_water-related_ecosystems_11_6.6.1_Water_Wet_Veg_Workflow_12_1.png" src="../../../_images/notebooks_11_UN_Sustainable_Development_Goal_indicators_11_6.6.1_Change_in_extent_of_water-related_ecosystems_11_6.6.1_Water_Wet_Veg_Workflow_12_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Load-in-all-Landsat-data">
+<h2>Load in all Landsat data<a class="headerlink" href="#Load-in-all-Landsat-data" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">ls_data</span> <span class="o">=</span> <span class="n">DEADataHandling</span><span class="o">.</span><span class="n">load_clearlandsat</span><span class="p">(</span><span class="n">dc</span><span class="p">,</span>
+                                            <span class="n">query</span><span class="p">,</span>
+                                            <span class="n">sensors</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;ls5&#39;</span><span class="p">,</span> <span class="s1">&#39;ls7&#39;</span><span class="p">,</span> <span class="s1">&#39;ls8&#39;</span><span class="p">),</span>
+                                            <span class="n">masked_prop</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                            <span class="n">mask_pixel_quality</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Loading ls5 pixel quality
+    Skipping ls5; no valid data for query
+Ignoring SLC-off observations for ls7
+Loading ls7 pixel quality
+    Loading 0 filtered ls7 timesteps
+Loading ls8 pixel quality
+    Loading 38 filtered ls8 timesteps
+Combining and sorting ls7, ls8 data
+    Replacing invalid -999 values with NaN (data will be coerced to float64)
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Make-annual-summaries-of-the-wet-and-green-tasselled-cap-data">
+<h2>Make annual summaries of the wet and green tasselled cap data<a class="headerlink" href="#Make-annual-summaries-of-the-wet-and-green-tasselled-cap-data" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Define unique years to analyse</span>
+<span class="n">years</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">ls_data</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+
+<span class="c1">#make empty list to hold vegetated wetlands</span>
+<span class="n">tc_yearly</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1">#calculate vegetated wetland extent per year</span>
+<span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">years</span><span class="p">:</span>
+
+    <span class="c1">#select data from each year</span>
+    <span class="n">year_data</span> <span class="o">=</span> <span class="n">ls_data</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">ls_data</span><span class="p">[</span><span class="s1">&#39;time.year&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">year</span><span class="p">)</span>
+
+    <span class="c1"># Apply tasseled cap transformation</span>
+    <span class="n">tc_data</span> <span class="o">=</span> <span class="n">TasseledCapTools</span><span class="o">.</span><span class="n">pct_exceedance_tasseled_cap</span><span class="p">(</span><span class="n">year_data</span><span class="p">)</span>
+
+    <span class="c1">#calculate 90th percentile of tasselled cap</span>
+    <span class="n">tc_data_90th</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">tc_data</span><span class="o">&gt;</span><span class="mf">0.9</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1">#select areas where wetness and greenness are both in  the 90th percentile</span>
+    <span class="n">wet_veg</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">tc_data_90th</span><span class="o">.</span><span class="n">greenness_pct_exceedance</span> <span class="o">&amp;</span> <span class="n">tc_data_90th</span><span class="o">.</span><span class="n">wetness_pct_exceedance</span><span class="p">),</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># So we can plot the yearly data easily, re-add the time dimension to the wet veg array</span>
+    <span class="n">wet_veg</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">year</span>
+    <span class="n">wet_veg</span> <span class="o">=</span> <span class="n">wet_veg</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Append yearly result to list</span>
+    <span class="n">tc_yearly</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">wet_veg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Combine-all-individual-years-into-one-xarray-dataset">
+<h2>Combine all individual years into one xarray dataset<a class="headerlink" href="#Combine-all-individual-years-into-one-xarray-dataset" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Combine all individual years into one xarray dataset</span>
+<span class="n">wet_veg_yearly</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">tc_yearly</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">wet_veg_yearly</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[27]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>&lt;matplotlib.collections.QuadMesh at 0x7f1548df3f98&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_11_UN_Sustainable_Development_Goal_indicators_11_6.6.1_Change_in_extent_of_water-related_ecosystems_11_6.6.1_Water_Wet_Veg_Workflow_19_1.png" src="../../../_images/notebooks_11_UN_Sustainable_Development_Goal_indicators_11_6.6.1_Change_in_extent_of_water-related_ecosystems_11_6.6.1_Water_Wet_Veg_Workflow_19_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="plot-multiple-years-to-check-data">
+<h2>plot multiple years to check data<a class="headerlink" href="#plot-multiple-years-to-check-data" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Plot multiple years of data</span>
+<span class="n">wet_veg_yearly</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;YlGn_r&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[29]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>&lt;xarray.plot.facetgrid.FacetGrid at 0x7f1548df8518&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_11_UN_Sustainable_Development_Goal_indicators_11_6.6.1_Change_in_extent_of_water-related_ecosystems_11_6.6.1_Water_Wet_Veg_Workflow_21_1.png" src="../../../_images/notebooks_11_UN_Sustainable_Development_Goal_indicators_11_6.6.1_Change_in_extent_of_water-related_ecosystems_11_6.6.1_Water_Wet_Veg_Workflow_21_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Create-a-pandas-dataframe-of-the-area-of-open-water-vs-wet-vegetation-per-year">
+<h2>Create a pandas dataframe of the area of open water vs wet vegetation per year<a class="headerlink" href="#Create-a-pandas-dataframe-of-the-area-of-open-water-vs-wet-vegetation-per-year" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">sdg_661_df</span><span class="o">=</span> <span class="n">wet_veg_yearly</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;perm_wetveg_pixels&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">sdg_661_df</span><span class="p">[</span><span class="s1">&#39;perm_wetveg_km2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sdg_661_df</span><span class="p">[</span><span class="s1">&#39;perm_wetveg_pixels&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">pixel_km2</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [32]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">sdg_661_df</span> <span class="o">=</span> <span class="n">sdg_661_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;perm_wetveg_pixels&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">sdg_661_df</span><span class="p">[</span><span class="s1">&#39;perm_openwater_km2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">perm_water_sum</span><span class="p">[</span><span class="n">perm_water_sum</span><span class="p">[</span><span class="s1">&#39;time.year&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">years</span><span class="p">)]</span>
+<span class="n">sdg_661_df</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[33]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>perm_wetveg_km2</th>
+      <th>perm_openwater_km2</th>
+    </tr>
+    <tr>
+      <th>time</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013</th>
+      <td>42.0125</td>
+      <td>3.81</td>
+    </tr>
+    <tr>
+      <th>2014</th>
+      <td>43.8200</td>
+      <td>3.76</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</div>
+<div class="section" id="plot-the-results">
+<h2>plot the results<a class="headerlink" href="#plot-the-results" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sdg_661_df</span><span class="p">[</span><span class="s1">&#39;perm_wetveg_km2&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sdg_661_df</span><span class="p">[</span><span class="s1">&#39;perm_openwater_km2&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[35]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>[&lt;matplotlib.lines.Line2D at 0x7f154888dc50&gt;]
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_11_UN_Sustainable_Development_Goal_indicators_11_6.6.1_Change_in_extent_of_water-related_ecosystems_11_6.6.1_Water_Wet_Veg_Workflow_28_1.png" src="../../../_images/notebooks_11_UN_Sustainable_Development_Goal_indicators_11_6.6.1_Change_in_extent_of_water-related_ecosystems_11_6.6.1_Water_Wet_Veg_Workflow_28_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [36]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">sdg_661_df</span><span class="p">[[</span><span class="s1">&#39;perm_openwater_km2&#39;</span><span class="p">,</span> <span class="s1">&#39;perm_wetveg_km2&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">area</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;xkcd:ocean blue&#39;</span><span class="p">,</span> <span class="s1">&#39;xkcd:lightish green&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Out[36]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1548a20198&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/notebooks_11_UN_Sustainable_Development_Goal_indicators_11_6.6.1_Change_in_extent_of_water-related_ecosystems_11_6.6.1_Water_Wet_Veg_Workflow_29_1.png" src="../../../_images/notebooks_11_UN_Sustainable_Development_Goal_indicators_11_6.6.1_Change_in_extent_of_water-related_ecosystems_11_6.6.1_Water_Wet_Veg_Workflow_29_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Next-steps">
+<h2>Next steps<a class="headerlink" href="#Next-steps" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>check that this approach works for other water bodies in other areas</li>
+<li>polygonize the results</li>
+<li>draw contours of the results</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1">### contour code</span>
+
+
+
+<span class="c1">#     # Prepare attributes as input to contour extract</span>
+<span class="c1">#     attribute_data = {&#39;in_perc&#39;: [area]}</span>
+<span class="c1">#     attribute_dtypes = {&#39;in_perc&#39;: &#39;float&#39;}</span>
+
+<span class="c1">#     # Set threshold</span>
+<span class="c1">#     thresh = 0</span>
+
+<span class="c1">#     # Extract contours with custom attribute fields:</span>
+<span class="c1">#     contour_dict = contour_extract(z_values=[thresh],</span>
+<span class="c1">#                                    ds_array=cleaned_subset_i.mndwi,</span>
+<span class="c1">#                                    ds_crs=&#39;epsg:3577&#39;,</span>
+<span class="c1">#                                    ds_affine=landsat_dataset.geobox.transform,</span>
+<span class="c1">#                                    output_shp=&#39;relative_topography/{}_{}.shp&#39;.format(name, i),</span>
+<span class="c1">#                                    min_vertices=50,</span>
+<span class="c1">#                                    attribute_data=attribute_data,</span>
+<span class="c1">#                                    attribute_dtypes=attribute_dtypes)</span>
+
+
+
+<span class="c1"># # Combine all shapefiles into one file</span>
+<span class="c1"># shapefiles = glob.glob(&#39;relative_topography/{}_*.shp&#39;.format(name))</span>
+<span class="c1"># gdf = pd.concat([gpd.read_file(shp) for shp in shapefiles], sort=False).pipe(gpd.GeoDataFrame)</span>
+
+<span class="c1"># # Save as combined shapefile</span>
+<span class="c1"># gdf = gdf.reset_index()[[&#39;in_perc&#39;, &#39;geometry&#39;]].sort_values(&#39;in_perc&#39;)</span>
+<span class="c1"># gdf.crs = &#39;epsg:3577&#39;</span>
+<span class="c1"># gdf.to_file(f&#39;relative_topography/{name}_combined.shp&#39;)</span>
+
+<span class="c1"># # Plot contours</span>
+<span class="c1"># fig, ax = plt.subplots(figsize=(16, 16))</span>
+<span class="c1"># gdf.plot(ax=ax, column=&#39;in_perc&#39;, cmap=&#39;viridis&#39;)</span>
+
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2018, Geoscience Australia
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.14.0/dist/embed-amd.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+
+<!-- Theme Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-113800428-1"></script>
+<script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+ 
+ gtag('config', 'UA-113800428-1');
+</script>
+
+    
+  
+
+
+</body>
+</html>

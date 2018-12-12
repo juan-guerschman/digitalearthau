@@ -106,22 +106,25 @@
 <li class="toctree-l2"><a class="reference internal" href="Introduction_to_LandsatPQ.html">Introduction to Landsat pixel quality (PQ25)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Introduction_to_Fractional_Cover.html">Introduction to Fractional Cover Data</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Introduction to Sentinel 2</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#See-what-Sentinel-2-products-are-currently-available">See what Sentinel 2 products are currently available</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Now-we-want-to-actually-load-and-look-at-some-data">Now we want to actually load and look at some data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Sentinel-2-products-currently-available">Sentinel 2 products currently available</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Loading-Sentinel-2-data">Loading Sentinel 2 data</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#See-what-came-back-from-the-extraction">See what came back from the extraction</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#About-Sentinel-2-bands">About Sentinel 2 bands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Sentinel-2-bands">Sentinel 2 bands</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#Data-corrections">Data corrections</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Dealing-with-missing-data">Dealing with missing data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Plot-as-a-true-colour-image">Plot as a true colour image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Plot-as-a-false-colour-image">Plot as a false colour image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Compare-observations-side-by-side">Compare observations side-by-side</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#Plot-this-scene-up-as-true-colour-image">Plot this scene up as true colour image</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Plot-this-scene-up-as-false-colour-image">Plot this scene up as false colour image</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Compare-some-scenes-side-by-side">Compare some scenes side-by-side</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Filter-scenes-using-pixel-quality">Filter scenes using pixel quality</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#Here-is-the-cloudy-image-we-would-like-to-mask">Here is the cloudy image we would like to mask</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#Plot-up-the-pixel-quality-information-for-the-same-scene">Plot up the pixel quality information for the same scene</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#Now-use-the-pixel-quality-information-to-create-a-mask,-and-apply-it-to-the-spectral-data">Now use the pixel quality information to create a mask, and apply it to the spectral data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Plot-pixel-quality-information">Plot pixel quality information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Use-pixel-quality-information-to-create-a-mask,-and-apply-it-to-the-spectral-data">Use pixel quality information to create a mask, and apply it to the spectral data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Plot-cloud-masked-image">Plot cloud-masked image</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#Use-load_clearsentinel2-to-automatically-load-cloud-free-observations">Use <code class="docutils literal notranslate"><span class="pre">load_clearsentinel2</span></code> to automatically load cloud free observations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Returning-only-cloud-free-images">Returning only cloud-free images</a></li>
 </ul>
 </li>
 </ul>
@@ -421,12 +424,12 @@ from the command line prior to launching jupyter notebook from the same
 terminal so that the required libraries and paths are set.</p>
 <p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">use</span> <span class="pre">/g/data/v10/public/modules/modulefiles</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">dea</span></code></p>
-<p><strong>Date</strong>: September 2018.</p>
-<p><strong>Author</strong>: Claire Krause</p>
-<p>Tags: <span class="target" id="index-0"></span>Sentinel2, <span class="target" id="index-1"></span>products, <span class="target" id="index-2"></span>DEAPlotting, <span class="target" id="index-3"></span>three_band_image, <span class="target" id="index-4"></span>three_band_image_subplots, <span class="target" id="index-5"></span>dc.list_products, <span class="target" id="index-6"></span>dc.load, <span class="target" id="index-7"></span>query, <span class="target" id="index-8"></span>beginner, <span class="target" id="index-9"></span>plot, <span class="target" id="index-10"></span>image, <span class="target" id="index-11"></span>pixelquality</p>
+<p><strong>Date</strong>: November 2018</p>
+<p><strong>Author</strong>: Claire Krause, Robbi Bishop-Taylor</p>
+<p>Tags: <span class="target" id="index-0"></span>Sentinel2, <span class="target" id="index-1"></span>products, <span class="target" id="index-2"></span>DEAPlotting, <span class="target" id="index-3"></span>rgb, <span class="target" id="index-4"></span>dc.list_products, <span class="target" id="index-5"></span>dc.load, <span class="target" id="index-6"></span>query, <span class="target" id="index-7"></span>beginner, <span class="target" id="index-8"></span>plot, <span class="target" id="index-9"></span>image, <span class="target" id="index-10"></span>pixelquality</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [18]:
+<span></span>In [1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -435,25 +438,26 @@ terminal so that the required libraries and paths are set.</p>
 <span class="kn">from</span> <span class="nn">datacube</span> <span class="k">import</span> <span class="n">Datacube</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">skimage</span> <span class="k">import</span> <span class="n">exposure</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
-<span class="c1"># Import external dea-notebooks functions using relative link to Scripts directory</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../10_Scripts&#39;</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">DEADataHandling</span>
+<span class="c1"># Point this to where you have the algorithms from the dea-notebooks/algorithms saved</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;../10_Scripts&#39;</span><span class="p">))</span>
 <span class="kn">import</span> <span class="nn">DEAPlotting</span>
+<span class="kn">import</span> <span class="nn">DEADataHandling</span>
 
-<span class="c1"># Connect to datacube database</span>
+<span class="c1"># Connect to datacube</span>
 <span class="n">dc</span> <span class="o">=</span> <span class="n">Datacube</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="s1">&#39;Intro to Sentinel2&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="See-what-Sentinel-2-products-are-currently-available">
-<h2>See what Sentinel 2 products are currently available<a class="headerlink" href="#See-what-Sentinel-2-products-are-currently-available" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Sentinel-2-products-currently-available">
+<h2>Sentinel 2 products currently available<a class="headerlink" href="#Sentinel-2-products-currently-available" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [3]:
+<span></span>In [2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -467,7 +471,7 @@ terminal so that the required libraries and paths are set.</p>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[3]:
+<span></span>Out[2]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -566,8 +570,8 @@ waters every five days at the equator.</p>
 out the <a class="reference external" href="http://www.esa.int/Our_Activities/Observing_the_Earth/Copernicus/Sentinel-2">European Space Agency
 website</a>.</p>
 </div>
-<div class="section" id="Now-we-want-to-actually-load-and-look-at-some-data">
-<h2>Now we want to actually load and look at some data<a class="headerlink" href="#Now-we-want-to-actually-load-and-look-at-some-data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Loading-Sentinel-2-data">
+<h2>Loading Sentinel 2 data<a class="headerlink" href="#Loading-Sentinel-2-data" title="Permalink to this headline">¶</a></h2>
 <p>We will focus on data from the Sentinel-2a platform for this
 demonstration, as there is more data available than 2b. To explore the
 spectral datasets from Sentinel-2a, we will use the <code class="docutils literal notranslate"><span class="pre">s2a_ard_granule</span></code>
@@ -594,7 +598,7 @@ system, this will be in metres.</li>
 </ul>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [4]:
+<span></span>In [3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -614,7 +618,7 @@ system, this will be in metres.</li>
 <h3>See what came back from the extraction<a class="headerlink" href="#See-what-came-back-from-the-extraction" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [5]:
+<span></span>In [4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -624,7 +628,7 @@ system, this will be in metres.</li>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[5]:
+<span></span>Out[4]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -635,51 +639,50 @@ Coordinates:
   * y                      (y) float64 -3.956e+06 -3.956e+06 ... -3.963e+06
   * x                      (x) float64 1.544e+06 1.544e+06 ... 1.553e+06
 Data variables:
-    azimuthal_exiting      (time, y, x) float32 24.918427 ... 127.58696
+    azimuthal_exiting      (time, y, x) float32 24.900135 ... 127.58696
     azimuthal_incident     (time, y, x) float32 23.90676 39.06566 ... 149.86623
-    exiting                (time, y, x) float32 10.383396 13.482613 ... 2.201671
+    exiting                (time, y, x) float32 10.388568 13.48787 ... 2.201671
     incident               (time, y, x) float32 36.450188 ... 30.279655
-    relative_azimuth       (time, y, x) float32 26.75534 26.75521 ... 28.386116
-    relative_slope         (time, y, x) float32 -1.0116673 ... 22.279266
-    satellite_azimuth      (time, y, x) float32 100.57116 ... 100.57671
-    satellite_view         (time, y, x) float32 4.7243457 4.723324 ... 4.0362
+    relative_azimuth       (time, y, x) float32 26.755356 ... 28.386116
+    relative_slope         (time, y, x) float32 -0.9933758 ... 22.279266
+    satellite_azimuth      (time, y, x) float32 100.571175 ... 100.57671
+    satellite_view         (time, y, x) float32 4.7305017 4.72948 ... 4.0362
     solar_azimuth          (time, y, x) float32 73.81582 73.81592 ... 72.1906
     solar_zenith           (time, y, x) float32 30.208754 ... 31.745928
     terrain_shadow         (time, y, x) uint8 1 1 1 1 1 1 1 1 ... 1 1 1 1 1 1 1
     fmask                  (time, y, x) uint8 2 2 2 2 2 2 2 2 ... 2 2 2 2 2 2 2
     nbar_contiguity        (time, y, x) uint8 1 1 1 1 1 1 1 1 ... 1 1 1 1 1 1 1
-    nbar_coastal_aerosol   (time, y, x) int16 819 805 779 779 ... 442 442 442
-    nbar_blue              (time, y, x) int16 931 888 882 845 ... 480 300 279
-    nbar_green             (time, y, x) int16 1097 1073 1055 ... 591 467 412
-    nbar_red               (time, y, x) int16 1393 1358 1336 ... 618 343 367
-    nbar_red_edge_1        (time, y, x) int16 1743 1656 1607 ... 648 805 685
-    nbar_red_edge_2        (time, y, x) int16 2080 2011 1984 ... 1503 2163 1953
-    nbar_red_edge_3        (time, y, x) int16 2351 2241 2211 ... 1916 2850 2938
-    nbar_nir_1             (time, y, x) int16 2505 2397 2472 ... 1915 3377 2475
-    nbar_nir_2             (time, y, x) int16 2709 2585 2582 ... 2198 3281 3346
-    nbar_swir_2            (time, y, x) int16 3028 2942 2864 ... 1387 1525 1585
-    nbar_swir_3            (time, y, x) int16 1939 1848 1787 ... 846 826 761
+    nbar_coastal_aerosol   (time, y, x) int16 822 807 784 784 ... 442 442 442
+    nbar_blue              (time, y, x) int16 903 863 858 824 ... 480 300 279
+    nbar_green             (time, y, x) int16 1051 1029 1013 987 ... 591 467 412
+    nbar_red               (time, y, x) int16 1301 1269 1249 ... 618 343 367
+    nbar_red_edge_1        (time, y, x) int16 1619 1539 1494 ... 648 805 685
+    nbar_red_edge_2        (time, y, x) int16 1927 1862 1838 ... 1503 2163 1953
+    nbar_red_edge_3        (time, y, x) int16 2308 2199 2170 ... 1916 2850 2938
+    nbar_nir_1             (time, y, x) int16 2456 2350 2423 ... 1915 3377 2475
+    nbar_nir_2             (time, y, x) int16 2658 2536 2533 ... 2198 3281 3346
+    nbar_swir_2            (time, y, x) int16 2862 2780 2707 ... 1387 1525 1585
+    nbar_swir_3            (time, y, x) int16 1817 1732 1675 ... 846 826 761
     nbart_contiguity       (time, y, x) uint8 1 1 1 1 1 1 1 1 ... 1 1 1 1 1 1 1
-    nbart_coastal_aerosol  (time, y, x) int16 861 856 850 850 ... 432 432 432
-    nbart_blue             (time, y, x) int16 981 958 967 934 ... 458 293 278
-    nbart_green            (time, y, x) int16 1158 1161 1161 ... 564 454 409
-    nbart_red              (time, y, x) int16 1473 1475 1474 ... 587 333 365
-    nbart_red_edge_1       (time, y, x) int16 1835 1793 1768 ... 616 780 676
-    nbart_red_edge_2       (time, y, x) int16 2189 2177 2182 ... 1429 2096 1928
-    nbart_red_edge_3       (time, y, x) int16 2458 2401 2401 ... 1841 2781 2909
-    nbart_nir_1            (time, y, x) int16 2630 2573 2690 ... 1839 3304 2464
-    nbart_nir_2            (time, y, x) int16 2832 2769 2802 ... 2113 3202 3314
-    nbart_swir_2           (time, y, x) int16 3209 3220 3191 ... 1317 1476 1564
-    nbart_swir_3           (time, y, x) int16 2059 2031 2002 ... 801 798 751
+    nbart_coastal_aerosol  (time, y, x) int16 867 862 861 861 ... 432 432 432
+    nbart_blue             (time, y, x) int16 954 936 946 917 ... 458 293 278
+    nbart_green            (time, y, x) int16 1113 1118 1119 ... 564 454 409
+    nbart_red              (time, y, x) int16 1384 1389 1392 ... 587 333 365
+    nbart_red_edge_1       (time, y, x) int16 1712 1679 1659 ... 616 780 676
+    nbart_red_edge_2       (time, y, x) int16 2037 2033 2040 ... 1429 2096 1928
+    nbart_red_edge_3       (time, y, x) int16 2402 2340 2336 ... 1841 2781 2909
+    nbart_nir_1            (time, y, x) int16 2566 2504 2614 ... 1839 3304 2464
+    nbart_nir_2            (time, y, x) int16 2767 2697 2725 ... 2113 3202 3314
+    nbart_swir_2           (time, y, x) int16 3031 3041 3013 ... 1317 1476 1564
+    nbart_swir_3           (time, y, x) int16 1931 1906 1879 ... 801 798 751
 Attributes:
     crs:      EPSG:3577
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="About-Sentinel-2-bands">
-<h2>About Sentinel 2 bands<a class="headerlink" href="#About-Sentinel-2-bands" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Sentinel-2-bands">
+<h3>Sentinel 2 bands<a class="headerlink" href="#Sentinel-2-bands" title="Permalink to this headline">¶</a></h3>
 <p>Sentinel 2 satellites have 13 spectral channels:</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -803,6 +806,7 @@ wave lengths.</p>
 returned from our query. These are a combination of datasets used in the
 correction process, and layers relating to pixel quality. We will
 explore the pixel quality layers below.</p>
+</div>
 <div class="section" id="Data-corrections">
 <h3>Data corrections<a class="headerlink" href="#Data-corrections" title="Permalink to this headline">¶</a></h3>
 <p>There are two corrections applied to the Sentinel data:</p>
@@ -824,17 +828,29 @@ effects of topography and angular variation in reflectance.</p>
 some additional features.</p>
 </li>
 </ol>
+<p>For more information on these corrections, see the explanation on the
+<a class="reference external" href="http://geoscienceaustralia.github.io/digitalearthau/data/data.html#">DEA surface reflectance
+page</a>.</p>
+</div>
+<div class="section" id="Dealing-with-missing-data">
+<h3>Dealing with missing data<a class="headerlink" href="#Dealing-with-missing-data" title="Permalink to this headline">¶</a></h3>
 <p>Note that the <code class="docutils literal notranslate"><span class="pre">nbart</span></code> data insert a missing value (<code class="docutils literal notranslate"><span class="pre">-9999</span></code>) into the
 dataset to denote a terrain shadow. This should be converted to a
 <code class="docutils literal notranslate"><span class="pre">NaN</span></code> value before using this data to avoid treating it as a valid
-value.</p>
-<p>For more information on these corrections, see the explanation of the
-<a class="reference external" href="http://geoscienceaustralia.github.io/digitalearthau/data/data.html#">Landsat archive
-data</a>.</p>
+value:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">Canberra</span> <span class="o">=</span> <span class="n">masking</span><span class="o">.</span><span class="n">mask_invalid_data</span><span class="p">(</span><span class="n">Canberra</span><span class="p">)</span>
+</pre></div>
 </div>
 </div>
-<div class="section" id="Plot-this-scene-up-as-true-colour-image">
-<h2>Plot this scene up as true colour image<a class="headerlink" href="#Plot-this-scene-up-as-true-colour-image" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="Plot-as-a-true-colour-image">
+<h3>Plot as a true colour image<a class="headerlink" href="#Plot-as-a-true-colour-image" title="Permalink to this headline">¶</a></h3>
 <p>True colour images approximate what the human eye sees when looking at a
 landscape. Note that the function used for this true colour plot
 enhances the contrast between the bands, resulting in a colour-enhanced
@@ -845,19 +861,7 @@ image.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">DEAPlotting</span><span class="o">.</span><span class="n">three_band_image</span><span class="p">(</span><span class="n">Canberra</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nbar_red&#39;</span><span class="p">,</span> <span class="s1">&#39;nbar_green&#39;</span><span class="p">,</span> <span class="s1">&#39;nbar_blue&#39;</span><span class="p">],</span>
-                             <span class="n">contrast_enhance</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[6]:
-</pre></div>
-</div>
-<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>(&lt;Figure size 720x720 with 1 Axes&gt;,
- &lt;matplotlib.axes._subplots.AxesSubplot at 0x7f383a7204e0&gt;)
+<span></span><span class="n">DEAPlotting</span><span class="o">.</span><span class="n">rgb</span><span class="p">(</span><span class="n">Canberra</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nbart_red&#39;</span><span class="p">,</span> <span class="s1">&#39;nbart_green&#39;</span><span class="p">,</span> <span class="s1">&#39;nbart_blue&#39;</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -865,12 +869,12 @@ image.</p>
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/notebooks_02_DEA_datasets_Introduction_to_Sentinel2_13_1.png" src="../../_images/notebooks_02_DEA_datasets_Introduction_to_Sentinel2_13_1.png" />
+<img alt="../../_images/notebooks_02_DEA_datasets_Introduction_to_Sentinel2_16_0.png" src="../../_images/notebooks_02_DEA_datasets_Introduction_to_Sentinel2_16_0.png" />
 </div>
 </div>
 </div>
-<div class="section" id="Plot-this-scene-up-as-false-colour-image">
-<h2>Plot this scene up as false colour image<a class="headerlink" href="#Plot-this-scene-up-as-false-colour-image" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Plot-as-a-false-colour-image">
+<h3>Plot as a false colour image<a class="headerlink" href="#Plot-as-a-false-colour-image" title="Permalink to this headline">¶</a></h3>
 <p>This plot uses the SWIR, NIR and green bands to accentuate the presence
 of water in the landscape.</p>
 <div class="nbinput docutils container">
@@ -879,19 +883,7 @@ of water in the landscape.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">DEAPlotting</span><span class="o">.</span><span class="n">three_band_image</span><span class="p">(</span>
-    <span class="n">Canberra</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nbar_swir_2&#39;</span><span class="p">,</span> <span class="s1">&#39;nbar_nir_1&#39;</span><span class="p">,</span> <span class="s1">&#39;nbar_green&#39;</span><span class="p">],</span> <span class="n">time</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[7]:
-</pre></div>
-</div>
-<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>(&lt;Figure size 720x720 with 1 Axes&gt;,
- &lt;matplotlib.axes._subplots.AxesSubplot at 0x7f383a765f60&gt;)
+<span></span><span class="n">DEAPlotting</span><span class="o">.</span><span class="n">rgb</span><span class="p">(</span><span class="n">Canberra</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nbart_swir_2&#39;</span><span class="p">,</span> <span class="s1">&#39;nbart_nir_1&#39;</span><span class="p">,</span> <span class="s1">&#39;nbart_green&#39;</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -899,40 +891,21 @@ of water in the landscape.</p>
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/notebooks_02_DEA_datasets_Introduction_to_Sentinel2_15_1.png" src="../../_images/notebooks_02_DEA_datasets_Introduction_to_Sentinel2_15_1.png" />
+<img alt="../../_images/notebooks_02_DEA_datasets_Introduction_to_Sentinel2_18_0.png" src="../../_images/notebooks_02_DEA_datasets_Introduction_to_Sentinel2_18_0.png" />
 </div>
 </div>
 </div>
-<div class="section" id="Compare-some-scenes-side-by-side">
-<h2>Compare some scenes side-by-side<a class="headerlink" href="#Compare-some-scenes-side-by-side" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Compare-observations-side-by-side">
+<h3>Compare observations side-by-side<a class="headerlink" href="#Compare-observations-side-by-side" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [8]:
+<span></span>In [17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">DEAPlotting</span><span class="o">.</span><span class="n">three_band_image_subplots</span><span class="p">(</span><span class="n">Canberra</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nbar_swir_2&#39;</span><span class="p">,</span> <span class="s1">&#39;nbar_nir_1&#39;</span><span class="p">,</span> <span class="s1">&#39;nbar_green&#39;</span><span class="p">],</span>
-                                      <span class="n">num_cols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.35</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="stderr output_area docutils container">
-<div class="highlight"><pre>
-Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
-Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[8]:
-</pre></div>
-</div>
-<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>(&lt;module &#39;matplotlib.pyplot&#39; from &#39;/g/data/v10/public/modules/dea-env/20181015/lib/python3.6/site-packages/matplotlib/pyplot.py&#39;&gt;,
- &lt;Figure size 720x720 with 2 Axes&gt;)
+<span></span><span class="c1"># Select multiple images to plot by giving a list of values to `index`.</span>
+<span class="c1"># This example plots the first and the second image in the dataset:</span>
+<span class="n">DEAPlotting</span><span class="o">.</span><span class="n">rgb</span><span class="p">(</span><span class="n">Canberra</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nbart_swir_2&#39;</span><span class="p">,</span> <span class="s1">&#39;nbart_nir_1&#39;</span><span class="p">,</span> <span class="s1">&#39;nbart_green&#39;</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -940,7 +913,8 @@ Clipping input data to the valid range for imshow with RGB data ([0..1] for floa
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/notebooks_02_DEA_datasets_Introduction_to_Sentinel2_17_2.png" src="../../_images/notebooks_02_DEA_datasets_Introduction_to_Sentinel2_17_2.png" />
+<img alt="../../_images/notebooks_02_DEA_datasets_Introduction_to_Sentinel2_20_0.png" src="../../_images/notebooks_02_DEA_datasets_Introduction_to_Sentinel2_20_0.png" />
+</div>
 </div>
 </div>
 </div>
@@ -981,27 +955,14 @@ want to filter are clouds and shadows.</p>
 </tr>
 </tbody>
 </table>
-<div class="section" id="Here-is-the-cloudy-image-we-would-like-to-mask">
-<h3>Here is the cloudy image we would like to mask<a class="headerlink" href="#Here-is-the-cloudy-image-we-would-like-to-mask" title="Permalink to this headline">¶</a></h3>
+<p>Here is the cloudy image we would like to mask:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [12]:
+<span></span>In [9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">DEAPlotting</span><span class="o">.</span><span class="n">three_band_image</span><span class="p">(</span>
-    <span class="n">Canberra</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nbar_swir_2&#39;</span><span class="p">,</span> <span class="s1">&#39;nbar_nir_1&#39;</span><span class="p">,</span> <span class="s1">&#39;nbar_green&#39;</span><span class="p">],</span> <span class="n">time</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[12]:
-</pre></div>
-</div>
-<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>(&lt;Figure size 720x720 with 1 Axes&gt;,
- &lt;matplotlib.axes._subplots.AxesSubplot at 0x7f388c082080&gt;)
+<span></span><span class="n">DEAPlotting</span><span class="o">.</span><span class="n">rgb</span><span class="p">(</span><span class="n">Canberra</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nbar_swir_2&#39;</span><span class="p">,</span> <span class="s1">&#39;nbar_nir_1&#39;</span><span class="p">,</span> <span class="s1">&#39;nbar_green&#39;</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1009,15 +970,16 @@ want to filter are clouds and shadows.</p>
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/notebooks_02_DEA_datasets_Introduction_to_Sentinel2_20_1.png" src="../../_images/notebooks_02_DEA_datasets_Introduction_to_Sentinel2_20_1.png" />
+<img alt="../../_images/notebooks_02_DEA_datasets_Introduction_to_Sentinel2_23_0.png" src="../../_images/notebooks_02_DEA_datasets_Introduction_to_Sentinel2_23_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="Plot-up-the-pixel-quality-information-for-the-same-scene">
-<h3>Plot up the pixel quality information for the same scene<a class="headerlink" href="#Plot-up-the-pixel-quality-information-for-the-same-scene" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="Plot-pixel-quality-information">
+<h3>Plot pixel quality information<a class="headerlink" href="#Plot-pixel-quality-information" title="Permalink to this headline">¶</a></h3>
+<p>Here we plot pixel quality information that corresponds to the
+observation above. This data is stored in the <code class="docutils literal notranslate"><span class="pre">fmask</span></code> variable:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [14]:
+<span></span>In [10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1027,56 +989,11 @@ want to filter are clouds and shadows.</p>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[14]:
+<span></span>Out[10]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>&lt;matplotlib.collections.QuadMesh at 0x7f382c183a20&gt;
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../../_images/notebooks_02_DEA_datasets_Introduction_to_Sentinel2_22_1.png" src="../../_images/notebooks_02_DEA_datasets_Introduction_to_Sentinel2_22_1.png" />
-</div>
-</div>
-</div>
-<div class="section" id="Now-use-the-pixel-quality-information-to-create-a-mask,-and-apply-it-to-the-spectral-data">
-<h3>Now use the pixel quality information to create a mask, and apply it to the spectral data<a class="headerlink" href="#Now-use-the-pixel-quality-information-to-create-a-mask,-and-apply-it-to-the-spectral-data" title="Permalink to this headline">¶</a></h3>
-<p>We want to filter out no data, cloud and cloud shadow, so we will use
-the <code class="docutils literal notranslate"><span class="pre">fmask</span></code> values <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">2</span></code> and <code class="docutils literal notranslate"><span class="pre">3</span></code> for our filter.</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [15]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">clear_pixels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">Canberra</span><span class="o">.</span><span class="n">fmask</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Canberra</span><span class="o">.</span><span class="n">fmask</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">),</span>
-                              <span class="n">Canberra</span><span class="o">.</span><span class="n">fmask</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">)</span>
-<span class="n">Clear_Canberra</span> <span class="o">=</span> <span class="n">Canberra</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">clear_pixels</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [17]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">DEAPlotting</span><span class="o">.</span><span class="n">three_band_image</span><span class="p">(</span><span class="n">Clear_Canberra</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nbar_swir_2&#39;</span><span class="p">,</span> <span class="s1">&#39;nbar_nir_1&#39;</span><span class="p">,</span> <span class="s1">&#39;nbar_green&#39;</span><span class="p">],</span> <span class="n">time</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[17]:
-</pre></div>
-</div>
-<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>(&lt;Figure size 720x720 with 1 Axes&gt;,
- &lt;matplotlib.axes._subplots.AxesSubplot at 0x7f388c0749b0&gt;)
+<span></span>&lt;matplotlib.collections.QuadMesh at 0x7fe6ccc2ed30&gt;
 </pre></div>
 </div>
 </div>
@@ -1085,6 +1002,168 @@ the <code class="docutils literal notranslate"><span class="pre">fmask</span></c
 </div>
 <div class="output_area docutils container">
 <img alt="../../_images/notebooks_02_DEA_datasets_Introduction_to_Sentinel2_25_1.png" src="../../_images/notebooks_02_DEA_datasets_Introduction_to_Sentinel2_25_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Use-pixel-quality-information-to-create-a-mask,-and-apply-it-to-the-spectral-data">
+<h3>Use pixel quality information to create a mask, and apply it to the spectral data<a class="headerlink" href="#Use-pixel-quality-information-to-create-a-mask,-and-apply-it-to-the-spectral-data" title="Permalink to this headline">¶</a></h3>
+<p>We want to filter out no data, cloud and cloud shadow, so we will use
+the <code class="docutils literal notranslate"><span class="pre">fmask</span></code> values <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">2</span></code> and <code class="docutils literal notranslate"><span class="pre">3</span></code> for our filter.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Numpy&#39;s `isin` function tests whether a pixel&#39;s value is in `test_elements`. Because we want to</span>
+<span class="c1"># discard pixels where this is the case (because these pixels represent nodata, cloud or cloud shadow),</span>
+<span class="c1"># we also use `invert=True` to keep only good quality pixels</span>
+<span class="n">clear_pixels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">Canberra</span><span class="o">.</span><span class="n">fmask</span><span class="p">,</span> <span class="n">test_elements</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">invert</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Use clear pixels as a mask to keep only clear pixels</span>
+<span class="n">Clear_Canberra</span> <span class="o">=</span> <span class="n">Canberra</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">clear_pixels</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Plot-cloud-masked-image">
+<h3>Plot cloud-masked image<a class="headerlink" href="#Plot-cloud-masked-image" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">DEAPlotting</span><span class="o">.</span><span class="n">rgb</span><span class="p">(</span><span class="n">Clear_Canberra</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nbart_swir_2&#39;</span><span class="p">,</span> <span class="s1">&#39;nbart_nir_1&#39;</span><span class="p">,</span> <span class="s1">&#39;nbart_green&#39;</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_02_DEA_datasets_Introduction_to_Sentinel2_29_0.png" src="../../_images/notebooks_02_DEA_datasets_Introduction_to_Sentinel2_29_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="Use-load_clearsentinel2-to-automatically-load-cloud-free-observations">
+<h2>Use <code class="docutils literal notranslate"><span class="pre">load_clearsentinel2</span></code> to automatically load cloud free observations<a class="headerlink" href="#Use-load_clearsentinel2-to-automatically-load-cloud-free-observations" title="Permalink to this headline">¶</a></h2>
+<p>To make loading Sentinel 2 data more convenient, the
+<code class="docutils literal notranslate"><span class="pre">load_clearsentinel2</span></code> function was written to automate common tasks
+like returning cloud-free time series:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">query</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">35.27</span><span class="p">,</span> <span class="o">-</span><span class="mf">35.33</span><span class="p">),</span>
+        <span class="s1">&#39;lon&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">149.07</span><span class="p">,</span> <span class="mf">149.15</span><span class="p">),</span>
+        <span class="s1">&#39;output_crs&#39;</span><span class="p">:</span> <span class="s1">&#39;EPSG:3577&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;resolution&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+        <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;2017-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2017-02-01&#39;</span><span class="p">)</span>
+        <span class="p">}</span>
+
+<span class="c1"># The `load_clearsentinel2` can be given a query containing spatial and temporal bounds, and a list of bands to return.</span>
+<span class="c1"># By setting `mask_pixel_quality=True`, the function will automatically remove nodata, cloud or cloud shadow pixels:</span>
+<span class="n">Clear_Canberra</span> <span class="o">=</span> <span class="n">DEADataHandling</span><span class="o">.</span><span class="n">load_clearsentinel2</span><span class="p">(</span><span class="n">dc</span><span class="o">=</span><span class="n">dc</span><span class="p">,</span>
+                                                     <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span>
+                                                     <span class="n">bands_of_interest</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;nbart_red&#39;</span><span class="p">,</span> <span class="s1">&#39;nbart_green&#39;</span><span class="p">,</span> <span class="s1">&#39;nbart_blue&#39;</span><span class="p">,</span>
+                                                                        <span class="s1">&#39;nbart_nir_1&#39;</span><span class="p">,</span> <span class="s1">&#39;nbart_swir_2&#39;</span><span class="p">,</span> <span class="s1">&#39;nbart_swir_3&#39;</span><span class="p">),</span>
+                                                     <span class="n">masked_prop</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                                     <span class="n">mask_pixel_quality</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Loading s2a pixel quality
+    Loading 2 filtered s2a timesteps
+Loading s2b pixel quality
+    Skipping s2b; no valid data for query
+Combining and sorting s2a data
+    Replacing invalid -999 values with NaN (data will be coerced to float64)
+</pre></div></div>
+</div>
+<p>We can plot the same observation as earlier to verify we get the same
+result:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">DEAPlotting</span><span class="o">.</span><span class="n">rgb</span><span class="p">(</span><span class="n">Clear_Canberra</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nbart_swir_2&#39;</span><span class="p">,</span> <span class="s1">&#39;nbart_nir_1&#39;</span><span class="p">,</span> <span class="s1">&#39;nbart_green&#39;</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_02_DEA_datasets_Introduction_to_Sentinel2_33_0.png" src="../../_images/notebooks_02_DEA_datasets_Introduction_to_Sentinel2_33_0.png" />
+</div>
+</div>
+<div class="section" id="Returning-only-cloud-free-images">
+<h3>Returning only cloud-free images<a class="headerlink" href="#Returning-only-cloud-free-images" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">load_clearsentinel2</span></code> function also allows you to return only
+images that contain greater than a given percentage of good quality
+pixels. For example, this can be used to return only cloud-free images.
+To do this, we specify a minimum proportion of good pixels using the
+<code class="docutils literal notranslate"><span class="pre">masked_prop</span></code> argument (e.g. specifying 0.3 below will return only
+images with more than 30% good quality, cloud-free pixels).</p>
+<p><strong>Please note:</strong> the Sentinel 2 cloud masking algorithm currently
+performs poorly over urban areas, where it commonly confuses buildings
+with clouds. Because of this, you make need to use a small value for
+<code class="docutils literal notranslate"><span class="pre">masked_prop</span></code> to ensure the algorithm does not discard an excessive
+number of images.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">Clear_Canberra</span> <span class="o">=</span> <span class="n">DEADataHandling</span><span class="o">.</span><span class="n">load_clearsentinel2</span><span class="p">(</span><span class="n">dc</span><span class="o">=</span><span class="n">dc</span><span class="p">,</span>
+                                                     <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span>
+                                                     <span class="n">bands_of_interest</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;nbart_red&#39;</span><span class="p">,</span> <span class="s1">&#39;nbart_green&#39;</span><span class="p">,</span> <span class="s1">&#39;nbart_blue&#39;</span><span class="p">,</span>
+                                                                        <span class="s1">&#39;nbart_nir_1&#39;</span><span class="p">,</span> <span class="s1">&#39;nbart_swir_2&#39;</span><span class="p">,</span> <span class="s1">&#39;nbart_swir_3&#39;</span><span class="p">),</span>
+                                                     <span class="n">masked_prop</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Loading s2a pixel quality
+    Loading 1 filtered s2a timesteps
+Loading s2b pixel quality
+    Skipping s2b; no valid data for query
+Combining and sorting s2a data
+    Replacing invalid -999 values with NaN (data will be coerced to float64)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">DEAPlotting</span><span class="o">.</span><span class="n">rgb</span><span class="p">(</span><span class="n">Clear_Canberra</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nbart_swir_2&#39;</span><span class="p">,</span> <span class="s1">&#39;nbart_nir_1&#39;</span><span class="p">,</span> <span class="s1">&#39;nbart_green&#39;</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_02_DEA_datasets_Introduction_to_Sentinel2_36_0.png" src="../../_images/notebooks_02_DEA_datasets_Introduction_to_Sentinel2_36_0.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">
