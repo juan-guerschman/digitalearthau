@@ -294,18 +294,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #303F9F;
+    color: #307FC1;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #D84315;
+    color: #BF5B3D;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 8ex;
+    min-width: 5ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -345,9 +345,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #cfcfcf;
+    border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f7f7f7;
+    background: #f5f5f5;
 }
 
 /* override MathJax center alignment in output cells */
@@ -355,7 +355,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.pngmath center alignment in output cells */
+/* override sphinx.ext.imgmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -405,6 +405,40 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -421,183 +455,80 @@ div.nboutput div.output_area.stderr {
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
 <div class="section" id="Introduction-to-DEA-Landsat-surface-reflectance">
 <h1>Introduction to DEA Landsat surface reflectance<a class="headerlink" href="#Introduction-to-DEA-Landsat-surface-reflectance" title="Permalink to this headline">¶</a></h1>
-<p><strong>Background:</strong> Surface reflectance products from three Landsat
-satellites (<strong>Landsat 5, 7 and 8</strong>) are available for access through
-Geoscience Australia’s Digital Earth Australia (DEA). This document
-includes a short introduction to the Landsat program, and describes the
-surface reflectance product suite (<strong>NBAR and NBAR-T</strong>) available
-through DEA. The code snippets in this doc will retrieve, modify and
-plot the data for <code class="docutils literal notranslate"><span class="pre">ls*_nbar_albers</span></code> and <code class="docutils literal notranslate"><span class="pre">ls*_nbart_albers</span></code>, where
-<code class="docutils literal notranslate"><span class="pre">*</span></code> is 5, 7 or 8 denote the satellite.</p>
+<p><strong>Background:</strong> Surface reflectance products from three Landsat satellites (<strong>Landsat 5, 7 and 8</strong>) are available for access through Geoscience Australia’s Digital Earth Australia (DEA). This document includes a short introduction to the Landsat program, and describes the surface reflectance product suite (<strong>NBAR and NBAR-T</strong>) available through DEA. The code snippets in this doc will retrieve, modify and plot the data for <code class="docutils literal notranslate"><span class="pre">ls*_nbar_albers</span></code> and <code class="docutils literal notranslate"><span class="pre">ls*_nbart_albers</span></code>, where <code class="docutils literal notranslate"><span class="pre">*</span></code> is 5, 7 or 8
+denote the satellite.</p>
 <p><strong>What does this document do?</strong></p>
 <ul class="simple">
-<li>Show how to use datacube to retrieve Landsat data for various
-temporal and spatial extents</li>
+<li>Show how to use datacube to retrieve Landsat data for various temporal and spatial extents</li>
 <li>Plot individual Landsat bands</li>
 <li>Plot multiple Landsat bands as a true colour image</li>
 <li>Plot multiple Landsat bands as a false colour image</li>
-<li>Demonstrate how to compute and plot simple remote sensing band
-indices</li>
+<li>Demonstrate how to compute and plot simple remote sensing band indices</li>
 </ul>
 <p><strong>Requirements</strong></p>
-<p>You need to run the following commands from the command line prior to
-launching jupyter notebooks from the same terminal so that the required
-libraries and paths are set:</p>
+<p>You need to run the following commands from the command line prior to launching jupyter notebooks from the same terminal so that the required libraries and paths are set:</p>
 <p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">use</span> <span class="pre">/g/data/v10/public/modules/modulefiles</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">dea</span></code></p>
-<p>If you find an error or bug in this notebook, please either create an
-‘Issue’ in the Github repository, or fix it yourself and create a ‘Pull’
-request to contribute the updated notebook back into the repository (See
-the repository
-<a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/blob/master/README.rst">README</a>
-for instructions on creating a Pull request).</p>
+<p>If you find an error or bug in this notebook, please either create an ‘Issue’ in the Github repository, or fix it yourself and create a ‘Pull’ request to contribute the updated notebook back into the repository (See the repository <a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/blob/master/README.rst">README</a> for instructions on creating a Pull request).</p>
 <p><strong>Date</strong>: August 2018</p>
-<p><strong>Authors</strong>: Robbi Bishop-Taylor, Arapaut Sivaprasad, Claire Krause, Bex
-Dunn</p>
+<p><strong>Authors</strong>: Robbi Bishop-Taylor, Arapaut Sivaprasad, Claire Krause, Bex Dunn</p>
 <p>Tags: <span class="target" id="index-0"></span>Landsat 5, <span class="target" id="index-1"></span>Landsat 7, <span class="target" id="index-2"></span>Landsat 8, <span class="target" id="index-3"></span>products, <span class="target" id="index-4"></span>dc.list_products, <span class="target" id="index-5"></span>dc.load, <span class="target" id="index-6"></span>query, <span class="target" id="index-7"></span>beginner, <span class="target" id="index-8"></span>plot, <span class="target" id="index-9"></span>image, <span class="target" id="index-10"></span>Scan Line Corrector, <span class="target" id="index-11"></span>Sensor bands, <span class="target" id="index-12"></span>Indices, <span class="target" id="index-13"></span>NDVI, <span class="target" id="index-14"></span>NDWI</p>
 <div class="section" id="About-Landsat">
 <h2>About Landsat<a class="headerlink" href="#About-Landsat" title="Permalink to this headline">¶</a></h2>
-<p>“Landsat represents the world’s longest continuously acquired collection
-of space-based moderate-resolution land remote sensing data. Four
-decades of imagery provides a unique resource for those who work in
-agriculture, geology, forestry, regional planning, education, mapping,
-and global change research. Landsat images are also invaluable for
-emergency response and disaster relief.” [<a class="reference external" href="#References">1</a>]</p>
-<p>“In the mid-1960s an ambitious effort to develop and launch the first
-civilian Earth observation satellite was started. The goal was achieved
-on July 23, 1972, with the launch of the Earth Resources Technology
-Satellite (ERTS-1), which was later renamed Landsat 1. The launches of
-Landsat 2, Landsat 3, and Landsat 4 followed in 1975, 1978, and 1982,
-respectively. When Landsat 5 was launched in 1984, no one could have
-predicted that the satellite would continue to deliver high quality,
-global data of Earth’s land surfaces for 28 years and 10 months until
-its retirement in June, 2013. Landsat 6, however, failed to achieve
-orbit in 1993. Landsat 7 was successfully launched in 1999 and, along
-with Landsat 8 launched in 2013, continues to provide daily global data.
-Landsat 9 is planned to be launched in late 2020.”
-[<a class="reference external" href="#References">2</a>]</p>
-<div class="figure" id="id1">
-<img alt="Fig 1. Time-line of the working lives of Landsats since 1972" src="../../_images/TimelineOnlyForWebRGB.jpg" />
-<p class="caption"><span class="caption-text">Fig 1. Time-line of the working lives of Landsats since 1972</span></p>
-</div>
+<p>“Landsat represents the world’s longest continuously acquired collection of space-based moderate-resolution land remote sensing data. Four decades of imagery provides a unique resource for those who work in agriculture, geology, forestry, regional planning, education, mapping, and global change research. Landsat images are also invaluable for emergency response and disaster relief.” [<a class="reference external" href="#References">1</a>]</p>
+<p>“In the mid-1960s an ambitious effort to develop and launch the first civilian Earth observation satellite was started. The goal was achieved on July 23, 1972, with the launch of the Earth Resources Technology Satellite (ERTS-1), which was later renamed Landsat 1. The launches of Landsat 2, Landsat 3, and Landsat 4 followed in 1975, 1978, and 1982, respectively. When Landsat 5 was launched in 1984, no one could have predicted that the satellite would continue to deliver high quality, global data
+of Earth’s land surfaces for 28 years and 10 months until its retirement in June, 2013. Landsat 6, however, failed to achieve orbit in 1993. Landsat 7 was successfully launched in 1999 and, along with Landsat 8 launched in 2013, continues to provide daily global data. Landsat 9 is planned to be launched in late 2020.” [<a class="reference external" href="#References">2</a>]</p>
+<p><img alt="Fig 1. Time-line of the working lives of Landsats since 1972" src="../../_images/TimelineOnlyForWebRGB.jpg" /></p>
 <div class="section" id="Basic-details-about-Landsat-5-to-9-[3][4][5][6][7]">
 <h3>Basic details about Landsat 5 to 9 [<a class="reference external" href="#References">3</a>][<a class="reference external" href="#References">4</a>][<a class="reference external" href="#References">5</a>][<a class="reference external" href="#References">6</a>][<a class="reference external" href="#References">7</a>]<a class="headerlink" href="#Basic-details-about-Landsat-5-to-9-[3][4][5][6][7]" title="Permalink to this headline">¶</a></h3>
-<div class="figure" id="id2">
-<img alt="Fig 2. Basic details about the Landsats" src="../../_images/landsats.jpg" />
-<p class="caption"><span class="caption-text">Fig 2. Basic details about the Landsats</span></p>
-</div>
+<p><img alt="Fig 2. Basic details about the Landsats" src="../../_images/landsats.jpg" /></p>
 </div>
 </div>
 <div class="section" id="Digital-Earth-Australia's-Landsat-archive">
 <h2>Digital Earth Australia’s Landsat archive<a class="headerlink" href="#Digital-Earth-Australia's-Landsat-archive" title="Permalink to this headline">¶</a></h2>
-<p>GA has acquired Landsat imagery over Australia since 1979, including TM,
-ETM+ and OLI imagery. While this data has been used extensively for
-numerous land and coastal mapping studies, its utility for accurate
-monitoring of environmental resources has been limited by the processing
-methods that have been traditionally used to correct for inherent
-geometric and radiometric distortions in EO imagery. To improve access
-to Australia’s archive of Landsat TM/ETM+/OLI data, GA has
-collaboratively developed an integrated approach to image data
-correction that incorporates normalising models to account for
-atmospheric effects, BRDF and topographic shading.</p>
-<p>The approach has been applied to Landsat TM/ETM+ and OLI imagery to
-create two surface reflectance products: <strong>NBAR</strong> and <strong>NBAR-T</strong>.
-[<a class="reference external" href="#References">9</a>]</p>
+<p>GA has acquired Landsat imagery over Australia since 1979, including TM, ETM+ and OLI imagery. While this data has been used extensively for numerous land and coastal mapping studies, its utility for accurate monitoring of environmental resources has been limited by the processing methods that have been traditionally used to correct for inherent geometric and radiometric distortions in EO imagery. To improve access to Australia’s archive of Landsat TM/ETM+/OLI data, GA has collaboratively
+developed an integrated approach to image data correction that incorporates normalising models to account for atmospheric effects, BRDF and topographic shading.</p>
+<p>The approach has been applied to Landsat TM/ETM+ and OLI imagery to create two surface reflectance products: <strong>NBAR</strong> and <strong>NBAR-T</strong>. [<a class="reference external" href="#References">9</a>]</p>
 </div>
 <div class="section" id="Landsat-surface-reflectance-products">
 <h2>Landsat surface reflectance products<a class="headerlink" href="#Landsat-surface-reflectance-products" title="Permalink to this headline">¶</a></h2>
-<p>The NBAR and NBAR-T surface reflectance product suite provides
-standardised optical surface reflectance datasets using robust physical
-models to correct for variations in image radiance values due to
-atmospheric properties, and sun and sensor geometry. The resulting stack
-of surface reflectance grids are consistent over space and time which is
-instrumental in identifying and quantifying environmental change.
-Surface reflectance is based on radiance data from the Landsat-5 TM,
-Landsat-7 ETM+ and Landsat-8 OLI/TIRS sensors. [<a class="reference external" href="#References">9</a>]</p>
+<p>The NBAR and NBAR-T surface reflectance product suite provides standardised optical surface reflectance datasets using robust physical models to correct for variations in image radiance values due to atmospheric properties, and sun and sensor geometry. The resulting stack of surface reflectance grids are consistent over space and time which is instrumental in identifying and quantifying environmental change. Surface reflectance is based on radiance data from the Landsat-5 TM, Landsat-7 ETM+ and
+Landsat-8 OLI/TIRS sensors. [<a class="reference external" href="#References">9</a>]</p>
 <p><strong>NBAR</strong></p>
-<p>NBAR stands for Nadir-corrected BRDF Adjusted Reflectance, where BRDF
-stands for Bidirectional Reflectance Distribution Function. The approach
-involves atmospheric correction to compute surface-leaving radiance, and
-bi-directional reflectance modelling to remove the effects of topography
-and angular variation in reflectance.</p>
+<p>NBAR stands for Nadir-corrected BRDF Adjusted Reflectance, where BRDF stands for Bidirectional Reflectance Distribution Function. The approach involves atmospheric correction to compute surface-leaving radiance, and bi-directional reflectance modelling to remove the effects of topography and angular variation in reflectance.</p>
 <ul class="simple">
-<li>The standardised NBAR product delivers calibrated optical surface
-reflectance data across land and coastal fringes. NBAR is a medium
-resolution (~25 m) grid based on the Landsat TM/ETM+/OLI archive and
-presents surface reflectance data in <strong>25 square metre grid cells</strong>
-in the <strong>Australian Albers Equal Area (EPSG:3577)</strong> projection
-system.</li>
-<li>Radiance measurements from Earth Observation (EO) sensors do not
-directly quantify the surface reflectance of the Earth. Such
-measurements are modified by variations in atmospheric properties,
-sun position, sensor view angle, surface slope and surface aspect. To
-obtain consistent and comparable measures of Earth surface
-reflectance from EO, these variations need to be reduced or removed
-from the radiance measurements. This is especially important when
-comparing imagery acquired in different seasons and geographic
-regions.</li>
-<li>NBAR surface reflectance is created using a physics-based, coupled
-BRDF and atmospheric correction model that can be applied to both
-flat and inclined surfaces. The resulting surface reflectance values
-are comparable both within individual images and between images
-acquired at different times and/or with different sensors.
-[<a class="reference external" href="#References">9</a>]</li>
+<li>The standardised NBAR product delivers calibrated optical surface reflectance data across land and coastal fringes. NBAR is a medium resolution (~25 m) grid based on the Landsat TM/ETM+/OLI archive and presents surface reflectance data in <strong>25 square metre grid cells</strong> in the <strong>Australian Albers Equal Area (EPSG:3577)</strong> projection system.</li>
+<li>Radiance measurements from Earth Observation (EO) sensors do not directly quantify the surface reflectance of the Earth. Such measurements are modified by variations in atmospheric properties, sun position, sensor view angle, surface slope and surface aspect. To obtain consistent and comparable measures of Earth surface reflectance from EO, these variations need to be reduced or removed from the radiance measurements. This is especially important when comparing imagery acquired in different
+seasons and geographic regions.</li>
+<li>NBAR surface reflectance is created using a physics-based, coupled BRDF and atmospheric correction model that can be applied to both flat and inclined surfaces. The resulting surface reflectance values are comparable both within individual images and between images acquired at different times and/or with different sensors. [<a class="reference external" href="#References">9</a>]</li>
 </ul>
 <p><strong>NBAR-T</strong></p>
-<p>Surface reflectance NBAR-T includes a terrain illumination reflectance
-correction and has the same features of NBAR, along with some additional
-features.</p>
+<p>Surface reflectance NBAR-T includes a terrain illumination reflectance correction and has the same features of NBAR, along with some additional features.</p>
 <ul class="simple">
-<li>The surface reflectance product is created using a physics-based
-coupled BRDF and atmospheric correction model that can be applied to
-both flat and inclined surfaces. The resulting surface reflectance
-values are comparable both within individual images and between
-images acquired at different times and/or with different sensors.</li>
-<li>Terrain affects optical satellite images through both irradiance and
-bidirectional reflectance distribution function (BRDF) effects.
-Slopes facing the sun receive enhanced solar irradiance and appear
-brighter compared to those facing away from the sun.</li>
-<li>For anisotropic surfaces, the radiance received at the satellite
-sensor from a sloping surface is also affected by surface BRDF which
-varies with combinations of surface landcover types, sun, and
-satellite geometry (sun and sensor view, and their relative azimuth
-angle) as well as topographic geometry (primarily slope and aspect
-angles). Consequently, to obtain comparable surface reflectance from
-satellite images covering mountainous areas, it is necessary to
-process the images to reduce or remove the topographic effect so that
-the images can be used for different purposes on the same spectral
-base.</li>
-<li>A Digital Surface Model (DSM) resolution appropriate to the scale of
-the resolution of satellite image is needed for the best results. 1
-second SRTM DSM is used for NBAR-T processing.
-[<a class="reference external" href="#References">9</a>]</li>
+<li>The surface reflectance product is created using a physics-based coupled BRDF and atmospheric correction model that can be applied to both flat and inclined surfaces. The resulting surface reflectance values are comparable both within individual images and between images acquired at different times and/or with different sensors.</li>
+<li>Terrain affects optical satellite images through both irradiance and bidirectional reflectance distribution function (BRDF) effects. Slopes facing the sun receive enhanced solar irradiance and appear brighter compared to those facing away from the sun.</li>
+<li>For anisotropic surfaces, the radiance received at the satellite sensor from a sloping surface is also affected by surface BRDF which varies with combinations of surface landcover types, sun, and satellite geometry (sun and sensor view, and their relative azimuth angle) as well as topographic geometry (primarily slope and aspect angles). Consequently, to obtain comparable surface reflectance from satellite images covering mountainous areas, it is necessary to process the images to reduce or
+remove the topographic effect so that the images can be used for different purposes on the same spectral base.</li>
+<li>A Digital Surface Model (DSM) resolution appropriate to the scale of the resolution of satellite image is needed for the best results. 1 second SRTM DSM is used for NBAR-T processing. [<a class="reference external" href="#References">9</a>]</li>
 </ul>
 <div class="section" id="Nodata-value">
 <h3>Nodata value<a class="headerlink" href="#Nodata-value" title="Permalink to this headline">¶</a></h3>
-<p>Both NBAR and NBAR-T data contains <strong>nodata pixels</strong>, represented as
-<code class="docutils literal notranslate"><span class="pre">-999</span></code> values. For NBAR these values can represent pixels outside the
-observed area (e.g. along the edges of Landsat satellite paths), while
-in NBAR-T <code class="docutils literal notranslate"><span class="pre">-999</span></code> values can also indicate areas of deep terrain
-shadow. These values should be converted to a <code class="docutils literal notranslate"><span class="pre">NaN</span></code> value before using
-this data to avoid treating it as a valid value. [<a class="reference external" href="#References">9</a>]</p>
+<p>Both NBAR and NBAR-T data contains <strong>nodata pixels</strong>, represented as <code class="docutils literal notranslate"><span class="pre">-999</span></code> values. For NBAR these values can represent pixels outside the observed area (e.g. along the edges of Landsat satellite paths), while in NBAR-T <code class="docutils literal notranslate"><span class="pre">-999</span></code> values can also indicate areas of deep terrain shadow. These values should be converted to a <code class="docutils literal notranslate"><span class="pre">NaN</span></code> value before using this data to avoid treating it as a valid value. [<a class="reference external" href="#References">9</a>]</p>
 </div>
 <div class="section" id="Available-bands">
 <h3>Available bands<a class="headerlink" href="#Available-bands" title="Permalink to this headline">¶</a></h3>
-<p>The sensors on the Landsats are different and collect reflected radiance
-in various spectral wavelengths. These are called bands. Details about
-the bands for satellites 5, 7 and 8 can be found at
-[<a class="reference external" href="#References">3</a>], [<a class="reference external" href="#References">5</a>] and
-[<a class="reference external" href="#References">6</a>], respectively. The following bands are included
-in the DEA archive: band names to be used in code, when retrieving the
-data, are given in brackets.</p>
+<p>The sensors on the Landsats are different and collect reflected radiance in various spectral wavelengths. These are called bands. Details about the bands for satellites 5, 7 and 8 can be found at [<a class="reference external" href="#References">3</a>], [<a class="reference external" href="#References">5</a>] and [<a class="reference external" href="#References">6</a>], respectively. The following bands are included in the DEA archive: band names to be used in code, when retrieving the data, are given in brackets.</p>
 <ul class="simple">
 <li><strong>Landsat 5 and 7:</strong><ul>
-<li>Excludes Landsat 5 Thematic Mapper (TM) thermal band and
-Multispectral Scanner (MSS) bands, and Landsat 7 Enhanced Thematic
-Mapper Plus (ETM+) thermal band and panchromatic band</li>
+<li>Excludes Landsat 5 Thematic Mapper (TM) thermal band and Multispectral Scanner (MSS) bands, and Landsat 7 Enhanced Thematic Mapper Plus (ETM+) thermal band and panchromatic band</li>
 <li>Includes the following Landsat 5 TM and Landsat 7 ETM+ bands:<ul>
 <li>Band 1: blue (<code class="docutils literal notranslate"><span class="pre">blue</span></code>)</li>
 <li>Band 2: green (<code class="docutils literal notranslate"><span class="pre">green</span></code>)</li>
@@ -610,8 +541,7 @@ Mapper Plus (ETM+) thermal band and panchromatic band</li>
 </ul>
 </li>
 <li><strong>Landsat 8:</strong><ul>
-<li>Excludes the Operational Land Imager (OLI) panchromatic or cirrus
-bands, and Thermal Infrared Sensor (TIRS) bands</li>
+<li>Excludes the Operational Land Imager (OLI) panchromatic or cirrus bands, and Thermal Infrared Sensor (TIRS) bands</li>
 <li>Includes the following Operational Land Imager (OLI) bands:<ul>
 <li>Band 1: coastal aerosol (<code class="docutils literal notranslate"><span class="pre">coastal_aerosol</span></code>)</li>
 <li>Band 2: blue (<code class="docutils literal notranslate"><span class="pre">blue</span></code>)</li>
@@ -628,44 +558,20 @@ bands, and Thermal Infrared Sensor (TIRS) bands</li>
 </div>
 <div class="section" id="Landsat-7-Scan-Line-Corrector-failure">
 <h3>Landsat 7 Scan Line Corrector failure<a class="headerlink" href="#Landsat-7-Scan-Line-Corrector-failure" title="Permalink to this headline">¶</a></h3>
-<p>“The Scan Line Corrector (SLC) is an electro-optical mechanism composed
-of two parallel mirrors set at an angle on a shaft. The SLC is
-positioned behind the primary optics and compensates for the along-track
-motion of the spacecraft occurring during an active SMA cross-track
-scan. As a result, a rectilinear scan pattern is produced using the SLC
-instead of the zigzag pattern that would be produced without it. The SLC
-failed for Landsat 7 on May 31, 2003. Without an operating SLC, the ETM+
-line of sight now traces a zig-zag pattern along the satellite ground
-track (see the figure above) resulting in wedge shaped scan-to-scan gaps
-(and alternating overlap areas) which increase in magnitude away from
-nadir. Despite the SLC failure, Landsat 7 ETM+ is still capable of
-acquiring useful image data with the SLC turned off (SLC-off),
-particularly within the central portion of any given scene.”
-[<a class="reference external" href="#References">8</a>]</p>
-<p>The top panel in the figure below shows how Landat 7 imagery appears
-prior to the May 31 2003 SLC failure (i.e. Landsat 7 SLC-on). The bottom
-panel shows the same area after the SLC failed (i.e. Landsat 7 SLC-off),
-with obvious diagonal striping that covers approximately 22% of the
-scene. This striping will be present in all post-May 31 2003
-<code class="docutils literal notranslate"><span class="pre">ls7_nbar_albers</span></code> and <code class="docutils literal notranslate"><span class="pre">ls7_nbart_albers</span></code> data in the DEA archive.
-For certain applications, it may be best to completely exclude post
-post-May 31 2003 imagery from analyses.</p>
-<div class="figure" id="id3">
-<img alt="Figure 3. Scan line corrected image." src="../../_images/SLC_comparison.jpg" />
-<p class="caption"><span class="caption-text">Figure 3. Scan line corrected image.</span></p>
-</div>
+<p>“The Scan Line Corrector (SLC) is an electro-optical mechanism composed of two parallel mirrors set at an angle on a shaft. The SLC is positioned behind the primary optics and compensates for the along-track motion of the spacecraft occurring during an active SMA cross-track scan. As a result, a rectilinear scan pattern is produced using the SLC instead of the zigzag pattern that would be produced without it. The SLC failed for Landsat 7 on May 31, 2003. Without an operating SLC, the ETM+ line
+of sight now traces a zig-zag pattern along the satellite ground track (see the figure above) resulting in wedge shaped scan-to-scan gaps (and alternating overlap areas) which increase in magnitude away from nadir. Despite the SLC failure, Landsat 7 ETM+ is still capable of acquiring useful image data with the SLC turned off (SLC-off), particularly within the central portion of any given scene.” [<a class="reference external" href="#References">8</a>]</p>
+<p>The top panel in the figure below shows how Landat 7 imagery appears prior to the May 31 2003 SLC failure (i.e. Landsat 7 SLC-on). The bottom panel shows the same area after the SLC failed (i.e. Landsat 7 SLC-off), with obvious diagonal striping that covers approximately 22% of the scene. This striping will be present in all post-May 31 2003 <code class="docutils literal notranslate"><span class="pre">ls7_nbar_albers</span></code> and <code class="docutils literal notranslate"><span class="pre">ls7_nbart_albers</span></code> data in the DEA archive. For certain applications, it may be best to completely exclude post post-May 31 2003
+imagery from analyses.</p>
+<p><img alt="Figure 3. Scan line corrected image." src="../../_images/SLC_comparison.jpg" /></p>
 </div>
 </div>
 <div class="section" id="Retrieving-Landsat-data">
 <h2>Retrieving Landsat data<a class="headerlink" href="#Retrieving-Landsat-data" title="Permalink to this headline">¶</a></h2>
-<p>The following code demonstrates how to import Landsat data using DEA,
-plot the data, and perform simple analyses (i.e. generating remote
-sensing band indices).</p>
+<p>The following code demonstrates how to import Landsat data using DEA, plot the data, and perform simple analyses (i.e. generating remote sensing band indices).</p>
 <div class="section" id="Import-modules">
 <h3>Import modules<a class="headerlink" href="#Import-modules" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -682,13 +588,9 @@ sensing band indices).</p>
 </div>
 <div class="section" id="Available-Landsat-products">
 <h3>Available Landsat products<a class="headerlink" href="#Available-Landsat-products" title="Permalink to this headline">¶</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">list_products</span></code> method in the Datacube class displays the names
-and details of all available products. For example, <code class="docutils literal notranslate"><span class="pre">ls7_nbar_albers</span></code>
-provides NBAR surface reflectance data generated using Landsat 7
-imagery:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">list_products</span></code> method in the Datacube class displays the names and details of all available products. For example, <code class="docutils literal notranslate"><span class="pre">ls7_nbar_albers</span></code> provides NBAR surface reflectance data generated using Landsat 7 imagery:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -703,11 +605,10 @@ imagery:</p>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="output_area docutils container">
+<div class="output_area rendered_html docutils container">
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -798,21 +699,14 @@ imagery:</p>
 <div class="section" id="Specify-a-query-with-coordinates-and-date-range">
 <h3>Specify a <em>query</em> with coordinates and date range<a class="headerlink" href="#Specify-a-query-with-coordinates-and-date-range" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><strong>lat/lon:</strong> Latitude and longitude of the area. e.g. Canberra =
-<code class="docutils literal notranslate"><span class="pre">'lat':</span> <span class="pre">(-35.25,</span> <span class="pre">-35.35),</span> <span class="pre">'lon':</span> <span class="pre">(149.05,</span> <span class="pre">149.17)</span></code></li>
-<li><strong>time:</strong> Date range to fetch the scenes. The approximate time
-between two scenes is 16 days. If there is a location near a swath
-boundary, it may be captured in two passes and so there could be two
-images within the 16 day period.<ul>
-<li>You must know <a class="reference external" href="https://data.dea.gadevs.ga/ls7_nbar_scene">the date(s) for which data is
-available</a> for each
-satellite/product, so that the query can be specified correctly.</li>
+<li><strong>lat/lon:</strong> Latitude and longitude of the area. e.g. Canberra = <code class="docutils literal notranslate"><span class="pre">'lat':</span> <span class="pre">(-35.25,</span> <span class="pre">-35.35),</span> <span class="pre">'lon':</span> <span class="pre">(149.05,</span> <span class="pre">149.17)</span></code></li>
+<li><strong>time:</strong> Date range to fetch the scenes. The approximate time between two scenes is 16 days. If there is a location near a swath boundary, it may be captured in two passes and so there could be two images within the 16 day period.<ul>
+<li>You must know <a class="reference external" href="https://data.dea.gadevs.ga/ls7_nbar_scene">the date(s) for which data is available</a> for each satellite/product, so that the query can be specified correctly.</li>
 </ul>
 </li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -826,25 +720,15 @@ satellite/product, so that the query can be specified correctly.</li>
 </div>
 <div class="section" id="Load-Landsat-data">
 <h3>Load Landsat data<a class="headerlink" href="#Load-Landsat-data" title="Permalink to this headline">¶</a></h3>
-<p>In this example we will load NBAR-T data from the Landsat 8 satellite.
-Sometimes multiple scenes are acquired by the satellite on the same day.
-We want to group these together, and will use <code class="docutils literal notranslate"><span class="pre">group_by='solar_day'</span></code>
-to do this. To load in the data, we use our query above to provide a
-spatial and temporal extraction range.</p>
-<p><code class="docutils literal notranslate"><span class="pre">dc.load</span></code> returns an <strong>xarray</strong> object, which has two core data
-structures:</p>
+<p>In this example we will load NBAR-T data from the Landsat 8 satellite. Sometimes multiple scenes are acquired by the satellite on the same day. We want to group these together, and will use <code class="docutils literal notranslate"><span class="pre">group_by='solar_day'</span></code> to do this. To load in the data, we use our query above to provide a spatial and temporal extraction range.</p>
+<p><code class="docutils literal notranslate"><span class="pre">dc.load</span></code> returns an <strong>xarray</strong> object, which has two core data structures:</p>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">DataArray</span></code> is a labeled, N-dimensional array.</li>
-<li><code class="docutils literal notranslate"><span class="pre">Dataset</span></code> is a multi-dimensional, in-memory array database. It is a
-dict-like container of DataArray objects aligned along any number of
-shared dimensions.</li>
+<li><code class="docutils literal notranslate"><span class="pre">Dataset</span></code> is a multi-dimensional, in-memory array database. It is a dict-like container of DataArray objects aligned along any number of shared dimensions.</li>
 </ul>
-<p>The available Landsat bands are listed under <code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">variables</span></code>. Surface
-reflectance values for each of the Landsat bands are expressed as
-<strong>16-bit integers scaled between 0 and 10000.</strong></p>
+<p>The available Landsat bands are listed under <code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">variables</span></code>. Surface reflectance values for each of the Landsat bands are expressed as <strong>16-bit integers scaled between 0 and 10000.</strong></p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -855,8 +739,7 @@ reflectance values for each of the Landsat bands are expressed as
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -882,12 +765,9 @@ Attributes:
 </div>
 <div class="section" id="Remove-nodata-values">
 <h3>Remove nodata values<a class="headerlink" href="#Remove-nodata-values" title="Permalink to this headline">¶</a></h3>
-<p>It is essential to remove <code class="docutils literal notranslate"><span class="pre">-999</span></code> nodata values prior to analysing or
-plotting Landsat imagery. You can do with by setting all nodata values
-to <code class="docutils literal notranslate"><span class="pre">NaN</span></code> using the <code class="docutils literal notranslate"><span class="pre">mask_invalid_data</span></code> function:</p>
+<p>It is essential to remove <code class="docutils literal notranslate"><span class="pre">-999</span></code> nodata values prior to analysing or plotting Landsat imagery. You can do with by setting all nodata values to <code class="docutils literal notranslate"><span class="pre">NaN</span></code> using the <code class="docutils literal notranslate"><span class="pre">mask_invalid_data</span></code> function:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -902,12 +782,9 @@ to <code class="docutils literal notranslate"><span class="pre">NaN</span></code
 <h2>Plotting Landsat data<a class="headerlink" href="#Plotting-Landsat-data" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="Plot-single-Landsat-bands">
 <h3>Plot single Landsat bands<a class="headerlink" href="#Plot-single-Landsat-bands" title="Permalink to this headline">¶</a></h3>
-<p>Xarray objects contain built-in methods for plotting single bands. For
-example, we can plot the Landsat 8 <code class="docutils literal notranslate"><span class="pre">nir</span></code> (near-infrared) band for each
-timestep:</p>
+<p>Xarray objects contain built-in methods for plotting single bands. For example, we can plot the Landsat 8 <code class="docutils literal notranslate"><span class="pre">nir</span></code> (near-infrared) band for each timestep:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -926,19 +803,10 @@ timestep:</p>
 </div>
 <div class="section" id="Creating-a-'true-colour'-image-using-three-bands">
 <h3>Creating a ‘true colour’ image using three bands<a class="headerlink" href="#Creating-a-'true-colour'-image-using-three-bands" title="Permalink to this headline">¶</a></h3>
-<p>We can also plot combinations of multiple bands as a colour RGB image by
-converting the xarray dataset to a three band data array, using
-<code class="docutils literal notranslate"><span class="pre">.isel(time=1)</span></code> to pull out a single time-step to plot, then using the
-<code class="docutils literal notranslate"><span class="pre">.plot.imshow</span></code> method to plot.</p>
-<p>By specifying the <code class="docutils literal notranslate"><span class="pre">red</span></code>, <code class="docutils literal notranslate"><span class="pre">green</span></code> and <code class="docutils literal notranslate"><span class="pre">blue</span></code> bands, we can produce
-a <a class="reference external" href="https://crisp.nus.edu.sg/~research/tutorial/opt_int.htm">‘true colour’
-plot</a> that
-approximates how the landscape would appear to the human eye. Note
-however that below we use the <code class="docutils literal notranslate"><span class="pre">robust=True</span></code> argument to remove extreme
-values and result in a colour-enhanced image:</p>
+<p>We can also plot combinations of multiple bands as a colour RGB image by converting the xarray dataset to a three band data array, using <code class="docutils literal notranslate"><span class="pre">.isel(time=1)</span></code> to pull out a single time-step to plot, then using the <code class="docutils literal notranslate"><span class="pre">.plot.imshow</span></code> method to plot.</p>
+<p>By specifying the <code class="docutils literal notranslate"><span class="pre">red</span></code>, <code class="docutils literal notranslate"><span class="pre">green</span></code> and <code class="docutils literal notranslate"><span class="pre">blue</span></code> bands, we can produce a <a class="reference external" href="https://crisp.nus.edu.sg/~research/tutorial/opt_int.htm">‘true colour’ plot</a> that approximates how the landscape would appear to the human eye. Note however that below we use the <code class="docutils literal notranslate"><span class="pre">robust=True</span></code> argument to remove extreme values and result in a colour-enhanced image:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -947,8 +815,7 @@ values and result in a colour-enhanced image:</p>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -966,11 +833,9 @@ values and result in a colour-enhanced image:</p>
 </div>
 <div class="section" id="Creating-a-'false-colour'-image-using-three-bands">
 <h3>Creating a ‘false colour’ image using three bands<a class="headerlink" href="#Creating-a-'false-colour'-image-using-three-bands" title="Permalink to this headline">¶</a></h3>
-<p>This plot uses the SWIR and NIR bands to accentuate the presence of
-water or vegetation in the landscape:</p>
+<p>This plot uses the SWIR and NIR bands to accentuate the presence of water or vegetation in the landscape:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -979,8 +844,7 @@ water or vegetation in the landscape:</p>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -999,15 +863,9 @@ water or vegetation in the landscape:</p>
 </div>
 <div class="section" id="Computing-band-indices">
 <h2>Computing band indices<a class="headerlink" href="#Computing-band-indices" title="Permalink to this headline">¶</a></h2>
-<p>Bands from Landsat surface reflectance products can be combined to
-compute simple remote sensing indices that provide insights into
-different aspects of the observed landscape. For example, we can
-calculate the Normalized Difference Water Index (NDWI), which has high
-values where a pixel is likely to be open water (e.g. NDWI &gt; 0, or red
-colours below):</p>
+<p>Bands from Landsat surface reflectance products can be combined to compute simple remote sensing indices that provide insights into different aspects of the observed landscape. For example, we can calculate the Normalized Difference Water Index (NDWI), which has high values where a pixel is likely to be open water (e.g. NDWI &gt; 0, or red colours below):</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1019,8 +877,7 @@ colours below):</p>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -1044,8 +901,7 @@ Coordinates:
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1056,8 +912,7 @@ Coordinates:
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -1083,11 +938,9 @@ Attributes:
 </div>
 <div class="section" id="Plotting-a-single-data-variable-or-band">
 <h3>Plotting a single data variable or band<a class="headerlink" href="#Plotting-a-single-data-variable-or-band" title="Permalink to this headline">¶</a></h3>
-<p>Newly created data variables (like <code class="docutils literal notranslate"><span class="pre">NDWI</span></code> above) can be plotted in
-exactly the same way as individual Landsat bands:</p>
+<p>Newly created data variables (like <code class="docutils literal notranslate"><span class="pre">NDWI</span></code> above) can be plotted in exactly the same way as individual Landsat bands:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1104,12 +957,9 @@ exactly the same way as individual Landsat bands:</p>
 <img alt="../../_images/notebooks_02_DEA_datasets_Introduction_to_Landsat_29_0.png" src="../../_images/notebooks_02_DEA_datasets_Introduction_to_Landsat_29_0.png" />
 </div>
 </div>
-<p>There are thousands of different band indices available; for example,
-the Normalized Difference Vegetation Index (NDVI) which has high values
-for pixels containing vegetation:</p>
+<p>There are thousands of different band indices available; for example, the Normalized Difference Vegetation Index (NDVI) which has high values for pixels containing vegetation:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1135,42 +985,20 @@ for pixels containing vegetation:</p>
 </div>
 <div class="section" id="Cloud-masking-with-Landsat-pixel-quality-(PQ25)">
 <h2>Cloud masking with Landsat pixel quality (PQ25)<a class="headerlink" href="#Cloud-masking-with-Landsat-pixel-quality-(PQ25)" title="Permalink to this headline">¶</a></h2>
-<p>You will observe above that the first timestep is affected by thick
-cloud that covers the majority of the image. Understanding where unclear
-pixels like these are in an image and then removing or dealing with them
-is a vital part of using any earth observation dataset like NBAR or
-NBAR-T surface reflectance.</p>
-<p>Please refer to the
-<a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/blob/master/02_DEA_datasets/Introduction_to_LandsatPQ.ipynb">Introduction_to_LandsatPQ</a>
-for information on how to clean and analyse Landsat data by accounting
-for pixel quality.</p>
+<p>You will observe above that the first timestep is affected by thick cloud that covers the majority of the image. Understanding where unclear pixels like these are in an image and then removing or dealing with them is a vital part of using any earth observation dataset like NBAR or NBAR-T surface reflectance.</p>
+<p>Please refer to the <a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/blob/master/02_DEA_datasets/Introduction_to_LandsatPQ.ipynb">Introduction_to_LandsatPQ</a> for information on how to clean and analyse Landsat data by accounting for pixel quality.</p>
 <div class="section" id="References">
 <h3>References<a class="headerlink" href="#References" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
-<li>USGS, 2018a. <em>Landsat Project Description | Landsat Missions</em>, Page
-Last Modified: 04/25/18 01:57 pm.
-<a class="reference external" href="https://landsat.usgs.gov/landsat-project-description">https://landsat.usgs.gov/landsat-project-description</a></li>
-<li>USGS, 2018b. <em>Landsat Missions Timeline | Landsat Missions</em>, Page
-Last Modified: 04/25/18 01:57 pm
-<a class="reference external" href="https://landsat.usgs.gov/landsat-missions-timeline">https://landsat.usgs.gov/landsat-missions-timeline</a></li>
-<li>USGS, 2018c. <em>Landsat 5 History | Landsat Missions</em>, Page Last
-Modified: 04/25/18 01:57 pm
-<a class="reference external" href="https://landsat.usgs.gov/landsat-5-history">https://landsat.usgs.gov/landsat-5-history</a></li>
-<li>USGS, 2018d. <em>Landsat 6 History | Landsat Missions</em>, Page Last
-Modified: 04/25/18 01:57 pm
-<a class="reference external" href="https://landsat.usgs.gov/landsat-6-history">https://landsat.usgs.gov/landsat-6-history</a></li>
-<li>USGS, 2018e. <em>Landsat 7 | Landsat Missions</em>, Page Last Modified:
-04/25/18 01:57 pm <a class="reference external" href="https://landsat.usgs.gov/landsat-7-history">https://landsat.usgs.gov/landsat-7-history</a></li>
-<li>USGS, 2018f. <em>Landsat 8 | Landsat Missions</em>, Page Last Modified:
-04/25/18 01:57 pm <a class="reference external" href="https://landsat.usgs.gov/landsat-8-mission">https://landsat.usgs.gov/landsat-8-mission</a></li>
-<li>USGS, 2018g. <em>Landsat 9 | Landsat Missions</em>, Page Last Modified:
-04/25/18 01:57 pm <a class="reference external" href="https://landsat.usgs.gov/landsat-9-mission">https://landsat.usgs.gov/landsat-9-mission</a></li>
-<li>USGS, 2018h. <em>Landsat 7 Data Users Handbook - Section 2 | Landsat
-Missions</em>, Page Last Modified: 04/25/18 01:57 pm
-<a class="reference external" href="https://landsat.usgs.gov/landsat-7-data-users-handbook-section-2">https://landsat.usgs.gov/landsat-7-data-users-handbook-section-2</a></li>
-<li>GA, 2017. <em>Surface Reflectance — Digital Earth Australia 1.0.0
-documentation</em>
-<a class="reference external" href="http://geoscienceaustralia.github.io/digitalearthau/data/data.html">http://geoscienceaustralia.github.io/digitalearthau/data/data.html</a></li>
+<li>USGS, 2018a. <em>Landsat Project Description | Landsat Missions</em>, Page Last Modified: 04/25/18 01:57 pm. <a class="reference external" href="https://landsat.usgs.gov/landsat-project-description">https://landsat.usgs.gov/landsat-project-description</a></li>
+<li>USGS, 2018b. <em>Landsat Missions Timeline | Landsat Missions</em>, Page Last Modified: 04/25/18 01:57 pm <a class="reference external" href="https://landsat.usgs.gov/landsat-missions-timeline">https://landsat.usgs.gov/landsat-missions-timeline</a></li>
+<li>USGS, 2018c. <em>Landsat 5 History | Landsat Missions</em>, Page Last Modified: 04/25/18 01:57 pm <a class="reference external" href="https://landsat.usgs.gov/landsat-5-history">https://landsat.usgs.gov/landsat-5-history</a></li>
+<li>USGS, 2018d. <em>Landsat 6 History | Landsat Missions</em>, Page Last Modified: 04/25/18 01:57 pm <a class="reference external" href="https://landsat.usgs.gov/landsat-6-history">https://landsat.usgs.gov/landsat-6-history</a></li>
+<li>USGS, 2018e. <em>Landsat 7 | Landsat Missions</em>, Page Last Modified: 04/25/18 01:57 pm <a class="reference external" href="https://landsat.usgs.gov/landsat-7-history">https://landsat.usgs.gov/landsat-7-history</a></li>
+<li>USGS, 2018f. <em>Landsat 8 | Landsat Missions</em>, Page Last Modified: 04/25/18 01:57 pm <a class="reference external" href="https://landsat.usgs.gov/landsat-8-mission">https://landsat.usgs.gov/landsat-8-mission</a></li>
+<li>USGS, 2018g. <em>Landsat 9 | Landsat Missions</em>, Page Last Modified: 04/25/18 01:57 pm <a class="reference external" href="https://landsat.usgs.gov/landsat-9-mission">https://landsat.usgs.gov/landsat-9-mission</a></li>
+<li>USGS, 2018h. <em>Landsat 7 Data Users Handbook - Section 2 | Landsat Missions</em>, Page Last Modified: 04/25/18 01:57 pm <a class="reference external" href="https://landsat.usgs.gov/landsat-7-data-users-handbook-section-2">https://landsat.usgs.gov/landsat-7-data-users-handbook-section-2</a></li>
+<li>GA, 2017. <em>Surface Reflectance — Digital Earth Australia 1.0.0 documentation</em> <a class="reference external" href="http://geoscienceaustralia.github.io/digitalearthau/data/data.html">http://geoscienceaustralia.github.io/digitalearthau/data/data.html</a></li>
 </ol>
 </div>
 </div>
@@ -1224,6 +1052,7 @@ documentation</em>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.14.0/dist/embed-amd.js"></script>
         <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     
 
   

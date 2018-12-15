@@ -281,18 +281,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #303F9F;
+    color: #307FC1;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #D84315;
+    color: #BF5B3D;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 8ex;
+    min-width: 5ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -332,9 +332,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #cfcfcf;
+    border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f7f7f7;
+    background: #f5f5f5;
 }
 
 /* override MathJax center alignment in output cells */
@@ -342,7 +342,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.pngmath center alignment in output cells */
+/* override sphinx.ext.imgmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -392,6 +392,40 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -408,58 +442,19 @@ div.nboutput div.output_area.stderr {
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
 <div class="section" id="Sun-glint-identification-and-removal">
 <h1>Sun glint identification and removal<a class="headerlink" href="#Sun-glint-identification-and-removal" title="Permalink to this headline">¶</a></h1>
-<p><strong>Note:</strong> As of August 2018, this notebook requires modification in
-order to run successfully. Please contact the author (Snowy Haiblen;
-<a class="reference external" href="mailto:Anna&#46;Haiblen&#37;&#52;&#48;ga&#46;gov&#46;au">Anna<span>&#46;</span>Haiblen<span>&#64;</span>ga<span>&#46;</span>gov<span>&#46;</span>au</a>) for assistance prior to running any analyses.</p>
-<p><strong>What does this notebook do?</strong> This notebook identifies and corrects
-for sun glints over deep ocean using the method of <a class="reference external" href="https://doi.org/10.1080/01431160500034086">Hedley *et al.*
-(2005)</a>. This method
-assumes that all near-infra red (nir) reflectance above a minimum value
-results from sun glint over deep ocean. If it is assumed that nir
-reflectance is linearly proportional to red, green, and blue (rgb)
-reflectance, then the reflectance due to sun glint can be removed from
-the rgb bands by quantifying this linear relationship. Thus, sun glint
-is removed using the equation:</p>
-<div class="math notranslate nohighlight">
-\begin{align}
-\ R_{i(deglinted)} = R_i - x(R_{nir}-min_{nir})
-\end{align}</div><p>where <span class="math notranslate nohighlight">\(R\)</span> is reflectance, <span class="math notranslate nohighlight">\(i\)</span> is the band of interest, and
-<span class="math notranslate nohighlight">\(x\)</span> is the slope of a linear regression of nir and rgb reflectance
-data. Figure 1 (from Hedley <em>et al.</em>, 2005) demonstrates this.</p>
-<p><em>Figure 1. Hedley</em> et al. <em>(2005) glint correction method (from Hedley</em>
-et al.<em>, 2005).</em></p>
-<p><a class="reference external" href="https://doi.org/10.1016/j.rse.2017.10.022">Harmel *et al.* (2018)</a>
-present a novel glint correction method that does not rely on an
-estimation of minimum nir reflectance, or on the assumption that
-non-glinted pixels are present in an area of interest. However, this
-method would be difficult to implement for DEA because knowledge of
-solar and satellite viewing angles, wave height, and sun radiance at the
-time of image capture are required, and because atmospheric correction
-is included in the glint correction algorithm and cannot be easily
-separated.</p>
-<p><strong>Workflow:</strong> Using this notebook, an image is first selected for sun
-glint identification and removal. To identify sun glint in the image,
-deep-ocean areas are then selected (either by drawing a polygon or
-selecting subplots from within the image that contain only deep ocean).
-Next, glint is identified and corrected for. There are then options to
-plot the uncorrected and corrected data and imagery for comparison, and
-to export the corrected data as a Geotiff. This workflow is summarised
-in Figure 2:</p>
-<p><em>Figure 2. Workflow for sun glint identification and removal using this
-notebook.</em></p>
-<p>Note that throughout the notebook, <strong>headings in red</strong> indicate
-locations where user inputs are required before running the code.</p>
-<p><strong>Date:</strong> May 2018</p>
-<p><strong>Author:</strong> Snowy Haiblen (written during a graduate rotation, feel free
-to contact me for further info (<a class="reference external" href="mailto:Anna&#46;Haiblen&#37;&#52;&#48;ga&#46;gov&#46;au">Anna<span>&#46;</span>Haiblen<span>&#64;</span>ga<span>&#46;</span>gov<span>&#46;</span>au</a>))</p>
+<p><strong>Note:</strong> As of August 2018, this notebook requires modification in order to run successfully. Please contact the author (Snowy Haiblen; <a class="reference external" href="mailto:Anna&#46;Haiblen&#37;&#52;&#48;ga&#46;gov&#46;au">Anna<span>&#46;</span>Haiblen<span>&#64;</span>ga<span>&#46;</span>gov<span>&#46;</span>au</a>) for assistance prior to running any analyses.</p>
 <div class="section" id="Load-modules">
 <h2>Load modules<a class="headerlink" href="#Load-modules" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [43]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -513,8 +508,7 @@ to contact me for further info (<a class="reference external" href="mailto:Anna&
 <div class="section" id="User-inputs:-area-of-interest,-product,-time-range,-and-cloud-free-fraction">
 <h2>User inputs: area of interest, product, time range, and cloud free fraction<a class="headerlink" href="#User-inputs:-area-of-interest,-product,-time-range,-and-cloud-free-fraction" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [64]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[64]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -547,8 +541,7 @@ to contact me for further info (<a class="reference external" href="mailto:Anna&
 <div class="section" id="Load-bands,-correct-for-no-data-pixels-and-image-overlap,-remove-clouded-imagery,-and-plot-all-available-true-colour-images-for-the-specified-time-range">
 <h2>Load bands, correct for no-data pixels and image overlap, remove clouded imagery, and plot all available true-colour images for the specified time range<a class="headerlink" href="#Load-bands,-correct-for-no-data-pixels-and-image-overlap,-remove-clouded-imagery,-and-plot-all-available-true-colour-images-for-the-specified-time-range" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [65]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[65]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -602,7 +595,7 @@ Generating mask ls8_pq_albers
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="stderr output_area docutils container">
+<div class="output_area stderr docutils container">
 <div class="highlight"><pre>
 /g/data/v10/public/modules/dea-env/20180405/lib/python3.6/site-packages/numpy/core/_methods.py:29: RuntimeWarning:
 
@@ -698,8 +691,7 @@ invalid value encountered in reduce
 <div class="section" id="Select-an-image-for-glint-identification-and-removal">
 <h2>Select an image for glint identification and removal<a class="headerlink" href="#Select-an-image-for-glint-identification-and-removal" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [66]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[66]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -715,22 +707,13 @@ invalid value encountered in reduce
 <center><p>by EITHER:</p>
 </center><p>##</p>
 <center><p>Drawing a polygon <em>OR</em> Selecting deep-ocean subplots</p>
-</center><p>Run the cells under the title <strong>Polygon method</strong> to select deep
-ocean areas by drawing a polygon on a map of the area. Alternatively,
-scroll down to the title <strong>Subplot method</strong> and run the cells below
-this.</p>
+</center><p>Run the cells under the title <strong>Polygon method</strong> to select deep ocean areas by drawing a polygon on a map of the area. Alternatively, scroll down to the title <strong>Subplot method</strong> and run the cells below this.</p>
 <hr class="docutils" />
 <p>###</p>
 <center><p>*******Polygon method*******</p>
-</center><p>Run the cell below this, then draw a polygon over deep ocean that is
-within the area of the image for glint correction. Note: * Do not
-included clouded pixels or pixels that have been removed because of
-cloud within your polygon. This will result in errors further down the
-workflow. * Drawing a larger polygon will mean that your glint
-correction is based on more data, and, therefore, is more accurate.</p>
+</center><p>Run the cell below this, then draw a polygon over deep ocean that is within the area of the image for glint correction. Note: * Do not included clouded pixels or pixels that have been removed because of cloud within your polygon. This will result in errors further down the workflow. * Drawing a larger polygon will mean that your glint correction is based on more data, and, therefore, is more accurate.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [67]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[67]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -780,8 +763,7 @@ Note: the scale and exent of the two images is not identical.
 <script type="application/vnd.jupyter.widget-view+json">{"model_id": "58d59a64287e436180d2d576914086ba", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[67]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[67]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -800,8 +782,7 @@ Note: the scale and exent of the two images is not identical.
 <div class="section" id="Create-a-polygon-from-the-shape-drawn-above,-and-save-it-in-the-same-coordinate-reference-system-as-the-datacube-data">
 <h3>Create a polygon from the shape drawn above, and save it in the same coordinate reference system as the datacube data<a class="headerlink" href="#Create-a-polygon-from-the-shape-drawn-above,-and-save-it-in-the-same-coordinate-reference-system-as-the-datacube-data" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [68]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[68]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -844,8 +825,7 @@ Note: the scale and exent of the two images is not identical.
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[68]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[68]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -856,11 +836,9 @@ Note: the scale and exent of the two images is not identical.
 </div>
 <div class="section" id="Rasterise-the-shapefile-and-plot-the-part-of-the-image-for-glint-correction-that-is-within-the-polygon-drawn-above">
 <h3>Rasterise the shapefile and plot the part of the image for glint correction that is within the polygon drawn above<a class="headerlink" href="#Rasterise-the-shapefile-and-plot-the-part-of-the-image-for-glint-correction-that-is-within-the-polygon-drawn-above" title="Permalink to this headline">¶</a></h3>
-<p>After running this cell, check that the polygon is within your area of
-interest and covers only cloud-free, deep ocean areas.</p>
+<p>After running this cell, check that the polygon is within your area of interest and covers only cloud-free, deep ocean areas.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [69]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[69]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -899,8 +877,7 @@ interest and covers only cloud-free, deep ocean areas.</p>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[69]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[69]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -921,8 +898,7 @@ interest and covers only cloud-free, deep ocean areas.</p>
 <div class="section" id="Grid-the-image-for-glint-correction-into-5x5-subplots">
 <h3>Grid the image for glint correction into 5x5 subplots<a class="headerlink" href="#Grid-the-image-for-glint-correction-into-5x5-subplots" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [70]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[70]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -960,12 +936,9 @@ interest and covers only cloud-free, deep ocean areas.</p>
 </div>
 <div class="section" id="Enter-the-title-number-for-subplots-that-are-100%-deep-ocean-in-the-list-below">
 <h3>Enter the title number for subplots that are 100% deep ocean in the list below<a class="headerlink" href="#Enter-the-title-number-for-subplots-that-are-100%-deep-ocean-in-the-list-below" title="Permalink to this headline">¶</a></h3>
-<p>Listing a greater number of subplots will mean that glint correction is
-based on more data. Do not include subplots with any cloud or no-data
-pixels.</p>
+<p>Listing a greater number of subplots will mean that glint correction is based on more data. Do not include subplots with any cloud or no-data pixels.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [71]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[71]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -978,8 +951,7 @@ pixels.</p>
 <div class="section" id="Create-lists-of-all-rgb-and-nir-reflectance-values-for-all-pixels-in-selected-deep-ocean-subplots">
 <h3>Create lists of all rgb and nir reflectance values for all pixels in selected deep-ocean subplots<a class="headerlink" href="#Create-lists-of-all-rgb-and-nir-reflectance-values-for-all-pixels-in-selected-deep-ocean-subplots" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [72]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[72]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1054,11 +1026,9 @@ pixels.</p>
 </div>
 <div class="section" id="Run-ONE-of-the-two-cells-below-(depending-on-which-deep-ocean-selection-method-you-used)">
 <h4>Run ONE of the two cells below (depending on which deep-ocean selection method you used)<a class="headerlink" href="#Run-ONE-of-the-two-cells-below-(depending-on-which-deep-ocean-selection-method-you-used)" title="Permalink to this headline">¶</a></h4>
-<p>These cells create arrays of all deep-ocean reflectance values for each
-band.</p>
+<p>These cells create arrays of all deep-ocean reflectance values for each band.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [50]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1082,8 +1052,7 @@ band.</p>
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [73]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[73]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1105,8 +1074,7 @@ band.</p>
 <div class="section" id="Identify-and-remove-glint">
 <h2>Identify and remove glint<a class="headerlink" href="#Identify-and-remove-glint" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [74]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[74]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1175,8 +1143,7 @@ green y-intercept: 78.9997242760258
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [75]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[75]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1202,11 +1169,9 @@ green y-intercept: 78.9997242760258
 <h2>Create outputs<a class="headerlink" href="#Create-outputs" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="Create-a-dataset-of-all-corrected-data-for-only-the-specified-deep-ocean-areas-to-identify-data-for-plotting">
 <h3>Create a dataset of all corrected data for only the specified deep-ocean areas to identify data for plotting<a class="headerlink" href="#Create-a-dataset-of-all-corrected-data-for-only-the-specified-deep-ocean-areas-to-identify-data-for-plotting" title="Permalink to this headline">¶</a></h3>
-<p>Run ONE of the two cells below (depending on which deep-ocean selection
-method you used)</p>
+<p>Run ONE of the two cells below (depending on which deep-ocean selection method you used)</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [53]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1233,8 +1198,7 @@ method you used)</p>
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [76]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[76]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1283,8 +1247,7 @@ method you used)</p>
 <div class="section" id="Plot-uncorrected-and-corrected-deep-ocean-rgb-and-nir-reflectance-data-for-pixels-with-the-lowest-100-and-highest-100-uncorrected-nir-reflectance-values">
 <h3>Plot uncorrected and corrected deep-ocean rgb and nir reflectance data for pixels with the lowest 100 and highest 100 uncorrected nir reflectance values<a class="headerlink" href="#Plot-uncorrected-and-corrected-deep-ocean-rgb-and-nir-reflectance-data-for-pixels-with-the-lowest-100-and-highest-100-uncorrected-nir-reflectance-values" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [77]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[77]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1330,8 +1293,7 @@ method you used)</p>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[77]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[77]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -1349,8 +1311,7 @@ method you used)</p>
 <div class="section" id="Plot-true-colour-images-for-the-area-of-interest-before-and-after-glint-correction">
 <h4>Plot true-colour images for the area of interest before and after glint correction<a class="headerlink" href="#Plot-true-colour-images-for-the-area-of-interest-before-and-after-glint-correction" title="Permalink to this headline">¶</a></h4>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [78]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[78]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1399,8 +1360,7 @@ xarray dataset has no spatial data; defaulting to plotting without coordinates. 
 <div class="section" id="Export-the-glint-corrected-image-as-a-Geotiff">
 <h4>Export the glint-corrected image as a Geotiff<a class="headerlink" href="#Export-the-glint-corrected-image-as-a-Geotiff" title="Permalink to this headline">¶</a></h4>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [41]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1466,6 +1426,7 @@ xarray dataset has no spatial data; defaulting to plotting without coordinates. 
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.14.0/dist/embed-amd.js"></script>
         <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     
 
   

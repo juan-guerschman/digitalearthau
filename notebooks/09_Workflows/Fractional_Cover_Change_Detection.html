@@ -280,18 +280,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #303F9F;
+    color: #307FC1;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #D84315;
+    color: #BF5B3D;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 8ex;
+    min-width: 5ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -331,9 +331,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #cfcfcf;
+    border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f7f7f7;
+    background: #f5f5f5;
 }
 
 /* override MathJax center alignment in output cells */
@@ -341,7 +341,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.pngmath center alignment in output cells */
+/* override sphinx.ext.imgmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -391,6 +391,40 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -407,12 +441,15 @@ div.nboutput div.output_area.stderr {
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
 <div class="section" id="Fractional-Cover:-Trend-and-Variability-Analysis">
 <h1>Fractional Cover: Trend and Variability Analysis<a class="headerlink" href="#Fractional-Cover:-Trend-and-Variability-Analysis" title="Permalink to this headline">¶</a></h1>
-<p><strong>Note:</strong> As of August 2018, this notebook requires modification in
-order to run successfully. Please contact the author (Chad Burton) for
-assistance prior to running any analyses.</p>
+<p><strong>Note:</strong> As of August 2018, this notebook requires modification in order to run successfully. Please contact the author (Chad Burton) for assistance prior to running any analyses.</p>
 <p><strong>Contents</strong></p>
 <p><a class="reference external" href="#readme">Description and readme</a></p>
 <p><a class="reference external" href="#userInputs">User Inputs</a></p>
@@ -437,99 +474,36 @@ assistance prior to running any analyses.</p>
 </ol>
 <p><strong>Description/Readme</strong></p>
 <p><strong>Summary:</strong></p>
-<p>This script conducts exploratory timeseries analysis on the Fractional
-Cover dataset (stored in the Geoscience Australia DataCube) in order to
-help detect, but not attribute, change in vegetation coverage from
-seasonal grasss to perennial shrubs and trees. The script conducts the
-following analysis:</p>
+<p>This script conducts exploratory timeseries analysis on the Fractional Cover dataset (stored in the Geoscience Australia DataCube) in order to help detect, but not attribute, change in vegetation coverage from seasonal grasss to perennial shrubs and trees. The script conducts the following analysis:</p>
 <ol class="arabic simple">
-<li>Pixel-wise trend and variability analysis to produce outputs of
-linear coefficients since some reference time, the change in seasonal
-and interannual variability between a baseline period and a more
-recent period, and the difference in mean total vegetation (PV + NPV)
-between a baseline period and more recent period.</li>
+<li>Pixel-wise trend and variability analysis to produce outputs of linear coefficients since some reference time, the change in seasonal and interannual variability between a baseline period and a more recent period, and the difference in mean total vegetation (PV + NPV) between a baseline period and more recent period.</li>
 <li>Zonal statistics for n polygons within a shapefile.</li>
-<li>Pixel-wise statistical tests to determine where change is
-significant, these test are applied to both the means (Welch T-test),
-and the variance (Levene test).</li>
-<li>Lastly, an RGB composite map is produced whose bands include: the
-difference in means, the difference in variability, and the
-welch-test probabilities. This final map shows regions where strong
-regeneration from emphemeral pasture to perrenial trees is likely to
-have occurred.</li>
+<li>Pixel-wise statistical tests to determine where change is significant, these test are applied to both the means (Welch T-test), and the variance (Levene test).</li>
+<li>Lastly, an RGB composite map is produced whose bands include: the difference in means, the difference in variability, and the welch-test probabilities. This final map shows regions where strong regeneration from emphemeral pasture to perrenial trees is likely to have occurred.</li>
 </ol>
-<p>The script relies heavily on the Climate Data Operators (CDO) library to
-conduct the analysis, which requires loading CDO in the terminal before
-using this script (run: module load cdo/1.7.1), and installation of the
-CDO python wrapper. Visit <a class="reference external" href="https://github.com/Try2Code/cdo-bindings">https://github.com/Try2Code/cdo-bindings</a> for
-instructions on installing CDO-python through the pip installer (this
-only needs to be done once).</p>
-<p>The python packages PyPDF2, and rasterstats are also required and are
-not pre-installed on the VDI.</p>
-<p>Custom modules are also used throughout the script and are available for
-download from the Geoscience Australia github page
-<a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/tree/master/algorithms">https://github.com/GeoscienceAustralia/dea-notebooks/tree/master/algorithms</a>.
-These include:</p>
-<p><em>array_to_geotiff, rasterize_vector, load_masked_FC,
-dataset_to_geotiff, three_band_image, load_clearlandsat</em></p>
-<p><em>Update:</em> These functions are now included at the start of the script
-after the user inputs section (the script is vastly longer but it
-doesn’t require any installation of custom modules).</p>
-<p>The user should go to the ‘user inputs’ sections at the top of the
-script and enter the relevant information. Thereafter, the script should
-not need editing. It is required that a shapefile defining the
-boundaries for the area of interest is supplied. The shapefile needs
-some preprocessing before it will run effectively, read part 2 below for
-more details.</p>
+<p>The script relies heavily on the Climate Data Operators (CDO) library to conduct the analysis, which requires loading CDO in the terminal before using this script (run: module load cdo/1.7.1), and installation of the CDO python wrapper. Visit <a class="reference external" href="https://github.com/Try2Code/cdo-bindings">https://github.com/Try2Code/cdo-bindings</a> for instructions on installing CDO-python through the pip installer (this only needs to be done once).</p>
+<p>The python packages PyPDF2, and rasterstats are also required and are not pre-installed on the VDI.</p>
+<p>Custom modules are also used throughout the script and are available for download from the Geoscience Australia github page <a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/tree/master/algorithms">https://github.com/GeoscienceAustralia/dea-notebooks/tree/master/algorithms</a>. These include:</p>
+<p><em>array_to_geotiff, rasterize_vector, load_masked_FC, dataset_to_geotiff, three_band_image, load_clearlandsat</em></p>
+<p><em>Update:</em> These functions are now included at the start of the script after the user inputs section (the script is vastly longer but it doesn’t require any installation of custom modules).</p>
+<p>The user should go to the ‘user inputs’ sections at the top of the script and enter the relevant information. Thereafter, the script should not need editing. It is required that a shapefile defining the boundaries for the area of interest is supplied. The shapefile needs some preprocessing before it will run effectively, read part 2 below for more details.</p>
 <p><strong>Part 1:</strong></p>
-<p>The first part of this script conducts pixel-wise time-series analysis
-on the fractional cover dataset over a region defined by an input
-shapefile.</p>
-<p>Depending on the size of the region of interest, this script could be
-run on Raijin to speed up its processing. However, with Dask implemented
-it will run (almost) any size analysis through the VDI. The script is
-raijin friendly so exporting it to a .py file should be fine.</p>
-<p><em>Nb: Piping of CDO operations is throwing an error, so each step in the
-analysis is seperated. Piping speeds up the analysis so I should try to
-resolve this when I get a chance</em></p>
+<p>The first part of this script conducts pixel-wise time-series analysis on the fractional cover dataset over a region defined by an input shapefile.</p>
+<p>Depending on the size of the region of interest, this script could be run on Raijin to speed up its processing. However, with Dask implemented it will run (almost) any size analysis through the VDI. The script is raijin friendly so exporting it to a .py file should be fine.</p>
+<p><em>Nb: Piping of CDO operations is throwing an error, so each step in the analysis is seperated. Piping speeds up the analysis so I should try to resolve this when I get a chance</em></p>
 <p><strong>Part 2:</strong></p>
-<p>The second part of this script calculates the zonal mean and zonal
-standard deviation (std dev of the pixel values within the polygon -
-indication of the range of values within the polygon) of Total
-Vegetation (PV + NPV) over each seperate polygon in the input shapefile.</p>
-<p><strong>This step requires some pre-processing of the input shapefile: an
-attribute column uniquely identifying ecah polygon must be included. The
-name of the attribute column needs to be declared in the ‘user inputs’
-section. Place this shapefile in your ‘data’ directory.</strong></p>
+<p>The second part of this script calculates the zonal mean and zonal standard deviation (std dev of the pixel values within the polygon - indication of the range of values within the polygon) of Total Vegetation (PV + NPV) over each seperate polygon in the input shapefile.</p>
+<p><strong>This step requires some pre-processing of the input shapefile: an attribute column uniquely identifying ecah polygon must be included. The name of the attribute column needs to be declared in the ‘user inputs’ section. Place this shapefile in your ‘data’ directory.</strong></p>
 <p><strong>Part 3:</strong></p>
-<p>All results are compiled into a pdf document (called
-‘final_results.pdf’) that contains - A true colour map of the area of
-interest with the shapefile overlaying it - The zonal timeseries for
-each polygon - Pixel-wise plots showing: the difference between the
-intra-annual variability in the baseline period compared with the recent
-period, the levene test p-values, the difference between the mean TV in
-the basline period and recent period, and Welsh T-test p values on the
-mean differences - A binary classification map showing the regions at
-high-risk of no-regeneration (based on the difference in variability
-map), and the same plot but masked just to those regions with a levene
-test p-value &lt;=0.1. The binary classification map is a boolean map of
-1’s and 0’s. A 1 indicates areas where regeneration is unlikely to have
-occurred (areas where the intra-annual variability is higher in the
-recent period than during the baseline period, likely indicating there
-has been no transition from highly seasonal grasses to less climate
-responsive perennial vegetation (trees and shrubs). - And finally the
-RGB plot that can be used to find regions where strong regeneration is
-occurring (regions that are white in the map).</p>
-<p>This code was written in April/May of 2018 by Chad Burton, with
-significant and invaluable help from everyone in Team X and Team Wombat.
-The notebook was completed as a graduate program project at Geoscience
-Australia.</p>
+<p>All results are compiled into a pdf document (called ‘final_results.pdf’) that contains - A true colour map of the area of interest with the shapefile overlaying it - The zonal timeseries for each polygon - Pixel-wise plots showing: the difference between the intra-annual variability in the baseline period compared with the recent period, the levene test p-values, the difference between the mean TV in the basline period and recent period, and Welsh T-test p values on the mean differences - A
+binary classification map showing the regions at high-risk of no-regeneration (based on the difference in variability map), and the same plot but masked just to those regions with a levene test p-value &lt;=0.1. The binary classification map is a boolean map of 1’s and 0’s. A 1 indicates areas where regeneration is unlikely to have occurred (areas where the intra-annual variability is higher in the recent period than during the baseline period, likely indicating there has been no transition from
+highly seasonal grasses to less climate responsive perennial vegetation (trees and shrubs). - And finally the RGB plot that can be used to find regions where strong regeneration is occurring (regions that are white in the map).</p>
+<p>This code was written in April/May of 2018 by Chad Burton, with significant and invaluable help from everyone in Team X and Team Wombat. The notebook was completed as a graduate program project at Geoscience Australia.</p>
 <p>Tags: <span class="target" id="index-0"></span>trend, <span class="target" id="index-1"></span>variance, <cite>Welch t-test</cite>, <span class="target" id="index-2"></span>Levene’s test, index:<cite>Climate Data Operators</cite>, <span class="target" id="index-3"></span>PyPDF2, <span class="target" id="index-4"></span>zonal statistics. index:<cite>fractional cover</cite>, <span class="target" id="index-5"></span>terminal operations, <span class="target" id="index-6"></span>rasterstats</p>
 <div class="section" id="Import-libraries">
 <h2>Import libraries<a class="headerlink" href="#Import-libraries" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -569,8 +543,7 @@ Australia.</p>
 <div class="section" id="USER-INPUTS">
 <h2>USER INPUTS<a class="headerlink" href="#USER-INPUTS" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -615,8 +588,7 @@ Australia.</p>
 <div class="section" id="Custom-functions">
 <h2>Custom functions<a class="headerlink" href="#Custom-functions" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -971,8 +943,7 @@ Australia.</p>
 <div class="section" id="Get-Fractional-Cover-dataset-from-the-DataCube">
 <h2>Get Fractional Cover dataset from the DataCube<a class="headerlink" href="#Get-Fractional-Cover-dataset-from-the-DataCube" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -990,8 +961,7 @@ Australia.</p>
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1007,8 +977,7 @@ Australia.</p>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1052,8 +1021,7 @@ I am densified (external_values, 2 elements)
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1103,8 +1071,7 @@ I am densified (external_values, 2 elements)
 <div class="section" id="Masking">
 <h2>Masking<a class="headerlink" href="#Masking" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1166,8 +1133,7 @@ I am densified (external_values, 2 elements)
 <div class="section" id="CDO-operations">
 <h2>CDO operations<a class="headerlink" href="#CDO-operations" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1222,7 +1188,7 @@ I am densified (external_values, 2 elements)
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="stderr output_area docutils container">
+<div class="output_area stderr docutils container">
 <div class="highlight"><pre>
 /g/data/v10/public/modules/agdc-py3-env/20171214/envs/agdc/lib/python3.6/site-packages/ipykernel_launcher.py:8: DeprecationWarning:
 .resample() has been modified to defer calculations. Instead of passing &#39;dim&#39; and &#39;how=&#34;mean&#34;, instead consider using .resample(time=&#34;M&#34;).mean()
@@ -1237,8 +1203,7 @@ I am densified (external_values, 2 elements)
 <div class="section" id="Statistical-tests-(Welch-T-and-Levene)">
 <h2>Statistical tests (Welch-T and Levene)<a class="headerlink" href="#Statistical-tests-(Welch-T-and-Levene)" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1252,8 +1217,7 @@ I am densified (external_values, 2 elements)
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1328,7 +1292,7 @@ Starting for-loop...I am thinking
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="stderr output_area docutils container">
+<div class="output_area stderr docutils container">
 <div class="highlight"><pre>
 /g/data/v10/public/modules/agdc-py3-env/20171214/envs/agdc/lib/python3.6/site-packages/numpy/core/fromnumeric.py:2909: RuntimeWarning: Mean of empty slice.
   out=out, **kwargs)
@@ -1348,7 +1312,7 @@ starting T-test
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="stderr output_area docutils container">
+<div class="output_area stderr docutils container">
 <div class="highlight"><pre>
 /g/data/v10/public/modules/agdc-py3-env/20171214/envs/agdc/lib/python3.6/site-packages/ipykernel_launcher.py:43: RuntimeWarning: invalid value encountered in greater
 /g/data/v10/public/modules/agdc-py3-env/20171214/envs/agdc/lib/python3.6/site-packages/ipykernel_launcher.py:44: RuntimeWarning: invalid value encountered in greater
@@ -1365,8 +1329,7 @@ finished levene test
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1394,8 +1357,7 @@ finished levene test
 <div class="section" id="CompositeRGB-plot">
 <h2>CompositeRGB plot<a class="headerlink" href="#CompositeRGB-plot" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1425,8 +1387,7 @@ finished levene test
 <div class="section" id="Exporting-geotiffs">
 <h2>Exporting geotiffs<a class="headerlink" href="#Exporting-geotiffs" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1479,8 +1440,7 @@ finished levene test
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1552,11 +1512,9 @@ finished levene test
 <div class="section" id="Zonal-Statistics">
 <h1>Zonal Statistics<a class="headerlink" href="#Zonal-Statistics" title="Permalink to this headline">¶</a></h1>
 <blockquote>
-<div>Use the exported ‘fc_clean_monthly.nc’ file to calculate the zonal</div></blockquote>
-<p>statistics over polygons</p>
+<div>Use the exported ‘fc_clean_monthly.nc’ file to calculate the zonal statistics over polygons</div></blockquote>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1644,7 +1602,7 @@ finished levene test
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="stderr output_area docutils container">
+<div class="output_area stderr docutils container">
 <div class="highlight"><pre>
 /home/547/cb3058/.digitalearthau/20171214/local/lib/python3.6/site-packages/rasterstats/io.py:294: UserWarning: Setting nodata to -999; specify nodata explicitly
   warnings.warn(&#34;Setting nodata to -999; specify nodata explicitly&#34;)
@@ -1654,13 +1612,11 @@ finished levene test
 <div class="section" id="Reporting-and-plotting">
 <h1>Reporting and plotting<a class="headerlink" href="#Reporting-and-plotting" title="Permalink to this headline">¶</a></h1>
 <blockquote>
-<div>Create a pdf report that contains all of the above analysis in one easy</div></blockquote>
-<p>document</p>
+<div>Create a pdf report that contains all of the above analysis in one easy document</div></blockquote>
 <div class="section" id="Zonal-timeseries-plots">
 <h2>Zonal timeseries plots<a class="headerlink" href="#Zonal-timeseries-plots" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1704,8 +1660,7 @@ finished levene test
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -1728,8 +1683,7 @@ finished levene test
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1755,8 +1709,7 @@ finished levene test
 <div class="section" id="Pixel-wise-plots">
 <h2>Pixel-wise plots<a class="headerlink" href="#Pixel-wise-plots" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1786,8 +1739,7 @@ finished levene test
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1859,7 +1811,7 @@ finished levene test
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="stderr output_area docutils container">
+<div class="output_area stderr docutils container">
 <div class="highlight"><pre>
 FutureWarning: &#39;pandas.tseries.converter.register&#39; has been moved and renamed to &#39;pandas.plotting.register_matplotlib_converters&#39;.  [utils.py:51]
 MatplotlibDeprecationWarning: Adding an axes using the same arguments as a previous axes currently reuses the earlier instance.  In a future version, a new instance will always be created and returned.  Meanwhile, this warning can be suppressed, and the future behavior ensured, by passing a unique label to each axes instance. [deprecation.py:106]
@@ -1873,8 +1825,7 @@ MatplotlibDeprecationWarning: Adding an axes using the same arguments as a previ
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1895,8 +1846,7 @@ MatplotlibDeprecationWarning: Adding an axes using the same arguments as a previ
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1948,7 +1898,7 @@ MatplotlibDeprecationWarning: Adding an axes using the same arguments as a previ
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="stderr output_area docutils container">
+<div class="output_area stderr docutils container">
 <div class="highlight"><pre>
 MatplotlibDeprecationWarning: Adding an axes using the same arguments as a previous axes currently reuses the earlier instance.  In a future version, a new instance will always be created and returned.  Meanwhile, this warning can be suppressed, and the future behavior ensured, by passing a unique label to each axes instance. [deprecation.py:106]
 </pre></div></div>
@@ -1961,8 +1911,7 @@ MatplotlibDeprecationWarning: Adding an axes using the same arguments as a previ
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2011,7 +1960,7 @@ MatplotlibDeprecationWarning: Adding an axes using the same arguments as a previ
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="stderr output_area docutils container">
+<div class="output_area stderr docutils container">
 <div class="highlight"><pre>
 RuntimeWarning: invalid value encountered in true_divide [exposure.py:297]
 </pre></div></div>
@@ -2027,8 +1976,7 @@ RuntimeWarning: invalid value encountered in true_divide [exposure.py:297]
 <div class="section" id="True-colour-plot">
 <h2>True colour plot<a class="headerlink" href="#True-colour-plot" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2067,8 +2015,7 @@ Combining and sorting ls5, ls7 and ls8 data
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [25]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2122,8 +2069,7 @@ Combining and sorting ls5, ls7 and ls8 data
 <div class="section" id="Merge-all-pdfs">
 <h2>Merge all pdfs<a class="headerlink" href="#Merge-all-pdfs" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [26]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2150,8 +2096,7 @@ Combining and sorting ls5, ls7 and ls8 data
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2210,6 +2155,7 @@ Combining and sorting ls5, ls7 and ls8 data
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.14.0/dist/embed-amd.js"></script>
         <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     
 
   

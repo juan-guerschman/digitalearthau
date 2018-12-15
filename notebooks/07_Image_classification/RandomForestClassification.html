@@ -267,18 +267,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #303F9F;
+    color: #307FC1;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #D84315;
+    color: #BF5B3D;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 8ex;
+    min-width: 5ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -318,9 +318,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #cfcfcf;
+    border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f7f7f7;
+    background: #f5f5f5;
 }
 
 /* override MathJax center alignment in output cells */
@@ -328,7 +328,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.pngmath center alignment in output cells */
+/* override sphinx.ext.imgmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -378,6 +378,40 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -394,52 +428,32 @@ div.nboutput div.output_area.stderr {
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
 <div class="section" id="Random-forest-classification">
 <h1>Random forest classification<a class="headerlink" href="#Random-forest-classification" title="Permalink to this headline">¶</a></h1>
 <p><strong>What does this notebook do?</strong></p>
-<p>This notebook classifies remote sensing data using a <code class="docutils literal notranslate"><span class="pre">random</span> <span class="pre">forest</span></code>
-classifier model. Key features include being able to efficiently import
-training data from a set of point, line or polygon shapefiles (i.e. data
-is extracted from each shapefile separately to avoid slow <code class="docutils literal notranslate"><span class="pre">dc.load</span></code> on
-large areas), and allow flexible and consistent selection of training
-and analysis data using import functions (i.e. ensuring training data is
-consistent with analysis data). The notebook exports geotiff
-classification outputs and a series of evaluation figures to help
-fine-tune the classifier.</p>
+<p>This notebook classifies remote sensing data using a <code class="docutils literal notranslate"><span class="pre">random</span> <span class="pre">forest</span></code> classifier model. Key features include being able to efficiently import training data from a set of point, line or polygon shapefiles (i.e. data is extracted from each shapefile separately to avoid slow <code class="docutils literal notranslate"><span class="pre">dc.load</span></code> on large areas), and allow flexible and consistent selection of training and analysis data using import functions (i.e. ensuring training data is consistent with analysis data). The notebook exports geotiff
+classification outputs and a series of evaluation figures to help fine-tune the classifier.</p>
 <p><strong>Requirements:</strong></p>
-<p>You need to run the following commands from the command line prior to
-launching jupyter notebooks from the same terminal so that the required
-libraries and paths are set:</p>
+<p>You need to run the following commands from the command line prior to launching jupyter notebooks from the same terminal so that the required libraries and paths are set:</p>
 <p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">use</span> <span class="pre">/g/data/v10/public/modules/modulefiles</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">dea</span></code></p>
-<p>This notebook also uses four external functions called
-<code class="docutils literal notranslate"><span class="pre">randomforest_train</span></code>, <code class="docutils literal notranslate"><span class="pre">randomforest_classify</span></code>, <code class="docutils literal notranslate"><span class="pre">randomforest_eval</span></code>
-and <code class="docutils literal notranslate"><span class="pre">load_nbarx</span></code>. These functions are available in the <code class="docutils literal notranslate"><span class="pre">10_Scripts</span></code>
-folder of the <a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/tree/master/10_Scripts">dea-notebooks Github
-repository</a>.
-To ensure these functions and all other file paths load correctly, it is
-recommended that you download or clone the entire <code class="docutils literal notranslate"><span class="pre">dea-notebooks</span></code>
-repository onto your computer and then launch this notebook from inside
-the cloned directory; please see the <a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/">readme document
-here</a> for
-instructions.</p>
-<p>Note that these functions have been developed by DEA users, not the DEA
-development team, and so are provided without warranty. If you find an
-error or bug in the functions or notebook, please either create an
-‘Issue’ in the Github repository, or fix it yourself and create a ‘Pull’
-request to contribute the updated notebook back into the repository (See
-the repository
-<a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/blob/master/README.rst">README</a>
-for instructions on creating a Pull request).</p>
+<p>This notebook also uses four external functions called <code class="docutils literal notranslate"><span class="pre">randomforest_train</span></code>, <code class="docutils literal notranslate"><span class="pre">randomforest_classify</span></code>, <code class="docutils literal notranslate"><span class="pre">randomforest_eval</span></code> and <code class="docutils literal notranslate"><span class="pre">load_nbarx</span></code>. These functions are available in the <code class="docutils literal notranslate"><span class="pre">10_Scripts</span></code> folder of the <a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/tree/master/10_Scripts">dea-notebooks Github repository</a>. To ensure these functions and all other file paths load correctly, it is recommended that you download or clone the entire <code class="docutils literal notranslate"><span class="pre">dea-notebooks</span></code> repository onto your computer
+and then launch this notebook from inside the cloned directory; please see the <a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/">readme document here</a> for instructions.</p>
+<p>Note that these functions have been developed by DEA users, not the DEA development team, and so are provided without warranty. If you find an error or bug in the functions or notebook, please either create an ‘Issue’ in the Github repository, or fix it yourself and create a ‘Pull’ request to contribute the updated notebook back into the repository (See the repository <a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/blob/master/README.rst">README</a> for instructions on creating a Pull
+request).</p>
 <p><strong>Date:</strong> August 2018</p>
 <p><strong>Author:</strong> Robbi Bishop-Taylor</p>
 <p><strong>Tags</strong>: <span class="target" id="index-0"></span>image_classification, <span class="target" id="index-1"></span>machine_learning, <span class="target" id="index-2"></span>random_forest, <span class="target" id="index-3"></span>Landsat8, <span class="target" id="index-4"></span>mangroves, <span class="target" id="index-5"></span>tasseled_cap, <span class="target" id="index-6"></span>Scripts, <span class="target" id="index-7"></span>water_classification</p>
 <div class="section" id="Import-modules-and-define-functions">
 <h2>Import modules and define functions<a class="headerlink" href="#Import-modules-and-define-functions" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -475,17 +489,10 @@ for instructions on creating a Pull request).</p>
 </div>
 <div class="section" id="Function-used-to-import-training-and-analysis-data">
 <h2>Function used to import training and analysis data<a class="headerlink" href="#Function-used-to-import-training-and-analysis-data" title="Permalink to this headline">¶</a></h2>
-<p>This function imports datacube data using a query, and return an xarray
-dataset with one single time-step, multiple bands/variables and <code class="docutils literal notranslate"><span class="pre">crs</span></code>
-and <code class="docutils literal notranslate"><span class="pre">affine</span></code> attributes. This format is required as an input to both
-<code class="docutils literal notranslate"><span class="pre">randomforest_train</span></code> and <code class="docutils literal notranslate"><span class="pre">randomforest_classify</span></code> to ensure that both
-training and analysis data are consistent. This function can be replaced
-with a custom function of your creation, as long as it returns data in
-the same format (one time-step, multiple bands, <code class="docutils literal notranslate"><span class="pre">crs</span></code> and <code class="docutils literal notranslate"><span class="pre">affine</span></code>
-attributes).</p>
+<p>This function imports datacube data using a query, and return an xarray dataset with one single time-step, multiple bands/variables and <code class="docutils literal notranslate"><span class="pre">crs</span></code> and <code class="docutils literal notranslate"><span class="pre">affine</span></code> attributes. This format is required as an input to both <code class="docutils literal notranslate"><span class="pre">randomforest_train</span></code> and <code class="docutils literal notranslate"><span class="pre">randomforest_classify</span></code> to ensure that both training and analysis data are consistent. This function can be replaced with a custom function of your creation, as long as it returns data in the same format (one time-step, multiple bands, <code class="docutils literal notranslate"><span class="pre">crs</span></code> and
+<code class="docutils literal notranslate"><span class="pre">affine</span></code> attributes).</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -516,11 +523,9 @@ attributes).</p>
 </div>
 <div class="section" id="Set-up-analysis">
 <h2>Set up analysis<a class="headerlink" href="#Set-up-analysis" title="Permalink to this headline">¶</a></h2>
-<p>Defines parameters used for analysis. This notebook demonstrates the
-classification of water vs non-water using median Landsat nbart data.</p>
+<p>Defines parameters used for analysis. This notebook demonstrates the classification of water vs non-water using median Landsat nbart data.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -554,12 +559,9 @@ classification of water vs non-water using median Landsat nbart data.</p>
 </div>
 <div class="section" id="Import-training-data-and-fit-model">
 <h2>Import training data and fit model<a class="headerlink" href="#Import-training-data-and-fit-model" title="Permalink to this headline">¶</a></h2>
-<p>Uses <code class="docutils literal notranslate"><span class="pre">randomforest_train</span></code> to extract training data from potentially
-multiple training shapefiles, and returns a trained classifier (and
-optionally, training label and training sample arrays)</p>
+<p>Uses <code class="docutils literal notranslate"><span class="pre">randomforest_train</span></code> to extract training data from potentially multiple training shapefiles, and returns a trained classifier (and optionally, training label and training sample arrays)</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -599,16 +601,9 @@ Model trained on 6 bands and 88469 training samples
 </div>
 <div class="section" id="Import-analysis-data-and-classify">
 <h2>Import analysis data and classify<a class="headerlink" href="#Import-analysis-data-and-classify" title="Permalink to this headline">¶</a></h2>
-<p>Classifies and exports an analysis dataset using a previously trained
-random forest classifier, provided this dataset has the same number of
-bands/variables as the data used to train the classifier. Using the same
-data function used to train the classifier (e.g. <code class="docutils literal notranslate"><span class="pre">data_func</span></code>
-previously defined as <code class="docutils literal notranslate"><span class="pre">nbart_import</span></code>) will ensure this is the case. By
-setting <code class="docutils literal notranslate"><span class="pre">class_prob</span> <span class="pre">=</span> <span class="pre">True</span></code>, you can optionally export a geotiff of
-predicted class probabilities in addition to the classification output.</p>
+<p>Classifies and exports an analysis dataset using a previously trained random forest classifier, provided this dataset has the same number of bands/variables as the data used to train the classifier. Using the same data function used to train the classifier (e.g. <code class="docutils literal notranslate"><span class="pre">data_func</span></code> previously defined as <code class="docutils literal notranslate"><span class="pre">nbart_import</span></code>) will ensure this is the case. By setting <code class="docutils literal notranslate"><span class="pre">class_prob</span> <span class="pre">=</span> <span class="pre">True</span></code>, you can optionally export a geotiff of predicted class probabilities in addition to the classification output.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -673,8 +668,7 @@ Class probability processing...
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -699,13 +693,9 @@ Class probability processing...
 </div>
 <div class="section" id="Feature/band/variable-importance">
 <h2>Feature/band/variable importance<a class="headerlink" href="#Feature/band/variable-importance" title="Permalink to this headline">¶</a></h2>
-<p>Extract classifier estimates of the relative importance of each
-band/variable for training the classifier. Useful for potentially
-selecting a subset of input bands/variables for model
-training/classification (i.e. optimising feature space)</p>
+<p>Extract classifier estimates of the relative importance of each band/variable for training the classifier. Useful for potentially selecting a subset of input bands/variables for model training/classification (i.e. optimising feature space)</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -723,7 +713,7 @@ training/classification (i.e. optimising feature space)</p>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="output_area docutils container">
+<div class="output_area rendered_html docutils container">
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -788,16 +778,10 @@ training/classification (i.e. optimising feature space)</p>
 </div>
 <div class="section" id="Plot-performance-of-model-by-parameter-values">
 <h2>Plot performance of model by parameter values<a class="headerlink" href="#Plot-performance-of-model-by-parameter-values" title="Permalink to this headline">¶</a></h2>
-<p>Random forest classifiers contain many modifiable parameters that can
-strongly affect the performance of the model. This section evaluates the
-effect of these parameters by plotting out-of-bag (OOB) error for a set
-of classifier parameter scenarios, and exports the resulting plots to
-file.</p>
-<p>A <code class="docutils literal notranslate"><span class="pre">max_estimators</span> <span class="pre">=</span> <span class="pre">300</span></code> is usually a good starting point, but this
-may be slow for large training sets.</p>
+<p>Random forest classifiers contain many modifiable parameters that can strongly affect the performance of the model. This section evaluates the effect of these parameters by plotting out-of-bag (OOB) error for a set of classifier parameter scenarios, and exports the resulting plots to file.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">max_estimators</span> <span class="pre">=</span> <span class="pre">300</span></code> is usually a good starting point, but this may be slow for large training sets.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -918,12 +902,9 @@ may be slow for large training sets.</p>
 </div>
 <div class="section" id="Export-tree-diagrams">
 <h2>Export tree diagrams<a class="headerlink" href="#Export-tree-diagrams" title="Permalink to this headline">¶</a></h2>
-<p>Export .png plots of each decision tree in the random forest ensemble.
-Useful for inspecting the splits used by the classifier to classify the
-data.</p>
+<p>Export .png plots of each decision tree in the random forest ensemble. Useful for inspecting the splits used by the classifier to classify the data.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -952,8 +933,7 @@ data.</p>
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1012,6 +992,7 @@ data.</p>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.14.0/dist/embed-amd.js"></script>
         <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     
 
   

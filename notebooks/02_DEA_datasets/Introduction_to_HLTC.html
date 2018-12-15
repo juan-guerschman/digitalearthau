@@ -273,18 +273,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #303F9F;
+    color: #307FC1;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #D84315;
+    color: #BF5B3D;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 8ex;
+    min-width: 5ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -324,9 +324,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #cfcfcf;
+    border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f7f7f7;
+    background: #f5f5f5;
 }
 
 /* override MathJax center alignment in output cells */
@@ -334,7 +334,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.pngmath center alignment in output cells */
+/* override sphinx.ext.imgmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -384,6 +384,40 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -400,39 +434,29 @@ div.nboutput div.output_area.stderr {
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
 <div class="section" id="Getting-started-with-High-Low-Tide-Composites-(HLTC_25)">
 <h1>Getting started with High-Low Tide Composites (HLTC_25)<a class="headerlink" href="#Getting-started-with-High-Low-Tide-Composites-(HLTC_25)" title="Permalink to this headline">¶</a></h1>
 <p><strong>What does this notebook do?</strong></p>
-<p>This notebook provides an introduction to the High and Low Tide
-Composites product (HLTC_25), which is composed of two surface
-reflectance composite mosaics of Landsat TM and ETM+ (Landsat 5 and
-Landsat 7 respectively) and OLI (Landsat 8) surface reflectance data (Li
-et al., 2012). These products have been produced using Digital Earth
-Australia (DEA). The two mosaics allow cloud free and noise reduced
-visualisation of the shallow water and inter-tidal coastal regions of
-Australia, as observed at high and low tide respectively (<a class="reference external" href="http://dx.doi.org/10.3390/rs10030480">Sagar et al.
-2018</a>).</p>
+<p>This notebook provides an introduction to the High and Low Tide Composites product (HLTC_25), which is composed of two surface reflectance composite mosaics of Landsat TM and ETM+ (Landsat 5 and Landsat 7 respectively) and OLI (Landsat 8) surface reflectance data (Li et al., 2012). These products have been produced using Digital Earth Australia (DEA). The two mosaics allow cloud free and noise reduced visualisation of the shallow water and inter-tidal coastal regions of Australia, as observed
+at high and low tide respectively (<a class="reference external" href="http://dx.doi.org/10.3390/rs10030480">Sagar et al. 2018</a>).</p>
 <p><strong>Requirements</strong></p>
-<p>You need to run the following commands from the command line prior to
-launching jupyter notebooks from the same terminal so that the required
-libraries and paths are set:</p>
+<p>You need to run the following commands from the command line prior to launching jupyter notebooks from the same terminal so that the required libraries and paths are set:</p>
 <p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">use</span> <span class="pre">/g/data/v10/public/modules/modulefiles</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">dea</span></code></p>
-<p>If you find an error or bug in this notebook, please either create an
-‘Issue’ in the Github repository, or fix it yourself and create a ‘Pull’
-request to contribute the updated notebook back into the repository (See
-the repository
-<a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/blob/master/README.rst">README</a>
-for instructions on creating a Pull request).</p>
+<p>If you find an error or bug in this notebook, please either create an ‘Issue’ in the Github repository, or fix it yourself and create a ‘Pull’ request to contribute the updated notebook back into the repository (See the repository <a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/blob/master/README.rst">README</a> for instructions on creating a Pull request).</p>
 <p><strong>Date:</strong> August 2018</p>
 <p><strong>Author:</strong> Robbi Bishop-Taylor</p>
 <p><strong>Tags</strong>: <span class="target" id="index-0"></span>HLTC, <span class="target" id="index-1"></span>composites, <span class="target" id="index-2"></span>intertidal_zone, <span class="target" id="index-3"></span>query, <span class="target" id="index-4"></span>dc.load, <span class="target" id="index-5"></span>plot, <span class="target" id="index-6"></span>Landsat5, , <span class="target" id="index-7"></span>Landsat7, <span class="target" id="index-8"></span>Landsat8, <span class="target" id="index-9"></span>NDWI</p>
 <div class="section" id="Import-modules">
 <h2>Import modules<a class="headerlink" href="#Import-modules" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -455,41 +479,14 @@ for instructions on creating a Pull request).</p>
 </div>
 <div class="section" id="Overview-of-High-Low-Tide-Composite-products">
 <h2>Overview of High-Low Tide Composite products<a class="headerlink" href="#Overview-of-High-Low-Tide-Composite-products" title="Permalink to this headline">¶</a></h2>
-<p>Inter-tidal zones are difficult regions to characterise due to the
-dynamic nature of the tide. They are highly changeable environments,
-subject to forcings from the land, sea and atmosphere and yet they form
-critical habitats for a wide range of organisms from birds to fish and
-sea grass. By harnessing the long archive of satellite imagery over
-Australia’s coastal zones in the DEA and pairing the images with
-regional tidal modelling, the archive can be sorted by tide height
-rather than date, enabling the inter-tidal zone to be viewed at any
-stage of the tide regime.</p>
-<p>The High Low Tide Composites (HLTC_25) product is composed of two
-mosaics, distinguished by tide height, representing a composite image of
-the synthetic geomedian surface reflectance from Landsats 5 TM, Landsat
-7 ETM+ and Landsat 8 OLI NBAR data (Li et al., 2012; Roberts et al.,
-2017). <a class="reference external" href="http://volkov.oce.orst.edu/tides/otps.html">Oregon State University Tidal Prediction Software
-(OTPS)</a> (Egbert and
-Erofeeva, 2002, 2010) was used to generate tide heights, relative to
-mean sea level, for the Australian continental coastline, split into 306
-distinct tidal regions. These time and date stamped tidal values were
-then attributed to all coastal tile observations for their time of
-acquisition, creating a range of observed tide heights for the
-Australian coastline. The two mosaics in HLTC_25 are composited from
-the highest and lowest 20 % of observed tide in the ensemble. A
-geomedian composite for each Landsat band is calculated from the tiles
-in each ensemble subset to produce the respective High and Low Tide
-composites. Note that Landsat 7 ETM+ observations are excluded after May
-2003 due to a large number of data artefacts.</p>
-<p>Four HLTC datasets are available through DEA: the High Tide 20
-percentage composite, the Low Tide 20 percentage composite, the High
-Tide 20 percentage pixel / clear observations count, and the Low Tide 20
-percentage pixel / clear observations count layer. All layers are in the
-Australian Albers <code class="docutils literal notranslate"><span class="pre">EPSG:3577</span></code> projection system, and have 25m pixel
-resolution:</p>
+<p>Inter-tidal zones are difficult regions to characterise due to the dynamic nature of the tide. They are highly changeable environments, subject to forcings from the land, sea and atmosphere and yet they form critical habitats for a wide range of organisms from birds to fish and sea grass. By harnessing the long archive of satellite imagery over Australia’s coastal zones in the DEA and pairing the images with regional tidal modelling, the archive can be sorted by tide height rather than date,
+enabling the inter-tidal zone to be viewed at any stage of the tide regime.</p>
+<p>The High Low Tide Composites (HLTC_25) product is composed of two mosaics, distinguished by tide height, representing a composite image of the synthetic geomedian surface reflectance from Landsats 5 TM, Landsat 7 ETM+ and Landsat 8 OLI NBAR data (Li et al., 2012; Roberts et al., 2017). <a class="reference external" href="http://volkov.oce.orst.edu/tides/otps.html">Oregon State University Tidal Prediction Software (OTPS)</a> (Egbert and Erofeeva, 2002, 2010) was used to generate tide heights, relative to mean sea level, for the
+Australian continental coastline, split into 306 distinct tidal regions. These time and date stamped tidal values were then attributed to all coastal tile observations for their time of acquisition, creating a range of observed tide heights for the Australian coastline. The two mosaics in HLTC_25 are composited from the highest and lowest 20 % of observed tide in the ensemble. A geomedian composite for each Landsat band is calculated from the tiles in each ensemble subset to produce the
+respective High and Low Tide composites. Note that Landsat 7 ETM+ observations are excluded after May 2003 due to a large number of data artefacts.</p>
+<p>Four HLTC datasets are available through DEA: the High Tide 20 percentage composite, the Low Tide 20 percentage composite, the High Tide 20 percentage pixel / clear observations count, and the Low Tide 20 percentage pixel / clear observations count layer. All layers are in the Australian Albers <code class="docutils literal notranslate"><span class="pre">EPSG:3577</span></code> projection system, and have 25m pixel resolution:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -503,7 +500,7 @@ resolution:</p>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="output_area docutils container">
+<div class="output_area rendered_html docutils container">
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -577,23 +574,12 @@ resolution:</p>
 </div>
 <div class="section" id="Import-High-and-Low-Tide-composites">
 <h2>Import High and Low Tide composites<a class="headerlink" href="#Import-High-and-Low-Tide-composites" title="Permalink to this headline">¶</a></h2>
-<p>We can set up an extraction query for HLTC_25 using only spatial
-details (i.e. extent and projection): because HLTC_25 was computed by
-combining images from the entire Landsat time series into a single
-layer, it has no true temporal dimension (the layers do have a timestamp
-<code class="docutils literal notranslate"><span class="pre">2008-06-01</span></code>, but this is a meaningless placeholder value which is
-only required due to restrictions of the netCDF file format).</p>
-<p>Each HLTC_25 composite contains six surface-reflectance spectral bands:
-blue, green, red, near-infrared, short-wave infrared 1 and short-wave
-infrared 2.</p>
+<p>We can set up an extraction query for HLTC_25 using only spatial details (i.e. extent and projection): because HLTC_25 was computed by combining images from the entire Landsat time series into a single layer, it has no true temporal dimension (the layers do have a timestamp <code class="docutils literal notranslate"><span class="pre">2008-06-01</span></code>, but this is a meaningless placeholder value which is only required due to restrictions of the netCDF file format).</p>
+<p>Each HLTC_25 composite contains six surface-reflectance spectral bands: blue, green, red, near-infrared, short-wave infrared 1 and short-wave infrared 2.</p>
 <div class="admonition note">
-Important note: Please note that the surface reflectance values for each
-HLTC band are expressed as a floating point number between 0 and 1. This
-differs from surface reflectance values included with the DEA Landsat
-datasets, which are expressed as integers scaled between 0 and 10000.</div>
+Important note: Please note that the surface reflectance values for each HLTC band are expressed as a floating point number between 0 and 1. This differs from surface reflectance values included with the DEA Landsat datasets, which are expressed as integers scaled between 0 and 10000.</div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -658,11 +644,9 @@ Attributes:
 </div>
 <div class="section" id="Plot-true-color-High-and-Low-Tide-composites">
 <h3>Plot true-color High and Low Tide composites<a class="headerlink" href="#Plot-true-color-High-and-Low-Tide-composites" title="Permalink to this headline">¶</a></h3>
-<p>We can now plot the HLTC_25 High and Low Tide composites, first in true
-color:</p>
+<p>We can now plot the HLTC_25 High and Low Tide composites, first in true color:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -675,8 +659,7 @@ color:</p>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -700,8 +683,7 @@ color:</p>
 </div>
 <p>…and in false color:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -712,8 +694,7 @@ color:</p>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -738,46 +719,20 @@ color:</p>
 </div>
 <div class="section" id="How-HLTC_25-composites-correspond-to-Landsat-observations-and-tidal-heights">
 <h3>How HLTC_25 composites correspond to Landsat observations and tidal heights<a class="headerlink" href="#How-HLTC_25-composites-correspond-to-Landsat-observations-and-tidal-heights" title="Permalink to this headline">¶</a></h3>
-<p>The following plots highlight the Landsat observations (black dots) that
-were used to generate the specific High and Low tide composites above,
-in relation to the full modelled tidal range (blue) and complete archive
-(white dots) for the particular location along Australia’s coastline.
-For the below example, note how the observations used to create the High
-Tide composite come from the top 20% of the observed tidal range, and
-the Low Tide composite observations come from the bottom 20% of
-observations. The Low and High Tide composites from the example above
-also use different temporal selections of the Landsat time series: the
-time range used for composite generation was locally tailored for each
-composite to ensure dynamic coastal features were captured whilst still
-allowing a clean and cloud free composite to be generated. The maximum
-epoch for which the products are calculated is between 1995-2017,
-although this varies due to data resolution and observation quality.</p>
-<p>These plots are <a class="reference external" href="https://nationalmap.gov.au/#share=s-42YrMXpOX9aW9Uhmxuc01c931kD">available for all areas of Australia’s coastline by
-clicking on an HLTC_25 polygon on National
-Map</a>,
-and provide valuable information for interpreting the HLTC_25 composite
-imagery.</p>
+<p>The following plots highlight the Landsat observations (black dots) that were used to generate the specific High and Low tide composites above, in relation to the full modelled tidal range (blue) and complete archive (white dots) for the particular location along Australia’s coastline. For the below example, note how the observations used to create the High Tide composite come from the top 20% of the observed tidal range, and the Low Tide composite observations come from the bottom 20% of
+observations. The Low and High Tide composites from the example above also use different temporal selections of the Landsat time series: the time range used for composite generation was locally tailored for each composite to ensure dynamic coastal features were captured whilst still allowing a clean and cloud free composite to be generated. The maximum epoch for which the products are calculated is between 1995-2017, although this varies due to data resolution and observation quality.</p>
+<p>These plots are <a class="reference external" href="https://nationalmap.gov.au/#share=s-42YrMXpOX9aW9Uhmxuc01c931kD">available for all areas of Australia’s coastline by clicking on an HLTC_25 polygon on National Map</a>, and provide valuable information for interpreting the HLTC_25 composite imagery.</p>
 <p>High tide composite:</p>
-<div class="figure" id="id1">
-<img alt="High tide composite" src="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/LHTC_Tides/COMPOSITE_HIGH_209_122.2_-18.07_20000101_20170101_PER_20.jpg" />
-<p class="caption"><span class="caption-text">High tide composite</span></p>
-</div>
+<p><img alt="High tide composite" src="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/LHTC_Tides/COMPOSITE_HIGH_209_122.2_-18.07_20000101_20170101_PER_20.jpg" /></p>
 <p>Low tide composite:</p>
-<div class="figure" id="id2">
-<img alt="Low tide composite" src="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/LHTC_Tides/COMPOSITE_LOW_209_122.2_-18.07_20100101_20170101_PER_20.jpg" />
-<p class="caption"><span class="caption-text">Low tide composite</span></p>
-</div>
+<p><img alt="Low tide composite" src="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/LHTC_Tides/COMPOSITE_LOW_209_122.2_-18.07_20100101_20170101_PER_20.jpg" /></p>
 </div>
 </div>
 <div class="section" id="Import-HLTC-clear-observations-count-layers">
 <h2>Import HLTC clear observations count layers<a class="headerlink" href="#Import-HLTC-clear-observations-count-layers" title="Permalink to this headline">¶</a></h2>
-<p>Prior to being combined into composite images, satellite observations
-were filtered to remove poor quality observations including cloud, cloud
-shadow and band saturation (of any band). To document this, the product
-also includes a count of clear observations per pixel for both mosaics:</p>
+<p>Prior to being combined into composite images, satellite observations were filtered to remove poor quality observations including cloud, cloud shadow and band saturation (of any band). To document this, the product also includes a count of clear observations per pixel for both mosaics:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -826,12 +781,9 @@ Attributes:
 </div>
 <div class="section" id="Plot-HLTC-clear-observations-count-layers">
 <h3>Plot HLTC clear observations count layers<a class="headerlink" href="#Plot-HLTC-clear-observations-count-layers" title="Permalink to this headline">¶</a></h3>
-<p>Darker values indicate areas with fewer clear Landsat observations,
-which may have been caused by cloud, cloud shadow or band saturation
-(e.g. potentially caused by bright sand or sun glint):</p>
+<p>Darker values indicate areas with fewer clear Landsat observations, which may have been caused by cloud, cloud shadow or band saturation (e.g. potentially caused by bright sand or sun glint):</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -857,19 +809,10 @@ which may have been caused by cloud, cloud shadow or band saturation
 </div>
 <div class="section" id="Computing-remote-sensing-indices-on-HLTC_25-composites">
 <h2>Computing remote sensing indices on HLTC_25 composites<a class="headerlink" href="#Computing-remote-sensing-indices-on-HLTC_25-composites" title="Permalink to this headline">¶</a></h2>
-<p>Because the composites were produced using a geomedian approach that
-preserves the band relationships within the modelled spectra at each
-pixel, the surface reflectance values can be used for remote sensing
-applications (for example, image classification, remote sensing index
-calculation, habitat mapping) in exactly the same way as spectral bands
-from individual Landsat observations. For example, we can use the
-composites to compute simple remote sensing indices such as the
-Normalized Difference Water Index (NDWI). This index will have high
-values where a pixel is likely to be open water (e.g. NDWI &gt; 0, or red
-colours below):</p>
+<p>Because the composites were produced using a geomedian approach that preserves the band relationships within the modelled spectra at each pixel, the surface reflectance values can be used for remote sensing applications (for example, image classification, remote sensing index calculation, habitat mapping) in exactly the same way as spectral bands from individual Landsat observations. For example, we can use the composites to compute simple remote sensing indices such as the Normalized Difference
+Water Index (NDWI). This index will have high values where a pixel is likely to be open water (e.g. NDWI &gt; 0, or red colours below):</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -898,11 +841,9 @@ colours below):</p>
 <img alt="../../_images/notebooks_02_DEA_datasets_Introduction_to_HLTC_22_0.png" src="../../_images/notebooks_02_DEA_datasets_Introduction_to_HLTC_22_0.png" />
 </div>
 </div>
-<p>A possible application of this may be to map the typical distribution of
-open water at low and high tide using a NDWI threshold:</p>
+<p>A possible application of this may be to map the typical distribution of open water at low and high tide using a NDWI threshold:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -979,6 +920,7 @@ open water at low and high tide using a NDWI threshold:</p>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.14.0/dist/embed-amd.js"></script>
         <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     
 
   

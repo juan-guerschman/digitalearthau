@@ -282,18 +282,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #303F9F;
+    color: #307FC1;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #D84315;
+    color: #BF5B3D;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 8ex;
+    min-width: 5ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -333,9 +333,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #cfcfcf;
+    border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f7f7f7;
+    background: #f5f5f5;
 }
 
 /* override MathJax center alignment in output cells */
@@ -343,7 +343,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.pngmath center alignment in output cells */
+/* override sphinx.ext.imgmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -393,6 +393,40 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -409,27 +443,23 @@ div.nboutput div.output_area.stderr {
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
 <div class="section" id="Introduction-to-Sentinel-2">
 <h1>Introduction to Sentinel 2<a class="headerlink" href="#Introduction-to-Sentinel-2" title="Permalink to this headline">¶</a></h1>
-<p><strong>What does this notebook do?</strong> This notebook steps you through how to
-load in and plot up data from Sentinel 2. It explores the data that are
-available from the Sentinel 2 satellite, and briefly describes the
-Sentinel satellite bands. It then loads in the <code class="docutils literal notranslate"><span class="pre">s2a_ard_granule</span></code>
-product and plots it up in true and false colour. It uses the provided
-pixel quality data to filters the example scene based on <code class="docutils literal notranslate"><span class="pre">cloud</span></code> and
-<code class="docutils literal notranslate"><span class="pre">cloud</span> <span class="pre">shadow</span></code>-free pixels.</p>
-<p><strong>Before you run this notebook:</strong> You need to run the following commands
-from the command line prior to launching jupyter notebook from the same
-terminal so that the required libraries and paths are set.</p>
+<p><strong>What does this notebook do?</strong> This notebook steps you through how to load in and plot up data from Sentinel 2. It explores the data that are available from the Sentinel 2 satellite, and briefly describes the Sentinel satellite bands. It then loads in the <code class="docutils literal notranslate"><span class="pre">s2a_ard_granule</span></code> product and plots it up in true and false colour. It uses the provided pixel quality data to filters the example scene based on <code class="docutils literal notranslate"><span class="pre">cloud</span></code> and <code class="docutils literal notranslate"><span class="pre">cloud</span> <span class="pre">shadow</span></code>-free pixels.</p>
+<p><strong>Before you run this notebook:</strong> You need to run the following commands from the command line prior to launching jupyter notebook from the same terminal so that the required libraries and paths are set.</p>
 <p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">use</span> <span class="pre">/g/data/v10/public/modules/modulefiles</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">dea</span></code></p>
 <p><strong>Date</strong>: November 2018</p>
 <p><strong>Author</strong>: Claire Krause, Robbi Bishop-Taylor</p>
 <p>Tags: <span class="target" id="index-0"></span>Sentinel2, <span class="target" id="index-1"></span>products, <span class="target" id="index-2"></span>DEAPlotting, <span class="target" id="index-3"></span>rgb, <span class="target" id="index-4"></span>dc.list_products, <span class="target" id="index-5"></span>dc.load, <span class="target" id="index-6"></span>query, <span class="target" id="index-7"></span>beginner, <span class="target" id="index-8"></span>plot, <span class="target" id="index-9"></span>image, <span class="target" id="index-10"></span>pixelquality</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -456,8 +486,7 @@ terminal so that the required libraries and paths are set.</p>
 <div class="section" id="Sentinel-2-products-currently-available">
 <h2>Sentinel 2 products currently available<a class="headerlink" href="#Sentinel-2-products-currently-available" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -470,11 +499,10 @@ terminal so that the required libraries and paths are set.</p>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="output_area docutils container">
+<div class="output_area rendered_html docutils container">
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -557,48 +585,22 @@ terminal so that the required libraries and paths are set.</p>
 </table>
 </div></div>
 </div>
-<p>There are two spectral Sentinel satellites currently in DEA;
-<strong>Sentinel-2A</strong> and <strong>Sentinel-2B</strong>. Sentinel-2A was launched on 23 June
-2015 and Sentinel-2B followed on 7 March 2017.</p>
-<p>Both of the Sentinel 2 satellites carries an innovative wide swath
-high-resolution multispectral imager with 13 spectral bands. The mission
-is based on a constellation of two identical satellites in the same
-orbit, 180° apart for optimal coverage and data delivery. Together they
-cover all Earth’s land surfaces, large islands, inland and coastal
-waters every five days at the equator.</p>
-<p>For more information on the Sentinel 2 platforms and applications, check
-out the <a class="reference external" href="http://www.esa.int/Our_Activities/Observing_the_Earth/Copernicus/Sentinel-2">European Space Agency
-website</a>.</p>
+<p>There are two spectral Sentinel satellites currently in DEA; <strong>Sentinel-2A</strong> and <strong>Sentinel-2B</strong>. Sentinel-2A was launched on 23 June 2015 and Sentinel-2B followed on 7 March 2017.</p>
+<p>Both of the Sentinel 2 satellites carries an innovative wide swath high-resolution multispectral imager with 13 spectral bands. The mission is based on a constellation of two identical satellites in the same orbit, 180° apart for optimal coverage and data delivery. Together they cover all Earth’s land surfaces, large islands, inland and coastal waters every five days at the equator.</p>
+<p>For more information on the Sentinel 2 platforms and applications, check out the <a class="reference external" href="http://www.esa.int/Our_Activities/Observing_the_Earth/Copernicus/Sentinel-2">European Space Agency website</a>.</p>
 </div>
 <div class="section" id="Loading-Sentinel-2-data">
 <h2>Loading Sentinel 2 data<a class="headerlink" href="#Loading-Sentinel-2-data" title="Permalink to this headline">¶</a></h2>
-<p>We will focus on data from the Sentinel-2a platform for this
-demonstration, as there is more data available than 2b. To explore the
-spectral datasets from Sentinel-2a, we will use the <code class="docutils literal notranslate"><span class="pre">s2a_ard_granule</span></code>
-product. Sometimes multiple scenes are acquired by the satellite on the
-same day. We want to group these together, and will use
-<code class="docutils literal notranslate"><span class="pre">group_by='solar_day'</span></code> to do this.</p>
-<p>To load in the Sentinel data, we have a number of options we can use in
-building our data extraction query:</p>
+<p>We will focus on data from the Sentinel-2a platform for this demonstration, as there is more data available than 2b. To explore the spectral datasets from Sentinel-2a, we will use the <code class="docutils literal notranslate"><span class="pre">s2a_ard_granule</span></code> product. Sometimes multiple scenes are acquired by the satellite on the same day. We want to group these together, and will use <code class="docutils literal notranslate"><span class="pre">group_by='solar_day'</span></code> to do this.</p>
+<p>To load in the Sentinel data, we have a number of options we can use in building our data extraction query:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">lat</span></code>/<code class="docutils literal notranslate"><span class="pre">lon</span></code> - specify a bounding box for the extraction. Note
-that a polygon can be used instead. See
-<a class="reference external" href="https://datacube-core.readthedocs.io/en/stable/dev/generate/datacube.api.query.Query.html#datacube.api.query.Query">here</a>
-for more details</li>
-<li><code class="docutils literal notranslate"><span class="pre">output_crs</span></code> - the output coordinate reference system to project
-the data into. The CRS you request will impact on the format for the
-<code class="docutils literal notranslate"><span class="pre">resolution</span></code> query. Two handy CRSs are ‘EPSG:3577’, which is the
-Australian Albers projected coordinate system, and ‘EPSG:4325’, which
-is WGS84 a global geographic coordinate system.</li>
-<li><code class="docutils literal notranslate"><span class="pre">resolution</span></code> - the requested output resolution for the data. If you
-have selected a geographic coordinate system for the <code class="docutils literal notranslate"><span class="pre">output_crs</span></code>,
-this will be in degrees. If you have selected a projected coordinate
-system, this will be in metres.</li>
+<li><code class="docutils literal notranslate"><span class="pre">lat</span></code>/<code class="docutils literal notranslate"><span class="pre">lon</span></code> - specify a bounding box for the extraction. Note that a polygon can be used instead. See <a class="reference external" href="https://datacube-core.readthedocs.io/en/stable/dev/generate/datacube.api.query.Query.html#datacube.api.query.Query">here</a> for more details</li>
+<li><code class="docutils literal notranslate"><span class="pre">output_crs</span></code> - the output coordinate reference system to project the data into. The CRS you request will impact on the format for the <code class="docutils literal notranslate"><span class="pre">resolution</span></code> query. Two handy CRSs are ‘EPSG:3577’, which is the Australian Albers projected coordinate system, and ‘EPSG:4325’, which is WGS84 a global geographic coordinate system.</li>
+<li><code class="docutils literal notranslate"><span class="pre">resolution</span></code> - the requested output resolution for the data. If you have selected a geographic coordinate system for the <code class="docutils literal notranslate"><span class="pre">output_crs</span></code>, this will be in degrees. If you have selected a projected coordinate system, this will be in metres.</li>
 <li><code class="docutils literal notranslate"><span class="pre">time</span></code> - the time range for the query.</li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -617,8 +619,7 @@ system, this will be in metres.</li>
 <div class="section" id="See-what-came-back-from-the-extraction">
 <h3>See what came back from the extraction<a class="headerlink" href="#See-what-came-back-from-the-extraction" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -627,8 +628,7 @@ system, this will be in metres.</li>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -796,16 +796,9 @@ Attributes:
 </tr>
 </tbody>
 </table>
-<p>These bands cover the visible, near-infrared and short-wave infrared
-wave lengths.</p>
-<div class="figure" id="id1">
-<img alt="Sentinel 2 bands" src="http://www.geosage.com/highview/figures/Sentinel2_Spectral_Bands.jpg" />
-<p class="caption"><span class="caption-text">Sentinel 2 bands</span></p>
-</div>
-<p><strong>Note</strong> There are a number of additional datasets that are alse
-returned from our query. These are a combination of datasets used in the
-correction process, and layers relating to pixel quality. We will
-explore the pixel quality layers below.</p>
+<p>These bands cover the visible, near-infrared and short-wave infrared wave lengths.</p>
+<p><img alt="Sentinel 2 bands" src="http://www.geosage.com/highview/figures/Sentinel2_Spectral_Bands.jpg" /></p>
+<p><strong>Note</strong> There are a number of additional datasets that are alse returned from our query. These are a combination of datasets used in the correction process, and layers relating to pixel quality. We will explore the pixel quality layers below.</p>
 </div>
 <div class="section" id="Data-corrections">
 <h3>Data corrections<a class="headerlink" href="#Data-corrections" title="Permalink to this headline">¶</a></h3>
@@ -813,34 +806,22 @@ explore the pixel quality layers below.</p>
 <ol class="arabic">
 <li><div class="first line-block">
 <div class="line"><strong>NBAR (e.g. ``nbar_green``)</strong></div>
-<div class="line">NBAR stands for Nadir-corrected BRDF Adjusted Reflectance, where</div>
+<div class="line">NBAR stands for Nadir-corrected BRDF Adjusted Reflectance, where BRDF stands for Bidirectional reflectance distribution function The approach involves atmospheric correction to compute surface-leaving radiance, and bi-directional reflectance modelling to remove the effects of topography and angular variation in reflectance.</div>
 </div>
-<p>BRDF stands for Bidirectional reflectance distribution function The
-approach involves atmospheric correction to compute surface-leaving
-radiance, and bi-directional reflectance modelling to remove the
-effects of topography and angular variation in reflectance.</p>
 </li>
 <li><div class="first line-block">
 <div class="line"><strong>T_NBAR (e.g. ``nbart_green``)</strong></div>
-<div class="line">Surface reflectance T_NBAR includes the terrain illumination</div>
+<div class="line">Surface reflectance T_NBAR includes the terrain illumination reflectance correction and has the same features of NBAR, along with some additional features.</div>
 </div>
-<p>reflectance correction and has the same features of NBAR, along with
-some additional features.</p>
 </li>
 </ol>
-<p>For more information on these corrections, see the explanation on the
-<a class="reference external" href="http://geoscienceaustralia.github.io/digitalearthau/data/data.html#">DEA surface reflectance
-page</a>.</p>
+<p>For more information on these corrections, see the explanation on the <a class="reference external" href="http://geoscienceaustralia.github.io/digitalearthau/data/data.html#">DEA surface reflectance page</a>.</p>
 </div>
 <div class="section" id="Dealing-with-missing-data">
 <h3>Dealing with missing data<a class="headerlink" href="#Dealing-with-missing-data" title="Permalink to this headline">¶</a></h3>
-<p>Note that the <code class="docutils literal notranslate"><span class="pre">nbart</span></code> data insert a missing value (<code class="docutils literal notranslate"><span class="pre">-9999</span></code>) into the
-dataset to denote a terrain shadow. This should be converted to a
-<code class="docutils literal notranslate"><span class="pre">NaN</span></code> value before using this data to avoid treating it as a valid
-value:</p>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">nbart</span></code> data insert a missing value (<code class="docutils literal notranslate"><span class="pre">-9999</span></code>) into the dataset to denote a terrain shadow. This should be converted to a <code class="docutils literal notranslate"><span class="pre">NaN</span></code> value before using this data to avoid treating it as a valid value:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -851,13 +832,9 @@ value:</p>
 </div>
 <div class="section" id="Plot-as-a-true-colour-image">
 <h3>Plot as a true colour image<a class="headerlink" href="#Plot-as-a-true-colour-image" title="Permalink to this headline">¶</a></h3>
-<p>True colour images approximate what the human eye sees when looking at a
-landscape. Note that the function used for this true colour plot
-enhances the contrast between the bands, resulting in a colour-enhanced
-image.</p>
+<p>True colour images approximate what the human eye sees when looking at a landscape. Note that the function used for this true colour plot enhances the contrast between the bands, resulting in a colour-enhanced image.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -875,11 +852,9 @@ image.</p>
 </div>
 <div class="section" id="Plot-as-a-false-colour-image">
 <h3>Plot as a false colour image<a class="headerlink" href="#Plot-as-a-false-colour-image" title="Permalink to this headline">¶</a></h3>
-<p>This plot uses the SWIR, NIR and green bands to accentuate the presence
-of water in the landscape.</p>
+<p>This plot uses the SWIR, NIR and green bands to accentuate the presence of water in the landscape.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -898,8 +873,7 @@ of water in the landscape.</p>
 <div class="section" id="Compare-observations-side-by-side">
 <h3>Compare observations side-by-side<a class="headerlink" href="#Compare-observations-side-by-side" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -920,9 +894,7 @@ of water in the landscape.</p>
 </div>
 <div class="section" id="Filter-scenes-using-pixel-quality">
 <h2>Filter scenes using pixel quality<a class="headerlink" href="#Filter-scenes-using-pixel-quality" title="Permalink to this headline">¶</a></h2>
-<p>A pixel quality dataset (<code class="docutils literal notranslate"><span class="pre">fmask</span></code>) is provided alongside the spectral
-data, which can be used to filter out noisy pixels. The key things we
-want to filter are clouds and shadows.</p>
+<p>A pixel quality dataset (<code class="docutils literal notranslate"><span class="pre">fmask</span></code>) is provided alongside the spectral data, which can be used to filter out noisy pixels. The key things we want to filter are clouds and shadows.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">fmask</span></code> field contains values from 0 to 5.</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -957,8 +929,7 @@ want to filter are clouds and shadows.</p>
 </table>
 <p>Here is the cloudy image we would like to mask:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -975,11 +946,9 @@ want to filter are clouds and shadows.</p>
 </div>
 <div class="section" id="Plot-pixel-quality-information">
 <h3>Plot pixel quality information<a class="headerlink" href="#Plot-pixel-quality-information" title="Permalink to this headline">¶</a></h3>
-<p>Here we plot pixel quality information that corresponds to the
-observation above. This data is stored in the <code class="docutils literal notranslate"><span class="pre">fmask</span></code> variable:</p>
+<p>Here we plot pixel quality information that corresponds to the observation above. This data is stored in the <code class="docutils literal notranslate"><span class="pre">fmask</span></code> variable:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -988,8 +957,7 @@ observation above. This data is stored in the <code class="docutils literal notr
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -1007,11 +975,9 @@ observation above. This data is stored in the <code class="docutils literal notr
 </div>
 <div class="section" id="Use-pixel-quality-information-to-create-a-mask,-and-apply-it-to-the-spectral-data">
 <h3>Use pixel quality information to create a mask, and apply it to the spectral data<a class="headerlink" href="#Use-pixel-quality-information-to-create-a-mask,-and-apply-it-to-the-spectral-data" title="Permalink to this headline">¶</a></h3>
-<p>We want to filter out no data, cloud and cloud shadow, so we will use
-the <code class="docutils literal notranslate"><span class="pre">fmask</span></code> values <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">2</span></code> and <code class="docutils literal notranslate"><span class="pre">3</span></code> for our filter.</p>
+<p>We want to filter out no data, cloud and cloud shadow, so we will use the <code class="docutils literal notranslate"><span class="pre">fmask</span></code> values <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">2</span></code> and <code class="docutils literal notranslate"><span class="pre">3</span></code> for our filter.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1029,8 +995,7 @@ the <code class="docutils literal notranslate"><span class="pre">fmask</span></c
 <div class="section" id="Plot-cloud-masked-image">
 <h3>Plot cloud-masked image<a class="headerlink" href="#Plot-cloud-masked-image" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1049,12 +1014,9 @@ the <code class="docutils literal notranslate"><span class="pre">fmask</span></c
 </div>
 <div class="section" id="Use-load_clearsentinel2-to-automatically-load-cloud-free-observations">
 <h2>Use <code class="docutils literal notranslate"><span class="pre">load_clearsentinel2</span></code> to automatically load cloud free observations<a class="headerlink" href="#Use-load_clearsentinel2-to-automatically-load-cloud-free-observations" title="Permalink to this headline">¶</a></h2>
-<p>To make loading Sentinel 2 data more convenient, the
-<code class="docutils literal notranslate"><span class="pre">load_clearsentinel2</span></code> function was written to automate common tasks
-like returning cloud-free time series:</p>
+<p>To make loading Sentinel 2 data more convenient, the <code class="docutils literal notranslate"><span class="pre">load_clearsentinel2</span></code> function was written to automate common tasks like returning cloud-free time series:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1090,11 +1052,9 @@ Combining and sorting s2a data
     Replacing invalid -999 values with NaN (data will be coerced to float64)
 </pre></div></div>
 </div>
-<p>We can plot the same observation as earlier to verify we get the same
-result:</p>
+<p>We can plot the same observation as earlier to verify we get the same result:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1111,20 +1071,10 @@ result:</p>
 </div>
 <div class="section" id="Returning-only-cloud-free-images">
 <h3>Returning only cloud-free images<a class="headerlink" href="#Returning-only-cloud-free-images" title="Permalink to this headline">¶</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">load_clearsentinel2</span></code> function also allows you to return only
-images that contain greater than a given percentage of good quality
-pixels. For example, this can be used to return only cloud-free images.
-To do this, we specify a minimum proportion of good pixels using the
-<code class="docutils literal notranslate"><span class="pre">masked_prop</span></code> argument (e.g. specifying 0.3 below will return only
-images with more than 30% good quality, cloud-free pixels).</p>
-<p><strong>Please note:</strong> the Sentinel 2 cloud masking algorithm currently
-performs poorly over urban areas, where it commonly confuses buildings
-with clouds. Because of this, you make need to use a small value for
-<code class="docutils literal notranslate"><span class="pre">masked_prop</span></code> to ensure the algorithm does not discard an excessive
-number of images.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">load_clearsentinel2</span></code> function also allows you to return only images that contain greater than a given percentage of good quality pixels. For example, this can be used to return only cloud-free images. To do this, we specify a minimum proportion of good pixels using the <code class="docutils literal notranslate"><span class="pre">masked_prop</span></code> argument (e.g. specifying 0.3 below will return only images with more than 30% good quality, cloud-free pixels).</p>
+<p><strong>Please note:</strong> the Sentinel 2 cloud masking algorithm currently performs poorly over urban areas, where it commonly confuses buildings with clouds. Because of this, you make need to use a small value for <code class="docutils literal notranslate"><span class="pre">masked_prop</span></code> to ensure the algorithm does not discard an excessive number of images.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1150,8 +1100,7 @@ Combining and sorting s2a data
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1167,8 +1116,7 @@ Combining and sorting s2a data
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1228,6 +1176,7 @@ Combining and sorting s2a data
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.14.0/dist/embed-amd.js"></script>
         <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     
 
   

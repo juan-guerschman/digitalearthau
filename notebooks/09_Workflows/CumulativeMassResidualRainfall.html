@@ -274,18 +274,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #303F9F;
+    color: #307FC1;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #D84315;
+    color: #BF5B3D;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 8ex;
+    min-width: 5ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -325,9 +325,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #cfcfcf;
+    border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f7f7f7;
+    background: #f5f5f5;
 }
 
 /* override MathJax center alignment in output cells */
@@ -335,7 +335,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.pngmath center alignment in output cells */
+/* override sphinx.ext.imgmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -385,6 +385,40 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -401,31 +435,28 @@ div.nboutput div.output_area.stderr {
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
 <div class="section" id="Cumulative-Mass-Residual-Rainfall-Calculation">
 <h1>Cumulative Mass Residual Rainfall Calculation<a class="headerlink" href="#Cumulative-Mass-Residual-Rainfall-Calculation" title="Permalink to this headline">¶</a></h1>
-<p><strong>Background:</strong> Mass Residual Rainfall is a useful calculation of the
-cumulative difference from the mean rainfall.</p>
+<p><strong>Background:</strong> Mass Residual Rainfall is a useful calculation of the cumulative difference from the mean rainfall.</p>
 <p><strong>Before you run this notebook:</strong></p>
-<p>You need access to r78 to use the <code class="docutils literal notranslate"><span class="pre">load_rainfall</span></code> function. You can
-get accesss by signing into your NCI account and requesting r78 access:
-<a class="reference external" href="https://my.nci.org.au/mancini/">https://my.nci.org.au/mancini/</a></p>
-<p>You need to run the following commands from the command line prior to
-launching jupyter notebook from the same terminal so that the required
-libraries and paths are set.</p>
+<p>You need access to r78 to use the <code class="docutils literal notranslate"><span class="pre">load_rainfall</span></code> function. You can get accesss by signing into your NCI account and requesting r78 access: <a class="reference external" href="https://my.nci.org.au/mancini/">https://my.nci.org.au/mancini/</a></p>
+<p>You need to run the following commands from the command line prior to launching jupyter notebook from the same terminal so that the required libraries and paths are set.</p>
 <p>module use /g/data/v10/public/modules/modulefiles</p>
 <p>module load dea</p>
-<p><strong>What does this notebook do?:</strong> Calculates mass residual rainfall for
-an area of interest</p>
+<p><strong>What does this notebook do?:</strong> Calculates mass residual rainfall for an area of interest</p>
 <p><strong>Date:</strong> Oct 2018</p>
-<p><strong>Authors:</strong> Bex Dunn, Vanessa Newey, Neil Symington, Claire Krause, Leo
-Lymburner</p>
+<p><strong>Authors:</strong> Bex Dunn, Vanessa Newey, Neil Symington, Claire Krause, Leo Lymburner</p>
 <p>Tags: <span class="target" id="index-0"></span>rainfall, <span class="target" id="index-1"></span>dc.load, <span class="target" id="index-2"></span>query, <span class="target" id="index-3"></span>statistics,</p>
 <div class="section" id="load-modules">
 <h2>load modules<a class="headerlink" href="#load-modules" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -457,12 +488,10 @@ Lymburner</p>
 <div class="section" id="Choose-a-time-period-and-location-to-calculate-residual-mass-curve.">
 <h3>Choose a time period and location to calculate residual mass curve.<a class="headerlink" href="#Choose-a-time-period-and-location-to-calculate-residual-mass-curve." title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Note: please select whole months here, not days, as a month with only
-two days may negatively affect your mass residual curve</li>
+<li>Note: please select whole months here, not days, as a month with only two days may negatively affect your mass residual curve</li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -482,8 +511,7 @@ two days may negatively affect your mass residual curve</li>
 <div class="section" id="load-rainfall-data">
 <h2>load rainfall data<a class="headerlink" href="#load-rainfall-data" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -496,8 +524,7 @@ two days may negatively affect your mass residual curve</li>
 <div class="section" id="calculate-rainfall-mass-residual">
 <h3>calculate rainfall mass residual<a class="headerlink" href="#calculate-rainfall-mass-residual" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -507,8 +534,7 @@ two days may negatively affect your mass residual curve</li>
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -518,8 +544,7 @@ two days may negatively affect your mass residual curve</li>
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -533,8 +558,7 @@ two days may negatively affect your mass residual curve</li>
 <div class="section" id="Calculate-the-cumulative-mass-residual-by-subtracting-the-cumulative-mean-rainfall-from-the-cumulative-rainfall">
 <h2>Calculate the cumulative mass residual by subtracting the cumulative mean rainfall from the cumulative rainfall<a class="headerlink" href="#Calculate-the-cumulative-mass-residual-by-subtracting-the-cumulative-mean-rainfall-from-the-cumulative-rainfall" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -546,8 +570,7 @@ two days may negatively affect your mass residual curve</li>
 <div class="section" id="The-spatially-averaged-cumulative-mass-residual-rainfall-for-our-area-of-interest">
 <h2>The spatially-averaged cumulative mass residual rainfall for our area of interest<a class="headerlink" href="#The-spatially-averaged-cumulative-mass-residual-rainfall-for-our-area-of-interest" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -559,8 +582,7 @@ two days may negatively affect your mass residual curve</li>
 <div class="section" id="The-cumulative-mass-residual-rainfall-for-one-timestep">
 <h2>The cumulative mass residual rainfall for one timestep<a class="headerlink" href="#The-cumulative-mass-residual-rainfall-for-one-timestep" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -569,20 +591,12 @@ two days may negatively affect your mass residual curve</li>
 </div>
 </div>
 <p><strong>Future additions:</strong></p>
-<p><em>calculate metrics based on residual rainfall</em> - increasing and
-decreasing periods - wet year after dry years - dry year after wet years</p>
-<p><em>calculate seasonality</em> - Koppen climate region (use notebook to follow
-decision tree - requires climate data) - Summer dominant, Summer,
-Uniform, Winter, Winter dominant # - TROP SOI value - IOD /SAM indices</p>
-<p>“During El Niño, rainfall in eastern Australian is typically below
-average during winter and spring. A neutral ENSO phase has little effect
-on Australian climate.”Bureau of meteorology
-<a class="reference external" href="http://www.bom.gov.au/climate/enso/">http://www.bom.gov.au/climate/enso/</a></p>
-<p><em>Calculate failed wet seasons</em> - calculate total wet season + dry season
-rainfalls - end of wet season rainfalls?</p>
+<p><em>calculate metrics based on residual rainfall</em> - increasing and decreasing periods - wet year after dry years - dry year after wet years</p>
+<p><em>calculate seasonality</em> - Koppen climate region (use notebook to follow decision tree - requires climate data) - Summer dominant, Summer, Uniform, Winter, Winter dominant # - TROP SOI value - IOD /SAM indices</p>
+<p>“During El Niño, rainfall in eastern Australian is typically below average during winter and spring. A neutral ENSO phase has little effect on Australian climate.”Bureau of meteorology <a class="reference external" href="http://www.bom.gov.au/climate/enso/">http://www.bom.gov.au/climate/enso/</a></p>
+<p><em>Calculate failed wet seasons</em> - calculate total wet season + dry season rainfalls - end of wet season rainfalls?</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -641,6 +655,7 @@ rainfalls - end of wet season rainfalls?</p>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.14.0/dist/embed-amd.js"></script>
         <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     
 
   

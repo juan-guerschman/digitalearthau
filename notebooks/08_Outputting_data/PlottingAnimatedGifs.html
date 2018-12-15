@@ -267,18 +267,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #303F9F;
+    color: #307FC1;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #D84315;
+    color: #BF5B3D;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 8ex;
+    min-width: 5ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -318,9 +318,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #cfcfcf;
+    border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f7f7f7;
+    background: #f5f5f5;
 }
 
 /* override MathJax center alignment in output cells */
@@ -328,7 +328,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.pngmath center alignment in output cells */
+/* override sphinx.ext.imgmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -378,6 +378,40 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -394,44 +428,28 @@ div.nboutput div.output_area.stderr {
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
 <div class="section" id="Plotting-animations-from-time-series-imagery">
 <h1>Plotting animations from time series imagery<a class="headerlink" href="#Plotting-animations-from-time-series-imagery" title="Permalink to this headline">¶</a></h1>
 <p><strong>What does this notebook do?</strong></p>
-<p>This notebook demonstrates how to import a time series of DEA cloud-free
-Landsat imagery from multiple sensors (i.e. Landsat 5, 7 and 8) as an
-xarray dataset, and then plot the data as a time series animation with
-one or two panels that can be either one or three-band images (e.g. true
-and false colour), or with a line graph (e.g. a pixel drill) in the
-right column. Animations can be produced as either GIFs, MP4s or WMVs
-for any area in Australia using a standard datacube query.</p>
+<p>This notebook demonstrates how to import a time series of DEA cloud-free Landsat imagery from multiple sensors (i.e. Landsat 5, 7 and 8) as an xarray dataset, and then plot the data as a time series animation with one or two panels that can be either one or three-band images (e.g. true and false colour), or with a line graph (e.g. a pixel drill) in the right column. Animations can be produced as either GIFs, MP4s or WMVs for any area in Australia using a standard datacube query.</p>
 <p><strong>Requirements:</strong></p>
-<p>You need to run the following commands from the command line prior to
-launching jupyter notebooks from the same terminal so that the required
-libraries and paths are set:</p>
+<p>You need to run the following commands from the command line prior to launching jupyter notebooks from the same terminal so that the required libraries and paths are set:</p>
 <p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">use</span> <span class="pre">/g/data/v10/public/modules/modulefiles</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">dea</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">ffmpeg</span></code></p>
-<p>This notebook also uses three external functions called
-<code class="docutils literal notranslate"><span class="pre">load_clearlandsat</span></code>, <code class="docutils literal notranslate"><span class="pre">animated_timeseries</span></code>,
-<code class="docutils literal notranslate"><span class="pre">animated_doubletimeseries</span></code> and <code class="docutils literal notranslate"><span class="pre">animated_timeseriesline</span></code>. These
-functions are available in the <code class="docutils literal notranslate"><span class="pre">10_Scripts</span></code> folder of the
-<a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/tree/master/10_Scripts">dea-notebooks Github
-repository</a>.
-Note that these functions have been developed by DEA users, not the DEA
-development team, and so are provided without warranty. If you find an
-error or bug in the functions, please either create an ‘Issue’ in the
-Github repository, or fix it yourself and create a ‘Pull’ request to
-contribute the updated function back into the repository (See the
-repository
-<a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/blob/master/README.rst">README</a>
-for instructions on creating a Pull request).</p>
+<p>This notebook also uses three external functions called <code class="docutils literal notranslate"><span class="pre">load_clearlandsat</span></code>, <code class="docutils literal notranslate"><span class="pre">animated_timeseries</span></code>, <code class="docutils literal notranslate"><span class="pre">animated_doubletimeseries</span></code> and <code class="docutils literal notranslate"><span class="pre">animated_timeseriesline</span></code>. These functions are available in the <code class="docutils literal notranslate"><span class="pre">10_Scripts</span></code> folder of the <a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/tree/master/10_Scripts">dea-notebooks Github repository</a>. Note that these functions have been developed by DEA users, not the DEA development team, and so are provided without warranty. If you find an error or
+bug in the functions, please either create an ‘Issue’ in the Github repository, or fix it yourself and create a ‘Pull’ request to contribute the updated function back into the repository (See the repository <a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/blob/master/README.rst">README</a> for instructions on creating a Pull request).</p>
 <p><strong>Date:</strong> October 2018</p>
 <p><strong>Author:</strong> Robbi Bishop-Taylor</p>
 <p><strong>Tags</strong>: <span class="target" id="index-0"></span>plot, <span class="target" id="index-1"></span>animation, <span class="target" id="index-2"></span>time_series, <span class="target" id="index-3"></span>gif, <span class="target" id="index-4"></span>mp4, <span class="target" id="index-5"></span>wmv, <span class="target" id="index-6"></span>movie, <span class="target" id="index-7"></span>Landsat5, <span class="target" id="index-8"></span>Landsat7, <span class="target" id="index-9"></span>Landsat8, <span class="target" id="index-10"></span>load_clearlandsat, <span class="target" id="index-11"></span>animated_timeseries, <span class="target" id="index-12"></span>animated_doubletimeseries’, :index:`DEAPlotting, <span class="target" id="index-13"></span>DEADataHandling, <span class="target" id="index-14"></span>Scripts, <span class="target" id="index-15"></span>pixeldrill, <span class="target" id="index-16"></span>Outputting data, <span class="target" id="index-17"></span>animated_timeseriesline</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -460,7 +478,7 @@ for instructions on creating a Pull request).</p>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="stderr output_area docutils container">
+<div class="output_area stderr docutils container">
 <div class="highlight"><pre>
 ../10_Scripts/DEAPlotting.py:23: UserWarning: matplotlib.pyplot as already been imported, this call will have no effect.
   matplotlib.use(&#39;agg&#39;)
@@ -468,15 +486,9 @@ for instructions on creating a Pull request).</p>
 </div>
 <div class="section" id="Import-satellite-data-to-animate">
 <h2>Import satellite data to animate<a class="headerlink" href="#Import-satellite-data-to-animate" title="Permalink to this headline">¶</a></h2>
-<p>Define the query bounds for datacube extraction using a dict. This
-should include <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> limits, potentially a list of
-<code class="docutils literal notranslate"><span class="pre">measurements</span></code> (i.e. the bands you want to extract like ‘red’,
-‘green’, ‘blue’; this significantly speeds up the import) and a <code class="docutils literal notranslate"><span class="pre">time</span></code>
-extent. If no <code class="docutils literal notranslate"><span class="pre">time</span></code> is given, the function defaults to all timesteps
-available to all sensors (e.g. 1987-2018).</p>
+<p>Define the query bounds for datacube extraction using a dict. This should include <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> limits, potentially a list of <code class="docutils literal notranslate"><span class="pre">measurements</span></code> (i.e. the bands you want to extract like ‘red’, ‘green’, ‘blue’; this significantly speeds up the import) and a <code class="docutils literal notranslate"><span class="pre">time</span></code> extent. If no <code class="docutils literal notranslate"><span class="pre">time</span></code> is given, the function defaults to all timesteps available to all sensors (e.g. 1987-2018).</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -490,15 +502,9 @@ available to all sensors (e.g. 1987-2018).</p>
 </div>
 <div class="section" id="Extract-cloud-free-clear-Landsat-observations-from-all-sensors">
 <h3>Extract cloud-free clear Landsat observations from all sensors<a class="headerlink" href="#Extract-cloud-free-clear-Landsat-observations-from-all-sensors" title="Permalink to this headline">¶</a></h3>
-<p>Use the <code class="docutils literal notranslate"><span class="pre">load_clearlandsat</span></code> function to load Landsat observations and
-PQ data for multiple sensors (i.e. ls5, ls7, ls8), and return a single
-xarray dataset containing only observations that contain greater than a
-specified proportion of clear pixels. This uses <code class="docutils literal notranslate"><span class="pre">dask</span></code> to only load in
-the filtered observations, and results in a visually appealing time
-series of observations that are not affected by cloud!</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">load_clearlandsat</span></code> function to load Landsat observations and PQ data for multiple sensors (i.e. ls5, ls7, ls8), and return a single xarray dataset containing only observations that contain greater than a specified proportion of clear pixels. This uses <code class="docutils literal notranslate"><span class="pre">dask</span></code> to only load in the filtered observations, and results in a visually appealing time series of observations that are not affected by cloud!</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -548,8 +554,7 @@ Attributes:
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -568,19 +573,10 @@ Attributes:
 </div>
 <div class="section" id="Plot-entire-time-series-as-a-one-panel-animated-GIF">
 <h2>Plot entire time series as a one-panel animated GIF<a class="headerlink" href="#Plot-entire-time-series-as-a-one-panel-animated-GIF" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">animated_timeseries</span></code> function takes an xarray time series and
-exports a one band or three band (e.g. true or false colour) GIF, MP4 or
-WMV animation showing changes in the landscape across time. Here, we
-plot the xarray as an animated GIF that includes a date annotation for
-each frame. We set the interval between the animation frames to 80
-milliseconds. For three-band RGB animations like this, the function will
-automatically select an appropriate colour stretch by clipping the data
-to remove values smaller or greater than the 2 and 98th percentiles.
-This can be controlled further with the <code class="docutils literal notranslate"><span class="pre">percentile_stretch</span></code>
-parameter.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">animated_timeseries</span></code> function takes an xarray time series and exports a one band or three band (e.g. true or false colour) GIF, MP4 or WMV animation showing changes in the landscape across time. Here, we plot the xarray as an animated GIF that includes a date annotation for each frame. We set the interval between the animation frames to 80 milliseconds. For three-band RGB animations like this, the function will automatically select an appropriate colour stretch by clipping the data to
+remove values smaller or greater than the 2 and 98th percentiles. This can be controlled further with the <code class="docutils literal notranslate"><span class="pre">percentile_stretch</span></code> parameter.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -604,8 +600,7 @@ Generating 17 frame animation
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -613,15 +608,9 @@ Generating 17 frame animation
 </pre></div>
 </div>
 </div>
-<p>We can also use different band combinations (e.g. false colour), add a
-title, and change the font size using <code class="docutils literal notranslate"><span class="pre">annotation_kwargs</span></code>, which
-passes a dictionary of values to the matplotlib <code class="docutils literal notranslate"><span class="pre">plt.annotate</span></code>
-function (see
-<a class="reference external" href="https://matplotlib.org/api/">https://matplotlib.org/api/</a><em>as</em>gen/matplotlib.pyplot.annotate.html
-for options):</p>
+<p>We can also use different band combinations (e.g. false colour), add a title, and change the font size using <code class="docutils literal notranslate"><span class="pre">annotation_kwargs</span></code>, which passes a dictionary of values to the matplotlib <code class="docutils literal notranslate"><span class="pre">plt.annotate</span></code> function (see <a class="reference external" href="https://matplotlib.org/api/">https://matplotlib.org/api/</a><em>as</em>gen/matplotlib.pyplot.annotate.html for options):</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -649,8 +638,7 @@ Generating 17 frame animation
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -658,17 +646,9 @@ Generating 17 frame animation
 </pre></div>
 </div>
 </div>
-<p>It is also possible to plot a single band image instead of a three band.
-For example, we could plot an index like the Normalized Difference Water
-Index (NDWI), which has high values where a pixel is likely to be open
-water (e.g. NDWI &gt; 0). By default the colour bar limits are set based on
-<code class="docutils literal notranslate"><span class="pre">percentile_stretch</span></code>; set <code class="docutils literal notranslate"><span class="pre">percentile_stretch=(0.0,</span> <span class="pre">1.00)</span></code> to show
-the full data range, or reduce it to e.g.
-<code class="docutils literal notranslate"><span class="pre">percentile_stretch=(0.01,</span> <span class="pre">0.99)</span></code> to optimise colours by discarding
-outliers/extreme values.</p>
+<p>It is also possible to plot a single band image instead of a three band. For example, we could plot an index like the Normalized Difference Water Index (NDWI), which has high values where a pixel is likely to be open water (e.g. NDWI &gt; 0). By default the colour bar limits are set based on <code class="docutils literal notranslate"><span class="pre">percentile_stretch</span></code>; set <code class="docutils literal notranslate"><span class="pre">percentile_stretch=(0.0,</span> <span class="pre">1.00)</span></code> to show the full data range, or reduce it to e.g. <code class="docutils literal notranslate"><span class="pre">percentile_stretch=(0.01,</span> <span class="pre">0.99)</span></code> to optimise colours by discarding outliers/extreme values.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -702,8 +682,7 @@ Generating 17 frame animation
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -711,16 +690,9 @@ Generating 17 frame animation
 </pre></div>
 </div>
 </div>
-<p>We can customise animations based on a single band like NDWI by
-specifying parameters using the <code class="docutils literal notranslate"><span class="pre">onebandplot_kwargs</span></code> which will be
-sent to the matplotlib <code class="docutils literal notranslate"><span class="pre">plt.imshow</span></code> function (see
-<a class="reference external" href="https://matplotlib.org/api/">https://matplotlib.org/api/</a><em>as</em>gen/matplotlib.pyplot.imshow.html for
-options). For example, we can use a more appropriate blue colour scheme
-with <code class="docutils literal notranslate"><span class="pre">'cmap':'Blues'</span></code>, and set <code class="docutils literal notranslate"><span class="pre">'vmin':0.1,</span> <span class="pre">'vmax':0.8</span></code> to overrule
-the default colour bar limits with manually specified values:</p>
+<p>We can customise animations based on a single band like NDWI by specifying parameters using the <code class="docutils literal notranslate"><span class="pre">onebandplot_kwargs</span></code> which will be sent to the matplotlib <code class="docutils literal notranslate"><span class="pre">plt.imshow</span></code> function (see <a class="reference external" href="https://matplotlib.org/api/">https://matplotlib.org/api/</a><em>as</em>gen/matplotlib.pyplot.imshow.html for options). For example, we can use a more appropriate blue colour scheme with <code class="docutils literal notranslate"><span class="pre">'cmap':'Blues'</span></code>, and set <code class="docutils literal notranslate"><span class="pre">'vmin':0.1,</span> <span class="pre">'vmax':0.8</span></code> to overrule the default colour bar limits with manually specified values:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -746,8 +718,7 @@ Generating 17 frame animation
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -755,12 +726,9 @@ Generating 17 frame animation
 </pre></div>
 </div>
 </div>
-<p>Two special kwargs (<code class="docutils literal notranslate"><span class="pre">tick_fontsize</span></code>, <code class="docutils literal notranslate"><span class="pre">tick_colour</span></code>) can be used to
-control the tick labels on the colourbar. This can be useful for example
-when the tick labels are difficult to see against a dark background:</p>
+<p>Two special kwargs (<code class="docutils literal notranslate"><span class="pre">tick_fontsize</span></code>, <code class="docutils literal notranslate"><span class="pre">tick_colour</span></code>) can be used to control the tick labels on the colourbar. This can be useful for example when the tick labels are difficult to see against a dark background:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -787,8 +755,7 @@ Generating 17 frame animation
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -796,11 +763,9 @@ Generating 17 frame animation
 </pre></div>
 </div>
 </div>
-<p>One band animations show a colour bar by default, but this can be
-disabled:</p>
+<p>One band animations show a colour bar by default, but this can be disabled:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -827,8 +792,7 @@ Generating 17 frame animation
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -839,12 +803,9 @@ Generating 17 frame animation
 </div>
 <div class="section" id="Plot-a-two-panel-side-by-side-animation">
 <h2>Plot a two panel side-by-side animation<a class="headerlink" href="#Plot-a-two-panel-side-by-side-animation" title="Permalink to this headline">¶</a></h2>
-<p>We can use the <code class="docutils literal notranslate"><span class="pre">animated_doubletimeseries</span></code> function to plot an
-animation that compares two different xarray datasets or band
-combinations at the same time:</p>
+<p>We can use the <code class="docutils literal notranslate"><span class="pre">animated_doubletimeseries</span></code> function to plot an animation that compares two different xarray datasets or band combinations at the same time:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -874,8 +835,7 @@ Generating 17 frame animation (i.e. timesteps in shortest dataset)
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -883,11 +843,9 @@ Generating 17 frame animation (i.e. timesteps in shortest dataset)
 </pre></div>
 </div>
 </div>
-<p>We can also plot a three-band image on one side of the plot, and a
-single band image on the other side:</p>
+<p>We can also plot a three-band image on one side of the plot, and a single band image on the other side:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -915,8 +873,7 @@ Generating 17 frame animation (i.e. timesteps in shortest dataset)
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -926,8 +883,7 @@ Generating 17 frame animation (i.e. timesteps in shortest dataset)
 </div>
 <p>Annotations can be customised for each panel individually:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -958,8 +914,7 @@ Generating 17 frame animation (i.e. timesteps in shortest dataset)
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -970,23 +925,11 @@ Generating 17 frame animation (i.e. timesteps in shortest dataset)
 </div>
 <div class="section" id="Plotting-a-side-by-side-time-series-and-line-graph">
 <h2>Plotting a side-by-side time series and line graph<a class="headerlink" href="#Plotting-a-side-by-side-time-series-and-line-graph" title="Permalink to this headline">¶</a></h2>
-<p>The final <code class="docutils literal notranslate"><span class="pre">animated_timeseriesline</span></code> function allows you to plot an
-xarray dataset in the left panel of the animation, and a set of line
-graphs from a pandas dataframe in the right hand panel. This may be
-useful for comparing satellite imagery to time series data like river
-guages, water quality indices, or pixel drills across time.</p>
-<p>First, you need time series data in pandas dataframe format. The
-dataframe must contain time steps in a <code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code> column, and one
-or more numeric data columns to plot as lines in the right panel. Column
-names are used to label the lines on the plot, so assign them
-informative names. Lines are plotted by showing all parts of the line
-with dates on or before the current timestep (i.e. for a 2006 time step,
-only the portion of the lines with dates on or before 2006 will be
-plotted for that frame. Here, we will extract a pixel drill of surface
-water data from the centre of the dataset:</p>
+<p>The final <code class="docutils literal notranslate"><span class="pre">animated_timeseriesline</span></code> function allows you to plot an xarray dataset in the left panel of the animation, and a set of line graphs from a pandas dataframe in the right hand panel. This may be useful for comparing satellite imagery to time series data like river guages, water quality indices, or pixel drills across time.</p>
+<p>First, you need time series data in pandas dataframe format. The dataframe must contain time steps in a <code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code> column, and one or more numeric data columns to plot as lines in the right panel. Column names are used to label the lines on the plot, so assign them informative names. Lines are plotted by showing all parts of the line with dates on or before the current timestep (i.e. for a 2006 time step, only the portion of the lines with dates on or before 2006 will be plotted for that
+frame. Here, we will extract a pixel drill of surface water data from the centre of the dataset:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1004,11 +947,10 @@ water data from the centre of the dataset:</p>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
-<div class="output_area docutils container">
+<div class="output_area rendered_html docutils container">
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1080,8 +1022,7 @@ water data from the centre of the dataset:</p>
 </div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1102,7 +1043,7 @@ water data from the centre of the dataset:</p>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="stderr output_area docutils container">
+<div class="output_area stderr docutils container">
 <div class="highlight"><pre>
 /g/data/v10/public/modules/dea-env/20181015/lib/python3.6/site-packages/matplotlib/figure.py:2362: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   warnings.warn(&#34;This figure includes Axes that are not compatible &#34;
@@ -1117,8 +1058,7 @@ water data from the centre of the dataset:</p>
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -1128,8 +1068,7 @@ water data from the centre of the dataset:</p>
 </div>
 <p>To demonstrate how multiple lines can be added to the same plot:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1153,7 +1092,7 @@ water data from the centre of the dataset:</p>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="stderr output_area docutils container">
+<div class="output_area stderr docutils container">
 <div class="highlight"><pre>
 /g/data/v10/public/modules/dea-env/20181015/lib/python3.6/site-packages/matplotlib/figure.py:2362: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   warnings.warn(&#34;This figure includes Axes that are not compatible &#34;
@@ -1168,8 +1107,7 @@ water data from the centre of the dataset:</p>
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -1177,12 +1115,9 @@ water data from the centre of the dataset:</p>
 </pre></div>
 </div>
 </div>
-<p>Lines do not need to have the same timestamps. To combine two different
-time series, you can simply concatenate the two dataframes and sort by
-date, and the function will take care of nodata values.</p>
+<p>Lines do not need to have the same timestamps. To combine two different time series, you can simply concatenate the two dataframes and sort by date, and the function will take care of nodata values.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1197,11 +1132,10 @@ date, and the function will take care of nodata values.</p>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
-<div class="output_area docutils container">
+<div class="output_area rendered_html docutils container">
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1241,8 +1175,7 @@ date, and the function will take care of nodata values.</p>
 </div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1258,7 +1191,7 @@ date, and the function will take care of nodata values.</p>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="stderr output_area docutils container">
+<div class="output_area stderr docutils container">
 <div class="highlight"><pre>
 /g/data/v10/public/modules/dea-env/20181015/lib/python3.6/site-packages/ipykernel/__main__.py:2: FutureWarning: Sorting because non-concatenation axis is not aligned. A future version
 of pandas will change to not sort by default.
@@ -1271,11 +1204,10 @@ To retain the current behavior and silence the warning, pass &#39;sort=True&#39;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
-<div class="output_area docutils container">
+<div class="output_area rendered_html docutils container">
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1365,8 +1297,7 @@ To retain the current behavior and silence the warning, pass &#39;sort=True&#39;
 </div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1393,8 +1324,7 @@ To retain the current behavior and silence the warning, pass &#39;sort=True&#39;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -1405,13 +1335,9 @@ To retain the current behavior and silence the warning, pass &#39;sort=True&#39;
 </div>
 <div class="section" id="Shapefile-overlay">
 <h2>Shapefile overlay<a class="headerlink" href="#Shapefile-overlay" title="Permalink to this headline">¶</a></h2>
-<p>All three animation functions support plotting shapefiles over satellite
-imagery. To do this, simply pass in a shapefile path with
-<code class="docutils literal notranslate"><span class="pre">shapefile_path</span></code>. The shapefile must be in the same projection system
-as the satellite data (e.g. Australian Albers EPSG:3577 below):</p>
+<p>All three animation functions support plotting shapefiles over satellite imagery. To do this, simply pass in a shapefile path with <code class="docutils literal notranslate"><span class="pre">shapefile_path</span></code>. The shapefile must be in the same projection system as the satellite data (e.g. Australian Albers EPSG:3577 below):</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1437,8 +1363,7 @@ Generating 17 frame animation
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -1446,11 +1371,9 @@ Generating 17 frame animation
 </pre></div>
 </div>
 </div>
-<p>You can customise styling for the shapefile overlays using the
-<code class="docutils literal notranslate"><span class="pre">shapefile_kwargs</span></code> argument:</p>
+<p>You can customise styling for the shapefile overlays using the <code class="docutils literal notranslate"><span class="pre">shapefile_kwargs</span></code> argument:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1477,8 +1400,7 @@ Generating 17 frame animation
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -1486,11 +1408,9 @@ Generating 17 frame animation
 </pre></div>
 </div>
 </div>
-<p>Multiple shapefiles can be overlaid by providing a list of shapefile
-paths:</p>
+<p>Multiple shapefiles can be overlaid by providing a list of shapefile paths:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1518,8 +1438,7 @@ Generating 17 frame animation
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -1527,16 +1446,9 @@ Generating 17 frame animation
 </pre></div>
 </div>
 </div>
-<p>To customise styling for each shapefile individually, you can pass in a
-list of dictionaries to <code class="docutils literal notranslate"><span class="pre">shapefile_kwargs</span></code>. This list should be equal
-in length to the number of shapefile paths you pass to
-<code class="docutils literal notranslate"><span class="pre">shapefile_path</span></code> (e.g. one dictionary corresponding to each path).
-Note that at the current time this functionality is only available for
-the <code class="docutils literal notranslate"><span class="pre">animated_timeseries</span></code> function (not <code class="docutils literal notranslate"><span class="pre">animated_timeseriesline</span></code> or
-<code class="docutils literal notranslate"><span class="pre">animated_doubletimeseries</span></code>):</p>
+<p>To customise styling for each shapefile individually, you can pass in a list of dictionaries to <code class="docutils literal notranslate"><span class="pre">shapefile_kwargs</span></code>. This list should be equal in length to the number of shapefile paths you pass to <code class="docutils literal notranslate"><span class="pre">shapefile_path</span></code> (e.g. one dictionary corresponding to each path). Note that at the current time this functionality is only available for the <code class="docutils literal notranslate"><span class="pre">animated_timeseries</span></code> function (not <code class="docutils literal notranslate"><span class="pre">animated_timeseriesline</span></code> or <code class="docutils literal notranslate"><span class="pre">animated_doubletimeseries</span></code>):</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1567,8 +1479,7 @@ Generating 17 frame animation
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -1579,16 +1490,9 @@ Generating 17 frame animation
 </div>
 <div class="section" id="Available-output-formats">
 <h2>Available output formats<a class="headerlink" href="#Available-output-formats" title="Permalink to this headline">¶</a></h2>
-<p>The above examples have focused on exporting animated GIFs, but MP4 and
-WMV files can also be generated: * .mp4: fast to generate, smallest
-file sizes and often highest quality; suitable for Twitter/social media
-and recent versions of Powerpoint * .wmv: slow to generate, large file
-sizes; suitable for Powerpoint 2010 * .gif: slow to generate, large
-file sizes; suitable for all versions of Powerpoint and Twitter/social
-media</p>
+<p>The above examples have focused on exporting animated GIFs, but MP4 and WMV files can also be generated: * .mp4: fast to generate, smallest file sizes and often highest quality; suitable for Twitter/social media and recent versions of Powerpoint * .wmv: slow to generate, large file sizes; suitable for Powerpoint 2010 * .gif: slow to generate, large file sizes; suitable for all versions of Powerpoint and Twitter/social media</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1639,8 +1543,7 @@ Generating 17 frame animation (i.e. timesteps in shortest dataset)
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1699,6 +1602,7 @@ Generating 17 frame animation (i.e. timesteps in shortest dataset)
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.14.0/dist/embed-amd.js"></script>
         <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     
 
   

@@ -267,18 +267,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #303F9F;
+    color: #307FC1;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #D84315;
+    color: #BF5B3D;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 8ex;
+    min-width: 5ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -318,9 +318,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #cfcfcf;
+    border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f7f7f7;
+    background: #f5f5f5;
 }
 
 /* override MathJax center alignment in output cells */
@@ -328,7 +328,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.pngmath center alignment in output cells */
+/* override sphinx.ext.imgmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -378,6 +378,40 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -394,41 +428,28 @@ div.nboutput div.output_area.stderr {
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
 <div class="section" id="DEA-WOfS-and-Water-Classifier-Notebook">
 <h1>DEA WOfS and Water Classifier Notebook<a class="headerlink" href="#DEA-WOfS-and-Water-Classifier-Notebook" title="Permalink to this headline">¶</a></h1>
-<p><strong>Description:</strong> This notebook allows users to perform water
-classification. The following steps will allow users to connect to a
-data cube, define the analysis location and time period (extent of
-latitude/longitude and dates), and then run the Australian Water
-Observations from Space (WOfS) algorithm. The outputs of the WOfS
-algorithm include static and time series pixel-level water observations
-for any pixel. These results provide critical information for water
-management that will allow users to assess water cycle dynamics,
-historical water extent and the risk of floods and droughts.</p>
-<p>This notebook is based on a CEOS
-<a class="reference external" href="https://github.com/ceos-seo/data_cube_notebooks/blob/master/water_detection.ipynb">notebook</a></p>
-<p>The water classifier is based on <a class="reference external" href="##%20References">Mueller et al.
-(2015)</a> <a class="reference external" href="https://github.com/GeoscienceAustralia/eo-tools/blob/stable/eotools/water_classifier.py">github link to water classifier
-code</a></p>
-<p><strong>Requirements:</strong> You need to run the following commands from the
-command line prior to launching jupyter notebooks from the same terminal
-so that the required libraries and paths are set:</p>
+<p><strong>Description:</strong> This notebook allows users to perform water classification. The following steps will allow users to connect to a data cube, define the analysis location and time period (extent of latitude/longitude and dates), and then run the Australian Water Observations from Space (WOfS) algorithm. The outputs of the WOfS algorithm include static and time series pixel-level water observations for any pixel. These results provide critical information for water management that will allow users
+to assess water cycle dynamics, historical water extent and the risk of floods and droughts.</p>
+<p>This notebook is based on a CEOS <a class="reference external" href="https://github.com/ceos-seo/data_cube_notebooks/blob/master/water_detection.ipynb">notebook</a></p>
+<p>The water classifier is based on <a class="reference external" href="##%20References">Mueller et al. (2015)</a> <a class="reference external" href="https://github.com/GeoscienceAustralia/eo-tools/blob/stable/eotools/water_classifier.py">github link to water classifier code</a></p>
+<p><strong>Requirements:</strong> You need to run the following commands from the command line prior to launching jupyter notebooks from the same terminal so that the required libraries and paths are set:</p>
 <p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">use</span> <span class="pre">/g/data/v10/public/modules/modulefiles</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">dea</span></code></p>
-<p>If you find an error or bug in this notebook, please either create an
-‘Issue’ in the Github repository, or fix it yourself and create a ‘Pull’
-request to contribute the updated notebook back into the repository (See
-the repository
-<a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/blob/master/README.rst">README</a>
-for instructions on creating a Pull request).</p>
+<p>If you find an error or bug in this notebook, please either create an ‘Issue’ in the Github repository, or fix it yourself and create a ‘Pull’ request to contribute the updated notebook back into the repository (See the repository <a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/blob/master/README.rst">README</a> for instructions on creating a Pull request).</p>
 <p><strong>Date:</strong> August 2018</p>
 <p><strong>Authors:</strong> Erin Telfer, Bex Dunn</p>
 <div class="section" id="Import-modules-from-standard-libraries,-datacube-and-files">
 <h2>Import modules from standard libraries, datacube and files<a class="headerlink" href="#Import-modules-from-standard-libraries,-datacube-and-files" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -463,8 +484,7 @@ for instructions on creating a Pull request).</p>
 <h2>Edit query and extract data from DEA<a class="headerlink" href="#Edit-query-and-extract-data-from-DEA" title="Permalink to this headline">¶</a></h2>
 <p>User input: define details below</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -484,8 +504,7 @@ for instructions on creating a Pull request).</p>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -508,8 +527,7 @@ for instructions on creating a Pull request).</p>
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -550,8 +568,7 @@ Combining and sorting ls5, ls7 and ls8 data
 <div class="section" id="Classify-water-and-calculate-Water-Observations-from-Space-(WOfS)">
 <h2>Classify water and calculate Water Observations from Space (WOfS)<a class="headerlink" href="#Classify-water-and-calculate-Water-Observations-from-Space-(WOfS)" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -582,8 +599,7 @@ Data variables:
 <div class="section" id="Calculate-and-plot-WOfS">
 <h2>Calculate and plot WOfS<a class="headerlink" href="#Calculate-and-plot-WOfS" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [37]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -598,8 +614,7 @@ Data variables:
 <div class="section" id="Plot-WOFS">
 <h2>Plot WOFS<a class="headerlink" href="#Plot-WOFS" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [38]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -616,8 +631,7 @@ xarray dataset has no spatial data; defaulting to plotting without coordinates. 
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[38]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -637,8 +651,7 @@ xarray dataset has no spatial data; defaulting to plotting without coordinates. 
 <div class="section" id="Save-WOfS-output-to-netCDF">
 <h2>Save WOfS output to netCDF<a class="headerlink" href="#Save-WOfS-output-to-netCDF" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [40]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -650,8 +663,7 @@ xarray dataset has no spatial data; defaulting to plotting without coordinates. 
 <div class="section" id="Save-WOfS-output-to-GeoTiff">
 <h2>Save WOfS output to GeoTiff<a class="headerlink" href="#Save-WOfS-output-to-GeoTiff" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [41]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -668,10 +680,7 @@ xarray dataset has no spatial data; defaulting to plotting without coordinates. 
 <div class="section" id="References">
 <h2>References<a class="headerlink" href="#References" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>Mueller, et al. 2015., <em>Water observations from space: Mapping
-surface water from 25 years of Landsat imagery across Australia</em>,
-Remote Sensing of Environment.
-<a class="reference external" href="https://doi.org/10.1016/j.rse.2015.11.003">https://doi.org/10.1016/j.rse.2015.11.003</a></li>
+<li>Mueller, et al. 2015., <em>Water observations from space: Mapping surface water from 25 years of Landsat imagery across Australia</em>, Remote Sensing of Environment. <a class="reference external" href="https://doi.org/10.1016/j.rse.2015.11.003">https://doi.org/10.1016/j.rse.2015.11.003</a></li>
 </ol>
 </div>
 </div>
@@ -724,6 +733,7 @@ Remote Sensing of Environment.
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.14.0/dist/embed-amd.js"></script>
         <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     
 
   

@@ -284,18 +284,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #303F9F;
+    color: #307FC1;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #D84315;
+    color: #BF5B3D;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 8ex;
+    min-width: 5ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -335,9 +335,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #cfcfcf;
+    border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f7f7f7;
+    background: #f5f5f5;
 }
 
 /* override MathJax center alignment in output cells */
@@ -345,7 +345,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.pngmath center alignment in output cells */
+/* override sphinx.ext.imgmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -395,6 +395,40 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -411,40 +445,26 @@ div.nboutput div.output_area.stderr {
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
 <div class="section" id="Find-dams-using-WOFLs">
 <h1>Find dams using WOFLs<a class="headerlink" href="#Find-dams-using-WOFLs" title="Permalink to this headline">¶</a></h1>
-<p><strong>What does this notebook do?</strong> This notebook uses <code class="docutils literal notranslate"><span class="pre">wofs_albers</span></code> tiles
-(aka <code class="docutils literal notranslate"><span class="pre">WOFLs</span></code>) to identify water bodies in the landscape. This code
-follows the following workflow: * Select a time period and location for
-the analysis * Extract all available WOFLs for that time and location
-* Calculate the percentage of time each pixel is observed as wet *
-Keep only pixels identified as wet at least 5% of the time * Convert
-the raster data into polygons * Filter the polygons based on size and
-proximity to identified major rivers * Write out the final polygon set
-as a shapefile</p>
-<p><strong>Requirements:</strong> You need to run the following commands from the
-command line prior to launching jupyter notebooks from the same terminal
-so that the required libraries and paths are set:</p>
+<p><strong>What does this notebook do?</strong> This notebook uses <code class="docutils literal notranslate"><span class="pre">wofs_albers</span></code> tiles (aka <code class="docutils literal notranslate"><span class="pre">WOFLs</span></code>) to identify water bodies in the landscape. This code follows the following workflow: * Select a time period and location for the analysis * Extract all available WOFLs for that time and location * Calculate the percentage of time each pixel is observed as wet * Keep only pixels identified as wet at least 5% of the time * Convert the raster data into polygons * Filter the polygons based on size and
+proximity to identified major rivers * Write out the final polygon set as a shapefile</p>
+<p><strong>Requirements:</strong> You need to run the following commands from the command line prior to launching jupyter notebooks from the same terminal so that the required libraries and paths are set:</p>
 <p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">use</span> <span class="pre">/g/data/v10/public/modules/modulefiles</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">dea</span></code></p>
-<p>This example also uses a number of functions available within the
-<code class="docutils literal notranslate"><span class="pre">10_Scripts</span></code> folder of the <a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/tree/master/10_Scripts">dea-notebooks Github
-repository</a>.
-Note that these functions have been developed by DEA users, not the DEA
-development team, and so are provided without warranty. If you find an
-error or bug in the functions, please either create an ‘Issue’ in the
-Github repository, or fix it yourself and create a ‘Pull’ request to
-contribute the updated function back into the repository (See the
-repository
-<a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/blob/master/README.rst">README</a>
-for instructions on creating a Pull request).</p>
+<p>This example also uses a number of functions available within the <code class="docutils literal notranslate"><span class="pre">10_Scripts</span></code> folder of the <a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/tree/master/10_Scripts">dea-notebooks Github repository</a>. Note that these functions have been developed by DEA users, not the DEA development team, and so are provided without warranty. If you find an error or bug in the functions, please either create an ‘Issue’ in the Github repository, or fix it yourself and create a ‘Pull’ request to
+contribute the updated function back into the repository (See the repository <a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/blob/master/README.rst">README</a> for instructions on creating a Pull request).</p>
 <p><strong>Date:</strong> August 2018</p>
 <p><strong>Author:</strong> Claire Krause</p>
 <p>Tags: <span class="target" id="index-0"></span>fiona, <span class="target" id="index-1"></span>geopandas, <span class="target" id="index-2"></span>Geotiff, <span class="target" id="index-3"></span>masking, <span class="target" id="index-4"></span>rasterio, <span class="target" id="index-5"></span>shapefile, <span class="target" id="index-6"></span>WOfS, <span class="target" id="index-7"></span>WOFL, <span class="target" id="index-8"></span>write_geotiff, <span class="target" id="index-9"></span>shapely, <span class="target" id="index-10"></span>descartes, <span class="target" id="index-11"></span>water_classifier_and_wofs, <span class="target" id="index-12"></span>raster to polygons, <span class="target" id="index-13"></span>polygons</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -476,8 +496,7 @@ for instructions on creating a Pull request).</p>
 <div class="section" id="Select-a-cropping-season-and-test-location">
 <h3>Select a cropping season and test location<a class="headerlink" href="#Select-a-cropping-season-and-test-location" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -492,8 +511,7 @@ for instructions on creating a Pull request).</p>
 <div class="section" id="Set-up-some-file-names-for-the-outputs-we-will-write">
 <h3>Set up some file names for the outputs we will write<a class="headerlink" href="#Set-up-some-file-names-for-the-outputs-we-will-write" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -510,8 +528,7 @@ for instructions on creating a Pull request).</p>
 <div class="section" id="Load-the-WOFLs">
 <h2>Load the WOFLs<a class="headerlink" href="#Load-the-WOFLs" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -532,12 +549,9 @@ Wall time: 22.9 s
 </div>
 <div class="section" id="Identify-the-water-bodies-in-our-study-area-during-our-chosen-time-period">
 <h2>Identify the water bodies in our study area during our chosen time period<a class="headerlink" href="#Identify-the-water-bodies-in-our-study-area-during-our-chosen-time-period" title="Permalink to this headline">¶</a></h2>
-<p>We are only interested in the water classifier, so we will create a
-boolean mask for wet vs not wet. This way we can easily find dams from
-always dry ground.</p>
+<p>We are only interested in the water classifier, so we will create a boolean mask for wet vs not wet. This way we can easily find dams from always dry ground.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [35]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -548,11 +562,9 @@ always dry ground.</p>
 </div>
 <div class="section" id="Calculate-percentage-wet-over-this-season">
 <h3>Calculate percentage wet over this season<a class="headerlink" href="#Calculate-percentage-wet-over-this-season" title="Permalink to this headline">¶</a></h3>
-<p>We want to work out how often a pixel is wet, as a proportion of the
-total time the pixel was observed.</p>
+<p>We want to work out how often a pixel is wet, as a proportion of the total time the pixel was observed.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [36]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -565,8 +577,7 @@ total time the pixel was observed.</p>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[36]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -586,8 +597,7 @@ total time the pixel was observed.</p>
 <h3>Write out our percentage wet classification to .TIFF<a class="headerlink" href="#Write-out-our-percentage-wet-classification-to-.TIFF" title="Permalink to this headline">¶</a></h3>
 <p>(So we can refer to it later on if required)</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [37]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -604,14 +614,9 @@ total time the pixel was observed.</p>
 <h2>Filter our classified data layer to remove noise<a class="headerlink" href="#Filter-our-classified-data-layer-to-remove-noise" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="First,-filter-the-raster-based-on-values-&gt;0.05">
 <h3>First, filter the raster based on values &gt;0.05<a class="headerlink" href="#First,-filter-the-raster-based-on-values->0.05" title="Permalink to this headline">¶</a></h3>
-<p>I.e. where water is observed at least 5% of the time (to remove e.g.
-ponds of water after rain events). This removes much of the noise from
-our dataset. We also convert our classifier into a boolean dataset here,
-to remove the seasonal percentage values for each pixel and just keep
-the ‘yes’/’no’ ‘could it be a dam’ information.</p>
+<p>I.e. where water is observed at least 5% of the time (to remove e.g. ponds of water after rain events). This removes much of the noise from our dataset. We also convert our classifier into a boolean dataset here, to remove the seasonal percentage values for each pixel and just keep the ‘yes’/’no’ ‘could it be a dam’ information.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [38]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -620,8 +625,7 @@ the ‘yes’/’no’ ‘could it be a dam’ information.</p>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [39]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -631,8 +635,7 @@ the ‘yes’/’no’ ‘could it be a dam’ information.</p>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[39]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -651,11 +654,9 @@ the ‘yes’/’no’ ‘could it be a dam’ information.</p>
 </div>
 <div class="section" id="Convert-the-raster-to-polygons">
 <h2>Convert the raster to polygons<a class="headerlink" href="#Convert-the-raster-to-polygons" title="Permalink to this headline">¶</a></h2>
-<p>At this point, we want to move from a gridded dataset to polygons, so we
-can treat the clusers of wet pixels as a whole.</p>
+<p>At this point, we want to move from a gridded dataset to polygons, so we can treat the clusers of wet pixels as a whole.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [25]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -667,20 +668,13 @@ can treat the clusers of wet pixels as a whole.</p>
 </div>
 <div class="section" id="Filter-the-wet-polygons-to-find-'dams'">
 <h2>Filter the wet polygons to find ‘dams’<a class="headerlink" href="#Filter-the-wet-polygons-to-find-'dams'" title="Permalink to this headline">¶</a></h2>
-<p>Note that these are ‘dams’ because we can not definitively say whether
-the water bodies identified are farm storages, lakes, rivers, or any
-other type of persistent water body.</p>
-<p>We can filter our identified water bodies to get us closer to dams
-though…</p>
+<p>Note that these are ‘dams’ because we can not definitively say whether the water bodies identified are farm storages, lakes, rivers, or any other type of persistent water body.</p>
+<p>We can filter our identified water bodies to get us closer to dams though…</p>
 <div class="section" id="Remove-the-giant-zero-polygon">
 <h3>Remove the giant zero polygon<a class="headerlink" href="#Remove-the-giant-zero-polygon" title="Permalink to this headline">¶</a></h3>
-<p>When we convert our data into polygons, the area surrounding the water
-features we want to capture is also converted to a polygon. We need to
-filter out any polygon that was created from the areas not identified as
-wet.</p>
+<p>When we convert our data into polygons, the area surrounding the water features we want to capture is also converted to a polygon. We need to filter out any polygon that was created from the areas not identified as wet.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [26]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -693,8 +687,7 @@ wet.</p>
 <div class="section" id="Calculate-the-area-of-each-polygon">
 <h3>Calculate the area of each polygon<a class="headerlink" href="#Calculate-the-area-of-each-polygon" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [27]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -709,11 +702,9 @@ wet.</p>
 </div>
 <div class="section" id="Filter-out-any-polygons-smaller-than-5000-m2">
 <h3>Filter out any polygons smaller than 5000 m2<a class="headerlink" href="#Filter-out-any-polygons-smaller-than-5000-m2" title="Permalink to this headline">¶</a></h3>
-<p>This value can be changed, however we have set it at 5000 m2 to focus
-only on large water bodies for now.</p>
+<p>This value can be changed, however we have set it at 5000 m2 to focus only on large water bodies for now.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [28]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -725,15 +716,9 @@ only on large water bodies for now.</p>
 </div>
 <div class="section" id="Remove-any-polygons-that-intersect-with-a-major-river">
 <h3>Remove any polygons that intersect with a major river<a class="headerlink" href="#Remove-any-polygons-that-intersect-with-a-major-river" title="Permalink to this headline">¶</a></h3>
-<p>We are only interested in farm dams, so do not need the WOFS polygons
-for the rivers. We use the <a class="reference external" href="http://pid.geoscience.gov.au/dataset/ga/83107">surface hydrology lines
-dataset</a> to filter out
-polygons that intersect with major rivers. Note that we have filtered
-this dataset to only keep rivers tagged as <code class="docutils literal notranslate"><span class="pre">major</span></code>, and it is this
-filtered dataset that we use here.</p>
+<p>We are only interested in farm dams, so do not need the WOFS polygons for the rivers. We use the <a class="reference external" href="http://pid.geoscience.gov.au/dataset/ga/83107">surface hydrology lines dataset</a> to filter out polygons that intersect with major rivers. Note that we have filtered this dataset to only keep rivers tagged as <code class="docutils literal notranslate"><span class="pre">major</span></code>, and it is this filtered dataset that we use here.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [29]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -742,8 +727,7 @@ filtered dataset that we use here.</p>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [30]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -765,7 +749,7 @@ filtered dataset that we use here.</p>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="stderr output_area docutils container">
+<div class="output_area stderr docutils container">
 <div class="highlight"><pre>
 /g/data/v10/public/modules/dea-env/20180405/lib/python3.6/site-packages/geopandas/tools/sjoin.py:53: UserWarning: CRS of frames being joined does not match!
   warn(&#39;CRS of frames being joined does not match!&#39;)
@@ -776,8 +760,7 @@ filtered dataset that we use here.</p>
 <div class="section" id="Plot-the-final-set-of-dam-polygons">
 <h2>Plot the final set of dam polygons<a class="headerlink" href="#Plot-the-final-set-of-dam-polygons" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [31]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -802,8 +785,7 @@ filtered dataset that we use here.</p>
 <div class="section" id="Save-the-polygons-to-a-shapefile">
 <h2>Save the polygons to a shapefile<a class="headerlink" href="#Save-the-polygons-to-a-shapefile" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [32]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -817,8 +799,7 @@ filtered dataset that we use here.</p>
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -877,6 +858,7 @@ filtered dataset that we use here.</p>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.14.0/dist/embed-amd.js"></script>
         <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     
 
   

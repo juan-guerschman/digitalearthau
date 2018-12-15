@@ -247,18 +247,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #303F9F;
+    color: #307FC1;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #D84315;
+    color: #BF5B3D;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 8ex;
+    min-width: 5ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -298,9 +298,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #cfcfcf;
+    border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f7f7f7;
+    background: #f5f5f5;
 }
 
 /* override MathJax center alignment in output cells */
@@ -308,7 +308,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.pngmath center alignment in output cells */
+/* override sphinx.ext.imgmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -358,6 +358,40 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -374,61 +408,39 @@ div.nboutput div.output_area.stderr {
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
 <div class="section" id="Preparing-and-Uploading-Data-to-AWS">
 <h1>Preparing and Uploading Data to AWS<a class="headerlink" href="#Preparing-and-Uploading-Data-to-AWS" title="Permalink to this headline">¶</a></h1>
-<p>These instructions are indended as a starting point. Please add to them
-if you find steps that are missing etc.</p>
+<p>These instructions are indended as a starting point. Please add to them if you find steps that are missing etc.</p>
 <p><strong>Date</strong> June 2018</p>
 <p><strong>Author</strong> Claire Krause</p>
 <div class="section" id="Get-an-AWS-account">
 <h2>Get an AWS account<a class="headerlink" href="#Get-an-AWS-account" title="Permalink to this headline">¶</a></h2>
-<p>Before you can do anything, you need to get a GA AWS account. This will
-give you permissions to move data onto the DEA AWS S3 bucket. Speak to
-DEA’s cloud engineer to organise an account. They can also point you to
-the correct place to load data, and will make sure the data you intend
-to upload can be accommodated.</p>
+<p>Before you can do anything, you need to get a GA AWS account. This will give you permissions to move data onto the DEA AWS S3 bucket. Speak to DEA’s cloud engineer to organise an account. They can also point you to the correct place to load data, and will make sure the data you intend to upload can be accommodated.</p>
 </div>
 <div class="section" id="Turn-the-required-data-into-cog-tif-files">
 <h2>Turn the required data into cog tif files<a class="headerlink" href="#Turn-the-required-data-into-cog-tif-files" title="Permalink to this headline">¶</a></h2>
-<p>The preferred format for datasets on S3 is cog format, aka ‘cloud
-optimised geoTIFF’. This file format is smaller than netCDF, enables
-pyramid loading, and is supported by <code class="docutils literal notranslate"><span class="pre">rasterio</span></code>.</p>
+<p>The preferred format for datasets on S3 is cog format, aka ‘cloud optimised geoTIFF’. This file format is smaller than netCDF, enables pyramid loading, and is supported by <code class="docutils literal notranslate"><span class="pre">rasterio</span></code>.</p>
 <div class="section" id="Translating-data-into-cog-format">
 <h3>Translating data into cog format<a class="headerlink" href="#Translating-data-into-cog-format" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference external" href="https://github.com/harshurampur">Harshu</a> has written some helper
-functions for translating data into cog format. This code can be found
-in the <a class="reference external" href="https://github.com/harshurampur/Geotiff-conversion">Geotiff-conversion
-repo</a>. To use
-this code, clone the repo into a suitable location (I used my folder on
-<code class="docutils literal notranslate"><span class="pre">/g/data/...</span></code>). For translation, there are two functions to choose
-from, depending on the current format of the data you want to upload: *
-<code class="docutils literal notranslate"><span class="pre">geotiff-cog.py</span></code> - for translating GeoTIFF to cog geoTIFFs *
-<code class="docutils literal notranslate"><span class="pre">netcdf-cog.py</span></code> - for translating netCDF to cog geoTIFFs</p>
-<p>To run the translation scripts, you will need to specify the path of the
-input and output files. You can then run the scripts from the command
-line. (You will need to have the DEA library loaded as this script
-requires some libraries to run):</p>
+<p><a class="reference external" href="https://github.com/harshurampur">Harshu</a> has written some helper functions for translating data into cog format. This code can be found in the <a class="reference external" href="https://github.com/harshurampur/Geotiff-conversion">Geotiff-conversion repo</a>. To use this code, clone the repo into a suitable location (I used my folder on <code class="docutils literal notranslate"><span class="pre">/g/data/...</span></code>). For translation, there are two functions to choose from, depending on the current format of the data you want to upload: * <code class="docutils literal notranslate"><span class="pre">geotiff-cog.py</span></code> - for translating GeoTIFF to
+cog geoTIFFs * <code class="docutils literal notranslate"><span class="pre">netcdf-cog.py</span></code> - for translating netCDF to cog geoTIFFs</p>
+<p>To run the translation scripts, you will need to specify the path of the input and output files. You can then run the scripts from the command line. (You will need to have the DEA library loaded as this script requires some libraries to run):</p>
 <p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">geotiff-cog.py</span> <span class="pre">-p</span> <span class="pre">/path/to/directory/of/files/for/translation</span> <span class="pre">-o</span> <span class="pre">/path/to/output/directory</span></code></p>
-<p>The script will create a directory in the output location that mirrors
-the directory name containing the input files. This script can handle
-data with multiple bands and time steps. A new cog <code class="docutils literal notranslate"><span class="pre">.tif</span></code> file is
-created for each timestep and band, so this code can take a while to
-run…</p>
+<p>The script will create a directory in the output location that mirrors the directory name containing the input files. This script can handle data with multiple bands and time steps. A new cog <code class="docutils literal notranslate"><span class="pre">.tif</span></code> file is created for each timestep and band, so this code can take a while to run…</p>
 </div>
 </div>
 <div class="section" id="Copy-the-data-to-aws">
 <h2>Copy the data to aws<a class="headerlink" href="#Copy-the-data-to-aws" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="Add-your-aws-credentials-to-raijin:">
 <h3>Add your aws credentials to raijin:<a class="headerlink" href="#Add-your-aws-credentials-to-raijin:" title="Permalink to this headline">¶</a></h3>
-<p>In order to run aws commands from within raijin, you will need to have
-your credentials and configuration files set up in your raijin home
-directory.</p>
-<p>Your credientials can be found by opening your AWS account, and
-selecting <code class="docutils literal notranslate"><span class="pre">IAM</span></code>. Select <code class="docutils literal notranslate"><span class="pre">Users</span></code> on the left-hand panel, then search
-for your u-number. Once you click on your u-number, you will see a box
-to <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">new</span> <span class="pre">security</span> <span class="pre">keys</span></code>. Select this, and then copy the access key
-and secret access key into the credentials file explained below.</p>
+<p>In order to run aws commands from within raijin, you will need to have your credentials and configuration files set up in your raijin home directory.</p>
+<p>Your credientials can be found by opening your AWS account, and selecting <code class="docutils literal notranslate"><span class="pre">IAM</span></code>. Select <code class="docutils literal notranslate"><span class="pre">Users</span></code> on the left-hand panel, then search for your u-number. Once you click on your u-number, you will see a box to <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">new</span> <span class="pre">security</span> <span class="pre">keys</span></code>. Select this, and then copy the access key and secret access key into the credentials file explained below.</p>
 <p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">mkdir</span> <span class="pre">.aws</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">nano</span> <span class="pre">.aws/credentials</span></code></p>
@@ -447,24 +459,14 @@ and secret access key into the credentials file explained below.</p>
 </div>
 <div class="section" id="Run-the-PBS-script-to-sync-your-data-with-aws">
 <h3>Run the PBS script to sync your data with aws<a class="headerlink" href="#Run-the-PBS-script-to-sync-your-data-with-aws" title="Permalink to this headline">¶</a></h3>
-<p>The code for doing this can be found in the same <a class="reference external" href="https://github.com/harshurampur/Geotiff-conversion/tree/master/compute-sync">Geotiff-conversion
-repository</a>.
-Modify the <code class="docutils literal notranslate"><span class="pre">compute_sync.sh</span></code> code with your own username, and update
-last line the command to point to the two directories you want to sink;
-- the directory on NCI with the prepared data - the folder on S3 where
-you want the data to go</p>
+<p>The code for doing this can be found in the same <a class="reference external" href="https://github.com/harshurampur/Geotiff-conversion/tree/master/compute-sync">Geotiff-conversion repository</a>. Modify the <code class="docutils literal notranslate"><span class="pre">compute_sync.sh</span></code> code with your own username, and update last line the command to point to the two directories you want to sink; - the directory on NCI with the prepared data - the folder on S3 where you want the data to go</p>
 </div>
 <div class="section" id="Hit-go!">
 <h3>Hit go!<a class="headerlink" href="#Hit-go!" title="Permalink to this headline">¶</a></h3>
-<p>Once you have set up your aws credentials, and modified
-<code class="docutils literal notranslate"><span class="pre">compute_sync.sh</span></code>, submit this script to PBS (either from within the
-<code class="docutils literal notranslate"><span class="pre">Geotiff-conversion/compute-sync</span></code> folder, or from anywhere on raijin
-with the full or relative path to the <code class="docutils literal notranslate"><span class="pre">compute_sync.sh</span></code> file
-included):</p>
+<p>Once you have set up your aws credentials, and modified <code class="docutils literal notranslate"><span class="pre">compute_sync.sh</span></code>, submit this script to PBS (either from within the <code class="docutils literal notranslate"><span class="pre">Geotiff-conversion/compute-sync</span></code> folder, or from anywhere on raijin with the full or relative path to the <code class="docutils literal notranslate"><span class="pre">compute_sync.sh</span></code> file included):</p>
 <p><code class="docutils literal notranslate"><span class="pre">qsub</span> <span class="pre">compute_sync.sh</span></code></p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -515,6 +517,7 @@ included):</p>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.14.0/dist/embed-amd.js"></script>
         <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     
 
   

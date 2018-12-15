@@ -293,18 +293,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #303F9F;
+    color: #307FC1;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #D84315;
+    color: #BF5B3D;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 8ex;
+    min-width: 5ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -344,9 +344,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #cfcfcf;
+    border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f7f7f7;
+    background: #f5f5f5;
 }
 
 /* override MathJax center alignment in output cells */
@@ -354,7 +354,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.pngmath center alignment in output cells */
+/* override sphinx.ext.imgmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -404,6 +404,40 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -420,43 +454,31 @@ div.nboutput div.output_area.stderr {
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
 <div class="section" id="Hovmoller-of-Tasselled-Cap-Wetness,-Brightness,-Greenness,-Rainfall">
 <h1>Hovmoller of Tasselled Cap Wetness, Brightness, Greenness, Rainfall<a class="headerlink" href="#Hovmoller-of-Tasselled-Cap-Wetness,-Brightness,-Greenness,-Rainfall" title="Permalink to this headline">¶</a></h1>
-<p><strong>What does this notebook do?</strong> This notebook opens a shape file of
-transects, allows you to select a transect by number, and plot a
-hovmoller diagram of the site tasselled cap indices based on datacube
-landsat surface reflectance data with contextual BoM rainfall data. You
-can then plot hovmoller diagrams for the thresholded tasselled cap
-indices.</p>
+<p><strong>What does this notebook do?</strong> This notebook opens a shape file of transects, allows you to select a transect by number, and plot a hovmoller diagram of the site tasselled cap indices based on datacube landsat surface reflectance data with contextual BoM rainfall data. You can then plot hovmoller diagrams for the thresholded tasselled cap indices.</p>
 <p><strong>Before you run this notebook:</strong></p>
 <p><strong>you will need:</strong></p>
 <ul class="simple">
-<li>a shapefile of the site transects in EPSG 4326 in a known location on
-raijin</li>
-<li>to use the rainfall data you will need to request access to project
-r78 on the NCI</li>
+<li>a shapefile of the site transects in EPSG 4326 in a known location on raijin</li>
+<li>to use the rainfall data you will need to request access to project r78 on the NCI</li>
 </ul>
 <p><strong>Background:</strong></p>
-<p>The <em>Tasseled Cap Index (TCI)</em> is a method of reducing 6 bands of
-satellite data (BLUE, GREEN, RED, NIR, SWIR1, SWIR2) to 3 bands
-(Brightness, Greenness, Wetness) using a Principal Components Analysis
-and Procrustes’ Rotation <a class="reference external" href="##References">(Roberts et al 2018)</a>. This
-notebook uses the published coefficients of <a class="reference external" href="##References">Crist
-1985</a> as applied to Digital Earth Australia’s Landsat
-satellite data.</p>
-<p><em>Tasseled cap percentage exceedance:</em> Percent of observations within
-epoch where TCI is above chosen threshold (i.e. where pixel has been
-‘wet’ ‘green or ‘bright’). e default thresholds used in calculating the
-percentage exceedance are brightness: 4000, greenness 600, wetness -600.</p>
+<p>The <em>Tasseled Cap Index (TCI)</em> is a method of reducing 6 bands of satellite data (BLUE, GREEN, RED, NIR, SWIR1, SWIR2) to 3 bands (Brightness, Greenness, Wetness) using a Principal Components Analysis and Procrustes’ Rotation <a class="reference external" href="##References">(Roberts et al 2018)</a>. This notebook uses the published coefficients of <a class="reference external" href="##References">Crist 1985</a> as applied to Digital Earth Australia’s Landsat satellite data.</p>
+<p><em>Tasseled cap percentage exceedance:</em> Percent of observations within epoch where TCI is above chosen threshold (i.e. where pixel has been ‘wet’ ‘green or ‘bright’). e default thresholds used in calculating the percentage exceedance are brightness: 4000, greenness 600, wetness -600.</p>
 <p><strong>Date:</strong> June 2018</p>
 <p><strong>Authors:</strong> Bex Dunn, Leo Lymburner</p>
 <p>Tags: <span class="target" id="index-0"></span>transect, <span class="target" id="index-1"></span>Hovmoller, <span class="target" id="index-2"></span>shapefile, <span class="target" id="index-3"></span>tasseled_cap, index:<cite>rainfall</cite>,index:<cite>DEADataHandling</cite>, index:<cite>DEAPlotting</cite>,index:<cite>load_clearlandsat</cite>, index:<cite>three_band_image</cite>, index:<cite>BandIndices</cite>,index:<cite>TasseledCapTools</cite></p>
 <div class="section" id="Set-up-modules,-functions-and-libraries">
 <h2>Set up modules, functions and libraries<a class="headerlink" href="#Set-up-modules,-functions-and-libraries" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -508,8 +530,7 @@ percentage exceedance are brightness: 4000, greenness 600, wetness -600.</p>
 <div class="section" id="Set-up-functions-for-this-notebook">
 <h2>Set up functions for this notebook<a class="headerlink" href="#Set-up-functions-for-this-notebook" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -560,8 +581,7 @@ percentage exceedance are brightness: 4000, greenness 600, wetness -600.</p>
 <div class="section" id="add-the-path-to-the-input-shapefile">
 <h3>add the path to the input shapefile<a class="headerlink" href="#add-the-path-to-the-input-shapefile" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -575,8 +595,7 @@ percentage exceedance are brightness: 4000, greenness 600, wetness -600.</p>
 <div class="section" id="Define-the-epoch">
 <h3>Define the epoch<a class="headerlink" href="#Define-the-epoch" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [40]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -600,8 +619,7 @@ temporal range is 1987-10-01 to 2018-10-01
 <div class="section" id="Set-up-query">
 <h2>Set up query<a class="headerlink" href="#Set-up-query" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [41]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -641,8 +659,7 @@ line is not simple, simplifying
 <div class="section" id="use-the-transect-dataframe-to-get-transect-metadata">
 <h2>use the transect dataframe to get transect metadata<a class="headerlink" href="#use-the-transect-dataframe-to-get-transect-metadata" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [42]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -684,8 +701,7 @@ OS error: [Errno 17] File exists: &#39;/g/data/r78/rjd547/groundwater_activities
 <div class="section" id="Check-if-this-notebook-has-already-been-run-and-the-data-saved:">
 <h2>Check if this notebook has already been run and the data saved:<a class="headerlink" href="#Check-if-this-notebook-has-already-been-run-and-the-data-saved:" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [43]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -705,8 +721,7 @@ OS error: [Errno 17] File exists: &#39;/g/data/r78/rjd547/groundwater_activities
 <div class="section" id="If-not,-pull-in-rainfall-and-nbar">
 <h2>If not, pull in rainfall and nbar<a class="headerlink" href="#If-not,-pull-in-rainfall-and-nbar" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [44]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -751,8 +766,7 @@ loaded bom rainfall grids from DEA
 <div class="section" id="Run-the-tasseled-cap-transform-and-threshold">
 <h2>Run the tasseled cap transform and threshold<a class="headerlink" href="#Run-the-tasseled-cap-transform-and-threshold" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [45]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -763,8 +777,7 @@ loaded bom rainfall grids from DEA
 <div class="section" id="Take-a-look-at-some-of-the-tasseled-cap-results">
 <h3>Take a look at some of the tasseled cap results<a class="headerlink" href="#Take-a-look-at-some-of-the-tasseled-cap-results" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [46]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -773,8 +786,7 @@ loaded bom rainfall grids from DEA
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[46]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -790,8 +802,7 @@ loaded bom rainfall grids from DEA
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [47]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -800,8 +811,7 @@ loaded bom rainfall grids from DEA
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [48]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -810,8 +820,7 @@ loaded bom rainfall grids from DEA
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[48]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -827,8 +836,7 @@ loaded bom rainfall grids from DEA
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [49]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -837,8 +845,7 @@ loaded bom rainfall grids from DEA
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [50]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -847,8 +854,7 @@ loaded bom rainfall grids from DEA
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [51]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -858,8 +864,7 @@ loaded bom rainfall grids from DEA
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[51]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -880,8 +885,7 @@ array(-599.9433)
 <div class="section" id="resample-gridded-rainfall-data">
 <h2>resample gridded rainfall data<a class="headerlink" href="#resample-gridded-rainfall-data" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [52]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[52]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -898,7 +902,7 @@ array(-599.9433)
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="stderr output_area docutils container">
+<div class="output_area stderr docutils container">
 <div class="highlight"><pre>
 /g/data/v10/public/modules/dea-env/20180405/lib/python3.6/site-packages/ipykernel_launcher.py:4: DeprecationWarning:
 .resample() has been modified to defer calculations. Instead of passing &#39;dim&#39; and &#39;how=&#34;mean&#34;, instead consider using .resample(time=&#34;MS&#34;).mean()
@@ -912,8 +916,7 @@ array(-599.9433)
 <div class="section" id="Set-up-data-for-Hovmoller-plots">
 <h2>Set up data for Hovmoller plots<a class="headerlink" href="#Set-up-data-for-Hovmoller-plots" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [53]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -928,14 +931,13 @@ array(-599.9433)
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="stderr output_area docutils container">
+<div class="output_area stderr docutils container">
 <div class="highlight"><pre>
 /g/data/v10/public/modules/dea-env/20180405/lib/python3.6/site-packages/ipykernel_launcher.py:34: DeprecationWarning: Dataset.sel_points is deprecated: use Dataset.sel()instead.
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [54]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -949,14 +951,13 @@ array(-599.9433)
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="stderr output_area docutils container">
+<div class="output_area stderr docutils container">
 <div class="highlight"><pre>
 /g/data/v10/public/modules/dea-env/20180405/lib/python3.6/site-packages/ipykernel_launcher.py:34: DeprecationWarning: Dataset.sel_points is deprecated: use Dataset.sel()instead.
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [55]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -965,8 +966,7 @@ array(-599.9433)
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[55]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -979,8 +979,7 @@ array(6.6511)
 <div class="section" id="Make-Hovmoller-plot">
 <h2>Make Hovmoller plot<a class="headerlink" href="#Make-Hovmoller-plot" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [56]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1055,8 +1054,7 @@ transect image:
 <div class="section" id="plot-greenness">
 <h3>plot greenness<a class="headerlink" href="#plot-greenness" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [57]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[57]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1158,8 +1156,7 @@ transect tci image:
 <div class="section" id="Plot-Brightness">
 <h3>Plot Brightness<a class="headerlink" href="#Plot-Brightness" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [58]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[58]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1262,8 +1259,7 @@ transect tci image:
 <div class="section" id="Save-the-data-to-an-output-file-for-future-use">
 <h2>Save the data to an output file for future use<a class="headerlink" href="#Save-the-data-to-an-output-file-for-future-use" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [59]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[59]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1294,8 +1290,7 @@ saved data to file
 <div class="section" id="Plot-thresholded-wetness">
 <h3>Plot thresholded wetness<a class="headerlink" href="#Plot-thresholded-wetness" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [34]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1371,8 +1366,7 @@ transect image:
 <div class="section" id="Plot-thresholded-brightness">
 <h3>Plot thresholded brightness<a class="headerlink" href="#Plot-thresholded-brightness" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [35]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1474,8 +1468,7 @@ transect tci image:
 <div class="section" id="Plot-thresholded-greenness">
 <h3>Plot thresholded greenness<a class="headerlink" href="#Plot-thresholded-greenness" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [36]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1577,15 +1570,17 @@ transect tci image:
 <div class="section" id="References">
 <h3>References<a class="headerlink" href="#References" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
-<li>Roberts, D., Dunn,B., Mueller, N. 2018, <em>Open Data Cube Products
-Using High-Dimensional Statistics of Time Series</em>, in press.</li>
-<li>E. P. Crist, <em>A tm tasseled cap equivalent transformation for
-reflectance factor data</em>, Remote Sensing of Environment, vol. 17, no.
-3, pp. 301-306, 1985.</li>
+<li>Roberts, D., Dunn,B., Mueller, N. 2018, <em>Open Data Cube Products Using High-Dimensional Statistics of Time Series</em>, in press.</li>
+<li><ol class="first upperalpha" start="5">
+<li><ol class="first upperalpha" start="16">
+<li>Crist, <em>A tm tasseled cap equivalent transformation for reflectance factor data</em>, Remote Sensing of Environment, vol. 17, no. 3, pp. 301-306, 1985.</li>
+</ol>
+</li>
+</ol>
+</li>
 </ol>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1645,6 +1640,7 @@ reflectance factor data</em>, Remote Sensing of Environment, vol. 17, no.
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.14.0/dist/embed-amd.js"></script>
         <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     
 
   

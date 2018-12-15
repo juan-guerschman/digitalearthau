@@ -271,18 +271,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #303F9F;
+    color: #307FC1;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #D84315;
+    color: #BF5B3D;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 8ex;
+    min-width: 5ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -322,9 +322,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #cfcfcf;
+    border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f7f7f7;
+    background: #f5f5f5;
 }
 
 /* override MathJax center alignment in output cells */
@@ -332,7 +332,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.pngmath center alignment in output cells */
+/* override sphinx.ext.imgmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -382,6 +382,40 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -398,38 +432,28 @@ div.nboutput div.output_area.stderr {
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
 <div class="section" id="Exporting-compliant-NetCDF-datasets-for-publication">
 <h1>Exporting compliant NetCDF datasets for publication<a class="headerlink" href="#Exporting-compliant-NetCDF-datasets-for-publication" title="Permalink to this headline">¶</a></h1>
 <p><strong>What does this notebook do?</strong></p>
-<p>This notebook demonstrates how to create a NetCDF output file that is
-compliant with the requirements of the NCI and international metadata
-standards. This is specifically intended to assist with products that
-were produced <strong>outside</strong> of standard <code class="docutils literal notranslate"><span class="pre">datacube</span></code> workflows: for
-example, where data exists in array or raster form rather than having
-been automatically generated using a <code class="docutils literal notranslate"><span class="pre">datacube-stats</span></code> workflow. The
-notebook demonstrates how to use a selection of existing <code class="docutils literal notranslate"><span class="pre">datacube</span></code>
-functions to create the NetCDF, as these automatically create much of
-the required metadata.</p>
-<p><em>(This is an in-progress document which is likely to be updated
-regularly as this procedure is streamlined. Pelase raise an issue on the
-dea-notebooks repository or contact the author if you have any
-suggestions on improving the workflow)</em></p>
+<p>This notebook demonstrates how to create a NetCDF output file that is compliant with the requirements of the NCI and international metadata standards. This is specifically intended to assist with products that were produced <strong>outside</strong> of standard <code class="docutils literal notranslate"><span class="pre">datacube</span></code> workflows: for example, where data exists in array or raster form rather than having been automatically generated using a <code class="docutils literal notranslate"><span class="pre">datacube-stats</span></code> workflow. The notebook demonstrates how to use a selection of existing <code class="docutils literal notranslate"><span class="pre">datacube</span></code> functions to
+create the NetCDF, as these automatically create much of the required metadata.</p>
+<p><em>(This is an in-progress document which is likely to be updated regularly as this procedure is streamlined. Pelase raise an issue on the dea-notebooks repository or contact the author if you have any suggestions on improving the workflow)</em></p>
 <p><strong>Requirements:</strong></p>
-<p>You need to run the following commands from the command line prior to
-launching jupyter notebooks from the same terminal so that the required
-libraries and paths are set:</p>
+<p>You need to run the following commands from the command line prior to launching jupyter notebooks from the same terminal so that the required libraries and paths are set:</p>
 <p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">use</span> <span class="pre">/g/data/v10/public/modules/modulefiles</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">dea</span></code></p>
-<p>This notebook also uses sample data from the National Intertidal Digital
-Elevation Model (NIDEM) located at
-<code class="docutils literal notranslate"><span class="pre">/g/data/r78/rt1527/nidem/output_data/</span></code>.</p>
+<p>This notebook also uses sample data from the National Intertidal Digital Elevation Model (NIDEM) located at <code class="docutils literal notranslate"><span class="pre">/g/data/r78/rt1527/nidem/output_data/</span></code>.</p>
 <p><strong>Date:</strong> August 2018</p>
 <p><strong>Author:</strong> Robbi Bishop-Taylor</p>
 <p><strong>Tags</strong>: <span class="target" id="index-0"></span>NetCDF, <span class="target" id="index-1"></span>Compliant files, <span class="target" id="index-2"></span>CF, <span class="target" id="index-3"></span>ACDD, <span class="target" id="index-4"></span>Publication, <span class="target" id="index-5"></span>NCI, <span class="target" id="index-6"></span>Outputting data</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -447,11 +471,9 @@ Elevation Model (NIDEM) located at
 </div>
 <div class="section" id="Import-sample-data">
 <h2>Import sample data<a class="headerlink" href="#Import-sample-data" title="Permalink to this headline">¶</a></h2>
-<p>For this example, we will create a compliant NetCDF file that contains
-three seperate input raster datasets. First, import the sample datasets:</p>
+<p>For this example, we will create a compliant NetCDF file that contains three seperate input raster datasets. First, import the sample datasets:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -471,21 +493,12 @@ three seperate input raster datasets. First, import the sample datasets:</p>
 <div class="section" id="Create-new-NetCDF">
 <h2>Create new NetCDF<a class="headerlink" href="#Create-new-NetCDF" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Here we create a new NetCDF storage unit using the
-<code class="docutils literal notranslate"><span class="pre">create_netcdf_storage_unit</span></code> function from
-<code class="docutils literal notranslate"><span class="pre">datacube.storage.storage</span></code></li>
-<li>This lets us set up the dataset’s coordinate reference system,
-dataset dimensions (e.g. x and y coordinates) and create empty
-variables tied to the above dimensions with manually defined nodata
-values, units and dtypes.</li>
-<li>Using the <code class="docutils literal notranslate"><span class="pre">CRS</span></code>, <code class="docutils literal notranslate"><span class="pre">Coordinate</span></code> and <code class="docutils literal notranslate"><span class="pre">Variable</span></code> functions
-automatically generates much of the required metadata, including
-<code class="docutils literal notranslate"><span class="pre">geospatial_bounds</span></code>, <code class="docutils literal notranslate"><span class="pre">geospatial_bounds_crs</span></code>,
-<code class="docutils literal notranslate"><span class="pre">geospatial_lat_*</span></code> and <code class="docutils literal notranslate"><span class="pre">geospatial_lon_*</span></code>.</li>
+<li>Here we create a new NetCDF storage unit using the <code class="docutils literal notranslate"><span class="pre">create_netcdf_storage_unit</span></code> function from <code class="docutils literal notranslate"><span class="pre">datacube.storage.storage</span></code></li>
+<li>This lets us set up the dataset’s coordinate reference system, dataset dimensions (e.g. x and y coordinates) and create empty variables tied to the above dimensions with manually defined nodata values, units and dtypes.</li>
+<li>Using the <code class="docutils literal notranslate"><span class="pre">CRS</span></code>, <code class="docutils literal notranslate"><span class="pre">Coordinate</span></code> and <code class="docutils literal notranslate"><span class="pre">Variable</span></code> functions automatically generates much of the required metadata, including <code class="docutils literal notranslate"><span class="pre">geospatial_bounds</span></code>, <code class="docutils literal notranslate"><span class="pre">geospatial_bounds_crs</span></code>, <code class="docutils literal notranslate"><span class="pre">geospatial_lat_*</span></code> and <code class="docutils literal notranslate"><span class="pre">geospatial_lon_*</span></code>.</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -554,27 +567,11 @@ root group (NETCDF4 data model, file format HDF5):
 </div>
 <div class="section" id="Assign-data-and-attributes-to-each-variable">
 <h3>Assign data and attributes to each variable<a class="headerlink" href="#Assign-data-and-attributes-to-each-variable" title="Permalink to this headline">¶</a></h3>
-<p>So far, the created NetCDF contains no data. The next step is to assign
-each of our data arrays into the previously created variables, and set
-metadata for each variable. * Using the <code class="docutils literal notranslate"><span class="pre">netcdfy_data</span></code> function will
-ensure the data types are compliant. * Include a descriptive summary of
-the variable for <code class="docutils literal notranslate"><span class="pre">long_name</span></code>. * If applicable, use <code class="docutils literal notranslate"><span class="pre">valid_range</span></code> to
-set the valid numeric range for the data. * For most datasets,
-<code class="docutils literal notranslate"><span class="pre">coverage_content_type</span></code> can be set to ‘modelResult’ (valid options are
-‘image’, ‘thematicClassification’, ‘physicalMeasurement’,
-‘auxiliaryInformation’, ‘qualityInformation’, ‘referenceInformation’,
-‘modelResult’, ‘coordinate’) * The <code class="docutils literal notranslate"><span class="pre">standard_name</span></code> attribute links
-the data to a specific pre-defined type of data defined by the Climate
-and Forecast (CF) Metadata Conventions. If applicable, select an option
-from this website
-(<a class="reference external" href="http://cfconventions.org/Data/cf-standard-names/55/build/cf-standard-name-table.html">http://cfconventions.org/Data/cf-standard-names/55/build/cf-standard-name-table.html</a>);
-e.g. ‘height_above_mean_sea_level’ below. If none of the
-<code class="docutils literal notranslate"><span class="pre">standard_name</span></code> options fit your data, it is best to leave it out,
-even though this will cause the NetCDF files to fail one of the ACDD
-tests.</p>
+<p>So far, the created NetCDF contains no data. The next step is to assign each of our data arrays into the previously created variables, and set metadata for each variable. * Using the <code class="docutils literal notranslate"><span class="pre">netcdfy_data</span></code> function will ensure the data types are compliant. * Include a descriptive summary of the variable for <code class="docutils literal notranslate"><span class="pre">long_name</span></code>. * If applicable, use <code class="docutils literal notranslate"><span class="pre">valid_range</span></code> to set the valid numeric range for the data. * For most datasets, <code class="docutils literal notranslate"><span class="pre">coverage_content_type</span></code> can be set to ‘modelResult’ (valid options are
+‘image’, ‘thematicClassification’, ‘physicalMeasurement’, ‘auxiliaryInformation’, ‘qualityInformation’, ‘referenceInformation’, ‘modelResult’, ‘coordinate’) * The <code class="docutils literal notranslate"><span class="pre">standard_name</span></code> attribute links the data to a specific pre-defined type of data defined by the Climate and Forecast (CF) Metadata Conventions. If applicable, select an option from this website (<a class="reference external" href="http://cfconventions.org/Data/cf-standard-names/55/build/cf-standard-name-table.html">http://cfconventions.org/Data/cf-standard-names/55/build/cf-standard-name-table.html</a>); e.g. ‘height_above_mean_sea_level’ below. If none
+of the <code class="docutils literal notranslate"><span class="pre">standard_name</span></code> options fit your data, it is best to leave it out, even though this will cause the NetCDF files to fail one of the ACDD tests.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -684,16 +681,9 @@ filling on)])
 </div>
 <div class="section" id="Add-global-metadata">
 <h3>Add global metadata<a class="headerlink" href="#Add-global-metadata" title="Permalink to this headline">¶</a></h3>
-<p>The next step is to add global attributes which provide metadata for the
-entire NetCDF dataset including all variables. * This link
-(<a class="reference external" href="https://geo-ide.noaa.gov/wiki/index.php?title=NetCDF_Attribute_Convention_for_Dataset_Discovery">https://geo-ide.noaa.gov/wiki/index.php?title=NetCDF_Attribute_Convention_for_Dataset_Discovery</a>)
-provides guidance on the kinds of information that can be included. Aim
-to include as many of the ‘Highly Recommended’ and ‘Recommended’
-attributes as possible. * Many of the ‘Recommended’ attributes will be
-automatically generated by <code class="docutils literal notranslate"><span class="pre">datacube</span></code> functions</p>
+<p>The next step is to add global attributes which provide metadata for the entire NetCDF dataset including all variables. * This link (<a class="reference external" href="https://geo-ide.noaa.gov/wiki/index.php?title=NetCDF_Attribute_Convention_for_Dataset_Discovery">https://geo-ide.noaa.gov/wiki/index.php?title=NetCDF_Attribute_Convention_for_Dataset_Discovery</a>) provides guidance on the kinds of information that can be included. Aim to include as many of the ‘Highly Recommended’ and ‘Recommended’ attributes as possible. * Many of the ‘Recommended’ attributes will be automatically generated by <code class="docutils literal notranslate"><span class="pre">datacube</span></code> functions</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -756,11 +746,9 @@ root group (NETCDF4 data model, file format HDF5):
 </div>
 <div class="section" id="Close-the-dataset">
 <h3>Close the dataset<a class="headerlink" href="#Close-the-dataset" title="Permalink to this headline">¶</a></h3>
-<p>When you have finished adding data and metadata, close the file to write
-it to file</p>
+<p>When you have finished adding data and metadata, close the file to write it to file</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -773,35 +761,24 @@ it to file</p>
 </div>
 <div class="section" id="Testing-compliance">
 <h2>Testing compliance<a class="headerlink" href="#Testing-compliance" title="Permalink to this headline">¶</a></h2>
-<p>At minimum, the NCI requires compliance with the Climate and Forecast
-Metadata Standard (CF) and the Attribute Convention for Data Discovery
-(ACDD). To test whether the dataset is compliant, we can run several
-checks:</p>
+<p>At minimum, the NCI requires compliance with the Climate and Forecast Metadata Standard (CF) and the Attribute Convention for Data Discovery (ACDD). To test whether the dataset is compliant, we can run several checks:</p>
 <div class="section" id="Climate-and-Forecast-Metadata-Standard-(CF)-compliance">
 <h3>Climate and Forecast Metadata Standard (CF) compliance<a class="headerlink" href="#Climate-and-Forecast-Metadata-Standard-(CF)-compliance" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>You can test for CF compliance using this online utility:
-<a class="reference external" href="http://puma.nerc.ac.uk/cgi-bin/cf-checker.pl">http://puma.nerc.ac.uk/cgi-bin/cf-checker.pl</a></li>
+<li>You can test for CF compliance using this online utility: <a class="reference external" href="http://puma.nerc.ac.uk/cgi-bin/cf-checker.pl">http://puma.nerc.ac.uk/cgi-bin/cf-checker.pl</a></li>
 <li>All CF tests should pass</li>
 </ul>
 </div>
 <div class="section" id="Attribute-Convention-for-Data-Discovery-(ACDD)-compliance">
 <h3>Attribute Convention for Data Discovery (ACDD) compliance<a class="headerlink" href="#Attribute-Convention-for-Data-Discovery-(ACDD)-compliance" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Run the compliance-checker tool loaded by the dea module on the NCI:
-<code class="docutils literal notranslate"><span class="pre">compliance-checker</span> <span class="pre">test_file.nc</span></code></li>
-<li>This is a much more detailed check, and will give a total score for
-the dataset and an explanation for each failed test.</li>
-<li>Every effort should be made to make all ’High Priority’ tests pass,
-but there is some flexibility (e.g. varattr may give less than a 100%
-score if some attributes that are not applicable for a given variable
-like standard_name are not set).</li>
-<li>You do not need to pass all ‘Medium priority’ tests, but try to
-complete as many as practically possible.</li>
+<li>Run the compliance-checker tool loaded by the dea module on the NCI: <code class="docutils literal notranslate"><span class="pre">compliance-checker</span> <span class="pre">test_file.nc</span></code></li>
+<li>This is a much more detailed check, and will give a total score for the dataset and an explanation for each failed test.</li>
+<li>Every effort should be made to make all ’High Priority’ tests pass, but there is some flexibility (e.g. varattr may give less than a 100% score if some attributes that are not applicable for a given variable like standard_name are not set).</li>
+<li>You do not need to pass all ‘Medium priority’ tests, but try to complete as many as practically possible.</li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -872,12 +849,9 @@ time_coverage_resolution:        Attr time_coverage_resolution not
 </div>
 <div class="section" id="Check-file-opens-correctly-in-QGIS">
 <h3>Check file opens correctly in QGIS<a class="headerlink" href="#Check-file-opens-correctly-in-QGIS" title="Permalink to this headline">¶</a></h3>
-<p>If your file contains spatial data, open the NetCDF in QGIS to verify it
-plots in the correct location, and that nodata values are correctly
-accounted for.</p>
+<p>If your file contains spatial data, open the NetCDF in QGIS to verify it plots in the correct location, and that nodata values are correctly accounted for.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -937,6 +911,7 @@ accounted for.</p>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.14.0/dist/embed-amd.js"></script>
         <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     
 
   

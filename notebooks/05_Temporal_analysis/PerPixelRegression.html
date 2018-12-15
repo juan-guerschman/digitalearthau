@@ -278,18 +278,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #303F9F;
+    color: #307FC1;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #D84315;
+    color: #BF5B3D;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 8ex;
+    min-width: 5ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -329,9 +329,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #cfcfcf;
+    border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f7f7f7;
+    background: #f5f5f5;
 }
 
 /* override MathJax center alignment in output cells */
@@ -339,7 +339,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.pngmath center alignment in output cells */
+/* override sphinx.ext.imgmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -389,6 +389,40 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -405,43 +439,30 @@ div.nboutput div.output_area.stderr {
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
 <div class="section" id="Per-pixel-regression-of-tide-heights-vs.-MNDWI">
 <h1>Per-pixel regression of tide heights vs. MNDWI<a class="headerlink" href="#Per-pixel-regression-of-tide-heights-vs.-MNDWI" title="Permalink to this headline">¶</a></h1>
 <p><strong>What does this notebook do?</strong></p>
-<p>This notebook computes pixel-wise regression based on Landsat 5, 7 and 8
-MNDWI values (a wetness index) vs tide heights generated using the (<a class="reference external" href="http://volkov.oce.orst.edu/tides/otps.html">OSU
-Tidal Prediction Software or
-OTPS</a>). This results in
-covariance, correlation, p-value, intercept, slope and standard error
-values for every pixel in a study area that help reveal how well tidal
-processes influence patterns of innundation in the landscape.</p>
-<p>This workflow can be adapted to comparing the relationship between any
-remotely sensed metric with another explanatory variable. Because the
-regression outputs are calculated for every individual pixel, these
-metrics can then be plotted to reveal spatial patterns in relationships
-between the two variables.</p>
+<p>This notebook computes pixel-wise regression based on Landsat 5, 7 and 8 MNDWI values (a wetness index) vs tide heights generated using the (<a class="reference external" href="http://volkov.oce.orst.edu/tides/otps.html">OSU Tidal Prediction Software or OTPS</a>). This results in covariance, correlation, p-value, intercept, slope and standard error values for every pixel in a study area that help reveal how well tidal processes influence patterns of innundation in the landscape.</p>
+<p>This workflow can be adapted to comparing the relationship between any remotely sensed metric with another explanatory variable. Because the regression outputs are calculated for every individual pixel, these metrics can then be plotted to reveal spatial patterns in relationships between the two variables.</p>
 <p><strong>Requirements:</strong></p>
-<p>You need to run the following commands from the command line prior to
-launching jupyter notebooks from the same terminal so that the required
-libraries and paths are set:</p>
+<p>You need to run the following commands from the command line prior to launching jupyter notebooks from the same terminal so that the required libraries and paths are set:</p>
 <p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">use</span> <span class="pre">/g/data/v10/public/modules/modulefiles</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">dea</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">otps</span></code></p>
-<p>If you find an error or bug in this notebook, please either create an
-‘Issue’ in the Github repository, or fix it yourself and create a ‘Pull’
-request to contribute the updated notebook back into the repository (See
-the repository
-<a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/blob/master/README.rst">README</a>
-for instructions on creating a Pull request).</p>
+<p>If you find an error or bug in this notebook, please either create an ‘Issue’ in the Github repository, or fix it yourself and create a ‘Pull’ request to contribute the updated notebook back into the repository (See the repository <a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/blob/master/README.rst">README</a> for instructions on creating a Pull request).</p>
 <p><strong>Date:</strong> October 2018</p>
 <p><strong>Authors:</strong> Robbi Bishop-Taylor, Bex Dunn</p>
 <p><strong>Tags</strong>: <span class="target" id="index-0"></span>tidal_model, <span class="target" id="index-1"></span>OTPS, <span class="target" id="index-2"></span>tidal_tagging, <span class="target" id="index-3"></span>predict_tide, <span class="target" id="index-4"></span>regression, <span class="target" id="index-5"></span>statistics, <span class="target" id="index-6"></span>correlation, <span class="target" id="index-7"></span>scatterplot, <span class="target" id="index-8"></span>intertidal, <span class="target" id="index-9"></span>mndwi, <span class="target" id="index-10"></span>ndwi</p>
 <div class="section" id="Import-modules">
 <h2>Import modules<a class="headerlink" href="#Import-modules" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -488,8 +509,7 @@ The autoreload extension is already loaded. To reload it, use:
 <div class="section" id="Define-notebook-specific-functions">
 <h3>Define notebook-specific functions<a class="headerlink" href="#Define-notebook-specific-functions" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -575,11 +595,9 @@ The autoreload extension is already loaded. To reload it, use:
 </div>
 <div class="section" id="Set-up-query-parameters">
 <h2>Set up query parameters<a class="headerlink" href="#Set-up-query-parameters" title="Permalink to this headline">¶</a></h2>
-<p>Set the centroid and buffer in metres around the centroid to define the
-analysis region.</p>
+<p>Set the centroid and buffer in metres around the centroid to define the analysis region.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -598,11 +616,9 @@ analysis region.</p>
 </div>
 <div class="section" id="Import-remotely-sensed-time-series-data">
 <h2>Import remotely-sensed time series data<a class="headerlink" href="#Import-remotely-sensed-time-series-data" title="Permalink to this headline">¶</a></h2>
-<p>Imports a time series of Landsat observations as a DEA <code class="docutils literal notranslate"><span class="pre">xarray</span></code>
-dataset.</p>
+<p>Imports a time series of Landsat observations as a DEA <code class="docutils literal notranslate"><span class="pre">xarray</span></code> dataset.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -655,8 +671,7 @@ Combining and sorting ls5, ls7, ls8 data
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -674,14 +689,9 @@ Combining and sorting ls5, ls7, ls8 data
 </div>
 <div class="section" id="Tidal-modelling-using-OTPS">
 <h2>Tidal modelling using OTPS<a class="headerlink" href="#Tidal-modelling-using-OTPS" title="Permalink to this headline">¶</a></h2>
-<p>Extracts a list of timestamps based on the time and date of acquisition
-for each Landsat observation. These timestamps can then be used inputs
-to the <a class="reference external" href="http://volkov.oce.orst.edu/tides/otps.html">OSU Tidal Prediction Software (OTPS) tidal
-model</a> to compute tidal
-heights at the time of acquisition of each Landsat observation.</p>
+<p>Extracts a list of timestamps based on the time and date of acquisition for each Landsat observation. These timestamps can then be used inputs to the <a class="reference external" href="http://volkov.oce.orst.edu/tides/otps.html">OSU Tidal Prediction Software (OTPS) tidal model</a> to compute tidal heights at the time of acquisition of each Landsat observation.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -722,19 +732,10 @@ heights at the time of acquisition of each Landsat observation.</p>
 </div>
 <div class="section" id="Tagging,-filtering-and-compositing-Landsat-observations-by-tidal-height/stage">
 <h3>Tagging, filtering and compositing Landsat observations by tidal height/stage<a class="headerlink" href="#Tagging,-filtering-and-compositing-Landsat-observations-by-tidal-height/stage" title="Permalink to this headline">¶</a></h3>
-<p>Adds tidal height data back into our original <code class="docutils literal notranslate"><span class="pre">xarray</span></code> dataset so that
-each Landsat observation is correctly tagged with its corresponding
-tidal height.</p>
-<p>To compute regressions between tide heights and MNDWI values, we need to
-change the dataset’s index from time to tide height. As an easy/clunky
-solution, we can assign our tide heights into the time coordinate, then
-rename it to tide. Note that because our tide heights contain duplicate
-values, we need to add tiny random values to our tide heights before
-assigning them into our time coordinate (xarray indexes cannot include
-random values).</p>
+<p>Adds tidal height data back into our original <code class="docutils literal notranslate"><span class="pre">xarray</span></code> dataset so that each Landsat observation is correctly tagged with its corresponding tidal height.</p>
+<p>To compute regressions between tide heights and MNDWI values, we need to change the dataset’s index from time to tide height. As an easy/clunky solution, we can assign our tide heights into the time coordinate, then rename it to tide. Note that because our tide heights contain duplicate values, we need to add tiny random values to our tide heights before assigning them into our time coordinate (xarray indexes cannot include random values).</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -751,8 +752,7 @@ random values).</p>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -779,14 +779,9 @@ Attributes:
 </div>
 <div class="section" id="Compute-linear-regression-of-MNDWI-vs-tide-height">
 <h3>Compute linear regression of MNDWI vs tide height<a class="headerlink" href="#Compute-linear-regression-of-MNDWI-vs-tide-height" title="Permalink to this headline">¶</a></h3>
-<p>First we calculate the Modified Normalised Difference Water Index
-(MNDWI) for every pixel in the study area, then compare this to tide
-heights using linear regression. This calculates covariance,
-correlation, intercept, p-value and standard error for NDWI values vs
-tide heights for every pixel, which we can plot spatially:</p>
+<p>First we calculate the Modified Normalised Difference Water Index (MNDWI) for every pixel in the study area, then compare this to tide heights using linear regression. This calculates covariance, correlation, intercept, p-value and standard error for NDWI values vs tide heights for every pixel, which we can plot spatially:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -827,8 +822,7 @@ tide heights for every pixel, which we can plot spatially:</p>
 </div>
 <p>Plot correlation only for pixels where p-value is less than 0.05:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -838,8 +832,7 @@ tide heights for every pixel, which we can plot spatially:</p>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -857,13 +850,9 @@ tide heights for every pixel, which we can plot spatially:</p>
 </div>
 <div class="section" id="Scatterplots">
 <h3>Scatterplots<a class="headerlink" href="#Scatterplots" title="Permalink to this headline">¶</a></h3>
-<p>For more detailed inspection of the data, we can plot scatterplots of
-MNDWI values by tide height for a single pixel. The black dot on the
-MNDWI image on the right gives the location of the point used for the
-scatterplot:</p>
+<p>For more detailed inspection of the data, we can plot scatterplots of MNDWI values by tide height for a single pixel. The black dot on the MNDWI image on the right gives the location of the point used for the scatterplot:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -890,8 +879,7 @@ scatterplot:</p>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -910,11 +898,9 @@ scatterplot:</p>
 </div>
 <div class="section" id="Experimental:-test-if-correlations-are-higher-at-various-tide-height-lags">
 <h2>Experimental: test if correlations are higher at various tide height lags<a class="headerlink" href="#Experimental:-test-if-correlations-are-higher-at-various-tide-height-lags" title="Permalink to this headline">¶</a></h2>
-<p>Here we lag tide heights by a set of negative and positive lag amounts,
-and compare what lags resulted in the highest correlations:</p>
+<p>Here we lag tide heights by a set of negative and positive lag amounts, and compare what lags resulted in the highest correlations:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -946,8 +932,7 @@ and compare what lags resulted in the highest correlations:</p>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -1013,6 +998,7 @@ and compare what lags resulted in the highest correlations:</p>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.14.0/dist/embed-amd.js"></script>
         <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     
 
   

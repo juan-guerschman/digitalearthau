@@ -211,6 +211,11 @@
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
 <div align="center" class="align-center"><img alt="Digital Earth Australia Logo" src="_images/dea-logo-inline.svg" /></div>
 <div class="line-block">
@@ -453,7 +458,6 @@ accounts on National Computational Infrastructure (NCI).</p>
 <li class="toctree-l3"><a class="reference internal" href="notebooks/04_Index_calculation/Mineral_Indices_Calculation.html#Import-modules-from-standard-libraries,-datacube-and-files">Import modules from standard libraries, datacube and files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="notebooks/04_Index_calculation/Mineral_Indices_Calculation.html#Edit-this-cell-to-choose-your-area-and-temporal-range">Edit this cell to choose your area and temporal range</a></li>
 <li class="toctree-l3"><a class="reference internal" href="notebooks/04_Index_calculation/Mineral_Indices_Calculation.html#Load-data-from-Digital-Earth-Australia">Load data from Digital Earth Australia</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notebooks/04_Index_calculation/Mineral_Indices_Calculation.html#Calculate-Mineral-Indices">Calculate Mineral Indices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="notebooks/04_Index_calculation/Mineral_Indices_Calculation.html#Plot-the-Iron-Oxide-Ratio-(RED/BLUE)">Plot the Iron Oxide Ratio (RED/BLUE)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="notebooks/04_Index_calculation/Mineral_Indices_Calculation.html#Plot-the-Ferrous-Minerals-Ratio-(SWIR1/NIR)">Plot the Ferrous Minerals Ratio (SWIR1/NIR)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="notebooks/04_Index_calculation/Mineral_Indices_Calculation.html#Plot-the-Clay-NIR/SWIR1-ratio-(NIR/SWIR1)">Plot the Clay NIR/SWIR1 ratio (NIR/SWIR1)</a></li>
@@ -992,6 +996,7 @@ accounts on National Computational Infrastructure (NCI).</p>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.14.0/dist/embed-amd.js"></script>
         <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     
 
   

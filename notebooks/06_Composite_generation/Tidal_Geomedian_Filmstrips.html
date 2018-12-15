@@ -267,18 +267,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #303F9F;
+    color: #307FC1;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #D84315;
+    color: #BF5B3D;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 8ex;
+    min-width: 5ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -318,9 +318,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #cfcfcf;
+    border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f7f7f7;
+    background: #f5f5f5;
 }
 
 /* override MathJax center alignment in output cells */
@@ -328,7 +328,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.pngmath center alignment in output cells */
+/* override sphinx.ext.imgmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -378,6 +378,40 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -394,39 +428,29 @@ div.nboutput div.output_area.stderr {
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
 <div class="section" id="Generate-tidal-geomedian-filmstrips">
 <h1>Generate tidal geomedian filmstrips<a class="headerlink" href="#Generate-tidal-geomedian-filmstrips" title="Permalink to this headline">¶</a></h1>
 <p><strong>What does this notebook do?</strong></p>
-<p>This notebooks demonstrates how to tidally tag remotely sensed imagery
-using the <a class="reference external" href="http://volkov.oce.orst.edu/tides/otps.html">OSU Tidal Prediction Software or
-OTPS</a> model, and create
-geomedian composites for a given set of epochs and tidal range. These
-geomedian composites are exported as geoTIFFs, and plotted as
-‘filmstrip’ plots that compare change over time.</p>
+<p>This notebooks demonstrates how to tidally tag remotely sensed imagery using the <a class="reference external" href="http://volkov.oce.orst.edu/tides/otps.html">OSU Tidal Prediction Software or OTPS</a> model, and create geomedian composites for a given set of epochs and tidal range. These geomedian composites are exported as geoTIFFs, and plotted as ‘filmstrip’ plots that compare change over time.</p>
 <p><strong>Requirements:</strong></p>
-<p>You need to run the following commands from the command line prior to
-launching jupyter notebooks from the same terminal so that the required
-libraries and paths are set:</p>
+<p>You need to run the following commands from the command line prior to launching jupyter notebooks from the same terminal so that the required libraries and paths are set:</p>
 <p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">use</span> <span class="pre">/g/data/v10/public/modules/modulefiles</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">dea/20180515</span></code> <em>(currently using an older version of
-``dea`` due to a bug in ``xr.concat``; will be reverted to
-``module load dea`` in future)</em></p>
+<p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">dea/20180515</span></code> <em>(currently using an older version of ``dea`` due to a bug in ``xr.concat``; will be reverted to ``module load dea`` in future)</em></p>
 <p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">otps</span></code></p>
-<p>If you find an error or bug in this notebook, please either create an
-‘Issue’ in the Github repository, or fix it yourself and create a ‘Pull’
-request to contribute the updated notebook back into the repository (See
-the repository
-<a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/blob/master/README.rst">README</a>
-for instructions on creating a Pull request).</p>
+<p>If you find an error or bug in this notebook, please either create an ‘Issue’ in the Github repository, or fix it yourself and create a ‘Pull’ request to contribute the updated notebook back into the repository (See the repository <a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/blob/master/README.rst">README</a> for instructions on creating a Pull request).</p>
 <p><strong>Date:</strong> August 2018</p>
 <p><strong>Author:</strong> Robbi Bishop-Taylor, Claire Phillips</p>
 <p><strong>Tags</strong>: <span class="target" id="index-0"></span>tidal_model, <span class="target" id="index-1"></span>OTPS, <span class="target" id="index-2"></span>tidal_tagging, <span class="target" id="index-3"></span>predict_tide, <span class="target" id="index-4"></span>composites, <span class="target" id="index-5"></span>dask, <span class="target" id="index-6"></span>write_geotiff,  <span class="target" id="index-7"></span>filmstrip_plot, <span class="target" id="index-8"></span>geopandas, <span class="target" id="index-9"></span>point_in_polygon</p>
 <div class="section" id="Import-modules">
 <h2>Import modules<a class="headerlink" href="#Import-modules" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -486,7 +510,7 @@ for instructions on creating a Pull request).</p>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="stderr output_area docutils container">
+<div class="output_area stderr docutils container">
 <div class="highlight"><pre>
 Failed to resolve driver datacube.plugins.index::s3aio_index
 </pre></div></div>
@@ -494,12 +518,9 @@ Failed to resolve driver datacube.plugins.index::s3aio_index
 </div>
 <div class="section" id="Geomedian-filmstrip-parameters">
 <h2>Geomedian filmstrip parameters<a class="headerlink" href="#Geomedian-filmstrip-parameters" title="Permalink to this headline">¶</a></h2>
-<p>Set the area, time period and sensors of interest, and tide limits and
-epoch length used to produce each geomedian composite. This is the only
-cell that needs to be edited to run the notebook.</p>
+<p>Set the area, time period and sensors of interest, and tide limits and epoch length used to produce each geomedian composite. This is the only cell that needs to be edited to run the notebook.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -522,13 +543,9 @@ cell that needs to be edited to run the notebook.</p>
 </div>
 <div class="section" id="Return-observations-for-each-sensor-for-the-entire-time-series">
 <h2>Return observations for each sensor for the entire time series<a class="headerlink" href="#Return-observations-for-each-sensor-for-the-entire-time-series" title="Permalink to this headline">¶</a></h2>
-<p>Use <code class="docutils literal notranslate"><span class="pre">dask</span></code> to lazily load Landsat data and PQ for each sensor for the
-entire time series. No data is actually loaded here: this is saved until
-after the layers have been filtered by tidal stage and date to save
-processing time.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">dask</span></code> to lazily load Landsat data and PQ for each sensor for the entire time series. No data is actually loaded here: this is saved until after the layers have been filtered by tidal stage and date to save processing time.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -625,12 +642,9 @@ Computing tidal heights for 107 ls8 observations
 </div>
 <div class="section" id="Subset-data-by-tidal-height-and-epoch-time-range">
 <h2>Subset data by tidal height and epoch time range<a class="headerlink" href="#Subset-data-by-tidal-height-and-epoch-time-range" title="Permalink to this headline">¶</a></h2>
-<p>Use image time-stamps to compute tidal heights at the time of each
-observation, and take a subset of the entire Landsat and PQ time series
-based on tide height and epoch date range for each sensor.</p>
+<p>Use image time-stamps to compute tidal heights at the time of each observation, and take a subset of the entire Landsat and PQ time series based on tide height and epoch date range for each sensor.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -705,12 +719,9 @@ Analysing tidal heights of -0.14 m to 0.42 m out of an observed local tidal rang
 </div>
 <div class="section" id="Combine-multiple-sensors,-load-data-and-generate-geomedians">
 <h2>Combine multiple sensors, load data and generate geomedians<a class="headerlink" href="#Combine-multiple-sensors,-load-data-and-generate-geomedians" title="Permalink to this headline">¶</a></h2>
-<p>For each epoch, combine all sensors into one dataset, load the data for
-the first time using <code class="docutils literal notranslate"><span class="pre">dask</span></code>’s <code class="docutils literal notranslate"><span class="pre">.compute()</span></code>, then composite all
-timesteps into a single array using a geometric median computation.</p>
+<p>For each epoch, combine all sensors into one dataset, load the data for the first time using <code class="docutils literal notranslate"><span class="pre">dask</span></code>’s <code class="docutils literal notranslate"><span class="pre">.compute()</span></code>, then composite all timesteps into a single array using a geometric median computation.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -792,11 +803,9 @@ Loading and combining ls5, ls7, ls8 data for 2012-01-01
 </div>
 <div class="section" id="Plot-geomedians-as-filmstrips">
 <h2>Plot geomedians as filmstrips<a class="headerlink" href="#Plot-geomedians-as-filmstrips" title="Permalink to this headline">¶</a></h2>
-<p>Plots geomedians for each epoch as single true and false-colour
-filmstrip plots:</p>
+<p>Plots geomedians for each epoch as single true and false-colour filmstrip plots:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -893,11 +902,9 @@ Generating 4-panel truecolour filmstrip plot
 </div>
 <div class="section" id="Create-tidal-modelled-vs-observed-plot">
 <h2>Create tidal modelled vs observed plot<a class="headerlink" href="#Create-tidal-modelled-vs-observed-plot" title="Permalink to this headline">¶</a></h2>
-<p>Create a plot comparing selected Landsat observations to all Landsat
-observations and the entire tidal history of the study area:</p>
+<p>Create a plot comparing selected Landsat observations to all Landsat observations and the entire tidal history of the study area:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -982,8 +989,7 @@ observations and the entire tidal history of the study area:</p>
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1042,6 +1048,7 @@ observations and the entire tidal history of the study area:</p>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.14.0/dist/embed-amd.js"></script>
         <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     
 
   

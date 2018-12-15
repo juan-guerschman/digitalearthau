@@ -247,18 +247,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #303F9F;
+    color: #307FC1;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #D84315;
+    color: #BF5B3D;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 8ex;
+    min-width: 5ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -298,9 +298,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #cfcfcf;
+    border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f7f7f7;
+    background: #f5f5f5;
 }
 
 /* override MathJax center alignment in output cells */
@@ -308,7 +308,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.pngmath center alignment in output cells */
+/* override sphinx.ext.imgmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -358,6 +358,40 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -374,29 +408,26 @@ div.nboutput div.output_area.stderr {
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
-<div class="figure" id="id1">
-<img alt="Digital Earth Australia Logo" src="http://www.ga.gov.au/__data/assets/image/0007/49534/DEA-Logo-Inline.png" />
-<p class="caption"><span class="caption-text">Digital Earth Australia Logo</span></p>
-</div>
+<p><img alt="Digital Earth Australia Logo" src="http://www.ga.gov.au/__data/assets/image/0007/49534/DEA-Logo-Inline.png" /></p>
 <div class="section" id="Digital-Earth-Australia">
 <h1>Digital Earth Australia<a class="headerlink" href="#Digital-Earth-Australia" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="Introduction-to-Jupyter-Notebooks">
 <h2>Introduction to Jupyter Notebooks<a class="headerlink" href="#Introduction-to-Jupyter-Notebooks" title="Permalink to this headline">¶</a></h2>
-<p>You can view the list of notebooks by selecting <strong>`File -&gt;
-Open… &lt;/&gt;`__</strong> from the menu above.</p>
-<p>To create a new notebook of your own, select <strong>File -&gt; New Notebook -&gt;
-Python 3</strong></p>
+<p>You can view the list of notebooks by selecting <strong>`File -&gt; Open… &lt;/&gt;`__</strong> from the menu above.</p>
+<p>To create a new notebook of your own, select <strong>File -&gt; New Notebook -&gt; Python 3</strong></p>
 <div class="section" id="Python-cells">
 <h3>Python cells<a class="headerlink" href="#Python-cells" title="Permalink to this headline">¶</a></h3>
-<p>Select a cell by clicking it (so that a border appears around it), or by
-using the arrow keys.</p>
-<p>To run a cell, click the button with the symbol, or press
-<strong>``Shift+Enter``</strong>.</p>
+<p>Select a cell by clicking it (so that a border appears around it), or by using the arrow keys.</p>
+<p>To run a cell, click the button with the symbol, or press <strong>``Shift+Enter``</strong>.</p>
 <p>The cell will be run, and the next cell will be selected.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -406,8 +437,7 @@ using the arrow keys.</p>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -415,12 +445,10 @@ using the arrow keys.</p>
 </pre></div>
 </div>
 </div>
-<p>The value of the last line of code will be output below the cell when
-you run it, as above.</p>
+<p>The value of the last line of code will be output below the cell when you run it, as above.</p>
 <p>You can also use the <strong>``print``</strong> function:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -442,8 +470,7 @@ The value of x is 3
 <p>We can run shell commands by starting the cell with “<code class="docutils literal notranslate"><span class="pre">!</span></code>”.</p>
 <p>To print the current working directory, we can run the <code class="docutils literal notranslate"><span class="pre">pwd</span></code> command:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -452,8 +479,7 @@ The value of x is 3
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -466,8 +492,7 @@ The value of x is 3
 <h3>Copy example notebooks<a class="headerlink" href="#Copy-example-notebooks" title="Permalink to this headline">¶</a></h3>
 <p>We can list the library of example notebooks:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -484,19 +509,14 @@ Digital Earth Australia.ipynb  List Products.ipynb
 Getting Started.ipynb          Loading Data.ipynb
 </pre></div></div>
 </div>
-<p>These are read-only. To make a copy of them to save your own changes,
-open the notebook and select <strong>File</strong></p>
+<p>These are read-only. To make a copy of them to save your own changes, open the notebook and select <strong>File</strong></p>
 </div>
 <div class="section" id="Disk-quota">
 <h3>Disk quota<a class="headerlink" href="#Disk-quota" title="Permalink to this headline">¶</a></h3>
-<p>On VDI, you have a quota on your home directory of 2GB (2048M). If you
-go over your quota, you will not be able to save files, and will be
-unable to start a new VDI session until you remove files described in
-<a class="reference external" href="https://vdi.nci.org.au/help">https://vdi.nci.org.au/help</a></p>
+<p>On VDI, you have a quota on your home directory of 2GB (2048M). If you go over your quota, you will not be able to save files, and will be unable to start a new VDI session until you remove files described in <a class="reference external" href="https://vdi.nci.org.au/help">https://vdi.nci.org.au/help</a></p>
 <p>You can check your usage by running the following command:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [63]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[63]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -518,9 +538,7 @@ vdi-fs1.z48:/home/
 </div>
 <div class="section" id="Transfering-Files">
 <h3>Transfering Files<a class="headerlink" href="#Transfering-Files" title="Permalink to this headline">¶</a></h3>
-<p>To transfer files to and from your VDI home dircetory, you can use a
-SFTP client like <a class="reference external" href="https://filezilla-project.org/">Filezilla</a> to
-connect to <strong>``vdi-sftp.nci.org.au``</strong>.</p>
+<p>To transfer files to and from your VDI home dircetory, you can use a SFTP client like <a class="reference external" href="https://filezilla-project.org/">Filezilla</a> to connect to <strong>``vdi-sftp.nci.org.au``</strong>.</p>
 </div>
 </div>
 </div>
@@ -564,6 +582,7 @@ connect to <strong>``vdi-sftp.nci.org.au``</strong>.</p>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.14.0/dist/embed-amd.js"></script>
         <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     
 
   
