@@ -343,46 +343,46 @@ datacube product list
 <code class="docutils literal notranslate"><span class="pre">nbar</span></code> or <code class="docutils literal notranslate"><span class="pre">pqa</span></code>, it is important that datasets are labeled with the exact
 same <code class="docutils literal notranslate"><span class="pre">product_type</span></code>. For <code class="docutils literal notranslate"><span class="pre">metadata_type</span></code> use <code class="docutils literal notranslate"><span class="pre">eo</span></code> and a template shown
 below, see <a class="reference internal" href="#gotchas">Gotchas</a> section for more info.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;product_name&gt;</span>
-<span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;free form description&gt;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;product_name&gt;</span>
+<span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;free form description&gt;</span>
 
 <span class="c1"># If unsure use eo</span>
 <span class="c1"># platform/instrument are optional, copy from source product</span>
 <span class="c1"># or omit if combining products from multiple platforms</span>
-<span class="l l-Scalar l-Scalar-Plain">metadata_type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">eo</span>
-<span class="l l-Scalar l-Scalar-Plain">metadata</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">product_type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;product_type&gt;</span>
-  <span class="l l-Scalar l-Scalar-Plain">format</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">NetCDF</span>
-  <span class="l l-Scalar l-Scalar-Plain">platform</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">code</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;e.g. LANDSAT_5&gt;</span>
-  <span class="l l-Scalar l-Scalar-Plain">instrument</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;e.g. TM&gt;</span>
+<span class="nt">metadata_type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">eo</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">product_type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;product_type&gt;</span>
+  <span class="nt">format</span><span class="p">:</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">NetCDF</span>
+  <span class="nt">platform</span><span class="p">:</span>
+    <span class="nt">code</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;e.g. LANDSAT_5&gt;</span>
+  <span class="nt">instrument</span><span class="p">:</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;e.g. TM&gt;</span>
 
-<span class="l l-Scalar l-Scalar-Plain">measurements</span><span class="p p-Indicator">:</span>
+<span class="nt">measurements</span><span class="p">:</span>
   <span class="c1"># Repeat for all variables</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;variable_name&gt;</span>
-    <span class="l l-Scalar l-Scalar-Plain">dtype</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;uint16|uint32|float|...&gt;</span>
-    <span class="l l-Scalar l-Scalar-Plain">nodata</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;optional, needed for integer types usually, -9999 for example&gt;</span>
-    <span class="l l-Scalar l-Scalar-Plain">units</span><span class="p p-Indicator">:</span> <span class="s">&#39;1&#39;</span> <span class="c1"># Measurement units like &quot;meters&quot;, use &#39;1&#39; if unit-less</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;variable_name&gt;</span>
+    <span class="nt">dtype</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;uint16|uint32|float|...&gt;</span>
+    <span class="nt">nodata</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;optional, needed for integer types usually, -9999 for example&gt;</span>
+    <span class="nt">units</span><span class="p">:</span> <span class="s">&#39;1&#39;</span> <span class="c1"># Measurement units like &quot;meters&quot;, use &#39;1&#39; if unit-less</span>
 
 <span class="c1"># Typical settings, usually no need to change.</span>
 <span class="c1"># For derived products usually good idea to copy source product settings</span>
 <span class="c1"># for tile_size and resolution</span>
-<span class="l l-Scalar l-Scalar-Plain">storage</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">driver</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">NetCDFCF</span>
-  <span class="l l-Scalar l-Scalar-Plain">crs</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">EPSG:3577</span>
-  <span class="l l-Scalar l-Scalar-Plain">tile_size</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">x</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">100000.0</span>
-    <span class="l l-Scalar l-Scalar-Plain">y</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">100000.0</span>
-  <span class="l l-Scalar l-Scalar-Plain">resolution</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">x</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">25</span>
-    <span class="l l-Scalar l-Scalar-Plain">y</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">-25</span>
-  <span class="l l-Scalar l-Scalar-Plain">chunking</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">x</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">200</span>
-    <span class="l l-Scalar l-Scalar-Plain">y</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">200</span>
-    <span class="l l-Scalar l-Scalar-Plain">time</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-  <span class="l l-Scalar l-Scalar-Plain">dimension_order</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="nv">time</span><span class="p p-Indicator">,</span> <span class="nv">y</span><span class="p p-Indicator">,</span> <span class="nv">x</span><span class="p p-Indicator">]</span>
+<span class="nt">storage</span><span class="p">:</span>
+  <span class="nt">driver</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">NetCDFCF</span>
+  <span class="nt">crs</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">EPSG:3577</span>
+  <span class="nt">tile_size</span><span class="p">:</span>
+    <span class="nt">x</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">100000.0</span>
+    <span class="nt">y</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">100000.0</span>
+  <span class="nt">resolution</span><span class="p">:</span>
+    <span class="nt">x</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">25</span>
+    <span class="nt">y</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">-25</span>
+  <span class="nt">chunking</span><span class="p">:</span>
+    <span class="nt">x</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">200</span>
+    <span class="nt">y</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">200</span>
+    <span class="nt">time</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+  <span class="nt">dimension_order</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">time</span><span class="p p-Indicator">,</span> <span class="nv">y</span><span class="p p-Indicator">,</span> <span class="nv">x</span><span class="p p-Indicator">]</span>
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">NEW_PRODUCT_FILE</span><span class="o">=</span><span class="s2">&quot;&lt;/path/to/product_file.yaml&gt;&quot;</span>
