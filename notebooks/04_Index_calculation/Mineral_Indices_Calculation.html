@@ -108,6 +108,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#Import-modules-from-standard-libraries,-datacube-and-files">Import modules from standard libraries, datacube and files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Edit-this-cell-to-choose-your-area-and-temporal-range">Edit this cell to choose your area and temporal range</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Load-data-from-Digital-Earth-Australia">Load data from Digital Earth Australia</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Calculate-Mineral-Indices">Calculate Mineral Indices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Plot-the-Iron-Oxide-Ratio-(RED/BLUE)">Plot the Iron Oxide Ratio (RED/BLUE)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Plot-the-Ferrous-Minerals-Ratio-(SWIR1/NIR)">Plot the Ferrous Minerals Ratio (SWIR1/NIR)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Plot-the-Clay-NIR/SWIR1-ratio-(NIR/SWIR1)">Plot the Clay NIR/SWIR1 ratio (NIR/SWIR1)</a></li>
@@ -439,6 +440,34 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="section" id="Mineral-Indices">
 <h1>Mineral Indices<a class="headerlink" href="#Mineral-Indices" title="Permalink to this headline">¶</a></h1>
+<p><strong>Background:</strong> <a class="reference external" href="https://landsat.usgs.gov/landsat-8">Landsat 8</a> data is available from April 2013 onwards. Mineral Indices can be used to aid in geological mapping, and exploit differences in the spectral response of landscape and regolith materials. Care needs to be taken in the interpretation of these indices as the scale of the imagery and sensor characteristics can affect the usefulness of the indices.</p>
+<p><strong>Ratios in this notebook:</strong></p>
+<div class="math notranslate nohighlight">
+\begin{align}
+Iron\ Oxide\ Ratio\ &amp;= \frac{RED}{BLUE} \\
+\end{align}</div><div class="math notranslate nohighlight">
+\begin{align}
+Ferrous\ Minerals\ Ratio &amp;= \frac{SWIR1}{NIR} \\
+\end{align}</div><div class="math notranslate nohighlight">
+\begin{align}
+Clay\ NIR/SWIR1\ Ratio &amp;= \frac{NIR}{SWIR1} \\
+\end{align}</div><div class="math notranslate nohighlight">
+\begin{align}
+Clay\ Minerals\ Ratio &amp;= \frac{SWIR1}{SWIR2} \\
+\end{align}</div><div class="math notranslate nohighlight">
+\begin{align}
+Ferruginous\ Regolith\ Ratio &amp;= \frac{NIR}{GREEN} \\
+\end{align}</div><p>Equation (1) Iron Oxide Ratio: <a class="reference external" href="##%20References">(Drury 1987, Harris Geospatial Solutions,Inc. 2018, Segal 1982)</a></p>
+<p>Equation (2) Ferrous Minerals Ratio: <a class="reference external" href="##%20References">(Drury 1987, Harris Geospatial Solutions,Inc. 2018, Segal 1982)</a></p>
+<p>Equation (3) Clay NIR/SWIR Ratio: Reference not found</p>
+<p>Equation (4) Clay Minerals Ratio: <a class="reference external" href="##%20References">(Drury 1987, Harris Geospatial Solutions,Inc. 2018, Wilford and Creasey 2002)</a></p>
+<p>Equation (5) Ferruginous Regolith Ratio: <a class="reference external" href="##%20References">(Wilford and Creasey 2002)</a></p>
+<p><strong>Before you run this notebook:</strong> You need to run the following commands from the command line prior to launching jupyter notebook from the same terminal so that the required libraries and paths are set.</p>
+<p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">use</span> <span class="pre">/g/data/v10/public/modules/modulefiles</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">dea</span></code></p>
+<p><strong>What does this notebook do?:</strong> This notebook runs mineral indices on Landsat 8 data. You can then save the data as a png image, netcdf and geotiff.</p>
+<p><strong>Date:</strong> August 2018</p>
+<p><strong>Authors:</strong> Leo Lymburner, Bex Dunn</p>
 <p>Tags: <span class="target" id="index-0"></span>Landsat8, <span class="target" id="index-1"></span>Mineral Indices<span class="target" id="index-2"></span>Geotiff, <span class="target" id="index-3"></span>NetCDF</p>
 <div class="section" id="Import-modules-from-standard-libraries,-datacube-and-files">
 <h2>Import modules from standard libraries, datacube and files<a class="headerlink" href="#Import-modules-from-standard-libraries,-datacube-and-files" title="Permalink to this headline">¶</a></h2>
@@ -560,7 +589,25 @@ Attributes:
 </pre></div>
 </div>
 </div>
-<div class="nbinput docutils container">
+</div>
+<div class="section" id="Calculate-Mineral-Indices">
+<h2>Calculate Mineral Indices<a class="headerlink" href="#Calculate-Mineral-Indices" title="Permalink to this headline">¶</a></h2>
+<div class="math notranslate nohighlight">
+\begin{align}
+Iron\ Oxide\ Ratio\ &amp;= \frac{RED}{BLUE} \\
+\end{align}</div><div class="math notranslate nohighlight">
+\begin{align}
+Ferrous\ Minerals\ Ratio &amp;= \frac{SWIR1}{NIR} \\
+\end{align}</div><div class="math notranslate nohighlight">
+\begin{align}
+Clay\ NIR/SWIR1\ Ratio &amp;= \frac{NIR}{SWIR1} \\
+\end{align}</div><div class="math notranslate nohighlight">
+\begin{align}
+Clay\ Minerals\ Ratio &amp;= \frac{SWIR1}{SWIR2} \\
+\end{align}</div><div class="math notranslate nohighlight">
+\begin{align}
+Ferruginous\ Regolith\ Ratio &amp;= \frac{NIR}{GREEN} \\
+\end{align}</div><div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>

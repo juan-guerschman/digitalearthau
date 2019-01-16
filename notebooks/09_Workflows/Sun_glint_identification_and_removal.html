@@ -451,6 +451,21 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Sun-glint-identification-and-removal">
 <h1>Sun glint identification and removal<a class="headerlink" href="#Sun-glint-identification-and-removal" title="Permalink to this headline">¶</a></h1>
 <p><strong>Note:</strong> As of August 2018, this notebook requires modification in order to run successfully. Please contact the author (Snowy Haiblen; <a class="reference external" href="mailto:Anna&#46;Haiblen&#37;&#52;&#48;ga&#46;gov&#46;au">Anna<span>&#46;</span>Haiblen<span>&#64;</span>ga<span>&#46;</span>gov<span>&#46;</span>au</a>) for assistance prior to running any analyses.</p>
+<p><strong>What does this notebook do?</strong> This notebook identifies and corrects for sun glints over deep ocean using the method of <a class="reference external" href="https://doi.org/10.1080/01431160500034086">Hedley *et al.* (2005)</a>. This method assumes that all near-infra red (nir) reflectance above a minimum value results from sun glint over deep ocean. If it is assumed that nir reflectance is linearly proportional to red, green, and blue (rgb) reflectance, then the reflectance due to sun glint can be removed from the rgb bands by
+quantifying this linear relationship. Thus, sun glint is removed using the equation:</p>
+<div class="math notranslate nohighlight">
+\begin{align}
+\ R_{i(deglinted)} = R_i - x(R_{nir}-min_{nir})
+\end{align}</div><p>where <span class="math notranslate nohighlight">\(R\)</span> is reflectance, <span class="math notranslate nohighlight">\(i\)</span> is the band of interest, and <span class="math notranslate nohighlight">\(x\)</span> is the slope of a linear regression of nir and rgb reflectance data. Figure 1 (from Hedley <em>et al.</em>, 2005) demonstrates this.</p>
+<p><em>Figure 1. Hedley</em> et al. <em>(2005) glint correction method (from Hedley</em> et al.<em>, 2005).</em></p>
+<p><a class="reference external" href="https://doi.org/10.1016/j.rse.2017.10.022">Harmel *et al.* (2018)</a> present a novel glint correction method that does not rely on an estimation of minimum nir reflectance, or on the assumption that non-glinted pixels are present in an area of interest. However, this method would be difficult to implement for DEA because knowledge of solar and satellite viewing angles, wave height, and sun radiance at the time of image capture are required, and because atmospheric correction is included in the
+glint correction algorithm and cannot be easily separated.</p>
+<p><strong>Workflow:</strong> Using this notebook, an image is first selected for sun glint identification and removal. To identify sun glint in the image, deep-ocean areas are then selected (either by drawing a polygon or selecting subplots from within the image that contain only deep ocean). Next, glint is identified and corrected for. There are then options to plot the uncorrected and corrected data and imagery for comparison, and to export the corrected data as a Geotiff. This workflow is summarised in
+Figure 2:</p>
+<p><em>Figure 2. Workflow for sun glint identification and removal using this notebook.</em></p>
+<p>Note that throughout the notebook, <strong>headings in red</strong> indicate locations where user inputs are required before running the code.</p>
+<p><strong>Date:</strong> May 2018</p>
+<p><strong>Author:</strong> Snowy Haiblen (written during a graduate rotation, feel free to contact me for further info (<a class="reference external" href="mailto:Anna&#46;Haiblen&#37;&#52;&#48;ga&#46;gov&#46;au">Anna<span>&#46;</span>Haiblen<span>&#64;</span>ga<span>&#46;</span>gov<span>&#46;</span>au</a>))</p>
 <div class="section" id="Load-modules">
 <h2>Load modules<a class="headerlink" href="#Load-modules" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
