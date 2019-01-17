@@ -479,6 +479,7 @@ div.rendered_html tbody tr:hover {
 <p>You need to run the following commands from the command line prior to launching jupyter notebooks from the same terminal so that the required libraries and paths are set:</p>
 <p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">use</span> <span class="pre">/g/data/v10/public/modules/modulefiles</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">dea</span></code></p>
+<p>This notebook assumes you have cloned the dea-notebooks repository by following the instructions on <a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks#dea-notebooks-using-command-line-git">DEA notebooks using command line git</a>. If you didn’t, you will need to download any scripts that fail in the first cell into your relative directory so that the notebook will have access to those scripts.</p>
 <p>If you find an error or bug in this notebook, please either create an ‘Issue’ in the Github repository, or fix it yourself and create a ‘Pull’ request to contribute the updated notebook back into the repository (See the repository <a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/blob/master/README.rst">README</a> for instructions on creating a Pull request).</p>
 <p><strong>Background:</strong> Data from the <a class="reference external" href="https://landsat.usgs.gov/about-landsat">Landsat</a> 5,7 and 8 satellite missions are accessible through <a class="reference external" href="http://www.ga.gov.au/about/projects/geographic/digital-earth-australia">Digital Earth Australia</a> (DEA). The code snippets in this notebook will let you retrieve and plot the <a class="reference external" href="https://d28rz98at9flks.cloudfront.net/79676/Fractional_Cover_FC25_v1_5.PDF">Fractional Cover</a> (FC25) data stored in DEA.</p>
 <p><strong>What does this notebook do?:</strong> This notebook introduces Fractional Cover and demonstrates how to load and filter Fractional Cover data using the DEA datacube. The data is then saved to NetCDF and GeoTIFF for analysis elsewhere.</p>
@@ -529,7 +530,7 @@ non-negative least squares unmixing model.[<a class="reference external" href="#
 <h2>Import modules from standard libraries, datacube and files<a class="headerlink" href="#Import-modules-from-standard-libraries,-datacube-and-files" title="Permalink to this headline">¶</a></h2>
 <p>Select ‘Trust this notebook’ to import these modules.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -591,7 +592,7 @@ non-negative least squares unmixing model.[<a class="reference external" href="#
 <div class="section" id="Code-to-display-the-products">
 <h4>Code to display the products<a class="headerlink" href="#Code-to-display-the-products" title="Permalink to this headline">¶</a></h4>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -619,7 +620,7 @@ non-negative least squares unmixing model.[<a class="reference external" href="#
 <li><strong>scene:</strong> The index of the scene to be plotted. If the date range is &lt; 16 days there may only be one scene, and the index must be specified as 0.</li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
