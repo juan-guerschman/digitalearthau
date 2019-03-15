@@ -20,13 +20,24 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.14.0/dist/embed-amd.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="https://unpkg.com/font-awesome@4.5.0/css/font-awesome.min.css" type="text/css" />
@@ -34,21 +45,16 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Introduction" href="about/intro.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -472,6 +478,30 @@ accounts on National Computational Infrastructure (NCI).</p>
 <li class="toctree-l3"><a class="reference internal" href="notebooks/04_Index_calculation/Mineral_Indices_Calculation.html#References">References</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/04_Index_calculation/Tasselled_Cap_Wetness_Index_Calculation.html">Tasselled Cap Wetness Index Calculation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_Index_calculation/Tasselled_Cap_Wetness_Index_Calculation.html#import-modules-and-scripts">import modules and scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_Index_calculation/Tasselled_Cap_Wetness_Index_Calculation.html#Set-up-polygon">Set up polygon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_Index_calculation/Tasselled_Cap_Wetness_Index_Calculation.html#set-up-DEA-query">set up DEA query</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="notebooks/04_Index_calculation/Tasselled_Cap_Wetness_Index_Calculation.html#Set-up-datasets">Set up datasets</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_Index_calculation/Tasselled_Cap_Wetness_Index_Calculation.html#set-cloudmasking-threshold-and-load-landsat-nbart-data">set cloudmasking threshold and load landsat nbart data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_Index_calculation/Tasselled_Cap_Wetness_Index_Calculation.html#mask-the-data-with-our-original-polygon-to-remove-extra-data">mask the data with our original polygon to remove extra data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_Index_calculation/Tasselled_Cap_Wetness_Index_Calculation.html#Plot-our-data-as-a-false-color-image">Plot our data as a false color image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_Index_calculation/Tasselled_Cap_Wetness_Index_Calculation.html#Run-the-tasselled-cap-transform-for-our-AOI">Run the tasselled cap transform for our AOI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_Index_calculation/Tasselled_Cap_Wetness_Index_Calculation.html#get-the-wetness-results">get the wetness results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_Index_calculation/Tasselled_Cap_Wetness_Index_Calculation.html#plot-the-tasseled-cap-wetness-for-our-AOI">plot the tasseled cap wetness for our AOI</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="notebooks/04_Index_calculation/Tasselled_Cap_Wetness_Index_Calculation.html#Write-geotiffs-of-wetness-for-each-time-we-have-imagery">Write geotiffs of wetness for each time we have imagery</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_Index_calculation/Tasselled_Cap_Wetness_Index_Calculation.html#set-up-paths-to-write-out-outputs-to">set up paths to write out outputs to</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/04_Index_calculation/Tasselled_Cap_Wetness_Index_Calculation.html#change-the-path-below-to-a-path-where-you'd-like-things-saved!">change the path below to a path where you’d like things saved!</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="notebooks/04_Index_calculation/Tasselled_Cap_Wetness_Index_Calculation.html#Write-geotiffs-of-surface-reflectance-for-each-time-we-have-imagery">Write geotiffs of surface reflectance for each time we have imagery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="notebooks/04_Index_calculation/Tasselled_Cap_Wetness_Index_Calculation.html#References">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/05_Temporal_analysis/README.html">Temporal Analyses</a><ul>
@@ -789,6 +819,37 @@ accounts on National Computational Infrastructure (NCI).</p>
 <li class="toctree-l3"><a class="reference internal" href="notebooks/08_Outputting_data/ProduceFalseColourGeotiffs.html#Export-the-three-bands-to-Geotiff-using-our-imported-function">Export the three bands to Geotiff using our imported function</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/08_Outputting_data/Sentinel2ScenesToGeoTIFF.html">Produce multiband GeoTIFFs for each Sentinel2 observation, given a shapefile</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/08_Outputting_data/Sentinel2ScenesToGeoTIFF.html#import-modules-and-scripts">import modules and scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/08_Outputting_data/Sentinel2ScenesToGeoTIFF.html#set-path-to-polygon-here">set path to polygon here</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/08_Outputting_data/Sentinel2ScenesToGeoTIFF.html#plot-polygon-to-check-it-looks-ok">plot polygon to check it looks ok</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/08_Outputting_data/Sentinel2ScenesToGeoTIFF.html#Print-and-plot-sample-of-resulting-data-(false-color)">Print and plot sample of resulting data (false color)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/08_Outputting_data/Sentinel2ScenesToGeoTIFF.html#Set-up-save-file-parameters">Set up save file parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="notebooks/08_Outputting_data/Sentinel2ScenesToGeoTIFF.html#The-new-Sentinel-data-has-multiple-data-types.-GeoTIFFs-need-only-one-data-type.-So-we-coerce-the-data-to-one-dtype-to-write-to-GeoTIFF.">The new Sentinel data has multiple data types. GeoTIFFs need only one data type. So we coerce the data to one dtype to write to GeoTIFF.</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/08_Outputting_data/Sentinel2ScenesToGeoTIFF.html#we-also-drop-two-information-layers-that-didn't-coerce-well">we also drop two information layers that didn’t coerce well</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/08_Outputting_data/Sentinel2ScenesToGeoTIFF.html#Write-each-date-to-a-separate-geotiff">Write each date to a separate geotiff</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/08_Outputting_data/LandsatScenestoGeoTIFF.html">Produce multiband GeoTIFFs for each Landsat observation, given a shapefile</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/08_Outputting_data/LandsatScenestoGeoTIFF.html#import-modules-and-scripts">import modules and scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/08_Outputting_data/LandsatScenestoGeoTIFF.html#Set-up-polygon">Set up polygon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/08_Outputting_data/LandsatScenestoGeoTIFF.html#set-up-DEA-query">set up DEA query</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="notebooks/08_Outputting_data/LandsatScenestoGeoTIFF.html#Set-up-datasets">Set up datasets</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/08_Outputting_data/LandsatScenestoGeoTIFF.html#set-cloudmasking-threshold-and-load-landsat-nbart-data">set cloudmasking threshold and load landsat nbart data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/08_Outputting_data/LandsatScenestoGeoTIFF.html#mask-the-data-with-our-original-polygon-to-remove-extra-data">mask the data with our original polygon to remove extra data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/08_Outputting_data/LandsatScenestoGeoTIFF.html#Plot-our-data-as-a-false-color-image">Plot our data as a false color image</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="notebooks/08_Outputting_data/LandsatScenestoGeoTIFF.html#Write-geotiffs-for-each-time-we-have-imagery">Write geotiffs for each time we have imagery</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/08_Outputting_data/LandsatScenestoGeoTIFF.html#set-up-paths-to-write-out-outputs-to">set up paths to write out outputs to</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/08_Outputting_data/LandsatScenestoGeoTIFF.html#change-the-path-below-to-a-path-where-you'd-like-things-saved!">change the path below to a path where you’d like things saved!</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/08_Outputting_data/LandsatScenestoGeoTIFF.html#write-GeoTIFFs-for-each-timestep">write GeoTIFFs for each timestep</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/08_Outputting_data/PlottingAnimatedGifs.html">Plotting animations from time series imagery</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="notebooks/08_Outputting_data/PlottingAnimatedGifs.html#Import-satellite-data-to-animate">Import satellite data to animate</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="notebooks/08_Outputting_data/PlottingAnimatedGifs.html#Extract-cloud-free-clear-Landsat-observations-from-all-sensors">Extract cloud-free clear Landsat observations from all sensors</a></li>
@@ -935,6 +996,46 @@ accounts on National Computational Infrastructure (NCI).</p>
 <li class="toctree-l3"><a class="reference internal" href="notebooks/09_Workflows/CumulativeMassResidualRainfall.html#The-cumulative-mass-residual-rainfall-for-one-timestep">The cumulative mass residual rainfall for one timestep</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/09_Workflows/Generate_Mangrove_Cover_Statistics_Through_Time.html">Compute 1 km pixel count summaries for Mangrove Cover</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/09_Workflows/Generate_Mangrove_Cover_Statistics_Through_Time.html#This-notebook-is-designed-for-creating-mangrove-cover-statistics-for-multiple-cyclones-or-regions-simultaneously.">This notebook is designed for creating mangrove cover statistics for multiple cyclones or regions simultaneously.</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="notebooks/09_Workflows/Generate_Mangrove_Cover_Statistics_Through_Time.html#Start-by-identifying-which-tiles-you-want-to-analyse">Start by identifying which tiles you want to analyse</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="notebooks/09_Workflows/Generate_Mangrove_Cover_Statistics_Through_Time.html#Below-are-instructions-for-creating-the-shapefiles-required-for-input-into-this-notebook">Below are instructions for creating the shapefiles required for input into this notebook</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/09_Workflows/Generate_Mangrove_Cover_Statistics_Through_Time.html#Identify-tiles-in-certain-wind-speed-categories">Identify tiles in certain wind speed categories</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="notebooks/09_Workflows/Generate_Mangrove_Cover_Statistics_Through_Time.html#Import-modules">Import modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="notebooks/09_Workflows/Generate_Mangrove_Cover_Statistics_Through_Time.html#Set-up-some-functions-for-plotting">Set up some functions for plotting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="notebooks/09_Workflows/Generate_Mangrove_Cover_Statistics_Through_Time.html#List-of-cyclones-to-be-processed">List of cyclones to be processed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="notebooks/09_Workflows/Generate_Mangrove_Cover_Statistics_Through_Time.html#Cyclone-list-for-GBRMPA">Cyclone list for GBRMPA</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="notebooks/09_Workflows/Generate_Mangrove_Cover_Statistics_Through_Time.html#This-cyclone-list-is-of-wind-speed-categories-for-specific-cyclones-that-recently-affected-the-Great-Barrier-Reef-Marine-Park-Authority-areas.">This cyclone list is of wind speed categories for specific cyclones that recently affected the Great Barrier Reef Marine Park Authority areas.</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="notebooks/09_Workflows/Generate_Mangrove_Cover_Statistics_Through_Time.html#NRM-list-for-GBRMPA">NRM list for GBRMPA</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="notebooks/09_Workflows/Generate_Mangrove_Cover_Statistics_Through_Time.html#This-NRM-region-list-is-of-all-the-1-km-mangrove-tiles-that-fall-within-certain-coastal-NRM-regions.">This NRM region list is of all the 1 km mangrove tiles that fall within certain coastal NRM regions.</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="notebooks/09_Workflows/Generate_Mangrove_Cover_Statistics_Through_Time.html#Other-cyclone-list">Other cyclone list</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="notebooks/09_Workflows/Generate_Mangrove_Cover_Statistics_Through_Time.html#This-cyclone-list-is-of-wind-speed-categories-for-specific-cyclones-that-were-significantly-damaging-between-2005-and-2015.">This cyclone list is of wind speed categories for specific cyclones that were significantly damaging between 2005 and 2015.</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="notebooks/09_Workflows/Generate_Mangrove_Cover_Statistics_Through_Time.html#Enter-the-wind-speed-categories-for-specific-cyclones-or-NRM-regions-(either-from-the-list-above-or-from-shapefiles-created/saved-elsewhere)-in-the-cell-below:">Enter the wind speed categories for specific cyclones or NRM regions (either from the list above or from shapefiles created/saved elsewhere) in the cell below:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="notebooks/09_Workflows/Generate_Mangrove_Cover_Statistics_Through_Time.html#Extract-raster-statistics-for-each-tile-polygon">Extract raster statistics for each tile polygon</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/09_Workflows/Generate_Mangrove_Cover_Statistics_Through_Time.html#Summary-of-the-following-cell:">Summary of the following cell:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/09_Workflows/Generate_Mangrove_Cover_Statistics_Through_Time.html#Detail-of-steps-in-the-following-cell:">Detail of steps in the following cell:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/09_Workflows/Generate_Mangrove_Cover_Statistics_Through_Time.html#Set-the-location-of-folders-and-files-for-use-in-the-following-code">Set the location of folders and files for use in the following code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/09_Workflows/Generate_Mangrove_Cover_Statistics_Through_Time.html#Reproject-the-1-km-mangrove-tiles-to-Australian-Albers-projection">Reproject the 1 km mangrove tiles to Australian Albers projection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/09_Workflows/Generate_Mangrove_Cover_Statistics_Through_Time.html#Calculate-zonal-statistics">Calculate zonal statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/09_Workflows/Generate_Mangrove_Cover_Statistics_Through_Time.html#Add-any-missing-data">Add any missing data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/09_Workflows/Generate_Mangrove_Cover_Statistics_Through_Time.html#Rearrange-and-reformat-data">Rearrange and reformat data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/09_Workflows/Generate_Mangrove_Cover_Statistics_Through_Time.html#Output-data">Output data</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/10_Scripts/README.html">Scripts</a><ul class="simple">
@@ -1005,30 +1106,28 @@ accounts on National Computational Infrastructure (NCI).</p>
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.14.0/dist/embed-amd.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-    
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-113800428-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+  
 
 
 <!-- Theme Analytics -->

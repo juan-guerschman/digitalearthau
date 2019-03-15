@@ -1,0 +1,982 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Compute 1 km pixel count summaries for Mangrove Cover &mdash; Digital Earth Australia 1.0.0 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/dea-favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.14.0/dist/embed-amd.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="https://unpkg.com/font-awesome@4.5.0/css/font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Scripts" href="../10_Scripts/README.html" />
+    <link rel="prev" title="Cumulative Mass Residual Rainfall Calculation" href="CumulativeMassResidualRainfall.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/dea-logo-inline.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about/intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/changelog.html">DEA NCI Environment Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../connect/account.html">NCI Account Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../connect/install.html">Installation and Software Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../connect/get_help.html">Getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../connect/nci_basics.html">Command Line Usage (Advanced)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../connect/jupyter.html">Jupyter Notebooks Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../internal/other_modules.html">Other Modules</a></li>
+</ul>
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../01_Getting_started/README.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_DEA_datasets/README.html">DEA Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_Integrating_external_data/README.html">Integrating External Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_Index_calculation/README.html">Index Calculation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_Temporal_analysis/README.html">Temporal Analyses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_Composite_generation/README.html">Composite Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_Image_classification/README.html">Image Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_Outputting_data/README.html">Outputting data</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="README.html">Workflows</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="RetrieveLandsat8ViewAndExport.html">View Landsat 8 imagery for a chosen time period</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sun_glint_identification_and_removal.html">Sun glint identification and removal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Fractional_Cover_Change_Detection.html">Fractional Cover: Trend and Variability Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Fractional_Cover_Change_Detection.html#Pixel-wise-trend-and-variability-analysis">Pixel-wise trend and variability analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Fractional_Cover_Change_Detection.html#Zonal-Statistics">Zonal Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Fractional_Cover_Change_Detection.html#Reporting-and-plotting">Reporting and plotting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Fractional_Cover_Percentiles.html">Fractional Cover Percentiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CumulativeMassResidualRainfall.html">Cumulative Mass Residual Rainfall Calculation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Compute 1 km pixel count summaries for Mangrove Cover</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#This-notebook-is-designed-for-creating-mangrove-cover-statistics-for-multiple-cyclones-or-regions-simultaneously.">This notebook is designed for creating mangrove cover statistics for multiple cyclones or regions simultaneously.</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Start-by-identifying-which-tiles-you-want-to-analyse">Start by identifying which tiles you want to analyse</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#Identify-tiles-in-certain-wind-speed-categories">Identify tiles in certain wind speed categories</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Import-modules">Import modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Set-up-some-functions-for-plotting">Set up some functions for plotting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#List-of-cyclones-to-be-processed">List of cyclones to be processed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Cyclone-list-for-GBRMPA">Cyclone list for GBRMPA</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#NRM-list-for-GBRMPA">NRM list for GBRMPA</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Other-cyclone-list">Other cyclone list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Extract-raster-statistics-for-each-tile-polygon">Extract raster statistics for each tile polygon</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#Summary-of-the-following-cell:">Summary of the following cell:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Detail-of-steps-in-the-following-cell:">Detail of steps in the following cell:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Set-the-location-of-folders-and-files-for-use-in-the-following-code">Set the location of folders and files for use in the following code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Reproject-the-1-km-mangrove-tiles-to-Australian-Albers-projection">Reproject the 1 km mangrove tiles to Australian Albers projection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Calculate-zonal-statistics">Calculate zonal statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Add-any-missing-data">Add any missing data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Rearrange-and-reformat-data">Rearrange and reformat data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Output-data">Output data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../10_Scripts/README.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Supplementary_data/README.html">Supplementary Data</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Data Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../data/data.html">Surface Reflectance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data/s3.html">Products Available on Amazon S3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data/s3-sftp.html">Bulk download products from Amazon S3</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developer Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../internal/new_product.html">Creating a New Product</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../internal/git_best_practice.html">Git Best Practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../internal/release.html">DEA Release Process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../internal/modules.html">DEA Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../internal/collection_management.html">Collection Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../internal/requirements_met.html">DEA Code Functionality Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Indexes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Tags Index</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Digital Earth Australia</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="README.html">Workflows</a> &raquo;</li>
+        
+      <li>Compute 1 km pixel count summaries for Mangrove Cover</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/notebooks/09_Workflows/Generate_Mangrove_Cover_Statistics_Through_Time.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 5ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    background: #f5f5f5;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="Compute-1-km-pixel-count-summaries-for-Mangrove-Cover">
+<h1>Compute 1 km pixel count summaries for Mangrove Cover<a class="headerlink" href="#Compute-1-km-pixel-count-summaries-for-Mangrove-Cover" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="This-notebook-is-designed-for-creating-mangrove-cover-statistics-for-multiple-cyclones-or-regions-simultaneously.">
+<h2>This notebook is designed for creating mangrove cover statistics for multiple cyclones or regions simultaneously.<a class="headerlink" href="#This-notebook-is-designed-for-creating-mangrove-cover-statistics-for-multiple-cyclones-or-regions-simultaneously." title="Permalink to this headline">¶</a></h2>
+<p><strong>What does this notebook do?</strong></p>
+<ol class="arabic simple">
+<li>Gives instructions for creating shapefiles for 1 km mangrove tiles</li>
+<li>Imports modules and sets up working folder</li>
+<li>Sets up functions for generating plots of yearly mangrove cover statistics</li>
+<li>Sets up list of shapefiles that contain 1 km mangrove tiles that 1) experienced certain wind speed categories for specific cyclones, or 2) for certain Natural Resource Management (NRM) regions</li>
+<li>Imports all Mangrove Cover datasets as combined virtual rasters for each year</li>
+<li>Uses <code class="docutils literal notranslate"><span class="pre">rasterstats</span></code> to compute pixel counts for each cover class within 1 km tiles</li>
+<li>Exports <code class="docutils literal notranslate"><span class="pre">.shp</span></code> files with pixel count attributes for each tile</li>
+<li>Exports pixel counts for all tiles and years as a <code class="docutils literal notranslate"><span class="pre">.pkl.gz</span></code> format file</li>
+<li>Generates mangrove cover statistics plots and <code class="docutils literal notranslate"><span class="pre">.csv</span></code> files for each cyclone or region</li>
+</ol>
+<p><strong>Requirements and data sources:</strong></p>
+<p>You need to run the following commands from the command line or a shell script prior to launching Jupyter notebooks from the same terminal so that the requiered libraries and paths are set:</p>
+<p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">use</span> <span class="pre">/g/data/v10/public/modules/modulefiles</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">dea</span></code></p>
+<p>The following files were copied to the <code class="docutils literal notranslate"><span class="pre">raw_data</span></code> directory of this notebook: * <code class="docutils literal notranslate"><span class="pre">CreateZoneMangroveExtentPlots.py</span></code> was copied from its original location at <code class="docutils literal notranslate"><span class="pre">/g/data/r78/pjb552/MangChangePVFC_V3</span></code> * <code class="docutils literal notranslate"><span class="pre">1kmGridMangrovesfinal.shp</span></code> was copied from its original location at <code class="docutils literal notranslate"><span class="pre">/g/data/r78/al3504/temp/1kmGridMangrovesfinal.shp</span></code> * <code class="docutils literal notranslate"><span class="pre">AustraliaSqGrid_MangroveRegionsV1_ExtraV3Info.shp</span></code> was copied from its original location at
+<code class="docutils literal notranslate"><span class="pre">/g/data/r78/pjb552/MangChangePVFC_V3/AustraliaSqGrid_MangroveRegionsV1_ExtraV3Info.shp</span></code>.</p>
+<p><strong>Author:</strong> Sebastian Wong, Claire Krause, Robbi Bishop Taylor</p>
+<p><strong>Date:</strong> January 2019</p>
+<div class="section" id="Start-by-identifying-which-tiles-you-want-to-analyse">
+<h3>Start by identifying which tiles you want to analyse<a class="headerlink" href="#Start-by-identifying-which-tiles-you-want-to-analyse" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="Below-are-instructions-for-creating-the-shapefiles-required-for-input-into-this-notebook">
+<h4>Below are instructions for creating the shapefiles required for input into this notebook<a class="headerlink" href="#Below-are-instructions-for-creating-the-shapefiles-required-for-input-into-this-notebook" title="Permalink to this headline">¶</a></h4>
+<p>Using <strong>QGIS</strong>, import the <code class="docutils literal notranslate"><span class="pre">1kmGridMangrovesfinal.shp</span></code> file. Then select the tiles that are of interest from that shapefile.</p>
+</div>
+</div>
+</div>
+<div class="section" id="Identify-tiles-in-certain-wind-speed-categories">
+<h2>Identify tiles in certain wind speed categories<a class="headerlink" href="#Identify-tiles-in-certain-wind-speed-categories" title="Permalink to this headline">¶</a></h2>
+<p>(Note: create and save a duplicate of the <code class="docutils literal notranslate"><span class="pre">1kmGridMangrovesfinal.shp</span></code> file before performing this step, so that the original is not altered).</p>
+<p>Identifying mangroves within a wind speed raster can be done by using the <code class="docutils literal notranslate"><span class="pre">Zonal</span> <span class="pre">Statistics</span></code> plugin. Once the <code class="docutils literal notranslate"><span class="pre">Zonal</span> <span class="pre">Statistics</span></code> plugin has been installed, select it via <em>Raster&gt;Zonal statistics&gt;Zonal statistics</em>. In the ‘<em>Zonal Statistics</em>’ dialogue box select the wind speed raster for a particular cyclone under the <em>‘Raster layer:’</em> drop down menu. Under the <em>‘Polygon layer containing the zones:’</em> drop down menu, select the new <code class="docutils literal notranslate"><span class="pre">1kmGridMangrovesfinal.shp</span></code> duplicate file that was saved
+earlier. From the <em>‘Statistics to calculate:’</em> menu select <em>‘Standard deviation’</em> and <em>‘Maximum’</em> and any other desired statistics. Click OK.</p>
+<p>The shapefile created above will now have zonal statistics for all mangrove tiles that are contained within the wind speed raster. One way of creating shapefiles for each wind speed category is to firstly duplicate the shapefile created in the previous step. Then, open the attributes table and select the data that falls within a wind speed range for a desired category. This can be done by checking the new <code class="docutils literal notranslate"><span class="pre">Maximum</span></code> column, which was created during the <code class="docutils literal notranslate"><span class="pre">Zonal</span> <span class="pre">Statistics</span></code> step. The remaining
+data can be deleted. This will leave you with a shapefile with the 1km mangrove tiles that have experienced the chosen wind speed category. This step can be repeated to create shapefiles for each area that has been subjceted to certain wind speed categories for a given cyclone. Rename new shapefiles according to their wind speed categories.</p>
+<p>Below is a summary of the wind speeds and their corresponding categories given by the Bureau of Meteorology (2019) (more details can also be found at <a class="reference external" href="http://www.bom.gov.au/cyclone/about/">http://www.bom.gov.au/cyclone/about/</a>):</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="23%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Category</th>
+<th class="head">Strongest gusts (km/h)</th>
+<th class="head">Typical effects</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1 Tropical Cyclone</td>
+<td>Less than 125 km/h Gales</td>
+<td>Minimal house damage. Damage to some crops, trees and caravans. Boats may drag moorings</td>
+</tr>
+<tr class="row-odd"><td>2 Tropical Cyclone</td>
+<td>125 - 164 km/h Destructive winds</td>
+<td>Minor house damage. Significant damage to signs, trees and caravans. Heavy damage to some crops. Risk of power failure. Small boats may break moorings</td>
+</tr>
+<tr class="row-even"><td>3 Severe tropical Cyclone</td>
+<td>165 - 224 km/h Very destructive winds</td>
+<td>Some roof and structural damage. Some caravans destroyed. Power failure likely.</td>
+</tr>
+<tr class="row-odd"><td>4 Severe Tropical Cyclone</td>
+<td>225 - 279 km/h Very destructive winds</td>
+<td>Significant roofing and structural damage. Many caravans destroyed and blown away. Dangerous airborne debris. Widespread power failures.</td>
+</tr>
+<tr class="row-even"><td>5 Severe Tropical Cyclone</td>
+<td>More than 280 km/h Extremely destructive winds</td>
+<td>Extremely dangerous with widespread destruction</td>
+</tr>
+</tbody>
+</table>
+<p>You have now created shapefiles for 1km mangrove tiles that have been subjected to certain wind speed categories during specific cyclones. These shapefiles can now be used to extract mangrove cover statistics.</p>
+<div class="section" id="Import-modules">
+<h3>Import modules<a class="headerlink" href="#Import-modules" title="Permalink to this headline">¶</a></h3>
+<p>This cell imports the modules required to run the scripts below. The working folder is also identified in this cell.</p>
+<p>The working folder directory given in the cell below is in the <code class="docutils literal notranslate"><span class="pre">Supplementary_data</span></code> folder of the <code class="docutils literal notranslate"><span class="pre">dea-notebooks</span></code> folder. Shapefiles for 1 km mangrove tiles for certain wind speed categories for specific cyclones, and Natural Resource Management (NRM) regions, have already been created (as per the instructions above) and are located in suitably named folders within the <code class="docutils literal notranslate"><span class="pre">MangroveCoverFiles</span></code> folder <code class="docutils literal notranslate"><span class="pre">(sw4446/dea-notebooks/Supplementary_data/MangroveCoverFiles)</span></code>. All outputs in this notebook
+are directed to <code class="docutils literal notranslate"><span class="pre">out_data</span></code> folders within the folder for the specific cyclone or NRM region. Therefore, the directory in the scripts (that output data to the <code class="docutils literal notranslate"><span class="pre">out_data</span></code> folders) should be changed to a directroy of your choice (as to create a local copy of the files that does not clutter the <code class="docutils literal notranslate"><span class="pre">Supplementary_data</span></code> folder). Likewise, the 1 km mangrove tile shapefiles in the folders for specific cyclones or NRM regions could also be copied out to a location of your choice, and the directories
+in the scripts below changed.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Import modules</span>
+<span class="o">%</span><span class="k">pylab</span> notebook
+
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">from</span> <span class="nn">rasterstats</span> <span class="k">import</span> <span class="n">zonal_stats</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">rsgislib</span>
+<span class="kn">import</span> <span class="nn">rsgislib.vectorutils</span>
+<span class="kn">import</span> <span class="nn">osgeo.gdal</span> <span class="k">as</span> <span class="nn">gdal</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;/g/data/r78/sw4446/dea-notebooks/Supplementary_data/MangroveCoverFiles&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Set-up-some-functions-for-plotting">
+<h3>Set up some functions for plotting<a class="headerlink" href="#Set-up-some-functions-for-plotting" title="Permalink to this headline">¶</a></h3>
+<p>This cell sets up some functions for creating the Mangrove Cover Statistics plots. The code in this cell was copied from <code class="docutils literal notranslate"><span class="pre">CreateZoneMangroveExtentPlots.py</span></code>, which was origionally located at <code class="docutils literal notranslate"><span class="pre">/g/data/r78/pjb552/MangChangePVFC_V3</span></code>. The code in <code class="docutils literal notranslate"><span class="pre">CreateZoneMangroveExtentPlots.py</span></code>that sets up the plots was copied and pasted into the cell below, with only minor modifications to suit this notebook.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">createPlots</span><span class="p">(</span><span class="n">dataFile</span><span class="p">,</span> <span class="n">tilesOfInterest</span><span class="p">,</span> <span class="n">outTypePlotFile</span><span class="p">,</span> <span class="n">baseTitle</span><span class="p">):</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="n">dataFile</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="s2">&quot;gzip&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="n">outData</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">tilesOfInterest</span><span class="p">[</span><span class="mi">0</span><span class="p">]][[</span><span class="s1">&#39;total&#39;</span><span class="p">,</span><span class="s1">&#39;low&#39;</span><span class="p">,</span><span class="s1">&#39;mid&#39;</span><span class="p">,</span><span class="s1">&#39;high&#39;</span><span class="p">]]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tilesOfInterest</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">tile</span> <span class="ow">in</span> <span class="n">tilesOfInterest</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+            <span class="n">outData</span> <span class="o">=</span> <span class="n">outData</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="n">tile</span><span class="p">][[</span><span class="s1">&#39;total&#39;</span><span class="p">,</span><span class="s1">&#39;low&#39;</span><span class="p">,</span><span class="s1">&#39;mid&#39;</span><span class="p">,</span><span class="s1">&#39;high&#39;</span><span class="p">]]</span>
+
+    <span class="n">outData</span> <span class="o">=</span> <span class="p">(</span><span class="n">outData</span><span class="p">)</span> <span class="o">*</span> <span class="mi">625</span> <span class="o">/</span> <span class="mi">1000000</span>
+
+    <span class="c1"># Setting up plot data, axes, colour</span>
+
+    <span class="n">ax</span><span class="o">=</span><span class="n">outData</span><span class="p">[[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span><span class="s1">&#39;mid&#39;</span><span class="p">,</span><span class="s1">&#39;high&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;#9FFF4C&#39;</span><span class="p">,</span> <span class="s1">&#39;#5ECC00&#39;</span><span class="p">,</span> <span class="s1">&#39;#3B7F00&#39;</span><span class="p">],</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time (Years)&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Area (km$^</span><span class="si">{2}</span><span class="s1">$)&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">baseTitle</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">outTypePlotFile</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">GenZoneMangroveChangePlots</span><span class="p">(</span><span class="n">zonesSHP</span><span class="p">,</span> <span class="n">zoneNameCol</span><span class="p">,</span> <span class="n">plotPathDIR</span><span class="p">,</span> <span class="n">dataFile</span><span class="p">,</span> <span class="n">gridSHP</span><span class="p">,</span> <span class="n">gridIDCol</span><span class="p">,</span> <span class="n">tmpPath</span><span class="p">,</span> <span class="n">RegionName</span><span class="p">):</span>
+    <span class="n">rsgisUtils</span> <span class="o">=</span> <span class="n">rsgislib</span><span class="o">.</span><span class="n">RSGISPyUtils</span><span class="p">()</span>
+    <span class="n">uidStr</span> <span class="o">=</span> <span class="n">rsgisUtils</span><span class="o">.</span><span class="n">uidGenerator</span><span class="p">()</span>
+    <span class="n">tmpDIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmpPath</span><span class="p">,</span> <span class="n">uidStr</span><span class="p">)</span>
+
+    <span class="n">tmpPresent</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">tmpDIR</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">tmpDIR</span><span class="p">)</span>
+        <span class="n">tmpPresent</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1">############ DO STUFF ###############</span>
+
+    <span class="n">zonesDataSet</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">OpenEx</span><span class="p">(</span><span class="n">zonesSHP</span><span class="p">,</span> <span class="n">gdal</span><span class="o">.</span><span class="n">OF_VECTOR</span> <span class="p">)</span>
+    <span class="k">if</span> <span class="n">zonesDataSet</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span><span class="p">(</span><span class="s2">&quot;Failed to open input zones shapefile</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">zonesLyr</span> <span class="o">=</span> <span class="n">zonesDataSet</span><span class="o">.</span><span class="n">GetLayer</span><span class="p">()</span>
+    <span class="n">zonesSpatRef</span> <span class="o">=</span> <span class="n">zonesLyr</span><span class="o">.</span><span class="n">GetSpatialRef</span><span class="p">()</span>
+    <span class="n">zonesSpatRef</span><span class="o">.</span><span class="n">AutoIdentifyEPSG</span><span class="p">()</span>
+    <span class="n">epsgCodeZones</span> <span class="o">=</span> <span class="n">zonesSpatRef</span><span class="o">.</span><span class="n">GetAuthorityCode</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="n">gridDataSet</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">OpenEx</span><span class="p">(</span><span class="n">gridSHP</span><span class="p">,</span> <span class="n">gdal</span><span class="o">.</span><span class="n">OF_VECTOR</span> <span class="p">)</span>
+    <span class="k">if</span> <span class="n">gridDataSet</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span><span class="p">(</span><span class="s2">&quot;Failed to open input grid shapefile</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">gridLyr</span> <span class="o">=</span> <span class="n">gridDataSet</span><span class="o">.</span><span class="n">GetLayer</span><span class="p">()</span>
+    <span class="n">gridSpatRef</span> <span class="o">=</span> <span class="n">gridLyr</span><span class="o">.</span><span class="n">GetSpatialRef</span><span class="p">()</span>
+    <span class="n">gridSpatRef</span><span class="o">.</span><span class="n">AutoIdentifyEPSG</span><span class="p">()</span>
+    <span class="n">epsgCodeGrid</span> <span class="o">=</span> <span class="n">gridSpatRef</span><span class="o">.</span><span class="n">GetAuthorityCode</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">epsgCodeZones</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">epsgCodeGrid</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Reprojecting zones shapefile&#39;</span><span class="p">)</span>
+        <span class="n">zonesDataSet</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">shpBasename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">zonesSHP</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">tmpReprojSHP</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmpDIR</span><span class="p">,</span> <span class="n">shpBasename</span><span class="o">+</span><span class="s1">&#39;_reproj.shp&#39;</span><span class="p">)</span>
+        <span class="n">rsgislib</span><span class="o">.</span><span class="n">vectorutils</span><span class="o">.</span><span class="n">reProjVectorLayer</span><span class="p">(</span><span class="n">zonesSHP</span><span class="p">,</span> <span class="n">tmpReprojSHP</span><span class="p">,</span> <span class="n">gridSpatRef</span><span class="o">.</span><span class="n">ExportToWkt</span><span class="p">())</span>
+
+        <span class="n">origZonesSHP</span> <span class="o">=</span> <span class="n">zonesSHP</span>
+        <span class="n">zonesSHP</span> <span class="o">=</span> <span class="n">tmpReprojSHP</span>
+
+        <span class="n">zonesDataSet</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">OpenEx</span><span class="p">(</span><span class="n">zonesSHP</span><span class="p">,</span> <span class="n">gdal</span><span class="o">.</span><span class="n">OF_VECTOR</span> <span class="p">)</span>
+        <span class="k">if</span> <span class="n">zonesDataSet</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span><span class="p">(</span><span class="s2">&quot;Failed to open input zones shapefile</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">zonesLyr</span> <span class="o">=</span> <span class="n">zonesDataSet</span><span class="o">.</span><span class="n">GetLayer</span><span class="p">()</span>
+        <span class="n">zonesSpatRef</span> <span class="o">=</span> <span class="n">zonesLyr</span><span class="o">.</span><span class="n">GetSpatialRef</span><span class="p">()</span>
+        <span class="n">zonesSpatRef</span><span class="o">.</span><span class="n">AutoIdentifyEPSG</span><span class="p">()</span>
+        <span class="n">epsgCodeZones</span> <span class="o">=</span> <span class="n">zonesSpatRef</span><span class="o">.</span><span class="n">GetAuthorityCode</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="n">zonesFeat</span> <span class="o">=</span> <span class="n">zonesLyr</span><span class="o">.</span><span class="n">GetNextFeature</span><span class="p">()</span>
+    <span class="k">while</span> <span class="n">zonesFeat</span><span class="p">:</span>
+        <span class="n">zoneGeom</span> <span class="o">=</span> <span class="n">zonesFeat</span><span class="o">.</span><span class="n">GetGeometryRef</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">zoneGeom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">gridLyr</span><span class="o">.</span><span class="n">SetSpatialFilter</span><span class="p">(</span><span class="n">zoneGeom</span><span class="p">)</span>
+            <span class="n">gridIDs</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">gridFeat</span> <span class="ow">in</span> <span class="n">gridLyr</span><span class="p">:</span>
+                <span class="n">gridIDs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">gridFeat</span><span class="o">.</span><span class="n">GetField</span><span class="p">(</span><span class="n">gridIDCol</span><span class="p">)))</span>
+
+            <span class="n">zoneName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">zonesFeat</span><span class="o">.</span><span class="n">GetField</span><span class="p">(</span><span class="n">zoneNameCol</span><span class="p">))</span>
+            <span class="n">zoneNameNoSpace</span> <span class="o">=</span> <span class="n">zoneName</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span>
+            <span class="n">outTypePlotFile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">plotPathDIR</span><span class="p">,</span> <span class="n">zoneNameNoSpace</span><span class="o">+</span><span class="s1">&#39;_totalAreaType_&#39;</span> <span class="o">+</span> <span class="n">RegionName</span> <span class="o">+</span> <span class="s1">&#39;.png&#39;</span><span class="p">)</span>
+            <span class="n">createPlots</span><span class="p">(</span><span class="n">dataFile</span><span class="p">,</span> <span class="n">gridIDs</span><span class="p">,</span> <span class="n">outTypePlotFile</span><span class="p">,</span> <span class="n">RegionName</span><span class="p">)</span>
+
+        <span class="n">zonesFeat</span> <span class="o">=</span> <span class="n">zonesLyr</span><span class="o">.</span><span class="n">GetNextFeature</span><span class="p">()</span>
+
+    <span class="n">zonesDataSet</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">gridDataSet</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1">####################################</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">tmpPresent</span><span class="p">:</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">tmpDIR</span><span class="p">,</span> <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="List-of-cyclones-to-be-processed">
+<h3>List of cyclones to be processed<a class="headerlink" href="#List-of-cyclones-to-be-processed" title="Permalink to this headline">¶</a></h3>
+<p>Below are lists of shapefile names which were created for specific wind speed categories for specific cyclones, and for NRM regions. The purpose of these lists are for easy repeatability and modifications of the scripts. Any wind speed category for any specific cyclone, or a group of these, can be run simultaneously, by simply copying and pasting the lists, or parts of the lists, into the <code class="docutils literal notranslate"><span class="pre">StormNames</span></code> cell below. Similarly, some or all of the NRM regions can also be run simultaneously by
+copying and pasting the lists, or parts of the lists, into the <code class="docutils literal notranslate"><span class="pre">StormNames</span></code> cell below.</p>
+<p>Please note however, that the wind speed categories for specific cyclones and the NRM regions can not be run at the same time as they use different naming conventions, which prevenets the script to run if trying to run both. Also, when changing to or from running cyclones and NRM regions, the script in the ‘<em>Extract raster statistics for each tile polygon / 1 km tiles</em>’ cell below must be modified, with the required code being active and the unnecessary code being commented out.</p>
+</div>
+<div class="section" id="Cyclone-list-for-GBRMPA">
+<h3>Cyclone list for GBRMPA<a class="headerlink" href="#Cyclone-list-for-GBRMPA" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="This-cyclone-list-is-of-wind-speed-categories-for-specific-cyclones-that-recently-affected-the-Great-Barrier-Reef-Marine-Park-Authority-areas.">
+<h4>This cyclone list is of wind speed categories for specific cyclones that recently affected the Great Barrier Reef Marine Park Authority areas.<a class="headerlink" href="#This-cyclone-list-is-of-wind-speed-categories-for-specific-cyclones-that-recently-affected-the-Great-Barrier-Reef-Marine-Park-Authority-areas." title="Permalink to this headline">¶</a></h4>
+<p>‘Debbie_C2’, ‘Debbie_C3’, ‘Debbie_C4’, ‘Debbie_C5’, ‘Debbie_C4C5’, ‘Ita_C1’, ‘Ita_C2’, ‘Ita_C3’, ‘Ita_C4’, ‘Marcia_C1’, ‘Marcia_C2’, ‘Marcia_C3’, ‘Marcia_C4’, ‘Marcia_C5’, ‘Marcia_C4C5’, ‘NathanLF1_C1’, ‘NathanLF1_C2’, ‘NathanLF1_C3’ ‘NathanLF2_C1’, ‘NathanLF2_C2’</p>
+</div>
+</div>
+<div class="section" id="NRM-list-for-GBRMPA">
+<h3>NRM list for GBRMPA<a class="headerlink" href="#NRM-list-for-GBRMPA" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="This-NRM-region-list-is-of-all-the-1-km-mangrove-tiles-that-fall-within-certain-coastal-NRM-regions.">
+<h4>This NRM region list is of all the 1 km mangrove tiles that fall within certain coastal NRM regions.<a class="headerlink" href="#This-NRM-region-list-is-of-all-the-1-km-mangrove-tiles-that-fall-within-certain-coastal-NRM-regions." title="Permalink to this headline">¶</a></h4>
+<p>‘Burdekin_NRM_Tiles’, ‘Burnett_Mary_NRM_Tiles’, ‘Cape_York_NRM_Tiles’, ‘Fitzroy_NRM_Tiles’, ‘Mackay_Whitsunday_NRM_Tiles’, ‘Wet_Tropics_NRM_Tiles’</p>
+</div>
+</div>
+<div class="section" id="Other-cyclone-list">
+<h3>Other cyclone list<a class="headerlink" href="#Other-cyclone-list" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="This-cyclone-list-is-of-wind-speed-categories-for-specific-cyclones-that-were-significantly-damaging-between-2005-and-2015.">
+<h4>This cyclone list is of wind speed categories for specific cyclones that were significantly damaging between 2005 and 2015.<a class="headerlink" href="#This-cyclone-list-is-of-wind-speed-categories-for-specific-cyclones-that-were-significantly-damaging-between-2005-and-2015." title="Permalink to this headline">¶</a></h4>
+<p>‘George_C1’, ‘George_C2’, ‘George_C3’, ‘George_C4’, ‘George_C5’, ‘George_C4C5’, ‘IngridLF1_C1’, ‘IngridLF1_C2’, ‘IngridLF1_C3’, ‘IngridLF2_C1’, ‘IngridLF2_C2’, ‘IngridLF2_C3’, ‘IngridLF2_C4’, ‘IngridLF2_C5’, ‘IngridLF2_C4C5’, ‘IngridLF3_C1’, ‘IngridLF3_C2’, ‘IngridLF3_C3’, ‘IngridLF3_C4’, ‘Lam_C1’, ‘Lam_C2’, ‘Lam_C3’, ‘Lam_C4’, ‘Larry_C1’, ‘Larry_C2’, ‘Larry_C3’, ‘Larry_C4’, ‘Larry_C5’, ‘Larry_C4C5’, ‘Laurence_C1’, ‘Laurence_C2’, ‘Laurence_C3’, ‘Laurence_C4’,
+‘Laurence_C5’, ‘Laurence_C4C5’, ‘MonicaLF1_C1’, ‘MonicaLF1_C2’, ‘MonicaLF1_C3’, ‘MonicaLF2_C1’, ‘MonicaLF2_C2’, ‘MonicaLF2_C3’, ‘MonicaLF2_C4’, ‘MonicaLF2_C5’, ‘MonicaLF2_C4C5’, ‘Yasi_C2’, ‘Yasi_C3’, ‘Yasi_C4’, ‘Yasi_C5’, ‘Yasi_C4C5’</p>
+<div class="section" id="Enter-the-wind-speed-categories-for-specific-cyclones-or-NRM-regions-(either-from-the-list-above-or-from-shapefiles-created/saved-elsewhere)-in-the-cell-below:">
+<h5>Enter the wind speed categories for specific cyclones or NRM regions (either from the list above or from shapefiles created/saved elsewhere) in the cell below:<a class="headerlink" href="#Enter-the-wind-speed-categories-for-specific-cyclones-or-NRM-regions-(either-from-the-list-above-or-from-shapefiles-created/saved-elsewhere)-in-the-cell-below:" title="Permalink to this headline">¶</a></h5>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">StormNames</span> <span class="o">=</span> <span class="p">[</span>
+              <span class="s1">&#39;Debbie_C5&#39;</span><span class="p">,</span>
+             <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="Extract-raster-statistics-for-each-tile-polygon">
+<h3>Extract raster statistics for each tile polygon<a class="headerlink" href="#Extract-raster-statistics-for-each-tile-polygon" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="Summary-of-the-following-cell:">
+<h2>Summary of the following cell:<a class="headerlink" href="#Summary-of-the-following-cell:" title="Permalink to this headline">¶</a></h2>
+<p>This cell extracts zonal statistics for every 1 km tile using <code class="docutils literal notranslate"><span class="pre">rasterstats.zonal_stats</span></code>, this is done for each year. This produces a geojson object which can be converted to a dataframe of counts for each class. After some data wrangling to match the format of the original files, a <code class="docutils literal notranslate"><span class="pre">.pkl.gz</span></code> format file is saved, which is used as an input to create plots using script from <code class="docutils literal notranslate"><span class="pre">CreateZoneMangroveExtentPlots.py</span></code>. The data is then plotted and a csv file is created.</p>
+</div>
+<div class="section" id="Detail-of-steps-in-the-following-cell:">
+<h2>Detail of steps in the following cell:<a class="headerlink" href="#Detail-of-steps-in-the-following-cell:" title="Permalink to this headline">¶</a></h2>
+<p><strong>Note:</strong> There is a large quantity of code in the following cell, as this cell is looped. Below is a description of what each peice of code in the cell does.</p>
+</div>
+<div class="section" id="Set-the-location-of-folders-and-files-for-use-in-the-following-code">
+<h2>Set the location of folders and files for use in the following code<a class="headerlink" href="#Set-the-location-of-folders-and-files-for-use-in-the-following-code" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">The begining of this cell allows you to set the names of folders (<code class="docutils literal notranslate"><span class="pre">TCName</span></code>), and the shapefiles within them (<code class="docutils literal notranslate"><span class="pre">TCSimulation</span></code>) for use in the following code. This is to help with efficiently changing the cyclones or regions to be run without changing the names of folders and shapefiles in each line of code.</div>
+<div class="line">Note: If the folders or shapefiles are not in the directory given in the following cell, the directory will have to be updated for these features to work.</div>
+</div>
+</div>
+<div class="section" id="Reproject-the-1-km-mangrove-tiles-to-Australian-Albers-projection">
+<h2>Reproject the 1 km mangrove tiles to Australian Albers projection<a class="headerlink" href="#Reproject-the-1-km-mangrove-tiles-to-Australian-Albers-projection" title="Permalink to this headline">¶</a></h2>
+<p>The next step in this cell is to reproject the 1 km mangrove tiles to Australian Albers projection. This code uses the 1 km mangrove tiles affected by a particular wind speed category during a specific cyclone, or an NRM region, and reprojects them. This uses the shapefiles in the cyclone or NRM region folder (<code class="docutils literal notranslate"><span class="pre">TCName</span></code>), and outputs the reprojected shapfiles to the <code class="docutils literal notranslate"><span class="pre">out_data</span></code> folder for that cyclone or region. It is recommended that the directory for the output data be changed from the
+<code class="docutils literal notranslate"><span class="pre">out_data</span></code> folders to a more suitable folder of your choice (as to create a copy of the files in a more suitable location that does not clutter the <code class="docutils literal notranslate"><span class="pre">Supplementary_data</span></code> folder). If the directory for the output data is changed, then the directories for <code class="docutils literal notranslate"><span class="pre">out_data</span></code> throughout the following cell must be changed accordingly, in order for this script to run.</p>
+</div>
+<div class="section" id="Calculate-zonal-statistics">
+<h2>Calculate zonal statistics<a class="headerlink" href="#Calculate-zonal-statistics" title="Permalink to this headline">¶</a></h2>
+<p>The next step in this cell calculates the zonal statistics from the <code class="docutils literal notranslate"><span class="pre">MANGROVE_COVER_3577_{year}.vrt</span></code> virtual raster based on the area identified by the 1 km mangrove tiles shapefile used.</p>
+</div>
+<div class="section" id="Add-any-missing-data">
+<h2>Add any missing data<a class="headerlink" href="#Add-any-missing-data" title="Permalink to this headline">¶</a></h2>
+<p>If any columns are missing or have a null value, this code adds an appropriately named column with ‘0’ values so that the following code can run.</p>
+</div>
+<div class="section" id="Rearrange-and-reformat-data">
+<h2>Rearrange and reformat data<a class="headerlink" href="#Rearrange-and-reformat-data" title="Permalink to this headline">¶</a></h2>
+<p>The script then exports a shapefile of 1 km pixel counts, rearranges the data to match the required file format, and reformats the values so that they are in square km (not pixel counts). The data is then combined into a single pandas dataframe, then written to a pickle format.</p>
+</div>
+<div class="section" id="Output-data">
+<h2>Output data<a class="headerlink" href="#Output-data" title="Permalink to this headline">¶</a></h2>
+<p>The final step in this cell and notebook is to output data in the form of a mangrove cover plot, and a csv version of these statistics.</p>
+<p>This cell will run/loop continuously through the list defined in <code class="docutils literal notranslate"><span class="pre">StormNames</span></code> until the final data is output, upon which it will print <em>‘We’re all done now’</em>. The outputs can be found in the <code class="docutils literal notranslate"><span class="pre">out_data</span></code> folders for the specific cyclones or NRM regions. In the <code class="docutils literal notranslate"><span class="pre">out_data</span></code> folder for each cyclone or NRM region, you will find: 1. <code class="docutils literal notranslate"><span class="pre">.shp</span></code> files of the 1 km tiles reprojected to Albers Australian projection 2. <code class="docutils literal notranslate"><span class="pre">.shp</span></code> files for 1 km pixel counts for each year 3. A mangrove change <code class="docutils literal notranslate"><span class="pre">.pkl.gz</span></code>
+file for the 1 km tiles from 1987 to 2017 4. A mangrove change <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file for the 1 km tiles from 1987 to 2017 5. A <code class="docutils literal notranslate"><span class="pre">.png</span></code> file plot of the mangrove cover change from 1987 to 2017</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">for</span> <span class="n">TCSimulation</span> <span class="ow">in</span> <span class="n">StormNames</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Working on </span><span class="si">{TCSimulation}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="c1"># TCName is name of folder conatining files for a certain cyclone or region</span>
+
+    <span class="c1"># Code for running cyclones</span>
+
+    <span class="n">TCName</span><span class="p">,</span> <span class="n">throwout</span> <span class="o">=</span> <span class="n">TCSimulation</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)</span>
+    <span class="n">TCName</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;LF\d&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">TCName</span><span class="p">)</span>
+
+    <span class="c1"># Code for running NRM Regions</span>
+
+    <span class="c1"># TCName = re.sub(&#39;_NRM_Tiles&#39;, &#39;&#39;, TCSimulation)</span>
+
+
+    <span class="c1">## Reproject 1km tiles to Australian Albers projection</span>
+    <span class="c1">#Reproject tiles to Australian Albers projection. This cell imports the shapefile with the tiles needed for</span>
+    <span class="c1">#analysis (which is identified in `{TCSimulation}`), reprojects them in the Australian Albers projection, then</span>
+    <span class="c1">#outputs them into the out_data folder in the cyclone or region folder (which is identified in `{TCName}`).</span>
+    <span class="c1"># Import 1km tiles, reproject to Albers then save out to file</span>
+    <span class="n">tiles_1km</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;./</span><span class="si">{TCName}</span><span class="s1">/</span><span class="si">{TCSimulation}</span><span class="s1">.shp&#39;</span><span class="p">)</span>
+    <span class="n">tiles_1km_albers</span> <span class="o">=</span> <span class="n">tiles_1km</span><span class="o">.</span><span class="n">to_crs</span><span class="p">({</span><span class="s1">&#39;init&#39;</span><span class="p">:</span> <span class="s1">&#39;epsg:3577&#39;</span><span class="p">})</span>
+    <span class="n">tiles_1km_albers</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">driver</span> <span class="o">=</span> <span class="s1">&#39;ESRI Shapefile&#39;</span><span class="p">,</span> <span class="n">filename</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;./</span><span class="si">{TCName}</span><span class="s1">/out_data/</span><span class="si">{TCSimulation}</span><span class="s1">_albers.shp&#39;</span><span class="p">)</span>
+
+    <span class="n">out_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">CategoryCountAll</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Calculating stats for each year&#39;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1987</span><span class="p">,</span> <span class="mi">2018</span><span class="p">):</span>
+
+        <span class="c1"># Calculate zonal states for every 1km tile in the virtual raster and export geojson with counts for each class</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">zonal_stats</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;./</span><span class="si">{TCName}</span><span class="s1">/out_data/</span><span class="si">{TCSimulation}</span><span class="s1">_albers.shp&#39;</span><span class="p">,</span> <span class="n">f</span><span class="s1">&#39;raw_data/MANGROVE_COVER_3577_</span><span class="si">{year}</span><span class="s1">.vrt&#39;</span><span class="p">,</span>
+                          <span class="n">categorical</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">category_map</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s1">&#39;high&#39;</span><span class="p">},</span>
+                          <span class="n">geojson_out</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Convert geojson to Geopandas dataframe and set NaN values to zero</span>
+        <span class="n">tile_gpd</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="o">.</span><span class="n">from_features</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># If columns are missing data, this script creates columns (e.g. &#39;total&#39;, &#39;low&#39;, &#39;mid&#39;, &#39;high&#39;)</span>
+        <span class="c1">#so that the following parts of the script can run.</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">tile_gpd</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tile_gpd</span><span class="p">[[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;high&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tile_gpd</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Adding high&#39;</span><span class="p">)</span>
+                <span class="n">tile_gpd</span><span class="p">[</span><span class="s1">&#39;high&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">continue</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">tile_gpd</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tile_gpd</span><span class="p">[[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;mid&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tile_gpd</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Adding mid&#39;</span><span class="p">)</span>
+                <span class="n">tile_gpd</span><span class="p">[</span><span class="s1">&#39;mid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">continue</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">tile_gpd</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tile_gpd</span><span class="p">[[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;low&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tile_gpd</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Adding low&#39;</span><span class="p">)</span>
+                <span class="n">tile_gpd</span><span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">continue</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">tile_gpd</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tile_gpd</span><span class="p">[[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;total&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tile_gpd</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Adding total&#39;</span><span class="p">)</span>
+                <span class="n">tile_gpd</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">continue</span>
+<span class="c1">#         try:</span>
+<span class="c1">#             tile_gpd[&#39;total&#39;] = tile_gpd[&#39;ID&#39;, &#39;total&#39;, &#39;low&#39;, &#39;mid&#39;, &#39;high&#39;].sum(axis=1)</span>
+<span class="c1">#         except KeyError:</span>
+<span class="c1">#             if &#39;ID&#39; not in tile_gpd:</span>
+<span class="c1">#                 print(&#39;Adding ID&#39;)</span>
+<span class="c1">#                 tile_gpd[&#39;ID&#39;] = 0</span>
+<span class="c1">#             else:</span>
+<span class="c1">#                 continue</span>
+
+
+        <span class="c1"># Export to shapefile</span>
+        <span class="n">tile_gpd</span><span class="o">.</span><span class="n">crs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;init&#39;</span><span class="p">:</span> <span class="s1">&#39;epsg:3577&#39;</span><span class="p">}</span>
+        <span class="n">tile_gpd</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">driver</span> <span class="o">=</span> <span class="s1">&#39;ESRI Shapefile&#39;</span><span class="p">,</span>
+                         <span class="n">filename</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;./</span><span class="si">{TCName}</span><span class="s1">/out_data/1km_pxlcounts_</span><span class="si">{TCSimulation}</span><span class="s1">_</span><span class="si">{year}</span><span class="s1">.shp&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Re-rearrange data to match required file format</span>
+        <span class="n">tile_reshape_gpd</span> <span class="o">=</span> <span class="n">tile_gpd</span><span class="p">[[</span><span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">],</span>
+                                                                                <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;PxlCount&#39;</span><span class="p">,</span>
+                                                                                <span class="n">value_name</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">))</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;ID&#39;</span><span class="p">)</span>
+        <span class="n">tile_reshape_gpd_noindex</span> <span class="o">=</span> <span class="n">tile_reshape_gpd</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;ID&#39;</span><span class="p">:</span> <span class="s1">&#39;GridID&#39;</span><span class="p">})</span>
+        <span class="n">tile_reshape_gpd</span> <span class="o">=</span> <span class="n">tile_reshape_gpd_noindex</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;GridID&#39;</span><span class="p">,</span> <span class="s1">&#39;PxlCount&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">reindex</span><span class="p">([</span><span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">],</span>
+                                                                                      <span class="n">level</span><span class="o">=</span><span class="s1">&#39;PxlCount&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">out_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tile_reshape_gpd</span><span class="p">)</span>
+
+        <span class="n">CountCategories</span> <span class="o">=</span> <span class="n">tile_reshape_gpd_noindex</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">tile_reshape_gpd_noindex</span><span class="p">[</span><span class="s1">&#39;PxlCount&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+        <span class="c1"># Reformat the values so that they are in square km, not pixel counts</span>
+        <span class="n">TempCategoryCountAll</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">()</span>
+        <span class="n">TempCategoryCountAll</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">CountCategories</span><span class="p">[</span><span class="n">f</span><span class="s1">&#39;</span><span class="si">{year}</span><span class="s1">&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span>
+        <span class="n">TempCategoryCountAll</span><span class="p">[</span><span class="s1">&#39;Low (km2)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">CountCategories</span><span class="p">[</span><span class="n">f</span><span class="s1">&#39;</span><span class="si">{year}</span><span class="s1">&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">low</span><span class="p">)</span> <span class="o">*</span> <span class="mi">625</span> <span class="o">/</span> <span class="mi">1000000</span>
+        <span class="n">TempCategoryCountAll</span><span class="p">[</span><span class="s1">&#39;Mid (km2)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">CountCategories</span><span class="p">[</span><span class="n">f</span><span class="s1">&#39;</span><span class="si">{year}</span><span class="s1">&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mid</span><span class="p">)</span> <span class="o">*</span> <span class="mi">625</span> <span class="o">/</span> <span class="mi">1000000</span>
+        <span class="n">TempCategoryCountAll</span><span class="p">[</span><span class="s1">&#39;High (km2)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">CountCategories</span><span class="p">[</span><span class="n">f</span><span class="s1">&#39;</span><span class="si">{year}</span><span class="s1">&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">high</span><span class="p">)</span> <span class="o">*</span> <span class="mi">625</span> <span class="o">/</span> <span class="mi">1000000</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">CategoryCountAll</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">CategoryCountAll</span><span class="p">,</span> <span class="n">TempCategoryCountAll</span><span class="p">],</span> <span class="n">dim</span> <span class="o">=</span> <span class="s1">&#39;concat_dims&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="n">CategoryCountAll</span> <span class="o">=</span> <span class="n">TempCategoryCountAll</span>
+
+
+    <span class="c1"># Combine into a single pandas dataframe, then write to pickle</span>
+    <span class="n">tile_allyears_gpd</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">out_list</span><span class="p">)</span>
+    <span class="n">tile_allyears_gpd</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;./</span><span class="si">{TCName}</span><span class="s1">/out_data/MangChange_</span><span class="si">{TCSimulation}</span><span class="s1">_1km_1987_to_2017.pkl.gz&#39;</span><span class="p">,</span>
+                                <span class="n">compression</span><span class="o">=</span><span class="s2">&quot;gzip&quot;</span><span class="p">)</span>
+
+    <span class="c1"># output a csv of stats</span>
+    <span class="n">CategoryCountAll</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;./</span><span class="si">{TCName}</span><span class="s1">/out_data/MangChange_</span><span class="si">{TCSimulation}</span><span class="s1">_1km_1987_to_2017.csv&#39;</span><span class="p">,</span>
+                                           <span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># plot the results</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Plotting up the results&#39;</span><span class="p">)</span>
+    <span class="n">GenZoneMangroveChangePlots</span><span class="p">(</span><span class="s1">&#39;raw_data/Mangrove_study_region.shp&#39;</span><span class="p">,</span> <span class="s1">&#39;REG_CODE_7&#39;</span><span class="p">,</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{TCName}</span><span class="s1">/out_data/&#39;</span><span class="p">,</span>
+                               <span class="n">f</span><span class="s1">&#39;./</span><span class="si">{TCName}</span><span class="s1">/out_data/MangChange_</span><span class="si">{TCSimulation}</span><span class="s1">_1km_1987_to_2017.pkl.gz&#39;</span><span class="p">,</span>
+                               <span class="n">f</span><span class="s1">&#39;./</span><span class="si">{TCName}</span><span class="s1">/out_data/</span><span class="si">{TCSimulation}</span><span class="s1">_albers.shp&#39;</span><span class="p">,</span>
+                               <span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{TCName}</span><span class="s1">/out_data/&#39;</span><span class="p">,</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{TCSimulation}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;We</span><span class="se">\&#39;</span><span class="s1">re all done now&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../10_Scripts/README.html" class="btn btn-neutral float-right" title="Scripts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="CumulativeMassResidualRainfall.html" class="btn btn-neutral float-left" title="Cumulative Mass Residual Rainfall Calculation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2018, Geoscience Australia
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-113800428-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+  
+
+
+<!-- Theme Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-113800428-1"></script>
+<script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+ 
+ gtag('config', 'UA-113800428-1');
+</script>
+
+    
+  
+
+
+</body>
+</html>
