@@ -18,6 +18,8 @@
   
   
   
+    <link rel="canonical" href="https://docs.dea.ga.gov.au/connect/account.html"/>
+  
 
   
   <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
@@ -45,7 +47,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Installation and Software Setup" href="install.html" />
-    <link rel="prev" title="DEA NCI Environment Changelog" href="../about/changelog.html" /> 
+    <link rel="prev" title="Changelog" href="../about/changelog.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -93,11 +95,16 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../about/intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../about/glossary.html">Glossary</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../about/changelog.html">DEA NCI Environment Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about/changelog.html">Changelog</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Connect</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">NCI Account Registration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">NCI Account Registration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#virtual-desktop-analysis">Virtual Desktop Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-access">Data Access</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#high-performance-computing">High Performance Computing</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation and Software Setup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="get_help.html">Getting help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nci_basics.html">Command Line Usage (Advanced)</a></li>
@@ -226,24 +233,74 @@
 </style>
 <div class="section" id="nci-account-registration">
 <span id="account"></span><h1>NCI Account Registration<a class="headerlink" href="#nci-account-registration" title="Permalink to this headline">¶</a></h1>
-<p>Digital Earth Australia is currently in a private beta for Australian government
+<p>The Digital Earth Australia analysis environment is currently available for Australian government
 and academic users eligible for accounts on National Computational
 Infrastructure (NCI).</p>
 <p>You can sign up with your government or academic institutional email address here:</p>
 <p><a class="reference external" href="https://my.nci.org.au/mancini/signup/">https://my.nci.org.au/mancini/signup/</a></p>
-<p>The easiest way to use Digital Earth Australia is to connect using a remote
+<div class="section" id="virtual-desktop-analysis">
+<h2>Virtual Desktop Analysis<a class="headerlink" href="#virtual-desktop-analysis" title="Permalink to this headline">¶</a></h2>
+<p>The easiest way to use Digital Earth Australia is to connect to a remote
 desktop at NCI, called <a class="reference internal" href="../about/glossary.html#term-vdi"><span class="xref std std-term">VDI</span></a>. (It is also possible to run on NCI’s
 <code class="docutils literal notranslate"><span class="pre">raijin</span></code> HPC cluster, but is recommended that you prototype on VDI first.)</p>
-<p>Your NCI account will need to be linked to a VDI project. You can view your
-linked projects at <a class="reference external" href="https://my.nci.org.au/">https://my.nci.org.au/</a>. If you do not already have access to
+<p>Your NCI account will need to be a member of a VDI project. You can view your
+project memberships at <a class="reference external" href="https://my.nci.org.au/">https://my.nci.org.au/</a>. If you do not already have access to
 a VDI project, you can request to join the <strong>wd8</strong> project. Once approved, you
 will be a member of the project and able to access DEA through the VDI.</p>
+</div>
+<div class="section" id="data-access">
+<span id="id1"></span><h2>Data Access<a class="headerlink" href="#data-access" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>Important Change, March 2019</strong></p>
+</div>
+<p>You now need to request membership of projects containing data you wish to access. Do this
+by using the same process as joining a VDI Project as described above.</p>
+<table border="1" class="docutils" id="id2">
+<caption><span class="caption-text">NCI Data Access Groups</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Project</th>
+<th class="head">Contents</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference external" href="https://my.nci.org.au/mancini/project/rs0">rs0</a></td>
+<td>Analysis Ready Surface Reflectance Data from Landsat satellites.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://my.nci.org.au/mancini/project/if87">if87</a></td>
+<td>Sentinel-2 Analysis Ready Data</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://my.nci.org.au/mancini/project/fk4">fk4</a></td>
+<td>Derivative EO data. WOfS, Fractional Cover, NIDEM, statistical summaries.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://my.nci.org.au/mancini/project/fj7">fj7</a></td>
+<td>Copernicus Hub data. Sentinel 1-3</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://my.nci.org.au/mancini/project/u39">u39</a></td>
+<td>IMOS and TERN-AusCover Satellite Products (MODIS)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://my.nci.org.au/mancini/project/rr5">rr5</a></td>
+<td>Bureau of Meteorology. Rainfall grids, Himawari 8, etc.</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://my.nci.org.au/mancini/project/rr2">rr2</a></td>
+<td>Geophysics reference data</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="high-performance-computing">
+<h2>High Performance Computing<a class="headerlink" href="#high-performance-computing" title="Permalink to this headline">¶</a></h2>
 <p>The DEA environment can also be accessed within the High Performance Computing
-(HPC) environment (i.e. Raijin). This will require compute and storage quota
+(HPC) environment (i.e. <a class="reference external" href="http://nci.org.au/systems-services/peak-system/raijin/">Raijin</a>). This will require compute and storage quota
 allocations to be made via NCI’s Allocation Scheme processes, on a per-project
 basis. This does not need to be specific to DEA – all users with computing
 capabilities on Raijin are able to access DEA through the HPC system.</p>
 <p>This guide focuses on accessing and exploring DEA via the VDI environment.</p>
+</div>
 </div>
 
 
@@ -257,7 +314,7 @@ capabilities on Raijin are able to access DEA through the HPC system.</p>
         <a href="install.html" class="btn btn-neutral float-right" title="Installation and Software Setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../about/changelog.html" class="btn btn-neutral float-left" title="DEA NCI Environment Changelog" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../about/changelog.html" class="btn btn-neutral float-left" title="Changelog" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
