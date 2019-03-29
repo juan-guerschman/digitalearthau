@@ -268,52 +268,52 @@ topography and angular variation in reflectance.</p>
 <div class="section" id="features">
 <h3>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>The standardised SR data products deliver calibrated optical surface reflectance data across land and coastal fringes.
-SR is a medium resolution (~25 m) grid based on the Landsat TM/ETM+/OLI archive and presents surface reflectance data in 25 square metre grid cells.</li>
-<li>Radiance measurements from EO sensors do not directly quantify the surface reflectance of the Earth. Such measurements are modified by variations in atmospheric
+<li><p>The standardised SR data products deliver calibrated optical surface reflectance data across land and coastal fringes.
+SR is a medium resolution (~25 m) grid based on the Landsat TM/ETM+/OLI archive and presents surface reflectance data in 25 square metre grid cells.</p></li>
+<li><p>Radiance measurements from EO sensors do not directly quantify the surface reflectance of the Earth. Such measurements are modified by variations in atmospheric
 properties, sun position, sensor view angle, surface slope and surface aspect.
 To obtain consistent and comparable measures of Earth surface reflectance from EO,these variations need to be reduced or removed from the radiance measurements (Li et al., 2010).
-This is especially important when comparing imagery acquired in different seasons and geographic regions.</li>
-<li>The SR product is created using a physics-based, coupled BRDF and atmospheric correction model that can be applied to both flat and inclined surfaces (Li et al., 2012).
-The resulting surface reflectance values are comparable both within individual images and between images acquired at different times and/or with different sensors.</li>
+This is especially important when comparing imagery acquired in different seasons and geographic regions.</p></li>
+<li><p>The SR product is created using a physics-based, coupled BRDF and atmospheric correction model that can be applied to both flat and inclined surfaces (Li et al., 2012).
+The resulting surface reflectance values are comparable both within individual images and between images acquired at different times and/or with different sensors.</p></li>
 </ul>
 <p id="table">It has the following bands:</p>
-<table border="1" class="docutils">
+<table class="docutils align-center">
 <colgroup>
-<col width="17%" />
-<col width="14%" />
-<col width="69%" />
+<col style="width: 17%" />
+<col style="width: 14%" />
+<col style="width: 69%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Bands</th>
-<th class="head">Name</th>
-<th class="head">Description</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bands</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>Band_1</td>
-<td>blue</td>
-<td>Blue</td>
+<tbody>
+<tr class="row-even"><td><p>Band_1</p></td>
+<td><p>blue</p></td>
+<td><p>Blue</p></td>
 </tr>
-<tr class="row-odd"><td>Band_2</td>
-<td>green</td>
-<td>Green</td>
+<tr class="row-odd"><td><p>Band_2</p></td>
+<td><p>green</p></td>
+<td><p>Green</p></td>
 </tr>
-<tr class="row-even"><td>Band_3</td>
-<td>red</td>
-<td>Red</td>
+<tr class="row-even"><td><p>Band_3</p></td>
+<td><p>red</p></td>
+<td><p>Red</p></td>
 </tr>
-<tr class="row-odd"><td>Band_4</td>
-<td>nir</td>
-<td>Near Infra-red</td>
+<tr class="row-odd"><td><p>Band_4</p></td>
+<td><p>nir</p></td>
+<td><p>Near Infra-red</p></td>
 </tr>
-<tr class="row-even"><td>Band_5</td>
-<td>swir1</td>
-<td>Short-wave Infra-red 1</td>
+<tr class="row-even"><td><p>Band_5</p></td>
+<td><p>swir1</p></td>
+<td><p>Short-wave Infra-red 1</p></td>
 </tr>
-<tr class="row-odd"><td>Band_7</td>
-<td>swir2</td>
-<td>Short-wave Infra-red 2</td>
+<tr class="row-odd"><td><p>Band_7</p></td>
+<td><p>swir2</p></td>
+<td><p>Short-wave Infra-red 2</p></td>
 </tr>
 </tbody>
 </table>
@@ -325,17 +325,17 @@ The resulting surface reflectance values are comparable both within individual i
 <div class="section" id="id2">
 <h3>Features<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>The SR product is created using a physics-based coupled BRDF and atmospheric correction model that can be applied to both flat and inclined surfaces (Li et al., 2012).
-The resulting surface reflectance values are comparable both within individual images and between images acquired at different times and/or with different sensors.</li>
-<li>Terrain affects optical satellite images through both irradiance and bidirectional reflectance distribution function (BRDF) effects.</li>
-<li>Slopes facing the sun receive enhanced solar irradiance and appear brighter compared to those facing away from the sun.</li>
-<li>For anisotropic surfaces, the radiance received at the satellite sensor from a sloping surface is also affected by surface
+<li><p>The SR product is created using a physics-based coupled BRDF and atmospheric correction model that can be applied to both flat and inclined surfaces (Li et al., 2012).
+The resulting surface reflectance values are comparable both within individual images and between images acquired at different times and/or with different sensors.</p></li>
+<li><p>Terrain affects optical satellite images through both irradiance and bidirectional reflectance distribution function (BRDF) effects.</p></li>
+<li><p>Slopes facing the sun receive enhanced solar irradiance and appear brighter compared to those facing away from the sun.</p></li>
+<li><p>For anisotropic surfaces, the radiance received at the satellite sensor from a sloping surface is also affected by surface
 BRDF which varies with combinations of surface landcover types, sun, and satellite geometry (sun and sensor view, and their relative
 azimuth angle) as well as topographic geometry (primarily slope and aspect angles).
 Consequently, to obtain comparable surface reflectance from satellite images covering mountainous areas,
-it is necessary to process the images to reduce or remove the topographic effect so that the images can be used for different purposes on the same spectral base.</li>
-<li>A Digital Surface Model (DSM) resolution appropriate to the scale of the resolution of satellite image is needed for the best results. 1 second SRTM DSM is
-used for NBART processing.</li>
+it is necessary to process the images to reduce or remove the topographic effect so that the images can be used for different purposes on the same spectral base.</p></li>
+<li><p>A Digital Surface Model (DSM) resolution appropriate to the scale of the resolution of satellite image is needed for the best results. 1 second SRTM DSM is
+used for NBART processing.</p></li>
 </ul>
 <p>It has the same bands description provided in Surface reflactance NBAR <a class="reference internal" href="#table">table</a>.</p>
 </div>
@@ -356,10 +356,10 @@ complexities involved with production of this product.</p>
 <blockquote>
 <div><p>Image radiance values recorded by passive EO sensors are a composite of:</p>
 <ul class="simple">
-<li>surface reflectance;</li>
-<li>atmospheric condition;</li>
-<li>interaction between surface land cover, solar radiation and sensor view angle;</li>
-<li>land surface orientation relative to the imaging sensor.</li>
+<li><p>surface reflectance;</p></li>
+<li><p>atmospheric condition;</p></li>
+<li><p>interaction between surface land cover, solar radiation and sensor view angle;</p></li>
+<li><p>land surface orientation relative to the imaging sensor.</p></li>
 </ul>
 <p>It has been traditionally assumed that Landsat imagery display negligible variation in sun and sensor view angles, however these can vary significantly both within
 and between scenes, especially in different seasons and geographic regions (Li et al., 2012). The SR product delivers modeled surface reflectance from Landsat TM/ETM+/OLI
@@ -367,62 +367,62 @@ data using physical rather than empirical models. Accordingly, this product will
 different sensors will be primarily due to on-ground changes in biophysical parameters rather than artifacts of the imaging environment.</p>
 </div></blockquote>
 <p>Landsat 8-OLI/TIRS also has following bands:</p>
-<table border="1" class="docutils">
+<table class="docutils align-center">
 <colgroup>
-<col width="15%" />
-<col width="33%" />
-<col width="52%" />
+<col style="width: 15%" />
+<col style="width: 33%" />
+<col style="width: 52%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Bands</th>
-<th class="head">Name</th>
-<th class="head">Description</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bands</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>Band_1</td>
-<td>coastal_aerosol</td>
-<td>Coastal Aerosol</td>
+<tbody>
+<tr class="row-even"><td><p>Band_1</p></td>
+<td><p>coastal_aerosol</p></td>
+<td><p>Coastal Aerosol</p></td>
 </tr>
-<tr class="row-odd"><td>Band_2</td>
-<td>blue</td>
-<td>Blue</td>
+<tr class="row-odd"><td><p>Band_2</p></td>
+<td><p>blue</p></td>
+<td><p>Blue</p></td>
 </tr>
-<tr class="row-even"><td>Band_3</td>
-<td>green</td>
-<td>Green</td>
+<tr class="row-even"><td><p>Band_3</p></td>
+<td><p>green</p></td>
+<td><p>Green</p></td>
 </tr>
-<tr class="row-odd"><td>Band_4</td>
-<td>red</td>
-<td>Red</td>
+<tr class="row-odd"><td><p>Band_4</p></td>
+<td><p>red</p></td>
+<td><p>Red</p></td>
 </tr>
-<tr class="row-even"><td>Band_5</td>
-<td>nir</td>
-<td>Near- Infrared</td>
+<tr class="row-even"><td><p>Band_5</p></td>
+<td><p>nir</p></td>
+<td><p>Near- Infrared</p></td>
 </tr>
-<tr class="row-odd"><td>Band_6</td>
-<td>swir1</td>
-<td>Short-wave Infra-red 1</td>
+<tr class="row-odd"><td><p>Band_6</p></td>
+<td><p>swir1</p></td>
+<td><p>Short-wave Infra-red 1</p></td>
 </tr>
-<tr class="row-even"><td>Band_7</td>
-<td>swir2</td>
-<td>Short-wave Infra-red 2</td>
+<tr class="row-even"><td><p>Band_7</p></td>
+<td><p>swir2</p></td>
+<td><p>Short-wave Infra-red 2</p></td>
 </tr>
-<tr class="row-odd"><td>Band_8</td>
-<td>panchromatic</td>
-<td>Panchromatic</td>
+<tr class="row-odd"><td><p>Band_8</p></td>
+<td><p>panchromatic</p></td>
+<td><p>Panchromatic</p></td>
 </tr>
-<tr class="row-even"><td>Band_9</td>
-<td>cirrus</td>
-<td>Cirrus</td>
+<tr class="row-even"><td><p>Band_9</p></td>
+<td><p>cirrus</p></td>
+<td><p>Cirrus</p></td>
 </tr>
-<tr class="row-odd"><td>Band_10</td>
-<td>tirs1</td>
-<td>Thermal Infrared Sensor1</td>
+<tr class="row-odd"><td><p>Band_10</p></td>
+<td><p>tirs1</p></td>
+<td><p>Thermal Infrared Sensor1</p></td>
 </tr>
-<tr class="row-even"><td>Band_11</td>
-<td>tirs2</td>
-<td>Thermal Infrared Sensor2</td>
+<tr class="row-even"><td><p>Band_11</p></td>
+<td><p>tirs2</p></td>
+<td><p>Thermal Infrared Sensor2</p></td>
 </tr>
 </tbody>
 </table>
@@ -448,11 +448,11 @@ or only sea pixels depending on their analytical requirements, leading to enhanc
 <blockquote>
 <div><p>PQ provides  an assessment of the quality of observations at a pixel level and includes information about whether a pixel is affected by:</p>
 <ul class="simple">
-<li>Spectral Contiguity (lack of signal in any band)</li>
-<li>Saturation in any band</li>
-<li>Presence of cloud</li>
-<li>Presence of cloud shadow</li>
-<li>Land or sea</li>
+<li><p>Spectral Contiguity (lack of signal in any band)</p></li>
+<li><p>Saturation in any band</p></li>
+<li><p>Presence of cloud</p></li>
+<li><p>Presence of cloud shadow</p></li>
+<li><p>Land or sea</p></li>
 </ul>
 </div></blockquote>
 <p>As Landsat Imagery becomes more readily available, there has been a rapid increase in the amount of analyses undertaken
@@ -486,9 +486,9 @@ Reflectance Grid 25 (ARG25) product and provides a 25m scale fractional cover
 representation of the proportions of :</p>
 <blockquote>
 <div><ul class="simple">
-<li>green or photosynthetic vegetation,</li>
-<li>nonphotosynthetic vegetation, and</li>
-<li>bare surface cover across the Australian continent</li>
+<li><p>green or photosynthetic vegetation,</p></li>
+<li><p>nonphotosynthetic vegetation, and</p></li>
+<li><p>bare surface cover across the Australian continent</p></li>
 </ul>
 </div></blockquote>
 <p>It is generated using the algorithm developed by the Joint Remote Sensing Research Program (JRSRP)
@@ -507,12 +507,12 @@ managers, and scientists to monitor land conditions over large areas over long t
 frames.</p>
 <blockquote>
 <div><ul class="simple">
-<li>The fractional cover unmixing algorthim uses the spectral signature for a picture element
-(pixel) to break it up into three parts or fractions.</li>
-<li>This is based on field work identifying the spectral characteristics of each of the fractions.</li>
-<li>The three fractions are green or photosynthetic vegetation, non-photosynthetic vegetation, and bare soil.</li>
-<li>The green fraction includes leaves and grass, the non-photosynthetic includes branches, dry grass
-and dead leaf litter, and the bare soil fraction includes bare soil or rock.</li>
+<li><p>The fractional cover unmixing algorthim uses the spectral signature for a picture element
+(pixel) to break it up into three parts or fractions.</p></li>
+<li><p>This is based on field work identifying the spectral characteristics of each of the fractions.</p></li>
+<li><p>The three fractions are green or photosynthetic vegetation, non-photosynthetic vegetation, and bare soil.</p></li>
+<li><p>The green fraction includes leaves and grass, the non-photosynthetic includes branches, dry grass
+and dead leaf litter, and the bare soil fraction includes bare soil or rock.</p></li>
 </ul>
 </div></blockquote>
 <p>FC25 is limited by the frequency and number of successful observations, which are
@@ -524,28 +524,28 @@ is also limited by the quality of the sensors, including their spatial resolutio
 accuracy of the fractional cover algorithms used.</p>
 <p>Revisit frequency of the Landsat series of satellites as captured by the
 Geoscience Australia ground station network.</p>
-<table border="1" class="docutils">
+<table class="docutils align-center">
 <colgroup>
-<col width="42%" />
-<col width="58%" />
+<col style="width: 42%" />
+<col style="width: 58%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Time range</th>
-<th class="head">Revisit frequency</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Time range</p></th>
+<th class="head"><p>Revisit frequency</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>1986-2003</td>
-<td>16 days</td>
+<tbody>
+<tr class="row-even"><td><p>1986-2003</p></td>
+<td><p>16 days</p></td>
 </tr>
-<tr class="row-odd"><td>2003-20112</td>
-<td>8 days</td>
+<tr class="row-odd"><td><p>2003-20112</p></td>
+<td><p>8 days</p></td>
 </tr>
-<tr class="row-even"><td>2011-20133</td>
-<td>16 days</td>
+<tr class="row-even"><td><p>2011-20133</p></td>
+<td><p>16 days</p></td>
 </tr>
-<tr class="row-odd"><td>2013-present</td>
-<td>8 days</td>
+<tr class="row-odd"><td><p>2013-present</p></td>
+<td><p>8 days</p></td>
 </tr>
 </tbody>
 </table>
@@ -555,13 +555,13 @@ Geoscience Australia ground station network.</p>
 <p>Fractional cover provides valuable information for a range of environemental and
 agricultural applications, including:</p>
 <ul class="simple">
-<li>Soil erosion monitoring</li>
-<li>Land surface process modelling</li>
-<li>Land management practices (e.g. crop rotation, stubble management, rangeland
-management)</li>
-<li>Vegetation studies</li>
-<li>Fuel load estimation</li>
-<li>Ecosystem modelling</li>
+<li><p>Soil erosion monitoring</p></li>
+<li><p>Land surface process modelling</p></li>
+<li><p>Land management practices (e.g. crop rotation, stubble management, rangeland
+management)</p></li>
+<li><p>Vegetation studies</p></li>
+<li><p>Fuel load estimation</p></li>
+<li><p>Ecosystem modelling</p></li>
 </ul>
 </div>
 </div>

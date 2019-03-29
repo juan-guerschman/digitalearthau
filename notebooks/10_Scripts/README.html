@@ -233,74 +233,65 @@
 <p>This folder contains examples of python code that demonstrates the use of functions and tools suitable for use in the DEA environment. The code examples provided here can be found in the <a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks">dea-notebooks Github repository</a>. Note that these functions have been developed by DEA users, not the DEA development team, and so are provided without warranty. If you find an error or bug in the functions, please either create an Issue in the Github repository, or fix it yourself and create a Pull request to contribute the updated function back into the repository (See the repository README for instructions on creating a Pull request).</p>
 <p>The <strong>FlexibleStats.py</strong> script is for use in conjunction with DEA stats to create products using non-sequential dates, further information is located within the file.</p>
 <p>The following functions are currently included in Python scripts for loading into notebooks:</p>
-<dl class="docutils">
-<dt>DEADataHandling.py: handling data using DEA functionality (i.e. dc.load or xarrays)</dt>
-<dd><ul class="first last simple">
-<li><strong>load_nbarx</strong>: Loads NBAR (Nadir BRDF Adjusted Reflectance) or NBAR-T (terrain corrected NBAR) data for a sensor, masks using pixel quality (PQ), then optionally filters out terrain -999s (for NBAR-T)</li>
-<li><strong>load_sentinel</strong>: Loads a Sentinel granule product and masks using PQ</li>
-<li><strong>load_clearlandsat</strong>: Loads a time series of Landsat observations from multiple sensors (ls5, ls7, ls8) with less than xx% cloud or nodata</li>
-<li><strong>load_clearsentinel2</strong>: Loads a time series of Sentinel 2 observations from multiple sensors (s2a, s2b) with less than xx% cloud or nodata</li>
-<li><strong>dataset_to_geotiff</strong>: Writes a multi-band geotiff for one xarray timeslice, or for a single composite image</li>
-<li><strong>open_polygon_from_shapefile</strong>: Imports a shapefile and converts to a datacube geometry object</li>
-<li><strong>write_your_netcdf</strong>: Writes an xarray dataset or array to a NetCDF file</li>
+<dl class="simple">
+<dt>DEADataHandling.py: handling data using DEA functionality (i.e. dc.load or xarrays)</dt><dd><ul class="simple">
+<li><p><strong>load_nbarx</strong>: Loads NBAR (Nadir BRDF Adjusted Reflectance) or NBAR-T (terrain corrected NBAR) data for a sensor, masks using pixel quality (PQ), then optionally filters out terrain -999s (for NBAR-T)</p></li>
+<li><p><strong>load_sentinel</strong>: Loads a Sentinel granule product and masks using PQ</p></li>
+<li><p><strong>load_clearlandsat</strong>: Loads a time series of Landsat observations from multiple sensors (ls5, ls7, ls8) with less than xx% cloud or nodata</p></li>
+<li><p><strong>load_clearsentinel2</strong>: Loads a time series of Sentinel 2 observations from multiple sensors (s2a, s2b) with less than xx% cloud or nodata</p></li>
+<li><p><strong>dataset_to_geotiff</strong>: Writes a multi-band geotiff for one xarray timeslice, or for a single composite image</p></li>
+<li><p><strong>open_polygon_from_shapefile</strong>: Imports a shapefile and converts to a datacube geometry object</p></li>
+<li><p><strong>write_your_netcdf</strong>: Writes an xarray dataset or array to a NetCDF file</p></li>
 </ul>
 </dd>
-<dt>DEAPlotting.py: plotting DEA data (e.g. xarrays)</dt>
-<dd><ul class="first last simple">
-<li><strong>rgb</strong>: Takes an xarray dataset and plots RGB images using three imagery bands</li>
-<li><strong>animated_timeseries</strong>: Takes an xarray time series and exports an animation showing landscape change across time</li>
-<li><strong>animated_doubletimeseries</strong>: Takes two xarray datasets and exports a two panel animation</li>
-<li><strong>animated_timeseriesline</strong>: Plots a pandas dataframe as a line graph next to an xarray dataset</li>
-<li><strong>plot_WOfS</strong>: Use the DEA WOfS color ramp to plot WOfS percentage data</li>
-<li><strong>display_map</strong>: Generates an interactive map with a bounded rectangle overlayed on Google Maps imagery from a set of x and y coordinates.</li>
+<dt>DEAPlotting.py: plotting DEA data (e.g. xarrays)</dt><dd><ul class="simple">
+<li><p><strong>rgb</strong>: Takes an xarray dataset and plots RGB images using three imagery bands</p></li>
+<li><p><strong>animated_timeseries</strong>: Takes an xarray time series and exports an animation showing landscape change across time</p></li>
+<li><p><strong>animated_doubletimeseries</strong>: Takes two xarray datasets and exports a two panel animation</p></li>
+<li><p><strong>animated_timeseriesline</strong>: Plots a pandas dataframe as a line graph next to an xarray dataset</p></li>
+<li><p><strong>plot_WOfS</strong>: Use the DEA WOfS color ramp to plot WOfS percentage data</p></li>
+<li><p><strong>display_map</strong>: Generates an interactive map with a bounded rectangle overlayed on Google Maps imagery from a set of x and y coordinates.</p></li>
 </ul>
 </dd>
-<dt>BandIndices.py: calculating remote sensing band indices</dt>
-<dd><ul class="first last simple">
-<li><strong>calculate_indices</strong>: Computes a set of indices (including NDVI, GNDVI, NDWI, NDMI) from an xarray dataset</li>
-<li><strong>geological_indices</strong>: Computes a set of geological remote sensing indices (including CMR, FMR, IOR) from an xarray dataset</li>
-<li><strong>tasseled_cap</strong>: Computes tasseled cap wetness, greenness and brightness bands from an xarray dataset</li>
+<dt>BandIndices.py: calculating remote sensing band indices</dt><dd><ul class="simple">
+<li><p><strong>calculate_indices</strong>: Computes a set of indices (including NDVI, GNDVI, NDWI, NDMI) from an xarray dataset</p></li>
+<li><p><strong>geological_indices</strong>: Computes a set of geological remote sensing indices (including CMR, FMR, IOR) from an xarray dataset</p></li>
+<li><p><strong>tasseled_cap</strong>: Computes tasseled cap wetness, greenness and brightness bands from an xarray dataset</p></li>
 </ul>
 </dd>
-<dt>SpatialTools.py: Rasters/shapefile manipulation functions that do not rely on DEA (i.e. no dc.load or xarrays)</dt>
-<dd><ul class="first last simple">
-<li><strong>rasterize_vector</strong>: Rasterize a vector file and return as an array</li>
-<li><strong>contour_extract</strong>: Extract contour lines from a two- or multi-dimensional array and return as a shapefile/geopandas dataframe</li>
-<li><strong>indices_to_coords</strong>: Takes lists of x and y array indices and converts them to equivelent spatial x and y coordinates</li>
-<li><strong>coords_to_indices</strong>: Takes lists of x and y coordinates and converts to equivelent raster array cell indices</li>
-<li><strong>raster_randomsample</strong>: Generate a set of n random points within cells of a raster that contain data</li>
-<li><strong>array_to_geotiff</strong>: Create a single band GeoTIFF file with data from an array</li>
-<li><strong>reproject_to_template</strong>: Reprojects a raster to match the extent, cell size, projection and dimensions of a template raster using GDAL</li>
+<dt>SpatialTools.py: Rasters/shapefile manipulation functions that do not rely on DEA (i.e. no dc.load or xarrays)</dt><dd><ul class="simple">
+<li><p><strong>rasterize_vector</strong>: Rasterize a vector file and return as an array</p></li>
+<li><p><strong>contour_extract</strong>: Extract contour lines from a two- or multi-dimensional array and return as a shapefile/geopandas dataframe</p></li>
+<li><p><strong>indices_to_coords</strong>: Takes lists of x and y array indices and converts them to equivelent spatial x and y coordinates</p></li>
+<li><p><strong>coords_to_indices</strong>: Takes lists of x and y coordinates and converts to equivelent raster array cell indices</p></li>
+<li><p><strong>raster_randomsample</strong>: Generate a set of n random points within cells of a raster that contain data</p></li>
+<li><p><strong>array_to_geotiff</strong>: Create a single band GeoTIFF file with data from an array</p></li>
+<li><p><strong>reproject_to_template</strong>: Reprojects a raster to match the extent, cell size, projection and dimensions of a template raster using GDAL</p></li>
 </ul>
 </dd>
-<dt>ClassificationTools.py: classifying remote sensing imagery using classifiers and machine learning</dt>
-<dd><ul class="first last simple">
-<li><strong>randomforest_train</strong>: Extracts training data from xarray dataset for multiple training shapefiles</li>
-<li><strong>randomforest_classify</strong>: Performs classification of xarray dataset using pre-trained random forest classifier, and export classified output to a geotiff</li>
-<li><strong>randomforest_eval</strong>: Takes a set of training labels and training samples, and plots OOB error against a range of classifier parameters to explore how parameters affect classification</li>
+<dt>ClassificationTools.py: classifying remote sensing imagery using classifiers and machine learning</dt><dd><ul class="simple">
+<li><p><strong>randomforest_train</strong>: Extracts training data from xarray dataset for multiple training shapefiles</p></li>
+<li><p><strong>randomforest_classify</strong>: Performs classification of xarray dataset using pre-trained random forest classifier, and export classified output to a geotiff</p></li>
+<li><p><strong>randomforest_eval</strong>: Takes a set of training labels and training samples, and plots OOB error against a range of classifier parameters to explore how parameters affect classification</p></li>
 </ul>
 </dd>
-<dt>SignificanceTests.py: per-pixel hypothesis testing</dt>
-<dd><ul class="first last simple">
-<li><strong>significance_tests</strong>: Given two xarray dataarrays from non-overlapping time-periods, conducts either a t-test or a Levene’s test to determine if the mean or variance are equal, respectively</li>
+<dt>SignificanceTests.py: per-pixel hypothesis testing</dt><dd><ul class="simple">
+<li><p><strong>significance_tests</strong>: Given two xarray dataarrays from non-overlapping time-periods, conducts either a t-test or a Levene’s test to determine if the mean or variance are equal, respectively</p></li>
 </ul>
 </dd>
-<dt>TasseledCapTools.py: a set of python functions to use with the outputs of tasseled cap transforms</dt>
-<dd><ul class="first last simple">
-<li><strong>thresholded_tasseled_cap</strong>: Computes thresholded tasseled cap wetness, greenness and brightness bands from a six band xarray dataset</li>
-<li><strong>pct_exceedance_tasseled_cap</strong>: Counts the number of thresholded tasseled cap scenes per pixel and divides by the number of tasseled cap scenes per pixel</li>
+<dt>TasseledCapTools.py: a set of python functions to use with the outputs of tasseled cap transforms</dt><dd><ul class="simple">
+<li><p><strong>thresholded_tasseled_cap</strong>: Computes thresholded tasseled cap wetness, greenness and brightness bands from a six band xarray dataset</p></li>
+<li><p><strong>pct_exceedance_tasseled_cap</strong>: Counts the number of thresholded tasseled cap scenes per pixel and divides by the number of tasseled cap scenes per pixel</p></li>
 </ul>
 </dd>
-<dt>RainfallTools.py: load rainfall from BoM rainfall grids</dt>
-<dd><ul class="first last simple">
-<li><strong>load_rainfall</strong>: Loads gridded rainfall data and fixes offset in underlying BoM data</li>
+<dt>RainfallTools.py: load rainfall from BoM rainfall grids</dt><dd><ul class="simple">
+<li><p><strong>load_rainfall</strong>: Loads gridded rainfall data and fixes offset in underlying BoM data</p></li>
 </ul>
 </dd>
-<dt>FileDialogs.py: A set of file dialog widgets for file paths for opening or saving files.</dt>
-<dd><ul class="first last simple">
-<li><strong>SaveFileButton</strong>:creates a button to save your file</li>
-<li><strong>SelectFileButton</strong>:creates a button to select one file</li>
-<li><strong>SelectFilesButton</strong>:SelectFilesButton returns a list of file paths (strings)</li>
+<dt>FileDialogs.py: A set of file dialog widgets for file paths for opening or saving files.</dt><dd><ul class="simple">
+<li><p><strong>SaveFileButton</strong>:creates a button to save your file</p></li>
+<li><p><strong>SelectFileButton</strong>:creates a button to select one file</p></li>
+<li><p><strong>SelectFilesButton</strong>:SelectFilesButton returns a list of file paths (strings)</p></li>
 </ul>
 </dd>
 </dl>

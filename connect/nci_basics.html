@@ -239,8 +239,8 @@
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Behind the scenes this will load a second module called <code class="docutils literal notranslate"><span class="pre">dea-env</span></code>
+<p class="admonition-title">Note</p>
+<p>Behind the scenes this will load a second module called <code class="docutils literal notranslate"><span class="pre">dea-env</span></code>
 which contains all required libraries and supporting software to use <code class="docutils literal notranslate"><span class="pre">dea</span></code>.</p>
 </div>
 <p>You can see a list of available modules by running:</p>
@@ -254,7 +254,7 @@ which contains all required libraries and supporting software to use <code class
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>VDI and Raijin have separate home directories, so you must copy your pgpass to the other if
 you use both environments.</p>
 <p>You can push the contents of your pgpass file from VDI to Raijin by running on a terminal window in VDI:</p>
@@ -265,14 +265,14 @@ you use both environments.</p>
 </div>
 <p>You will most likely be prompted for your NCI password.</p>
 <p>To pull the contents of your pgpass from Raijin to VDI instead, run</p>
-<div class="last highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ssh raijin &quot;cat ~/.pgpass&quot; &gt;&gt; ~/.pgpass</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ssh raijin &quot;cat ~/.pgpass&quot; &gt;&gt; ~/.pgpass</span>
 <span class="go">chmod 0600 ~/.pgpass</span>
 </pre></div>
 </div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">If you have created a <code class="docutils literal notranslate"><span class="pre">.datacube.conf</span></code> file in your home folder from early Data Cube betas, you should rename or remove it
+<p class="admonition-title">Warning</p>
+<p>If you have created a <code class="docutils literal notranslate"><span class="pre">.datacube.conf</span></code> file in your home folder from early Data Cube betas, you should rename or remove it
 to avoid it conflicting with the settings loaded by the module.</p>
 </div>
 </div>

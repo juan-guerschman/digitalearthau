@@ -452,7 +452,7 @@ div.rendered_html tbody tr:hover {
 <p>This notebook pulls in data based on the extent of a provided polygon. The polygon is then used to mask the data.</p>
 <p><strong>Required inputs</strong></p>
 <ul class="simple">
-<li>A shape file containing the polygon you would like to use for the analysis. Here we use the ACT state boundary, available as a <a class="reference external" href="https://data.gov.au/dataset/act-state-boundary-psma-administrative-boundaries/resource/20cc8694-1ac0-4c5c-bc5f-7710089d824a">shapefile from data.gov.au</a>.</li>
+<li><p>A shape file containing the polygon you would like to use for the analysis. Here we use the ACT state boundary, available as a <a class="reference external" href="https://data.gov.au/dataset/act-state-boundary-psma-administrative-boundaries/resource/20cc8694-1ac0-4c5c-bc5f-7710089d824a">shapefile from data.gov.au</a>.</p></li>
 </ul>
 <p>This example uses a function called <code class="docutils literal notranslate"><span class="pre">three_band_image</span></code>. This function is available within the <code class="docutils literal notranslate"><span class="pre">DEAPlotting.py</span></code> file in the <code class="docutils literal notranslate"><span class="pre">10_Scripts</span></code> folder of the <a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/tree/master/10_Scripts">dea-notebooks Github repository</a>. Note that these functions have been developed by DEA users, not the DEA development team, and so are provided without warranty. If you find an error or bug in the functions, please either create an ‘Issue’ in the Github
 repository, or fix it yourself and create a ‘Pull’ request to contribute the updated function back into the repository (See the repository <a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/blob/master/README.rst">README</a> for instructions on creating a Pull request).</p>
@@ -569,7 +569,8 @@ Attributes:
 </div>
 </div>
 <div class="admonition note">
-Although we have used a polygon for our import, the extent of the returned data is a rectangle with the extents set by the input polygon, not a dataset with areas outside of the polygon set to <code class="docutils literal notranslate"><span class="pre">NaN</span></code>. In this instance, we only want to deal with data inside of our polygon, so we will use it to mask the returned dataset.</div>
+<p>Although we have used a polygon for our import, the extent of the returned data is a rectangle with the extents set by the input polygon, not a dataset with areas outside of the polygon set to <code class="docutils literal notranslate"><span class="pre">NaN</span></code>. In this instance, we only want to deal with data inside of our polygon, so we will use it to mask the returned dataset.</p>
+</div>
 </div>
 <div class="section" id="Mask-the-dataset-with-our-original-polygon-to-remove-extra-data">
 <h2>Mask the dataset with our original polygon to remove extra data<a class="headerlink" href="#Mask-the-dataset-with-our-original-polygon-to-remove-extra-data" title="Permalink to this headline">¶</a></h2>

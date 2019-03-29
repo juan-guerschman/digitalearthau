@@ -585,7 +585,8 @@ respective High and Low Tide composites. Note that Landsat 7 ETM+ observations a
 <p>We can set up an extraction query for HLTC_25 using only spatial details (i.e. extent and projection): because HLTC_25 was computed by combining images from the entire Landsat time series into a single layer, it has no true temporal dimension (the layers do have a timestamp <code class="docutils literal notranslate"><span class="pre">2008-06-01</span></code>, but this is a meaningless placeholder value which is only required due to restrictions of the netCDF file format).</p>
 <p>Each HLTC_25 composite contains six surface-reflectance spectral bands: blue, green, red, near-infrared, short-wave infrared 1 and short-wave infrared 2.</p>
 <div class="admonition note">
-Important note: Please note that the surface reflectance values for each HLTC band are expressed as a floating point number between 0 and 1. This differs from surface reflectance values included with the DEA Landsat datasets, which are expressed as integers scaled between 0 and 10000.</div>
+<p>Important note: Please note that the surface reflectance values for each HLTC band are expressed as a floating point number between 0 and 1. This differs from surface reflectance values included with the DEA Landsat datasets, which are expressed as integers scaled between 0 and 10000.</p>
+</div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>

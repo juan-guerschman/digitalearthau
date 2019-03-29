@@ -245,97 +245,83 @@
 <p>Last update: 4th October 2018</p>
 <div class="section" id="sentinel-2-near-real-time-stable">
 <h2>Sentinel 2 Near Real Time (Stable)<a class="headerlink" href="#sentinel-2-near-real-time-stable" title="Permalink to this headline">¶</a></h2>
-<pre class="literal-block">
-s3://dea-public-data/
+<pre class="literal-block">s3://dea-public-data/
 ...
 ├── <a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=L2/">L2/</a>
-│   ├── <a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=L2/sentinel-2-nrt/">sentinel-2-nrt/</a>
-</pre>
+│   ├── <a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=L2/sentinel-2-nrt/">sentinel-2-nrt/</a></pre>
 <p>A rolling archive of 90 days of Sentinel 2 NBAR Surface Reflectance.</p>
 <p>This data is based off the Sinergise PDS data which is available in
 JP2000, which is why the product definition includes data for both.</p>
 <ul class="simple">
-<li><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/L2/sentinel-2-nrt/product-definition.yaml">Sentinel 2 NRT Product definition</a></li>
-<li><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/L2/sentinel-2-nrt/S2MSIARD/2018-10-01/S2A_OPER_MSI_ARD_TL_EPAE_20181001T024445_A017102_T52HGK_N02.06/ARD-METADATA.yaml">Sentinel 2 NRT Example tile metadata</a></li>
-<li><a class="reference external" href="https://github.com/GeoscienceAustralia/dea-config/blob/master/prod/services/wms/nrt/wms_cfg.py">Sentinel 2 NRT ODC WMS config</a></li>
+<li><p><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/L2/sentinel-2-nrt/product-definition.yaml">Sentinel 2 NRT Product definition</a></p></li>
+<li><p><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/L2/sentinel-2-nrt/S2MSIARD/2018-10-01/S2A_OPER_MSI_ARD_TL_EPAE_20181001T024445_A017102_T52HGK_N02.06/ARD-METADATA.yaml">Sentinel 2 NRT Example tile metadata</a></p></li>
+<li><p><a class="reference external" href="https://github.com/GeoscienceAustralia/dea-config/blob/master/prod/services/wms/nrt/wms_cfg.py">Sentinel 2 NRT ODC WMS config</a></p></li>
 </ul>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">We only recently increased the NRT archive from 30 days to 90 days. As such, it is still growing to include a full 90 days.</p>
+<p class="admonition-title">Note</p>
+<p>We only recently increased the NRT archive from 30 days to 90 days. As such, it is still growing to include a full 90 days.</p>
 </div>
 </div>
 <div class="section" id="water-observations-from-space">
 <h2>Water Observations from Space<a class="headerlink" href="#water-observations-from-space" title="Permalink to this headline">¶</a></h2>
-<pre class="literal-block">
-s3://dea-public-data/
+<pre class="literal-block">s3://dea-public-data/
 ...
-├── <a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=WOfS/">WOfS/</a>
-</pre>
+├── <a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=WOfS/">WOfS/</a></pre>
 <div class="section" id="water-observation-feature-layers-alpha">
 <h3>Water Observation Feature Layers (Alpha)<a class="headerlink" href="#water-observation-feature-layers-alpha" title="Permalink to this headline">¶</a></h3>
-<pre class="literal-block">
-s3://dea-public-data/
+<pre class="literal-block">s3://dea-public-data/
 ...
 ├── <a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=WOfS/">WOfS/</a>
-│   ├── <a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=WOfS/WOFLs/">WOFLs/</a>
-</pre>
+│   ├── <a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=WOfS/WOFLs/">WOFLs/</a></pre>
 <ul class="simple">
-<li><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/WOfS/WOFLs/v2.1.0/Product%20Description.pdf">Water Observation Feature Layers Product description</a></li>
-<li><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/WOfS/WOFLs/v2.1.0/product-definition.yaml">Water Observation Feature Layers Product definition</a></li>
-<li><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/WOfS/WOFLs/v2.1.0/combined/x_-16/y_-19/2015/05/12/LS_WATER_3577_-16_-19_20150512020641500000_v1526766106.yaml">Water Observation Feature Layers Example tile metadata</a></li>
+<li><p><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/WOfS/WOFLs/v2.1.0/Product%20Description.pdf">Water Observation Feature Layers Product description</a></p></li>
+<li><p><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/WOfS/WOFLs/v2.1.0/product-definition.yaml">Water Observation Feature Layers Product definition</a></p></li>
+<li><p><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/WOfS/WOFLs/v2.1.0/combined/x_-16/y_-19/2015/05/12/LS_WATER_3577_-16_-19_20150512020641500000_v1526766106.yaml">Water Observation Feature Layers Example tile metadata</a></p></li>
 </ul>
 </div>
 <div class="section" id="filtered-summary-stable">
 <h3>Filtered Summary (Stable)<a class="headerlink" href="#filtered-summary-stable" title="Permalink to this headline">¶</a></h3>
-<pre class="literal-block">
-s3://dea-public-data/
+<pre class="literal-block">s3://dea-public-data/
 ...
 ├── <a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=WOfS/">WOfS/</a>
-│   ├── <a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=WOfS/filtered_summary/">filtered_summary/</a>
-</pre>
+│   ├── <a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=WOfS/filtered_summary/">filtered_summary/</a></pre>
 <ul class="simple">
-<li><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/WOfS/filtered_summary/v2.1.0/Product%20Description.pdf">Water Observations Filtered Summary Product description</a></li>
-<li><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/WOfS/filtered_summary/v2.1.0/product-definition.yaml">Water Observations Filtered Summary Product definition</a></li>
-<li><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/WOfS/filtered_summary/v2.1.0/combined/x_-14/y_-13/wofs_filtered_summary_-14_-13.yaml">Water Observations Filtered Summary Example tile metadata</a></li>
+<li><p><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/WOfS/filtered_summary/v2.1.0/Product%20Description.pdf">Water Observations Filtered Summary Product description</a></p></li>
+<li><p><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/WOfS/filtered_summary/v2.1.0/product-definition.yaml">Water Observations Filtered Summary Product definition</a></p></li>
+<li><p><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/WOfS/filtered_summary/v2.1.0/combined/x_-14/y_-13/wofs_filtered_summary_-14_-13.yaml">Water Observations Filtered Summary Example tile metadata</a></p></li>
 </ul>
 </div>
 <div class="section" id="summary-stable">
 <h3>Summary (Stable)<a class="headerlink" href="#summary-stable" title="Permalink to this headline">¶</a></h3>
-<pre class="literal-block">
-s3://dea-public-data/
+<pre class="literal-block">s3://dea-public-data/
 ...
 ├── <a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=WOfS/">WOfS/</a>
-│   ├── <a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=WOfS/summary/">summary/</a>
-</pre>
+│   ├── <a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=WOfS/summary/">summary/</a></pre>
 <ul class="simple">
-<li><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/WOfS/summary/v2.1.0/Product%20Description.pdf">Water Observations Summary Product description</a></li>
-<li><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/WOfS/summary/v2.1.0/product-definition.yaml">Water Observations Summary Product definition</a></li>
-<li><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/WOfS/summary/v2.1.0/combined/x_-16/y_-12/WOFS_3577_-16_-12_summary.yaml">Water Observations Summary Example tile&nbsp;metadata</a></li>
-<li><a class="reference external" href="https://github.com/GeoscienceAustralia/dea-config/blob/master/prod/services/wms/ows/wms_cfg.py#L821-L1433">Water Observations Summary ODC WMS config</a></li>
+<li><p><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/WOfS/summary/v2.1.0/Product%20Description.pdf">Water Observations Summary Product description</a></p></li>
+<li><p><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/WOfS/summary/v2.1.0/product-definition.yaml">Water Observations Summary Product definition</a></p></li>
+<li><p><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/WOfS/summary/v2.1.0/combined/x_-16/y_-12/WOFS_3577_-16_-12_summary.yaml">Water Observations Summary Example tile metadata</a></p></li>
+<li><p><a class="reference external" href="https://github.com/GeoscienceAustralia/dea-config/blob/master/prod/services/wms/ows/wms_cfg.py#L821-L1433">Water Observations Summary ODC WMS config</a></p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="geomedian-australia-stable">
 <h2>Geomedian Australia (Stable)<a class="headerlink" href="#geomedian-australia-stable" title="Permalink to this headline">¶</a></h2>
-<pre class="literal-block">
-s3://dea-public-data/
+<pre class="literal-block">s3://dea-public-data/
 ...
-├── <a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=geomedian-australia/">geomedian-australia/</a>
-</pre>
+├── <a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=geomedian-australia/">geomedian-australia/</a></pre>
 <ul class="simple">
-<li><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/geomedian-australia/Product%20Description.pdf">Geomedian Australia Product Description</a></li>
-<li><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/geomedian-australia/product-definition.yaml">Geomedian Australia Product Definition</a></li>
-<li><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/geomedian-australia/v2.1.0/L7/x_-3/y_-20/2010/01/01/ls7_gm_nbart_-3_-20_20100101.yaml">Geomedian Australia Example tile metadata</a></li>
-<li><a class="reference external" href="https://github.com/GeoscienceAustralia/dea-config/blob/master/prod/services/wms/ows/wms_cfg.py#L105-L741">Geomedian Australia ODC WMS config</a></li>
+<li><p><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/geomedian-australia/Product%20Description.pdf">Geomedian Australia Product Description</a></p></li>
+<li><p><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/geomedian-australia/product-definition.yaml">Geomedian Australia Product Definition</a></p></li>
+<li><p><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/geomedian-australia/v2.1.0/L7/x_-3/y_-20/2010/01/01/ls7_gm_nbart_-3_-20_20100101.yaml">Geomedian Australia Example tile metadata</a></p></li>
+<li><p><a class="reference external" href="https://github.com/GeoscienceAustralia/dea-config/blob/master/prod/services/wms/ows/wms_cfg.py#L105-L741">Geomedian Australia ODC WMS config</a></p></li>
 </ul>
 </div>
 <div class="section" id="mangrove-cover-stable">
 <h2>Mangrove Cover (Stable)<a class="headerlink" href="#mangrove-cover-stable" title="Permalink to this headline">¶</a></h2>
-<pre class="literal-block">
-s3://dea-public-data/
+<pre class="literal-block">s3://dea-public-data/
 ...
-├── <a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=mangrove_cover/">mangrove_cover/</a>
-</pre>
+├── <a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=mangrove_cover/">mangrove_cover/</a></pre>
 <p>The mangrove canopy cover product provides valuable information about
 the extent and canopy density of mangroves for each year between 1987
 and 2016 for the entire Australian coastline. The canopy cover classes
@@ -347,37 +333,33 @@ Remote Sensing Research Program and the Global Mangrove Watch layers
 (<a class="reference external" href="https://doi.org/10.1071/MF13177">https://doi.org/10.1071/MF13177</a>) developed by the Japanese Aerospace
 Exploration Agency.</p>
 <ul class="simple">
-<li><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/mangrove_cover/product-definition.yaml">Mangrove Cover Product definition</a></li>
-<li><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/mangrove_cover/-19_-30/MANGROVE_COVER_3577_-19_-30_20170101.yaml">Mangrove Cover Example tile metadata</a></li>
-<li><a class="reference external" href="https://github.com/GeoscienceAustralia/dea-config/blob/master/prod/services/wms/ows/wms_cfg.py#L742-L820">Mangrove Cover ODC WMS config</a></li>
+<li><p><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/mangrove_cover/product-definition.yaml">Mangrove Cover Product definition</a></p></li>
+<li><p><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/mangrove_cover/-19_-30/MANGROVE_COVER_3577_-19_-30_20170101.yaml">Mangrove Cover Example tile metadata</a></p></li>
+<li><p><a class="reference external" href="https://github.com/GeoscienceAustralia/dea-config/blob/master/prod/services/wms/ows/wms_cfg.py#L742-L820">Mangrove Cover ODC WMS config</a></p></li>
 </ul>
 </div>
 <div class="section" id="barest-earth-alpha">
 <h2>Barest Earth (Alpha)<a class="headerlink" href="#barest-earth-alpha" title="Permalink to this headline">¶</a></h2>
-<pre class="literal-block">
-s3://dea-public-data/
+<pre class="literal-block">s3://dea-public-data/
 ...
-├── <a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=bare-earth/">bare-earth/</a>
-</pre>
+├── <a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=bare-earth/">bare-earth/</a></pre>
 <p>Total summary (1988 - present) with an algorithm that selecting the
 barest earth pixel.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Metadata has x and y instead of latitude and longitude, it is currently being re-generated</p>
+<p class="admonition-title">Warning</p>
+<p>Metadata has x and y instead of latitude and longitude, it is currently being re-generated</p>
 </div>
 <ul class="simple">
-<li><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/bare-earth/summary/v2.1.0/product-definition.yaml">Barest Earth Product definition</a></li>
-<li><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/bare-earth/summary/v2.1.0/L8/x_-13/y_-105/be-l8_-13_-105.yaml">Barest Earth Example tile metadata</a></li>
-<li><a class="reference external" href="https://github.com/GeoscienceAustralia/dea-config/blob/master/dev/services/wms/ows/wms_cfg.py#L741-L947">Barest Earth ODC WMS config</a></li>
+<li><p><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/bare-earth/summary/v2.1.0/product-definition.yaml">Barest Earth Product definition</a></p></li>
+<li><p><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/bare-earth/summary/v2.1.0/L8/x_-13/y_-105/be-l8_-13_-105.yaml">Barest Earth Example tile metadata</a></p></li>
+<li><p><a class="reference external" href="https://github.com/GeoscienceAustralia/dea-config/blob/master/dev/services/wms/ows/wms_cfg.py#L741-L947">Barest Earth ODC WMS config</a></p></li>
 </ul>
 </div>
 <div class="section" id="fractional-cover-alpha">
 <h2>Fractional Cover (Alpha)<a class="headerlink" href="#fractional-cover-alpha" title="Permalink to this headline">¶</a></h2>
-<pre class="literal-block">
-s3://dea-public-data/
+<pre class="literal-block">s3://dea-public-data/
 ...
-├── <a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=fractional-cover/">fractional-cover/</a>
-</pre>
+├── <a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=fractional-cover/">fractional-cover/</a></pre>
 <p>Fractional Cover (FC) is one of two vegetation-related products
 currently offered by Digital Earth Australia, the other being the
 Normalised Difference Vegetation Index (NDVI) product. FC provides
@@ -385,34 +367,30 @@ information about the the proportions of green vegetation, non-green
 vegetation (including deciduous trees during autumn, dry grass, etc.),
 and bare soils for every 25m x 25m ground footprint across the whole
 Australian continent. This information is available for every cloud free
-satellite observation&nbsp;over Australia from 1987 till now. FC can
+satellite observation over Australia from 1987 till now. FC can
 potentially provide insights into the interplay and changes in areas of
 dry vegetation and/or bare soil as well as allowing the mapping of green
 vegetation extent.</p>
 <ul class="simple">
-<li><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/fractional-cover/fc/v2.2.0/product-definition.yaml">Fractional Cover Product definition</a></li>
-<li><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/fractional-cover/fc/v2.2.0/ls8/x_-16/y_-13/2018/03/24/LS8_OLI_FC_3577_-16_-13_20180324021120500000_v1524571261.yaml">Fractional Cover Example tile metadata</a></li>
-<li><a class="reference external" href="https://github.com/GeoscienceAustralia/dea-config/blob/master/dev/services/wms/fc/wms_cfg.py#L72-L155">Fractional Cover ODC WMS config</a></li>
+<li><p><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/fractional-cover/fc/v2.2.0/product-definition.yaml">Fractional Cover Product definition</a></p></li>
+<li><p><a class="reference external" href="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/fractional-cover/fc/v2.2.0/ls8/x_-16/y_-13/2018/03/24/LS8_OLI_FC_3577_-16_-13_20180324021120500000_v1524571261.yaml">Fractional Cover Example tile metadata</a></p></li>
+<li><p><a class="reference external" href="https://github.com/GeoscienceAustralia/dea-config/blob/master/dev/services/wms/fc/wms_cfg.py#L72-L155">Fractional Cover ODC WMS config</a></p></li>
 </ul>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Some data is missing due to problems uploading</p>
+<p class="admonition-title">Warning</p>
+<p>Some data is missing due to problems uploading</p>
 </div>
 </div>
 <div class="section" id="other-data">
 <h2>Other Data<a class="headerlink" href="#other-data" title="Permalink to this headline">¶</a></h2>
-<pre class="literal-block">
-<a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=ITEM_Intervals/">ITEM_Intervals/</a>
+<pre class="literal-block"><a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=ITEM_Intervals/">ITEM_Intervals/</a>
 
 <a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=ITEM_V2/">ITEM_V2/</a>
 
 <a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=LHTC_Tides/">LHTC_Tides/</a>
 
-<a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=ewater/">ewater/</a>
-</pre>
-<pre class="literal-block">
-<a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=projects/">projects/</a>
-</pre>
+<a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=ewater/">ewater/</a></pre>
+<pre class="literal-block"><a class="reference external" href="http://dea-public-data.s3-website-ap-southeast-2.amazonaws.com/?prefix=projects/">projects/</a></pre>
 <p>These are short term projects that will be migrated to another bucket
 soon.</p>
 </div>

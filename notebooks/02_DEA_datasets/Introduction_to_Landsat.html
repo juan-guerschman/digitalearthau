@@ -475,11 +475,11 @@ div.rendered_html tbody tr:hover {
 denote the satellite.</p>
 <p><strong>What does this document do?</strong></p>
 <ul class="simple">
-<li>Show how to use datacube to retrieve Landsat data for various temporal and spatial extents</li>
-<li>Plot individual Landsat bands</li>
-<li>Plot multiple Landsat bands as a true colour image</li>
-<li>Plot multiple Landsat bands as a false colour image</li>
-<li>Demonstrate how to compute and plot simple remote sensing band indices</li>
+<li><p>Show how to use datacube to retrieve Landsat data for various temporal and spatial extents</p></li>
+<li><p>Plot individual Landsat bands</p></li>
+<li><p>Plot multiple Landsat bands as a true colour image</p></li>
+<li><p>Plot multiple Landsat bands as a false colour image</p></li>
+<li><p>Demonstrate how to compute and plot simple remote sensing band indices</p></li>
 </ul>
 <p><strong>Requirements</strong></p>
 <p>You need to run the following commands from the command line prior to launching jupyter notebooks from the same terminal so that the required libraries and paths are set:</p>
@@ -513,19 +513,19 @@ Landsat-8 OLI/TIRS sensors. [<a class="reference external" href="#References">9<
 <p><strong>NBAR</strong></p>
 <p>NBAR stands for Nadir-corrected BRDF Adjusted Reflectance, where BRDF stands for Bidirectional Reflectance Distribution Function. The approach involves atmospheric correction to compute surface-leaving radiance, and bi-directional reflectance modelling to remove the effects of topography and angular variation in reflectance.</p>
 <ul class="simple">
-<li>The standardised NBAR product delivers calibrated optical surface reflectance data across land and coastal fringes. NBAR is a medium resolution (~25 m) grid based on the Landsat TM/ETM+/OLI archive and presents surface reflectance data in <strong>25 square metre grid cells</strong> in the <strong>Australian Albers Equal Area (EPSG:3577)</strong> projection system.</li>
-<li>Radiance measurements from Earth Observation (EO) sensors do not directly quantify the surface reflectance of the Earth. Such measurements are modified by variations in atmospheric properties, sun position, sensor view angle, surface slope and surface aspect. To obtain consistent and comparable measures of Earth surface reflectance from EO, these variations need to be reduced or removed from the radiance measurements. This is especially important when comparing imagery acquired in different
-seasons and geographic regions.</li>
-<li>NBAR surface reflectance is created using a physics-based, coupled BRDF and atmospheric correction model that can be applied to both flat and inclined surfaces. The resulting surface reflectance values are comparable both within individual images and between images acquired at different times and/or with different sensors. [<a class="reference external" href="#References">9</a>]</li>
+<li><p>The standardised NBAR product delivers calibrated optical surface reflectance data across land and coastal fringes. NBAR is a medium resolution (~25 m) grid based on the Landsat TM/ETM+/OLI archive and presents surface reflectance data in <strong>25 square metre grid cells</strong> in the <strong>Australian Albers Equal Area (EPSG:3577)</strong> projection system.</p></li>
+<li><p>Radiance measurements from Earth Observation (EO) sensors do not directly quantify the surface reflectance of the Earth. Such measurements are modified by variations in atmospheric properties, sun position, sensor view angle, surface slope and surface aspect. To obtain consistent and comparable measures of Earth surface reflectance from EO, these variations need to be reduced or removed from the radiance measurements. This is especially important when comparing imagery acquired in different
+seasons and geographic regions.</p></li>
+<li><p>NBAR surface reflectance is created using a physics-based, coupled BRDF and atmospheric correction model that can be applied to both flat and inclined surfaces. The resulting surface reflectance values are comparable both within individual images and between images acquired at different times and/or with different sensors. [<a class="reference external" href="#References">9</a>]</p></li>
 </ul>
 <p><strong>NBAR-T</strong></p>
 <p>Surface reflectance NBAR-T includes a terrain illumination reflectance correction and has the same features of NBAR, along with some additional features.</p>
 <ul class="simple">
-<li>The surface reflectance product is created using a physics-based coupled BRDF and atmospheric correction model that can be applied to both flat and inclined surfaces. The resulting surface reflectance values are comparable both within individual images and between images acquired at different times and/or with different sensors.</li>
-<li>Terrain affects optical satellite images through both irradiance and bidirectional reflectance distribution function (BRDF) effects. Slopes facing the sun receive enhanced solar irradiance and appear brighter compared to those facing away from the sun.</li>
-<li>For anisotropic surfaces, the radiance received at the satellite sensor from a sloping surface is also affected by surface BRDF which varies with combinations of surface landcover types, sun, and satellite geometry (sun and sensor view, and their relative azimuth angle) as well as topographic geometry (primarily slope and aspect angles). Consequently, to obtain comparable surface reflectance from satellite images covering mountainous areas, it is necessary to process the images to reduce or
-remove the topographic effect so that the images can be used for different purposes on the same spectral base.</li>
-<li>A Digital Surface Model (DSM) resolution appropriate to the scale of the resolution of satellite image is needed for the best results. 1 second SRTM DSM is used for NBAR-T processing. [<a class="reference external" href="#References">9</a>]</li>
+<li><p>The surface reflectance product is created using a physics-based coupled BRDF and atmospheric correction model that can be applied to both flat and inclined surfaces. The resulting surface reflectance values are comparable both within individual images and between images acquired at different times and/or with different sensors.</p></li>
+<li><p>Terrain affects optical satellite images through both irradiance and bidirectional reflectance distribution function (BRDF) effects. Slopes facing the sun receive enhanced solar irradiance and appear brighter compared to those facing away from the sun.</p></li>
+<li><p>For anisotropic surfaces, the radiance received at the satellite sensor from a sloping surface is also affected by surface BRDF which varies with combinations of surface landcover types, sun, and satellite geometry (sun and sensor view, and their relative azimuth angle) as well as topographic geometry (primarily slope and aspect angles). Consequently, to obtain comparable surface reflectance from satellite images covering mountainous areas, it is necessary to process the images to reduce or
+remove the topographic effect so that the images can be used for different purposes on the same spectral base.</p></li>
+<li><p>A Digital Surface Model (DSM) resolution appropriate to the scale of the resolution of satellite image is needed for the best results. 1 second SRTM DSM is used for NBAR-T processing. [<a class="reference external" href="#References">9</a>]</p></li>
 </ul>
 <div class="section" id="Nodata-value">
 <h3>Nodata value<a class="headerlink" href="#Nodata-value" title="Permalink to this headline">¶</a></h3>
@@ -535,29 +535,33 @@ remove the topographic effect so that the images can be used for different purpo
 <h3>Available bands<a class="headerlink" href="#Available-bands" title="Permalink to this headline">¶</a></h3>
 <p>The sensors on the Landsats are different and collect reflected radiance in various spectral wavelengths. These are called bands. Details about the bands for satellites 5, 7 and 8 can be found at [<a class="reference external" href="#References">3</a>], [<a class="reference external" href="#References">5</a>] and [<a class="reference external" href="#References">6</a>], respectively. The following bands are included in the DEA archive: band names to be used in code, when retrieving the data, are given in brackets.</p>
 <ul class="simple">
-<li><strong>Landsat 5 and 7:</strong><ul>
-<li>Excludes Landsat 5 Thematic Mapper (TM) thermal band and Multispectral Scanner (MSS) bands, and Landsat 7 Enhanced Thematic Mapper Plus (ETM+) thermal band and panchromatic band</li>
-<li>Includes the following Landsat 5 TM and Landsat 7 ETM+ bands:<ul>
-<li>Band 1: blue (<code class="docutils literal notranslate"><span class="pre">blue</span></code>)</li>
-<li>Band 2: green (<code class="docutils literal notranslate"><span class="pre">green</span></code>)</li>
-<li>Band 3: red (<code class="docutils literal notranslate"><span class="pre">red</span></code>)</li>
-<li>Band 4: near-infrared (<code class="docutils literal notranslate"><span class="pre">nir</span></code>)</li>
-<li>Band 5: shortwave infrared 1 (<code class="docutils literal notranslate"><span class="pre">swir1</span></code>)</li>
-<li>Band 7: shortwave infrared 2 (<code class="docutils literal notranslate"><span class="pre">swir2</span></code>)</li>
+<li><p><strong>Landsat 5 and 7:</strong></p>
+<ul>
+<li><p>Excludes Landsat 5 Thematic Mapper (TM) thermal band and Multispectral Scanner (MSS) bands, and Landsat 7 Enhanced Thematic Mapper Plus (ETM+) thermal band and panchromatic band</p></li>
+<li><p>Includes the following Landsat 5 TM and Landsat 7 ETM+ bands:</p>
+<ul>
+<li><p>Band 1: blue (<code class="docutils literal notranslate"><span class="pre">blue</span></code>)</p></li>
+<li><p>Band 2: green (<code class="docutils literal notranslate"><span class="pre">green</span></code>)</p></li>
+<li><p>Band 3: red (<code class="docutils literal notranslate"><span class="pre">red</span></code>)</p></li>
+<li><p>Band 4: near-infrared (<code class="docutils literal notranslate"><span class="pre">nir</span></code>)</p></li>
+<li><p>Band 5: shortwave infrared 1 (<code class="docutils literal notranslate"><span class="pre">swir1</span></code>)</p></li>
+<li><p>Band 7: shortwave infrared 2 (<code class="docutils literal notranslate"><span class="pre">swir2</span></code>)</p></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><strong>Landsat 8:</strong><ul>
-<li>Excludes the Operational Land Imager (OLI) panchromatic or cirrus bands, and Thermal Infrared Sensor (TIRS) bands</li>
-<li>Includes the following Operational Land Imager (OLI) bands:<ul>
-<li>Band 1: coastal aerosol (<code class="docutils literal notranslate"><span class="pre">coastal_aerosol</span></code>)</li>
-<li>Band 2: blue (<code class="docutils literal notranslate"><span class="pre">blue</span></code>)</li>
-<li>Band 3: green (<code class="docutils literal notranslate"><span class="pre">green</span></code>)</li>
-<li>Band 4: red (<code class="docutils literal notranslate"><span class="pre">red</span></code>)</li>
-<li>Band 5: near-infrared (<code class="docutils literal notranslate"><span class="pre">nir</span></code>)</li>
-<li>Band 6: shortwave infrared 1 (<code class="docutils literal notranslate"><span class="pre">swir1</span></code>)</li>
-<li>Band 7: shortwave infrared 2 (<code class="docutils literal notranslate"><span class="pre">swir2</span></code>)</li>
+<li><p><strong>Landsat 8:</strong></p>
+<ul>
+<li><p>Excludes the Operational Land Imager (OLI) panchromatic or cirrus bands, and Thermal Infrared Sensor (TIRS) bands</p></li>
+<li><p>Includes the following Operational Land Imager (OLI) bands:</p>
+<ul>
+<li><p>Band 1: coastal aerosol (<code class="docutils literal notranslate"><span class="pre">coastal_aerosol</span></code>)</p></li>
+<li><p>Band 2: blue (<code class="docutils literal notranslate"><span class="pre">blue</span></code>)</p></li>
+<li><p>Band 3: green (<code class="docutils literal notranslate"><span class="pre">green</span></code>)</p></li>
+<li><p>Band 4: red (<code class="docutils literal notranslate"><span class="pre">red</span></code>)</p></li>
+<li><p>Band 5: near-infrared (<code class="docutils literal notranslate"><span class="pre">nir</span></code>)</p></li>
+<li><p>Band 6: shortwave infrared 1 (<code class="docutils literal notranslate"><span class="pre">swir1</span></code>)</p></li>
+<li><p>Band 7: shortwave infrared 2 (<code class="docutils literal notranslate"><span class="pre">swir2</span></code>)</p></li>
 </ul>
 </li>
 </ul>
@@ -707,9 +711,10 @@ imagery from analyses.</p>
 <div class="section" id="Specify-a-query-with-coordinates-and-date-range">
 <h3>Specify a <em>query</em> with coordinates and date range<a class="headerlink" href="#Specify-a-query-with-coordinates-and-date-range" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><strong>lat/lon:</strong> Latitude and longitude of the area. e.g. Canberra = <code class="docutils literal notranslate"><span class="pre">'lat':</span> <span class="pre">(-35.25,</span> <span class="pre">-35.35),</span> <span class="pre">'lon':</span> <span class="pre">(149.05,</span> <span class="pre">149.17)</span></code></li>
-<li><strong>time:</strong> Date range to fetch the scenes. The approximate time between two scenes is 16 days. If there is a location near a swath boundary, it may be captured in two passes and so there could be two images within the 16 day period.<ul>
-<li>You must know <a class="reference external" href="https://data.dea.gadevs.ga/ls7_nbar_scene">the date(s) for which data is available</a> for each satellite/product, so that the query can be specified correctly.</li>
+<li><p><strong>lat/lon:</strong> Latitude and longitude of the area. e.g. Canberra = <code class="docutils literal notranslate"><span class="pre">'lat':</span> <span class="pre">(-35.25,</span> <span class="pre">-35.35),</span> <span class="pre">'lon':</span> <span class="pre">(149.05,</span> <span class="pre">149.17)</span></code></p></li>
+<li><p><strong>time:</strong> Date range to fetch the scenes. The approximate time between two scenes is 16 days. If there is a location near a swath boundary, it may be captured in two passes and so there could be two images within the 16 day period.</p>
+<ul>
+<li><p>You must know <a class="reference external" href="https://data.dea.gadevs.ga/ls7_nbar_scene">the date(s) for which data is available</a> for each satellite/product, so that the query can be specified correctly.</p></li>
 </ul>
 </li>
 </ul>
@@ -731,8 +736,8 @@ imagery from analyses.</p>
 <p>In this example we will load NBAR-T data from the Landsat 8 satellite. Sometimes multiple scenes are acquired by the satellite on the same day. We want to group these together, and will use <code class="docutils literal notranslate"><span class="pre">group_by='solar_day'</span></code> to do this. To load in the data, we use our query above to provide a spatial and temporal extraction range.</p>
 <p><code class="docutils literal notranslate"><span class="pre">dc.load</span></code> returns an <strong>xarray</strong> object, which has two core data structures:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">DataArray</span></code> is a labeled, N-dimensional array.</li>
-<li><code class="docutils literal notranslate"><span class="pre">Dataset</span></code> is a multi-dimensional, in-memory array database. It is a dict-like container of DataArray objects aligned along any number of shared dimensions.</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DataArray</span></code> is a labeled, N-dimensional array.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Dataset</span></code> is a multi-dimensional, in-memory array database. It is a dict-like container of DataArray objects aligned along any number of shared dimensions.</p></li>
 </ul>
 <p>The available Landsat bands are listed under <code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">variables</span></code>. Surface reflectance values for each of the Landsat bands are expressed as <strong>16-bit integers scaled between 0 and 10000.</strong></p>
 <div class="nbinput docutils container">
@@ -998,15 +1003,15 @@ Attributes:
 <div class="section" id="References">
 <h3>References<a class="headerlink" href="#References" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
-<li>USGS, 2018a. <em>Landsat Project Description | Landsat Missions</em>, Page Last Modified: 04/25/18 01:57 pm. <a class="reference external" href="https://landsat.usgs.gov/landsat-project-description">https://landsat.usgs.gov/landsat-project-description</a></li>
-<li>USGS, 2018b. <em>Landsat Missions Timeline | Landsat Missions</em>, Page Last Modified: 04/25/18 01:57 pm <a class="reference external" href="https://landsat.usgs.gov/landsat-missions-timeline">https://landsat.usgs.gov/landsat-missions-timeline</a></li>
-<li>USGS, 2018c. <em>Landsat 5 History | Landsat Missions</em>, Page Last Modified: 04/25/18 01:57 pm <a class="reference external" href="https://landsat.usgs.gov/landsat-5-history">https://landsat.usgs.gov/landsat-5-history</a></li>
-<li>USGS, 2018d. <em>Landsat 6 History | Landsat Missions</em>, Page Last Modified: 04/25/18 01:57 pm <a class="reference external" href="https://landsat.usgs.gov/landsat-6-history">https://landsat.usgs.gov/landsat-6-history</a></li>
-<li>USGS, 2018e. <em>Landsat 7 | Landsat Missions</em>, Page Last Modified: 04/25/18 01:57 pm <a class="reference external" href="https://landsat.usgs.gov/landsat-7-history">https://landsat.usgs.gov/landsat-7-history</a></li>
-<li>USGS, 2018f. <em>Landsat 8 | Landsat Missions</em>, Page Last Modified: 04/25/18 01:57 pm <a class="reference external" href="https://landsat.usgs.gov/landsat-8-mission">https://landsat.usgs.gov/landsat-8-mission</a></li>
-<li>USGS, 2018g. <em>Landsat 9 | Landsat Missions</em>, Page Last Modified: 04/25/18 01:57 pm <a class="reference external" href="https://landsat.usgs.gov/landsat-9-mission">https://landsat.usgs.gov/landsat-9-mission</a></li>
-<li>USGS, 2018h. <em>Landsat 7 Data Users Handbook - Section 2 | Landsat Missions</em>, Page Last Modified: 04/25/18 01:57 pm <a class="reference external" href="https://landsat.usgs.gov/landsat-7-data-users-handbook-section-2">https://landsat.usgs.gov/landsat-7-data-users-handbook-section-2</a></li>
-<li>GA, 2017. <em>Surface Reflectance — Digital Earth Australia 1.0.0 documentation</em> <a class="reference external" href="http://geoscienceaustralia.github.io/digitalearthau/data/data.html">http://geoscienceaustralia.github.io/digitalearthau/data/data.html</a></li>
+<li><p>USGS, 2018a. <em>Landsat Project Description | Landsat Missions</em>, Page Last Modified: 04/25/18 01:57 pm. <a class="reference external" href="https://landsat.usgs.gov/landsat-project-description">https://landsat.usgs.gov/landsat-project-description</a></p></li>
+<li><p>USGS, 2018b. <em>Landsat Missions Timeline | Landsat Missions</em>, Page Last Modified: 04/25/18 01:57 pm <a class="reference external" href="https://landsat.usgs.gov/landsat-missions-timeline">https://landsat.usgs.gov/landsat-missions-timeline</a></p></li>
+<li><p>USGS, 2018c. <em>Landsat 5 History | Landsat Missions</em>, Page Last Modified: 04/25/18 01:57 pm <a class="reference external" href="https://landsat.usgs.gov/landsat-5-history">https://landsat.usgs.gov/landsat-5-history</a></p></li>
+<li><p>USGS, 2018d. <em>Landsat 6 History | Landsat Missions</em>, Page Last Modified: 04/25/18 01:57 pm <a class="reference external" href="https://landsat.usgs.gov/landsat-6-history">https://landsat.usgs.gov/landsat-6-history</a></p></li>
+<li><p>USGS, 2018e. <em>Landsat 7 | Landsat Missions</em>, Page Last Modified: 04/25/18 01:57 pm <a class="reference external" href="https://landsat.usgs.gov/landsat-7-history">https://landsat.usgs.gov/landsat-7-history</a></p></li>
+<li><p>USGS, 2018f. <em>Landsat 8 | Landsat Missions</em>, Page Last Modified: 04/25/18 01:57 pm <a class="reference external" href="https://landsat.usgs.gov/landsat-8-mission">https://landsat.usgs.gov/landsat-8-mission</a></p></li>
+<li><p>USGS, 2018g. <em>Landsat 9 | Landsat Missions</em>, Page Last Modified: 04/25/18 01:57 pm <a class="reference external" href="https://landsat.usgs.gov/landsat-9-mission">https://landsat.usgs.gov/landsat-9-mission</a></p></li>
+<li><p>USGS, 2018h. <em>Landsat 7 Data Users Handbook - Section 2 | Landsat Missions</em>, Page Last Modified: 04/25/18 01:57 pm <a class="reference external" href="https://landsat.usgs.gov/landsat-7-data-users-handbook-section-2">https://landsat.usgs.gov/landsat-7-data-users-handbook-section-2</a></p></li>
+<li><p>GA, 2017. <em>Surface Reflectance — Digital Earth Australia 1.0.0 documentation</em> <a class="reference external" href="http://geoscienceaustralia.github.io/digitalearthau/data/data.html">http://geoscienceaustralia.github.io/digitalearthau/data/data.html</a></p></li>
 </ol>
 </div>
 </div>

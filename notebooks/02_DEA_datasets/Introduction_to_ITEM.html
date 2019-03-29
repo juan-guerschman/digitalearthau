@@ -641,8 +641,9 @@ only exposed during the lowest of observed tides, while interval <code class="do
 <p>Because ITEM Relative Extent Model intervals represent a <em>relative</em> 10% proportion of the tidal range observed by Landsat across a 30 year period, they represent different ranges of tidal heights in different locations around Australia’s coastline. The plot below assists in interpreting what each interval represents: coloured bars correspond to the coloured intervals above, and show the Landsat observations (black dots) and the range of tidal heights (y-axis) that were used to generate each
 interval. For example, the bright red interval above (interval <code class="docutils literal notranslate"><span class="pre">1</span></code> or 0-10% of observed tide heights) was produced using Landsat observations that were acquired during tides of between -2.25 to -3.0m below Mean Sea Level (MSL). These plots are <a class="reference external" href="https://nationalmap.gov.au/#share=s-z67A2BRZUYCcbOtc2kWvTcgjWTq">available for all areas of Australia’s coastline by clicking on an ITEM polygon on National Map</a>.</p>
 <div class="admonition note">
-An important thing to remember when interpreting ITEM relative extents: Due the sun-synchronous nature of the various Landsat sensor observations, it is unlikely that the full physical extents of the tidal range are observed by Landsat. Hence, the highest and lowest <em>observed</em> tidal heights used to produce the intervals can cover a variable proportion of the full tidal range, and have no consistent relationship to Lowest and Highest Astronomical Tide. For example, observe how the top and bottom
-of the coloured bars below do not match up with the top and bottom of the full light grey tidal range:</div>
+<p>An important thing to remember when interpreting ITEM relative extents: Due the sun-synchronous nature of the various Landsat sensor observations, it is unlikely that the full physical extents of the tidal range are observed by Landsat. Hence, the highest and lowest <em>observed</em> tidal heights used to produce the intervals can cover a variable proportion of the full tidal range, and have no consistent relationship to Lowest and Highest Astronomical Tide. For example, observe how the top and bottom
+of the coloured bars below do not match up with the top and bottom of the full light grey tidal range:</p>
+</div>
 <p><img alt="image" src="http://dea-public-data.s3-ap-southeast-2.amazonaws.com/ITEM_Intervals/ITEM_REL_209_122.20_-18.07.jpg" /></p>
 </div>
 </div>
@@ -684,9 +685,9 @@ Attributes:
 <h3>Plot ITEM Confidence layer<a class="headerlink" href="#Plot-ITEM-Confidence-layer" title="Permalink to this headline">¶</a></h3>
 <p>The Confidence layer reflects the pixel based consistency of the NDWI values within each subset of observations, based on the tidal range. Higher standard deviation values (orange to red colours below) indicate water classification changes not based on the tidal cycle, and hence lower confidence in the extent model. Possible drivers of these changes include:</p>
 <ul class="simple">
-<li>Inadequacies of the tidal model, due perhaps to complex coastal bathymetry or estuarine structures not captured in the model. These effects have been reduced in ITEM v2.0 compared to previous versions, through the use of an improved tidal modelling framework</li>
-<li>Change in the structure and exposure of water/non-water features NOT driven by tidal variation. For example, movement of sand banks in estuaries, construction of man-made features (ports etc.).</li>
-<li>Terrestrial/Inland water features not influenced by the tidal cycle.</li>
+<li><p>Inadequacies of the tidal model, due perhaps to complex coastal bathymetry or estuarine structures not captured in the model. These effects have been reduced in ITEM v2.0 compared to previous versions, through the use of an improved tidal modelling framework</p></li>
+<li><p>Change in the structure and exposure of water/non-water features NOT driven by tidal variation. For example, movement of sand banks in estuaries, construction of man-made features (ports etc.).</p></li>
+<li><p>Terrestrial/Inland water features not influenced by the tidal cycle.</p></li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:

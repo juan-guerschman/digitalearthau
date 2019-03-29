@@ -464,7 +464,7 @@ div.rendered_html tbody tr:hover {
 <p><a class="reference external" href="#userInputs">User Inputs</a></p>
 <p><a class="reference external" href="#functions">Custom functions</a></p>
 <ol class="arabic">
-<li><p class="first"><a class="reference external" href="#pixelWiseAnalysis">Pixel-wise trend and variability analysis</a></p>
+<li><p><a class="reference external" href="#pixelWiseAnalysis">Pixel-wise trend and variability analysis</a></p>
 <p>1.1 <a class="reference external" href="#get_data">Extract data</a></p>
 <p>1.2 <a class="reference external" href="#masking">Masking</a></p>
 <p>1.3 <a class="reference external" href="#CDO_operations">CDO operations</a></p>
@@ -472,9 +472,8 @@ div.rendered_html tbody tr:hover {
 <p>1.5 <a class="reference external" href="#rgb_plot">Composite RGB</a></p>
 <p>1.6 <a class="reference external" href="#export_geotiffs">Export geotiffs</a></p>
 </li>
-<li><p class="first"><a class="reference external" href="#zonalStats">Zonal statistics</a></p>
-</li>
-<li><p class="first"><a class="reference external" href="#reporting">Reporting and plotting</a></p>
+<li><p><a class="reference external" href="#zonalStats">Zonal statistics</a></p></li>
+<li><p><a class="reference external" href="#reporting">Reporting and plotting</a></p>
 <p>3.1 <a class="reference external" href="#timeseries">Zonal timeseries plots</a></p>
 <p>3.2 <a class="reference external" href="#pixel-wise_plots">Pixel-wise plots</a></p>
 <p>3.3 <a class="reference external" href="#truecolourplot">True Colour plot</a></p>
@@ -485,10 +484,10 @@ div.rendered_html tbody tr:hover {
 <p><strong>Summary:</strong></p>
 <p>This script conducts exploratory timeseries analysis on the Fractional Cover dataset (stored in the Geoscience Australia DataCube) in order to help detect, but not attribute, change in vegetation coverage from seasonal grasss to perennial shrubs and trees. The script conducts the following analysis:</p>
 <ol class="arabic simple">
-<li>Pixel-wise trend and variability analysis to produce outputs of linear coefficients since some reference time, the change in seasonal and interannual variability between a baseline period and a more recent period, and the difference in mean total vegetation (PV + NPV) between a baseline period and more recent period.</li>
-<li>Zonal statistics for n polygons within a shapefile.</li>
-<li>Pixel-wise statistical tests to determine where change is significant, these test are applied to both the means (Welch T-test), and the variance (Levene test).</li>
-<li>Lastly, an RGB composite map is produced whose bands include: the difference in means, the difference in variability, and the welch-test probabilities. This final map shows regions where strong regeneration from emphemeral pasture to perrenial trees is likely to have occurred.</li>
+<li><p>Pixel-wise trend and variability analysis to produce outputs of linear coefficients since some reference time, the change in seasonal and interannual variability between a baseline period and a more recent period, and the difference in mean total vegetation (PV + NPV) between a baseline period and more recent period.</p></li>
+<li><p>Zonal statistics for n polygons within a shapefile.</p></li>
+<li><p>Pixel-wise statistical tests to determine where change is significant, these test are applied to both the means (Welch T-test), and the variance (Levene test).</p></li>
+<li><p>Lastly, an RGB composite map is produced whose bands include: the difference in means, the difference in variability, and the welch-test probabilities. This final map shows regions where strong regeneration from emphemeral pasture to perrenial trees is likely to have occurred.</p></li>
 </ol>
 <p>The script relies heavily on the Climate Data Operators (CDO) library to conduct the analysis, which requires loading CDO in the terminal before using this script (run: module load cdo/1.7.1), and installation of the CDO python wrapper. Visit <a class="reference external" href="https://github.com/Try2Code/cdo-bindings">https://github.com/Try2Code/cdo-bindings</a> for instructions on installing CDO-python through the pip installer (this only needs to be done once).</p>
 <p>The python packages PyPDF2, and rasterstats are also required and are not pre-installed on the VDI.</p>
@@ -948,7 +947,8 @@ highly seasonal grasses to less climate responsive perennial vegetation (trees a
 <div class="section" id="Pixel-wise-trend-and-variability-analysis">
 <h1>Pixel-wise trend and variability analysis<a class="headerlink" href="#Pixel-wise-trend-and-variability-analysis" title="Permalink to this headline">¶</a></h1>
 <blockquote>
-<div>Functioning code, nothing should need to be changed from here onwards</div></blockquote>
+<div><p>Functioning code, nothing should need to be changed from here onwards</p>
+</div></blockquote>
 <div class="section" id="Get-Fractional-Cover-dataset-from-the-DataCube">
 <h2>Get Fractional Cover dataset from the DataCube<a class="headerlink" href="#Get-Fractional-Cover-dataset-from-the-DataCube" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
@@ -1521,7 +1521,8 @@ finished levene test
 <div class="section" id="Zonal-Statistics">
 <h1>Zonal Statistics<a class="headerlink" href="#Zonal-Statistics" title="Permalink to this headline">¶</a></h1>
 <blockquote>
-<div>Use the exported ‘fc_clean_monthly.nc’ file to calculate the zonal statistics over polygons</div></blockquote>
+<div><p>Use the exported ‘fc_clean_monthly.nc’ file to calculate the zonal statistics over polygons</p>
+</div></blockquote>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
@@ -1621,7 +1622,8 @@ finished levene test
 <div class="section" id="Reporting-and-plotting">
 <h1>Reporting and plotting<a class="headerlink" href="#Reporting-and-plotting" title="Permalink to this headline">¶</a></h1>
 <blockquote>
-<div>Create a pdf report that contains all of the above analysis in one easy document</div></blockquote>
+<div><p>Create a pdf report that contains all of the above analysis in one easy document</p>
+</div></blockquote>
 <div class="section" id="Zonal-timeseries-plots">
 <h2>Zonal timeseries plots<a class="headerlink" href="#Zonal-timeseries-plots" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">

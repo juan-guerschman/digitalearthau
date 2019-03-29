@@ -2432,44 +2432,42 @@ water_sum.plot(cmap=&#39;rainbow&#39;, robust=True)
 <p>A software release and management plan;</p>
 <p>Approved by Robert Woodcock, Matt Paget and Simon Oliver 19/01/2016</p>
 <ol class="arabic simple">
-<li>Develop branch - aim is to have this not broken - integration tests should enforce expected functionality on this branch</li>
+<li><p>Develop branch - aim is to have this not broken - integration tests should enforce expected functionality on this branch</p></li>
 </ol>
 <ol class="loweralpha simple">
-<li>integration tests are trying to enforce this</li>
-<li>Develop is the main collaboration branch</li>
-<li>To discourage keeping feature branches separate for too long - small incremental improvements are better</li>
+<li><p>integration tests are trying to enforce this</p></li>
+<li><p>Develop is the main collaboration branch</p></li>
+<li><p>To discourage keeping feature branches separate for too long - small incremental improvements are better</p></li>
 </ol>
 <ol class="arabic simple" start="2">
-<li>Master to be replaced with git tagged releases (these should not deviate greatly from develop)</li>
+<li><p>Master to be replaced with git tagged releases (these should not deviate greatly from develop)</p></li>
 </ol>
 <ol class="loweralpha simple">
-<li>The process to get to release could be :</li>
-<li>Decide when develop is feature complete</li>
+<li><p>The process to get to release could be :</p></li>
+<li><p>Decide when develop is feature complete</p></li>
 </ol>
 <ol class="lowerroman" start="2">
-<li><p class="first">Branch it to a release candidate</p>
-</li>
-<li><div class="first highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Test</span> <span class="n">the</span> <span class="n">release</span> <span class="n">candidate</span> <span class="p">(</span><span class="n">manual</span> <span class="o">-</span> <span class="n">apply</span> <span class="n">patches</span> <span class="k">as</span> <span class="n">needed</span> <span class="n">to</span> <span class="n">branch</span><span class="p">)</span>
+<li><p>Branch it to a release candidate</p></li>
+<li><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Test</span> <span class="n">the</span> <span class="n">release</span> <span class="n">candidate</span> <span class="p">(</span><span class="n">manual</span> <span class="o">-</span> <span class="n">apply</span> <span class="n">patches</span> <span class="k">as</span> <span class="n">needed</span> <span class="n">to</span> <span class="n">branch</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Tag release</p>
-</li>
+<li><p>Tag release</p></li>
 </ol>
 <ol class="arabic simple" start="3">
-<li>Continuous integration tests are run on every checkin to check core functionality- currently includes all of the ingestion code - in the process of extending to include storage access.</li>
+<li><p>Continuous integration tests are run on every checkin to check core functionality- currently includes all of the ingestion code - in the process of extending to include storage access.</p></li>
 </ol>
 <ol class="loweralpha simple">
-<li>To merge in a feature branch it should include any relevant tests.</li>
+<li><p>To merge in a feature branch it should include any relevant tests.</p></li>
 </ol>
 <ol class="arabic simple" start="4">
-<li>Persistent demo environment to be set up on Raijin with major changes going in - accessible to NCI/CSIRO and GA - only updated when we are going to do a release i.e. against the release candidate (as a final check)</li>
+<li><p>Persistent demo environment to be set up on Raijin with major changes going in - accessible to NCI/CSIRO and GA - only updated when we are going to do a release i.e. against the release candidate (as a final check)</p></li>
 </ol>
 <ol class="loweralpha simple">
-<li>Aim to have pushbutton releases to raijin (nightly build)</li>
+<li><p>Aim to have pushbutton releases to raijin (nightly build)</p></li>
 </ol>
 <ol class="arabic simple" start="5">
-<li>We should be doing user acceptance tests also and need to agree on what this looks like prior to approving a release.</li>
+<li><p>We should be doing user acceptance tests also and need to agree on what this looks like prior to approving a release.</p></li>
 </ol>
 <p>A plan for improving the data management of the collections in the RDS Landsat (rs0) and WOfs (fk4) Projects, such as establishing data layout, appropriate access controls (including read/write permissions) and alignment to existing organisational data libraries);  Reformatting of all data in projects rs0 (Landsat) and fk4 (WOfS) that are currently stored in GeoTIFF into netCDF4-CF;</p>
 <div class="nbinput nblast docutils container">

@@ -238,15 +238,15 @@
 <h2>Required Software<a class="headerlink" href="#required-software" title="Permalink to this headline">¶</a></h2>
 <p>Install TurboVNC and Strudel according to the instructions at <a class="reference external" href="http://vdi.nci.org.au/help">http://vdi.nci.org.au/help</a>.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The NCI instructions recommend specific versions of
+<p class="admonition-title">Note</p>
+<p>The NCI instructions recommend specific versions of
 <cite>TurboVNC &lt;https://sourceforge.net/projects/turbovnc/files/&gt;</cite> and
 <cite>Strudel &lt;https://cvl.massive.org.au/launcher_files/stable/&gt;</cite>.
 More recent versions may or may not be compatible with the VDI.</p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Your institution may provide this software to be installed via an internal process.
+<p class="admonition-title">Note</p>
+<p>Your institution may provide this software to be installed via an internal process.
 For example at Geoscience Australia, the software can be requested from the
 <a class="reference external" href="http://intranet.ga.gov.au/CherwellPortal/SSMS">Software Service Management System (SSMS)</a>
 [internal link only].</p>
@@ -256,26 +256,27 @@ For example at Geoscience Australia, the software can be requested from the
 <h2>Connecting to the VDI<a class="headerlink" href="#connecting-to-the-vdi" title="Permalink to this headline">¶</a></h2>
 <p>To setup Strudel to connect to the NCI, run the Strudel application, then:</p>
 <ul class="simple">
-<li>Select <strong>File</strong> -&gt; <strong>Manage Sites</strong></li>
-<li>Click <strong>New</strong></li>
-<li>Enter the details:<ul>
-<li>Name: <strong>NCI Virtual Desktops</strong></li>
-<li>URL: <strong>https://vdi.nci.org.au/strudel.json</strong></li>
+<li><p>Select <strong>File</strong> -&gt; <strong>Manage Sites</strong></p></li>
+<li><p>Click <strong>New</strong></p></li>
+<li><p>Enter the details:</p>
+<ul>
+<li><p>Name: <strong>NCI Virtual Desktops</strong></p></li>
+<li><p>URL: <strong>https://vdi.nci.org.au/strudel.json</strong></p></li>
 </ul>
 </li>
-<li>Click <strong>OK</strong></li>
-<li>Make sure the <strong>Active</strong> checkbox is ticked.</li>
-<li>Click <strong>OK</strong></li>
+<li><p>Click <strong>OK</strong></p></li>
+<li><p>Make sure the <strong>Active</strong> checkbox is ticked.</p></li>
+<li><p>Click <strong>OK</strong></p></li>
 </ul>
 <p>To connect:</p>
 <ul class="simple">
-<li>Site: <strong>NCI Virtual Desktops</strong></li>
-<li>Username: Your NCI username (eg <cite>abc123</cite> or <cite>ab1234</cite>)</li>
-<li>Click <strong>Login</strong></li>
+<li><p>Site: <strong>NCI Virtual Desktops</strong></p></li>
+<li><p>Username: Your NCI username (eg <cite>abc123</cite> or <cite>ab1234</cite>)</p></li>
+<li><p>Click <strong>Login</strong></p></li>
 </ul>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If the drop-down site list in Strudel remains empty, it most likely means
+<p class="admonition-title">Note</p>
+<p>If the drop-down site list in Strudel remains empty, it most likely means
 that the software is unable to retrieve the strudel.json URL,
 such as due to firewall or network proxy configuration.</p>
 </div>
@@ -286,7 +287,7 @@ such as due to firewall or network proxy configuration.</p>
 <p>From the <strong>Applications</strong> menu in the top left of the screen, choose <strong>System</strong> -&gt; <strong>Terminal</strong>.</p>
 <div class="figure align-center" id="id1">
 <img alt="Start Terminal Menu" src="../_images/vdi-launch-terminal.png" />
-<p class="caption"><span class="caption-text">Launch the Terminal from the System Tools menu.</span></p>
+<p class="caption"><span class="caption-text">Launch the Terminal from the System Tools menu.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
 <p>In the terminal window run the command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sh</span> <span class="o">/</span><span class="n">g</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">v10</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">digitalearthau</span><span class="o">/</span><span class="n">install</span><span class="o">.</span><span class="n">sh</span>

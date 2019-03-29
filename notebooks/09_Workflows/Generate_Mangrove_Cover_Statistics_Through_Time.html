@@ -467,15 +467,15 @@ div.rendered_html tbody tr:hover {
 <h2>This notebook is designed for creating mangrove cover statistics for multiple cyclones or regions simultaneously.<a class="headerlink" href="#This-notebook-is-designed-for-creating-mangrove-cover-statistics-for-multiple-cyclones-or-regions-simultaneously." title="Permalink to this headline">¶</a></h2>
 <p><strong>What does this notebook do?</strong></p>
 <ol class="arabic simple">
-<li>Gives instructions for creating shapefiles for 1 km mangrove tiles</li>
-<li>Imports modules and sets up working folder</li>
-<li>Sets up functions for generating plots of yearly mangrove cover statistics</li>
-<li>Sets up list of shapefiles that contain 1 km mangrove tiles that 1) experienced certain wind speed categories for specific cyclones, or 2) for certain Natural Resource Management (NRM) regions</li>
-<li>Imports all Mangrove Cover datasets as combined virtual rasters for each year</li>
-<li>Uses <code class="docutils literal notranslate"><span class="pre">rasterstats</span></code> to compute pixel counts for each cover class within 1 km tiles</li>
-<li>Exports <code class="docutils literal notranslate"><span class="pre">.shp</span></code> files with pixel count attributes for each tile</li>
-<li>Exports pixel counts for all tiles and years as a <code class="docutils literal notranslate"><span class="pre">.pkl.gz</span></code> format file</li>
-<li>Generates mangrove cover statistics plots and <code class="docutils literal notranslate"><span class="pre">.csv</span></code> files for each cyclone or region</li>
+<li><p>Gives instructions for creating shapefiles for 1 km mangrove tiles</p></li>
+<li><p>Imports modules and sets up working folder</p></li>
+<li><p>Sets up functions for generating plots of yearly mangrove cover statistics</p></li>
+<li><p>Sets up list of shapefiles that contain 1 km mangrove tiles that 1) experienced certain wind speed categories for specific cyclones, or 2) for certain Natural Resource Management (NRM) regions</p></li>
+<li><p>Imports all Mangrove Cover datasets as combined virtual rasters for each year</p></li>
+<li><p>Uses <code class="docutils literal notranslate"><span class="pre">rasterstats</span></code> to compute pixel counts for each cover class within 1 km tiles</p></li>
+<li><p>Exports <code class="docutils literal notranslate"><span class="pre">.shp</span></code> files with pixel count attributes for each tile</p></li>
+<li><p>Exports pixel counts for all tiles and years as a <code class="docutils literal notranslate"><span class="pre">.pkl.gz</span></code> format file</p></li>
+<li><p>Generates mangrove cover statistics plots and <code class="docutils literal notranslate"><span class="pre">.csv</span></code> files for each cyclone or region</p></li>
 </ol>
 <p><strong>Requirements and data sources:</strong></p>
 <p>You need to run the following commands from the command line or a shell script prior to launching Jupyter notebooks from the same terminal so that the requiered libraries and paths are set:</p>
@@ -501,38 +501,38 @@ earlier. From the <em>‘Statistics to calculate:’</em> menu select <em>‘Sta
 <p>The shapefile created above will now have zonal statistics for all mangrove tiles that are contained within the wind speed raster. One way of creating shapefiles for each wind speed category is to firstly duplicate the shapefile created in the previous step. Then, open the attributes table and select the data that falls within a wind speed range for a desired category. This can be done by checking the new <code class="docutils literal notranslate"><span class="pre">Maximum</span></code> column, which was created during the <code class="docutils literal notranslate"><span class="pre">Zonal</span> <span class="pre">Statistics</span></code> step. The remaining
 data can be deleted. This will leave you with a shapefile with the 1km mangrove tiles that have experienced the chosen wind speed category. This step can be repeated to create shapefiles for each area that has been subjceted to certain wind speed categories for a given cyclone. Rename new shapefiles according to their wind speed categories.</p>
 <p>Below is a summary of the wind speeds and their corresponding categories given by the Bureau of Meteorology (2019) (more details can also be found at <a class="reference external" href="http://www.bom.gov.au/cyclone/about/">http://www.bom.gov.au/cyclone/about/</a>):</p>
-<table border="1" class="docutils">
+<table class="docutils align-center">
 <colgroup>
-<col width="9%" />
-<col width="23%" />
-<col width="68%" />
+<col style="width: 9%" />
+<col style="width: 23%" />
+<col style="width: 68%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Category</th>
-<th class="head">Strongest gusts (km/h)</th>
-<th class="head">Typical effects</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Category</p></th>
+<th class="head"><p>Strongest gusts (km/h)</p></th>
+<th class="head"><p>Typical effects</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>1 Tropical Cyclone</td>
-<td>Less than 125 km/h Gales</td>
-<td>Minimal house damage. Damage to some crops, trees and caravans. Boats may drag moorings</td>
+<tbody>
+<tr class="row-even"><td><p>1 Tropical Cyclone</p></td>
+<td><p>Less than 125 km/h Gales</p></td>
+<td><p>Minimal house damage. Damage to some crops, trees and caravans. Boats may drag moorings</p></td>
 </tr>
-<tr class="row-odd"><td>2 Tropical Cyclone</td>
-<td>125 - 164 km/h Destructive winds</td>
-<td>Minor house damage. Significant damage to signs, trees and caravans. Heavy damage to some crops. Risk of power failure. Small boats may break moorings</td>
+<tr class="row-odd"><td><p>2 Tropical Cyclone</p></td>
+<td><p>125 - 164 km/h Destructive winds</p></td>
+<td><p>Minor house damage. Significant damage to signs, trees and caravans. Heavy damage to some crops. Risk of power failure. Small boats may break moorings</p></td>
 </tr>
-<tr class="row-even"><td>3 Severe tropical Cyclone</td>
-<td>165 - 224 km/h Very destructive winds</td>
-<td>Some roof and structural damage. Some caravans destroyed. Power failure likely.</td>
+<tr class="row-even"><td><p>3 Severe tropical Cyclone</p></td>
+<td><p>165 - 224 km/h Very destructive winds</p></td>
+<td><p>Some roof and structural damage. Some caravans destroyed. Power failure likely.</p></td>
 </tr>
-<tr class="row-odd"><td>4 Severe Tropical Cyclone</td>
-<td>225 - 279 km/h Very destructive winds</td>
-<td>Significant roofing and structural damage. Many caravans destroyed and blown away. Dangerous airborne debris. Widespread power failures.</td>
+<tr class="row-odd"><td><p>4 Severe Tropical Cyclone</p></td>
+<td><p>225 - 279 km/h Very destructive winds</p></td>
+<td><p>Significant roofing and structural damage. Many caravans destroyed and blown away. Dangerous airborne debris. Widespread power failures.</p></td>
 </tr>
-<tr class="row-even"><td>5 Severe Tropical Cyclone</td>
-<td>More than 280 km/h Extremely destructive winds</td>
-<td>Extremely dangerous with widespread destruction</td>
+<tr class="row-even"><td><p>5 Severe Tropical Cyclone</p></td>
+<td><p>More than 280 km/h Extremely destructive winds</p></td>
+<td><p>Extremely dangerous with widespread destruction</p></td>
 </tr>
 </tbody>
 </table>

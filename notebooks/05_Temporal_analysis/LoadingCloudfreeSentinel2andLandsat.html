@@ -534,8 +534,9 @@ create an ‘Issue’ in the Github repository, or fix it yourself and create a 
 <code class="docutils literal notranslate"><span class="pre">animated_timeseries</span></code> function from <code class="docutils literal notranslate"><span class="pre">DEAPlotting</span></code>.</p>
 <p>The proportion of clear pixels is calculated by summing the pixels that are flagged as being problematic in the Landsat PQ25 layer. By default only cloudy or cloud shadowed pixels or pixels without valid data in every band are included in the calculation, but this can be customised using the <code class="docutils literal notranslate"><span class="pre">mask_dict</span></code> function.</p>
 <div class="admonition note">
-If you encounter memory issues: By default, the function removes invalid -999 values by replacing them with NaN (mask_invalid_data=True). For large data extractions, it is recommended that you set both mask_pixel_quality=False and mask_invalid_data=False. Otherwise, all output variables will be coerced to float64 when NaN values are inserted into the array, potentially causing your data to use 4x as much memory. Be aware that the resulting arrays will contain invalid -999 values which
-should be considered in analyses.</div>
+<p>If you encounter memory issues: By default, the function removes invalid -999 values by replacing them with NaN (mask_invalid_data=True). For large data extractions, it is recommended that you set both mask_pixel_quality=False and mask_invalid_data=False. Otherwise, all output variables will be coerced to float64 when NaN values are inserted into the array, potentially causing your data to use 4x as much memory. Be aware that the resulting arrays will contain invalid -999 values which
+should be considered in analyses.</p>
+</div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>

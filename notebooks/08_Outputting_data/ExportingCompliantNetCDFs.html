@@ -503,9 +503,9 @@ create the NetCDF, as these automatically create much of the required metadata.<
 <div class="section" id="Create-new-NetCDF">
 <h2>Create new NetCDF<a class="headerlink" href="#Create-new-NetCDF" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Here we create a new NetCDF storage unit using the <code class="docutils literal notranslate"><span class="pre">create_netcdf_storage_unit</span></code> function from <code class="docutils literal notranslate"><span class="pre">datacube.storage.storage</span></code></li>
-<li>This lets us set up the dataset’s coordinate reference system, dataset dimensions (e.g. x and y coordinates) and create empty variables tied to the above dimensions with manually defined nodata values, units and dtypes.</li>
-<li>Using the <code class="docutils literal notranslate"><span class="pre">CRS</span></code>, <code class="docutils literal notranslate"><span class="pre">Coordinate</span></code> and <code class="docutils literal notranslate"><span class="pre">Variable</span></code> functions automatically generates much of the required metadata, including <code class="docutils literal notranslate"><span class="pre">geospatial_bounds</span></code>, <code class="docutils literal notranslate"><span class="pre">geospatial_bounds_crs</span></code>, <code class="docutils literal notranslate"><span class="pre">geospatial_lat_*</span></code> and <code class="docutils literal notranslate"><span class="pre">geospatial_lon_*</span></code>.</li>
+<li><p>Here we create a new NetCDF storage unit using the <code class="docutils literal notranslate"><span class="pre">create_netcdf_storage_unit</span></code> function from <code class="docutils literal notranslate"><span class="pre">datacube.storage.storage</span></code></p></li>
+<li><p>This lets us set up the dataset’s coordinate reference system, dataset dimensions (e.g. x and y coordinates) and create empty variables tied to the above dimensions with manually defined nodata values, units and dtypes.</p></li>
+<li><p>Using the <code class="docutils literal notranslate"><span class="pre">CRS</span></code>, <code class="docutils literal notranslate"><span class="pre">Coordinate</span></code> and <code class="docutils literal notranslate"><span class="pre">Variable</span></code> functions automatically generates much of the required metadata, including <code class="docutils literal notranslate"><span class="pre">geospatial_bounds</span></code>, <code class="docutils literal notranslate"><span class="pre">geospatial_bounds_crs</span></code>, <code class="docutils literal notranslate"><span class="pre">geospatial_lat_*</span></code> and <code class="docutils literal notranslate"><span class="pre">geospatial_lon_*</span></code>.</p></li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -775,17 +775,17 @@ root group (NETCDF4 data model, file format HDF5):
 <div class="section" id="Climate-and-Forecast-Metadata-Standard-(CF)-compliance">
 <h3>Climate and Forecast Metadata Standard (CF) compliance<a class="headerlink" href="#Climate-and-Forecast-Metadata-Standard-(CF)-compliance" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>You can test for CF compliance using this online utility: <a class="reference external" href="http://puma.nerc.ac.uk/cgi-bin/cf-checker.pl">http://puma.nerc.ac.uk/cgi-bin/cf-checker.pl</a></li>
-<li>All CF tests should pass</li>
+<li><p>You can test for CF compliance using this online utility: <a class="reference external" href="http://puma.nerc.ac.uk/cgi-bin/cf-checker.pl">http://puma.nerc.ac.uk/cgi-bin/cf-checker.pl</a></p></li>
+<li><p>All CF tests should pass</p></li>
 </ul>
 </div>
 <div class="section" id="Attribute-Convention-for-Data-Discovery-(ACDD)-compliance">
 <h3>Attribute Convention for Data Discovery (ACDD) compliance<a class="headerlink" href="#Attribute-Convention-for-Data-Discovery-(ACDD)-compliance" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Run the compliance-checker tool loaded by the dea module on the NCI: <code class="docutils literal notranslate"><span class="pre">compliance-checker</span> <span class="pre">test_file.nc</span></code></li>
-<li>This is a much more detailed check, and will give a total score for the dataset and an explanation for each failed test.</li>
-<li>Every effort should be made to make all ’High Priority’ tests pass, but there is some flexibility (e.g. varattr may give less than a 100% score if some attributes that are not applicable for a given variable like standard_name are not set).</li>
-<li>You do not need to pass all ‘Medium priority’ tests, but try to complete as many as practically possible.</li>
+<li><p>Run the compliance-checker tool loaded by the dea module on the NCI: <code class="docutils literal notranslate"><span class="pre">compliance-checker</span> <span class="pre">test_file.nc</span></code></p></li>
+<li><p>This is a much more detailed check, and will give a total score for the dataset and an explanation for each failed test.</p></li>
+<li><p>Every effort should be made to make all ’High Priority’ tests pass, but there is some flexibility (e.g. varattr may give less than a 100% score if some attributes that are not applicable for a given variable like standard_name are not set).</p></li>
+<li><p>You do not need to pass all ‘Medium priority’ tests, but try to complete as many as practically possible.</p></li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:

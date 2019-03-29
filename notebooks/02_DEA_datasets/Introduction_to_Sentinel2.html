@@ -602,10 +602,10 @@ div.rendered_html tbody tr:hover {
 <p>We will focus on data from the Sentinel-2a platform for this demonstration, as there is more data available than 2b. To explore the spectral datasets from Sentinel-2a, we will use the <code class="docutils literal notranslate"><span class="pre">s2a_ard_granule</span></code> product. Sometimes multiple scenes are acquired by the satellite on the same day. We want to group these together, and will use <code class="docutils literal notranslate"><span class="pre">group_by='solar_day'</span></code> to do this.</p>
 <p>To load in the Sentinel data, we have a number of options we can use in building our data extraction query:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">lat</span></code>/<code class="docutils literal notranslate"><span class="pre">lon</span></code> - specify a bounding box for the extraction. Note that a polygon can be used instead. See <a class="reference external" href="https://datacube-core.readthedocs.io/en/stable/dev/generate/datacube.api.query.Query.html#datacube.api.query.Query">here</a> for more details</li>
-<li><code class="docutils literal notranslate"><span class="pre">output_crs</span></code> - the output coordinate reference system to project the data into. The CRS you request will impact on the format for the <code class="docutils literal notranslate"><span class="pre">resolution</span></code> query. Two handy CRSs are ‘EPSG:3577’, which is the Australian Albers projected coordinate system, and ‘EPSG:4325’, which is WGS84 a global geographic coordinate system.</li>
-<li><code class="docutils literal notranslate"><span class="pre">resolution</span></code> - the requested output resolution for the data. If you have selected a geographic coordinate system for the <code class="docutils literal notranslate"><span class="pre">output_crs</span></code>, this will be in degrees. If you have selected a projected coordinate system, this will be in metres.</li>
-<li><code class="docutils literal notranslate"><span class="pre">time</span></code> - the time range for the query.</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lat</span></code>/<code class="docutils literal notranslate"><span class="pre">lon</span></code> - specify a bounding box for the extraction. Note that a polygon can be used instead. See <a class="reference external" href="https://datacube-core.readthedocs.io/en/stable/dev/generate/datacube.api.query.Query.html#datacube.api.query.Query">here</a> for more details</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output_crs</span></code> - the output coordinate reference system to project the data into. The CRS you request will impact on the format for the <code class="docutils literal notranslate"><span class="pre">resolution</span></code> query. Two handy CRSs are ‘EPSG:3577’, which is the Australian Albers projected coordinate system, and ‘EPSG:4325’, which is WGS84 a global geographic coordinate system.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">resolution</span></code> - the requested output resolution for the data. If you have selected a geographic coordinate system for the <code class="docutils literal notranslate"><span class="pre">output_crs</span></code>, this will be in degrees. If you have selected a projected coordinate system, this will be in metres.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time</span></code> - the time range for the query.</p></li>
 </ul>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -692,115 +692,115 @@ Attributes:
 <div class="section" id="Sentinel-2-bands">
 <h3>Sentinel 2 bands<a class="headerlink" href="#Sentinel-2-bands" title="Permalink to this headline">¶</a></h3>
 <p>Sentinel 2 satellites have 13 spectral channels:</p>
-<table border="1" class="docutils">
+<table class="docutils align-center">
 <colgroup>
-<col width="17%" />
-<col width="15%" />
-<col width="13%" />
-<col width="24%" />
-<col width="16%" />
-<col width="16%" />
+<col style="width: 17%" />
+<col style="width: 15%" />
+<col style="width: 13%" />
+<col style="width: 24%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Sentinel 2 bands</th>
-<th class="head">DEA band name</th>
-<th class="head">Band number</th>
-<th class="head">Central wavelength (nm)</th>
-<th class="head">Resolution (m)</th>
-<th class="head">Bandwidth (nm)</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Sentinel 2 bands</p></th>
+<th class="head"><p>DEA band name</p></th>
+<th class="head"><p>Band number</p></th>
+<th class="head"><p>Central wavelength (nm)</p></th>
+<th class="head"><p>Resolution (m)</p></th>
+<th class="head"><p>Bandwidth (nm)</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>Coastal aerosol</td>
-<td><code class="docutils literal notranslate"><span class="pre">nbar(t)_coastal_aerosol</span></code></td>
-<td>1</td>
-<td>443</td>
-<td>60</td>
-<td>20</td>
+<tbody>
+<tr class="row-even"><td><p>Coastal aerosol</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nbar(t)_coastal_aerosol</span></code></p></td>
+<td><p>1</p></td>
+<td><p>443</p></td>
+<td><p>60</p></td>
+<td><p>20</p></td>
 </tr>
-<tr class="row-odd"><td>Blue</td>
-<td><code class="docutils literal notranslate"><span class="pre">nbar(t)_blue</span></code></td>
-<td>2</td>
-<td>490</td>
-<td>10</td>
-<td>65</td>
+<tr class="row-odd"><td><p>Blue</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nbar(t)_blue</span></code></p></td>
+<td><p>2</p></td>
+<td><p>490</p></td>
+<td><p>10</p></td>
+<td><p>65</p></td>
 </tr>
-<tr class="row-even"><td>Green</td>
-<td><code class="docutils literal notranslate"><span class="pre">nbar(t)_green</span></code></td>
-<td>3</td>
-<td>560</td>
-<td>10</td>
-<td>35</td>
+<tr class="row-even"><td><p>Green</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nbar(t)_green</span></code></p></td>
+<td><p>3</p></td>
+<td><p>560</p></td>
+<td><p>10</p></td>
+<td><p>35</p></td>
 </tr>
-<tr class="row-odd"><td>Red</td>
-<td><code class="docutils literal notranslate"><span class="pre">nbar(t)_red</span></code></td>
-<td>4</td>
-<td>665</td>
-<td>10</td>
-<td>30</td>
+<tr class="row-odd"><td><p>Red</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nbar(t)_red</span></code></p></td>
+<td><p>4</p></td>
+<td><p>665</p></td>
+<td><p>10</p></td>
+<td><p>30</p></td>
 </tr>
-<tr class="row-even"><td>Vegetation red edge</td>
-<td><code class="docutils literal notranslate"><span class="pre">nbar(t)_red_edge_1</span></code></td>
-<td>5</td>
-<td>705</td>
-<td>20</td>
-<td>15</td>
+<tr class="row-even"><td><p>Vegetation red edge</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nbar(t)_red_edge_1</span></code></p></td>
+<td><p>5</p></td>
+<td><p>705</p></td>
+<td><p>20</p></td>
+<td><p>15</p></td>
 </tr>
-<tr class="row-odd"><td>Vegetation red edge</td>
-<td><code class="docutils literal notranslate"><span class="pre">nbar(t)_red_edge_2</span></code></td>
-<td>6</td>
-<td>740</td>
-<td>20</td>
-<td>15</td>
+<tr class="row-odd"><td><p>Vegetation red edge</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nbar(t)_red_edge_2</span></code></p></td>
+<td><p>6</p></td>
+<td><p>740</p></td>
+<td><p>20</p></td>
+<td><p>15</p></td>
 </tr>
-<tr class="row-even"><td>Vegetation red edge</td>
-<td><code class="docutils literal notranslate"><span class="pre">nbar(t)_red_edge_3</span></code></td>
-<td>7</td>
-<td>783</td>
-<td>20</td>
-<td>20</td>
+<tr class="row-even"><td><p>Vegetation red edge</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nbar(t)_red_edge_3</span></code></p></td>
+<td><p>7</p></td>
+<td><p>783</p></td>
+<td><p>20</p></td>
+<td><p>20</p></td>
 </tr>
-<tr class="row-odd"><td>NIR</td>
-<td><code class="docutils literal notranslate"><span class="pre">nbar(t)_nir_1</span></code></td>
-<td>8</td>
-<td>842</td>
-<td>10</td>
-<td>115</td>
+<tr class="row-odd"><td><p>NIR</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nbar(t)_nir_1</span></code></p></td>
+<td><p>8</p></td>
+<td><p>842</p></td>
+<td><p>10</p></td>
+<td><p>115</p></td>
 </tr>
-<tr class="row-even"><td>Narrow NIR</td>
-<td><code class="docutils literal notranslate"><span class="pre">nbar(t)_nir_2</span></code></td>
-<td>8A</td>
-<td>865</td>
-<td>20</td>
-<td>20</td>
+<tr class="row-even"><td><p>Narrow NIR</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nbar(t)_nir_2</span></code></p></td>
+<td><p>8A</p></td>
+<td><p>865</p></td>
+<td><p>20</p></td>
+<td><p>20</p></td>
 </tr>
-<tr class="row-odd"><td>Water vapour</td>
-<td>N/A</td>
-<td>9</td>
-<td>945</td>
-<td>60</td>
-<td>20</td>
+<tr class="row-odd"><td><p>Water vapour</p></td>
+<td><p>N/A</p></td>
+<td><p>9</p></td>
+<td><p>945</p></td>
+<td><p>60</p></td>
+<td><p>20</p></td>
 </tr>
-<tr class="row-even"><td>SWIR - Cirrus</td>
-<td>N/A</td>
-<td>10</td>
-<td>1375</td>
-<td>60</td>
-<td>20</td>
+<tr class="row-even"><td><p>SWIR - Cirrus</p></td>
+<td><p>N/A</p></td>
+<td><p>10</p></td>
+<td><p>1375</p></td>
+<td><p>60</p></td>
+<td><p>20</p></td>
 </tr>
-<tr class="row-odd"><td>SWIR</td>
-<td><code class="docutils literal notranslate"><span class="pre">nbar(t)_swir_2</span></code></td>
-<td>11</td>
-<td>1610</td>
-<td>20</td>
-<td>90</td>
+<tr class="row-odd"><td><p>SWIR</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nbar(t)_swir_2</span></code></p></td>
+<td><p>11</p></td>
+<td><p>1610</p></td>
+<td><p>20</p></td>
+<td><p>90</p></td>
 </tr>
-<tr class="row-even"><td>SWIR</td>
-<td><code class="docutils literal notranslate"><span class="pre">nbar(t)_swir_3</span></code></td>
-<td>12</td>
-<td>2190</td>
-<td>20</td>
-<td>180</td>
+<tr class="row-even"><td><p>SWIR</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nbar(t)_swir_3</span></code></p></td>
+<td><p>12</p></td>
+<td><p>2190</p></td>
+<td><p>20</p></td>
+<td><p>180</p></td>
 </tr>
 </tbody>
 </table>
@@ -812,12 +812,12 @@ Attributes:
 <h3>Data corrections<a class="headerlink" href="#Data-corrections" title="Permalink to this headline">¶</a></h3>
 <p>There are two corrections applied to the Sentinel data:</p>
 <ol class="arabic">
-<li><div class="first line-block">
+<li><div class="line-block">
 <div class="line"><strong>NBAR (e.g. ``nbar_green``)</strong></div>
 <div class="line">NBAR stands for Nadir-corrected BRDF Adjusted Reflectance, where BRDF stands for Bidirectional reflectance distribution function The approach involves atmospheric correction to compute surface-leaving radiance, and bi-directional reflectance modelling to remove the effects of topography and angular variation in reflectance.</div>
 </div>
 </li>
-<li><div class="first line-block">
+<li><div class="line-block">
 <div class="line"><strong>T_NBAR (e.g. ``nbart_green``)</strong></div>
 <div class="line">Surface reflectance T_NBAR includes the terrain illumination reflectance correction and has the same features of NBAR, along with some additional features.</div>
 </div>
@@ -904,34 +904,34 @@ Attributes:
 <h2>Filter scenes using pixel quality<a class="headerlink" href="#Filter-scenes-using-pixel-quality" title="Permalink to this headline">¶</a></h2>
 <p>A pixel quality dataset (<code class="docutils literal notranslate"><span class="pre">fmask</span></code>) is provided alongside the spectral data, which can be used to filter out noisy pixels. The key things we want to filter are clouds and shadows.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">fmask</span></code> field contains values from 0 to 5.</p>
-<table border="1" class="docutils">
+<table class="docutils align-center">
 <colgroup>
-<col width="36%" />
-<col width="64%" />
+<col style="width: 36%" />
+<col style="width: 64%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Value</th>
-<th class="head">Description</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>0</td>
-<td>Null</td>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Null</p></td>
 </tr>
-<tr class="row-odd"><td>1</td>
-<td>Valid</td>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Valid</p></td>
 </tr>
-<tr class="row-even"><td>2</td>
-<td>Cloud</td>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>Cloud</p></td>
 </tr>
-<tr class="row-odd"><td>3</td>
-<td>Cloud shadow</td>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>Cloud shadow</p></td>
 </tr>
-<tr class="row-even"><td>4</td>
-<td>Snow</td>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Snow</p></td>
 </tr>
-<tr class="row-odd"><td>5</td>
-<td>Water</td>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>Water</p></td>
 </tr>
 </tbody>
 </table>

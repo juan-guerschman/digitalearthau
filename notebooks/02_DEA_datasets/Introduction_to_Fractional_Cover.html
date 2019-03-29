@@ -464,22 +464,22 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="section" id="Introduction-to-Fractional-Cover-Data">
 <h1>Introduction to Fractional Cover Data<a class="headerlink" href="#Introduction-to-Fractional-Cover-Data" title="Permalink to this headline">¶</a></h1>
-<table border="1" class="docutils">
+<table class="docutils align-center">
 <colgroup>
-<col width="25%" />
-<col width="75%" />
+<col style="width: 25%" />
+<col style="width: 75%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Authors:</th>
-<th class="head">Bex Dunn, Claire Krause, Arapaut Sivaprasad</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Authors:</p></th>
+<th class="head"><p>Bex Dunn, Claire Krause, Arapaut Sivaprasad</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>Created:</td>
-<td>May 14, 2018</td>
+<tbody>
+<tr class="row-even"><td><p>Created:</p></td>
+<td><p>May 14, 2018</p></td>
 </tr>
-<tr class="row-odd"><td>Last edited:</td>
-<td>January 25, 2019</td>
+<tr class="row-odd"><td><p>Last edited:</p></td>
+<td><p>January 25, 2019</p></td>
 </tr>
 </tbody>
 </table>
@@ -495,15 +495,15 @@ those scripts. <code class="docutils literal notranslate"><span class="pre">&quo
 <p><strong>How to use this notebook:</strong></p>
 <p>A basic understanding of any programming language is desirable but one doesn’t have to be an expert Python programmer to manipulate the code to get and display the data.This doc applies to the following Landsat satellites, Fractional Cover bands and the WOfS dataset:</p>
 <ul class="simple">
-<li>Landsat 5</li>
-<li>Landsat 7</li>
-<li>Landsat 8</li>
-<li>PV - Photosythetic vegetation</li>
-<li>NPV - Non-Photosythetic vegetation</li>
-<li>BS - Bare Soil</li>
-<li>UE - Unmixing Error</li>
-<li>Water Observations from Space (WOFs)</li>
-<li>WOfS Feature Layer (WOFL)</li>
+<li><p>Landsat 5</p></li>
+<li><p>Landsat 7</p></li>
+<li><p>Landsat 8</p></li>
+<li><p>PV - Photosythetic vegetation</p></li>
+<li><p>NPV - Non-Photosythetic vegetation</p></li>
+<li><p>BS - Bare Soil</p></li>
+<li><p>UE - Unmixing Error</p></li>
+<li><p>Water Observations from Space (WOFs)</p></li>
+<li><p>WOfS Feature Layer (WOFL)</p></li>
 </ul>
 <div class="section" id="What-is-Fractional-Cover?-[1,-2]">
 <h2>What is Fractional Cover? [<a class="reference external" href="#References">1, 2</a>]<a class="headerlink" href="#What-is-Fractional-Cover?-[1,-2]" title="Permalink to this headline">¶</a></h2>
@@ -515,10 +515,10 @@ least squares unmixing model.[<a class="reference external" href="#References">1
 <div class="section" id="Fractional-Cover-Bands:-[1]">
 <h3>Fractional Cover Bands: [<a class="reference external" href="#References">1</a>]<a class="headerlink" href="#Fractional-Cover-Bands:-[1]" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><strong>Bare Soil (bare ground, rock, disturbed) (BS):</strong> - Bare Ground (bare soil, rock) percentage; Digital Number 10000 = 100%</li>
-<li><strong>Photosythetic Vegetation. (green grass, trees, etc.) (PV):</strong> - Photosynthetic Vegetation: Green Vegetation percentage;Digital Number 10000 = 100%</li>
-<li><strong>Non-Photosythetic vegetation (litter, dead leaf and branches) (NPV):</strong> - Non-Photosynthetic Vegetation (litter, dead leaves andbranches) percentage; Digital Number 10000 = 100%</li>
-<li><strong>Unmixing Error (UE):</strong> - Unmixing Error. The residual error, defined as the Euclidean Norm of the Residual Vector. High values express less confidence in the fractional components.</li>
+<li><p><strong>Bare Soil (bare ground, rock, disturbed) (BS):</strong> - Bare Ground (bare soil, rock) percentage; Digital Number 10000 = 100%</p></li>
+<li><p><strong>Photosythetic Vegetation. (green grass, trees, etc.) (PV):</strong> - Photosynthetic Vegetation: Green Vegetation percentage;Digital Number 10000 = 100%</p></li>
+<li><p><strong>Non-Photosythetic vegetation (litter, dead leaf and branches) (NPV):</strong> - Non-Photosynthetic Vegetation (litter, dead leaves andbranches) percentage; Digital Number 10000 = 100%</p></li>
+<li><p><strong>Unmixing Error (UE):</strong> - Unmixing Error. The residual error, defined as the Euclidean Norm of the Residual Vector. High values express less confidence in the fractional components.</p></li>
 </ul>
 <p><strong>No Data Values:</strong> Fractional cover contains no data values (-1) we use the datacube storage function “masking.mask_invalid_data” to remove these from our data before using the data</p>
 </div>
@@ -571,30 +571,30 @@ least squares unmixing model.[<a class="reference external" href="#References">1
 <h3>See what products are currently available<a class="headerlink" href="#See-what-products-are-currently-available" title="Permalink to this headline">¶</a></h3>
 <p>The <strong>list_products</strong> method in the Datacube class displays the names and details of all available products. For example, <strong>ls8_fc_albers</strong>, is a set of data collected by Landsat 8, processed with the Fractional Cover algorithm and stored in the Australian Albers projected coordinate system.</p>
 <p>Given below are the products that are of interest to us in the context of this document. The code given below the list will let you see ALL products in the datacube.</p>
-<table border="1" class="docutils">
+<table class="docutils align-center">
 <colgroup>
-<col width="8%" />
-<col width="24%" />
-<col width="68%" />
+<col style="width: 8%" />
+<col style="width: 24%" />
+<col style="width: 68%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">id</th>
-<th class="head">name</th>
-<th class="head">description</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>id</p></th>
+<th class="head"><p>name</p></th>
+<th class="head"><p>description</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>69</td>
-<td>ls5_fc_albers</td>
-<td>Landsat 5 Fractional Cover 25 metre, 100km til…</td>
+<tbody>
+<tr class="row-even"><td><p>69</p></td>
+<td><p>ls5_fc_albers</p></td>
+<td><p>Landsat 5 Fractional Cover 25 metre, 100km til…</p></td>
 </tr>
-<tr class="row-odd"><td>70</td>
-<td>ls7_fc_albers</td>
-<td>Landsat 7 Fractional Cover 25 metre, 100km til…</td>
+<tr class="row-odd"><td><p>70</p></td>
+<td><p>ls7_fc_albers</p></td>
+<td><p>Landsat 7 Fractional Cover 25 metre, 100km til…</p></td>
 </tr>
-<tr class="row-even"><td>71</td>
-<td>ls8_fc_albers</td>
-<td>Landsat 8 Fractional Cover 25 metre, 100km til…</td>
+<tr class="row-even"><td><p>71</p></td>
+<td><p>ls8_fc_albers</p></td>
+<td><p>Landsat 8 Fractional Cover 25 metre, 100km til…</p></td>
 </tr>
 </tbody>
 </table>
@@ -621,12 +621,13 @@ least squares unmixing model.[<a class="reference external" href="#References">1
 <h3>Specify the <em>query</em> with the coordinates and date range<a class="headerlink" href="#Specify-the-query-with-the-coordinates-and-date-range" title="Permalink to this headline">¶</a></h3>
 <p>The <em>query</em> is what you are asking the datacube to return.</p>
 <ul class="simple">
-<li><strong>lat/lon:</strong> Latitude and longitude of the area. e.g. Canberra = ‘lat’: (-35.25, -35.35), ‘lon’: (149.05, 149.17)</li>
-<li><strong>time:</strong> Date range to fetch the scenes. The approximate time between two scenes is 16 days. If there is a location near a swath boundary, it may be captured in two passes and so there could be two images within the 16 day period.<ul>
-<li>You must know <a class="reference external" href="https://data.dea.gadevs.ga/ls7_nbar_scene">the date(s) for which data is available</a> for each satellite/product, so that the query can be specified correctly.</li>
+<li><p><strong>lat/lon:</strong> Latitude and longitude of the area. e.g. Canberra = ‘lat’: (-35.25, -35.35), ‘lon’: (149.05, 149.17)</p></li>
+<li><p><strong>time:</strong> Date range to fetch the scenes. The approximate time between two scenes is 16 days. If there is a location near a swath boundary, it may be captured in two passes and so there could be two images within the 16 day period.</p>
+<ul>
+<li><p>You must know <a class="reference external" href="https://data.dea.gadevs.ga/ls7_nbar_scene">the date(s) for which data is available</a> for each satellite/product, so that the query can be specified correctly.</p></li>
 </ul>
 </li>
-<li><strong>scene:</strong> The index of the scene to be plotted. If the date range is &lt; 16 days there may only be one scene, and the index must be specified as 0.</li>
+<li><p><strong>scene:</strong> The index of the scene to be plotted. If the date range is &lt; 16 days there may only be one scene, and the index must be specified as 0.</p></li>
 </ul>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -651,8 +652,8 @@ least squares unmixing model.[<a class="reference external" href="#References">1
 <h3>Create a data scene object<a class="headerlink" href="#Create-a-data-scene-object" title="Permalink to this headline">¶</a></h3>
 <p>The return value from the load command below is an <strong>xarray</strong> object, which has two core data structures:</p>
 <ul class="simple">
-<li><strong>DataArray</strong> is a labeled, N-dimensional array.</li>
-<li><strong>Dataset</strong> is a multi-dimensional, in-memory array database. It is a dict-like container of DataArray objects aligned along any number of shared dimensions, and serves a similar purpose in xarray to the <strong>pandas.DataFrame</strong>.</li>
+<li><p><strong>DataArray</strong> is a labeled, N-dimensional array.</p></li>
+<li><p><strong>Dataset</strong> is a multi-dimensional, in-memory array database. It is a dict-like container of DataArray objects aligned along any number of shared dimensions, and serves a similar purpose in xarray to the <strong>pandas.DataFrame</strong>.</p></li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
@@ -766,9 +767,9 @@ Combining and sorting ls5, ls7 and ls8 data
 <div class="section" id="Filter-fractional-cover-scenes-using-WOfS-feature-layers-(WOFLs)">
 <h2>Filter fractional cover scenes using WOfS feature layers (WOFLs)<a class="headerlink" href="#Filter-fractional-cover-scenes-using-WOfS-feature-layers-(WOFLs)" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Use the wofs dataset to create scene-by-scene masks to remove areas of water</li>
-<li>For more information on WOfS, see the <a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/blob/master/Image_classification/DEA_WOfS_and_water_classifier.ipynb">DEA WOfS and Water Classifier Notebook</a></li>
-<li>There may be errors in the WOfS tiles until WOfS is finished</li>
+<li><p>Use the wofs dataset to create scene-by-scene masks to remove areas of water</p></li>
+<li><p>For more information on WOfS, see the <a class="reference external" href="https://github.com/GeoscienceAustralia/dea-notebooks/blob/master/Image_classification/DEA_WOfS_and_water_classifier.ipynb">DEA WOfS and Water Classifier Notebook</a></p></li>
+<li><p>There may be errors in the WOfS tiles until WOfS is finished</p></li>
 </ul>
 <div class="section" id="load-the-wofs-feature-layers-(wofls)-within-the-same-query-as-Fractional-cover,-using-'like'">
 <h3>load the wofs feature layers (wofls) within the same query as Fractional cover, using ‘like’<a class="headerlink" href="#load-the-wofs-feature-layers-(wofls)-within-the-same-query-as-Fractional-cover,-using-'like'" title="Permalink to this headline">¶</a></h3>
@@ -1066,8 +1067,8 @@ wrote to GeoTIFF
 <div class="section" id="References">
 <h2>References<a class="headerlink" href="#References" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>GA, 2015. <em>Fractional Cover (FC25) Product Description.</em> <a class="reference external" href="https://d28rz98at9flks.cloudfront.net/79676/Fractional_Cover_FC25_v1_5.PDF">https://d28rz98at9flks.cloudfront.net/79676/Fractional_Cover_FC25_v1_5.PDF</a></li>
-<li>TERN Auscover, 2012. <em>Fractional cover - Landsat, Joint Remote Sensing Research Program algorithm, Australia coverage.</em> Last modified by Peter Scarth on 2017/03/24 09:53. <a class="reference external" href="http://data.auscover.org.au/xwiki/bin/view/Product+pages/Landsat+Fractional+Cover">http://data.auscover.org.au/xwiki/bin/view/Product+pages/Landsat+Fractional+Cover</a></li>
+<li><p>GA, 2015. <em>Fractional Cover (FC25) Product Description.</em> <a class="reference external" href="https://d28rz98at9flks.cloudfront.net/79676/Fractional_Cover_FC25_v1_5.PDF">https://d28rz98at9flks.cloudfront.net/79676/Fractional_Cover_FC25_v1_5.PDF</a></p></li>
+<li><p>TERN Auscover, 2012. <em>Fractional cover - Landsat, Joint Remote Sensing Research Program algorithm, Australia coverage.</em> Last modified by Peter Scarth on 2017/03/24 09:53. <a class="reference external" href="http://data.auscover.org.au/xwiki/bin/view/Product+pages/Landsat+Fractional+Cover">http://data.auscover.org.au/xwiki/bin/view/Product+pages/Landsat+Fractional+Cover</a></p></li>
 </ol>
 </div>
 </div>
